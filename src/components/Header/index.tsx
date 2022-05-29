@@ -1,10 +1,11 @@
 import React from 'react';
+import logo from '../../assets/images/logo.svg';
 
 const Header = () => (
   <header className="header">
     <ul>
       <li className="logo">
-        <img src="assets/images/mocks/logo.png" />
+        <img src={logo} />
       </li>
       <li><a>Home</a></li>
       <li><a></a></li>

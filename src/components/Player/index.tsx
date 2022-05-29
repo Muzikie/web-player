@@ -1,13 +1,14 @@
 import React from 'react';
 import Icon from '../common/Icon';
 import './player.css';
+import img from '../../assets/images/mocks/album9.png';
 
 const Player = () => {
   return (
     <section className="player">
       <section className="playingMusic">
         <figure>
-          <img src="../../assets/images/mocks/album9.png" alt="Love the Way You Lie" />
+          <img src={img} alt="Love the Way You Lie" />
         </figure>
         <header>
           <h5>Love the Way You Lie</h5>

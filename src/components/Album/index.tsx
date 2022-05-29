@@ -2,12 +2,15 @@ import React from 'react';
 import './album.css';
 
 interface AlbumProps {
-  name: string;
+  data: {
+    name: string;
+    file: any;
+  }
 }
 
-const Album = ({ name }: AlbumProps) => (
+const Album = ({ data }: AlbumProps) => (
   <a>
-    <img src={`../../assets/images/mocks/${name}.png`} alt={name} />
+    <img src={data.file} alt={data.name} />
   </a>
 );
 
