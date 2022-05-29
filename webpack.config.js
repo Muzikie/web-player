@@ -36,6 +36,19 @@ module.exports = {
           'postcss-loader',
         ],
       },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+        exclude: [/images/],
+        options: {
+          name: '[path][name]-[hash:6].[ext]',
+        },
+        loader: 'file-loader',
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        exclude: [/fonts/],
+        loader: 'file-loader',
+      },
     ],
   },
   plugins: [
