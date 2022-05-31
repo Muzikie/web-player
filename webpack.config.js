@@ -31,9 +31,35 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExctractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
+          {
+
+            loader: MiniCssExctractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              // ident: 'postcss',
+              // sourceMap: true,
+              // sourceComments: true,
+              postcssOptions: {
+                plugins: [
+                  require('postcss-partial-import')({}),
+                  require('postcss-mixins')({}),
+                  require('postcss-nesting')({}),
+                ],
+              },
+            },
+          },
         ],
       },
       {

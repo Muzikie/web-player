@@ -5,7 +5,8 @@
   "main": "./src/index.ts",
   "scripts": {
     "dev": "webpack serve --mode=development --hot",
-    "build": "webpack --mode=production --progress",
+    "dis:clean": "rm -rf dist && mkdir dist",
+    "build": "npm run dis:clean && webpack --mode=production --progress",
     "test": "npx jest --maxWorkers=1",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix"
@@ -32,7 +33,13 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss": "^8.4.14",
+    "postcss-css-variables": "^0.18.0",
     "postcss-loader": "^7.0.0",
+    "postcss-media-variables": "^2.0.1",
+    "postcss-mixins": "^9.0.2",
+    "postcss-nested": "^5.0.6",
+    "postcss-nesting": "^10.1.7",
+    "postcss-partial-import": "^4.1.0",
     "ts-loader": "^9.3.0",
     "typescript": "^4.7.2",
     "url-loader": "^4.1.1",
