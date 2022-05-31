@@ -1,5 +1,6 @@
 import React from 'react';
 import Album from '../Album';
+import styles from './recentsSidebar.css';
 import album1 from '../../assets/images/mocks/album1.png';
 import album2 from '../../assets/images/mocks/album2.png';
 import album3 from '../../assets/images/mocks/album3.png';
@@ -21,12 +22,12 @@ const RecentsSidebar = () => {
     { file: album8, name: 'album8' },
   ];
   return (
-    <aside className="sidebar right">
-      <ul>
+    <aside className={`${styles.sidebar} ${styles.right}`}>
+      <div className={styles.list}>
         {
-          list.map((item) => (<li key={item.name}><Album data={item} /></li>))
+          list.map((item) => (<Album key={item.name} data={item} />))
         }
-      </ul>
+      </div>
     </aside>
   );
 };

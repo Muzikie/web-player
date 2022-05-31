@@ -1,0 +1,49 @@
+.wrapper {
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px 30px 10px 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0);
+  transition: all ease 100ms;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  & figure {
+    width: 44px;
+    height: 44px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 auto 0 0;
+
+    & img {
+      width: 100%;
+    }
+  }
+
+  & h4 {
+    margin: 0;
+    flex: 4 0;
+    text-align: left;
+  }
+
+  & .playButton,
+  & .duration,
+  & .albumArt,
+  & .likes {
+    flex: 1 0;
+  }
+
+  & .likes {
+    display: flex;
+    align-items: center;
+  }
+
+  & .duration {
+    text-align: right;
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import TextLink from '../TextLink';
+import styles from './userCollections.css';
 
 const UserCollections = () => {
   const list = [
@@ -7,7 +8,7 @@ const UserCollections = () => {
     { title: 'Party 90s', target: 'party90s-href' }
   ];
   return (
-    <aside className="sidebar right">
+    <aside className={`${styles.sidebar} ${styles.left}`}>
       <ul>
         {
           list.map((item) => (<li key={item.target}><TextLink data={item} /></li>))

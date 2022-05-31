@@ -4,14 +4,13 @@ import Player from '../../components/Player';
 import RecentsSidebar from '../../components/RecentsSidebar';
 import UserCollections from '../../components/UserCollections';
 import ArtistFull from '../../components/ArtistFull';
+import styles from './artist.css';
 
 const Artist = () => {
   return (
-    <div className="wrapper expand">
-      <div className="expand">
-        <Header />
-      </div>
-      <main className="main">
+    <div className={styles.expand}>
+      <Header />
+      <main className={styles.main}>
         <UserCollections />
         <ArtistFull />
         <RecentsSidebar />

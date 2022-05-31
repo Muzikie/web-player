@@ -1,0 +1,11 @@
+.sidebar {
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.left {
+  width: var(--left-sidebar);
+  left: 0;
+  margin-right: calc(-1 * var(--left-sidebar));
+}

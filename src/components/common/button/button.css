@@ -1,0 +1,46 @@
+.button {
+  --big: 50px;
+
+  color: var(--white);
+  cursor: pointer;
+
+  &.primary {
+    position: relative;
+  }
+
+  &.secondary {
+    border: solid 1px gray;
+    background: transparent;
+    width: 180px;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 0);
+    transition: all ease 100ms;
+    font-size: 16px;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &.tertiary {
+    position: relative;
+  }
+
+  &.icon {
+    padding: 0;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    border: 0;
+  }
+
+  &.play {
+    display: block;
+    border-radius: 50%;
+    width: var(--big);
+    height: var(--big);
+    border: 0;
+    background-color: var(--green);
+  }
+}

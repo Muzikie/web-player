@@ -1,6 +1,12 @@
-/***************************
-Header
-***************************/
+.header {
+  width: calc(100% - var(--right-sidebar));
+  height: var(--header);
+  padding-top: 15px;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 3;
+}
+
 .header ul {
   height: 100%;
   display: flex;

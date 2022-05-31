@@ -1,0 +1,15 @@
+ :root {
+  --green: #01b84a;
+  --white: #ffffff;
+  --black: #000000;
+  --body-font: 'Mulish', sans-serif;
+  --left-sidebar: 90px;
+  --right-sidebar: 210px;
+  --header: 70px;
+  --album-size: 146px;
+  --track-size: 54px;
+}
+
+:root [data-theme="dark"] {
+  
+}

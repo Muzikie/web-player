@@ -1,4 +1,11 @@
 {
   "name": "Selena Gomez",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis? Quod ipsam aperiam sunt dolorem adipisci voluptatum."
+  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis? Quod ipsam aperiam sunt dolorem adipisci voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis? Quod ipsam aperiam sunt dolorem adipisci voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis? Quod ipsam aperiam sunt dolorem adipisci voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis? Quod ipsam aperiam sunt dolorem adipisci voluptatum.",
+  "mostPopular": [
+    { "image": "track1.jpg", "title": "Love You Like a Lover Song", "albumId": "track-id-1", "albumName": "When The Sun Goes Down", "likes": 4500, "duration": 200 },
+    { "image": "track2.jpg", "title": "Lose You To Love Me", "albumId": "track-id-2", "albumName": "Rare", "likes": 4400, "duration": 206 },
+    { "image": "track3.jpg", "title": "Come & Get It", "albumId": "track-id-3", "albumName": "Stars Dance", "likes": 3900, "duration": 209 },
+    { "image": "track4.jpg", "title": "Same Old Love", "albumId": "track-id-4", "albumName": "Revival", "likes": 3400, "duration": 199 },
+    { "image": "track5.jpg", "title": "The Heart Wants What It Wants", "albumId": "track-id-5", "albumName": "The Heart Wants What It Wants", "likes": 3300, "duration": 176 }
+  ]
 }

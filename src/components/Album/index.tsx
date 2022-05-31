@@ -1,5 +1,5 @@
 import React from 'react';
-import './album.css';
+import styles from './album.css';
 
 interface AlbumProps {
   data: {
@@ -9,9 +9,11 @@ interface AlbumProps {
 }
 
 const Album = ({ data }: AlbumProps) => (
-  <a>
-    <img src={data.file} alt={data.name} />
-  </a>
+  <div className={styles.album}>
+    <a>
+      <img src={data.file} alt={data.name} />
+    </a>
+  </div>
 );
 
 export default Album;
