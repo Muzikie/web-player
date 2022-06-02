@@ -8,8 +8,8 @@
     display: block;
     overflow: hidden;
     border-radius: var(--border-radius-medium);
-    width: var(--album-size);
-    height: var(--album-size);
+    width: var(--box-size-xl);
+    height: var(--box-size-xl);
   }
 
   & img {

@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './artistLanding.css';
-import selena from '../../assets/images/mocks/selena-gomez.jpg';
 import data from './data.json';
-import { PlayButton, SecondaryButton } from '../common/button';
 import Collections from '../Collection';
 import MostPopular from './MostPopular';
 import ArtistSummary from './ArtistSummary';

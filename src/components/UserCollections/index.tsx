@@ -1,5 +1,6 @@
 import React from 'react';
-import TextLink from '../TextLink';
+import { IconButton } from '../common/button';
+import { TextLink, IconLink } from '../common/Link';
 import styles from './userCollections.css';
 
 const UserCollections = () => {
@@ -9,9 +10,14 @@ const UserCollections = () => {
   ];
   return (
     <aside className={styles.wrapper}>
+      <div>
+        <IconLink icon="home" target="home" />
+        <IconLink icon="settings" target="settings" />
+        <IconLink icon="profile" target="profile" />
+      </div>
       <ul>
         {
-          list.map((item) => (<li key={item.target}><TextLink data={item} /></li>))
+          list.map((item) => (<li key={item.target}><TextLink {...item} /></li>))
         }
       </ul>
     </aside>

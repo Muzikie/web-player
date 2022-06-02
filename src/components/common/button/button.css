@@ -1,6 +1,4 @@
 .button {
-  --big: 50px;
-
   color: var(--white);
   cursor: pointer;
 
@@ -17,6 +15,8 @@
     transition: all ease 100ms;
     font-size: 16px;
     letter-spacing: 1px;
+    height: var(--box-size-s);
+    box-sizing: content-box;
 
     &:hover {
       background-color: var(--brightOutline);
@@ -38,8 +38,8 @@
   &.play {
     display: block;
     border-radius: var(--border-radius-round);
-    width: var(--big);
-    height: var(--big);
+    width: var(--box-size-m);
+    height: var(--box-size-m);
     border: 0;
     background-color: var(--green);
 

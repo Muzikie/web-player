@@ -15,8 +15,12 @@
   --left-sidebar: 140px;
   --right-sidebar: 210px;
   --header: 80px;
-  --album-size: 146px;
-  --track-size: 54px;
+
+  --box-size-s: 40px;
+  --box-size-m: 54px;
+  --box-size-l: 100px;
+  --box-size-xl: 146px;
+
   --border-radius-small: 5px;
   --border-radius-medium: 10px;
   --border-radius-large: 30px;

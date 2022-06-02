@@ -35,8 +35,8 @@
       border: solid 1px rgb(83, 83, 83);
       background: transparent;
       width: 0px;
-      height: 40px;
-      line-height: 40px;
+      height: var(--box-size-s);
+      line-height: var(--box-size-s);
       padding: 0 20px;
       border-radius: 10px;
       transition: all ease 200ms;
