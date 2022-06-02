@@ -5,11 +5,15 @@
   z-index: 3;
   bottom: 0;
   left: 0;
-  background: #000000c7;
+  background: var(--dark-glassy);
   display: flex;
   flex-flow: row nowrap;
   padding: 0 90px;
   box-sizing: border-box;
+  border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+  border-style: solid;
+  border-color: var(--brightOutline);
+  border-width: 1px 0px 0px 0px;
 }
 
 .playingMusic {

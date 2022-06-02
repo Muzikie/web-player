@@ -9,7 +9,7 @@
   }
 
   &.secondary {
-    border: solid 1px gray;
+    border: solid 1px var(--gray);
     background: transparent;
     width: 180px;
     border-radius: var(--border-radius-medium);
@@ -19,7 +19,7 @@
     letter-spacing: 1px;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: var(--brightOutline);
     }
   }
 
@@ -42,5 +42,9 @@
     height: var(--big);
     border: 0;
     background-color: var(--green);
+
+    &:hover {
+      box-shadow: 0 0 0 1px var(--green);
+    }
   }
 }

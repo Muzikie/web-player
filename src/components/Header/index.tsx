@@ -1,17 +1,17 @@
 import React from 'react';
 import logo from '../../assets/images/logo.svg';
+import Icon from '../common/Icon';
 import styles from './header.css';
 
 const Header = () => (
   <header className={styles.header}>
-    <ul>
-      <li className={styles.logo}>
-        <img src={logo} />
-      </li>
-      <li><a>Home</a></li>
-      <li><a>Upload</a></li>
-      <li><a>Search</a></li>
-    </ul>
+    <div className={styles.logo}>
+      <img src={logo} />
+    </div>
+    <div className={styles.search}>
+      <input type="text" name="search" id="search" />
+      <Icon name='search' />
+    </div>
   </header>
 );
 

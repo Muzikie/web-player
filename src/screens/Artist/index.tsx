@@ -3,16 +3,16 @@ import Header from '../../components/Header';
 import Player from '../../components/Player';
 import RecentsSidebar from '../../components/RecentsSidebar';
 import UserCollections from '../../components/UserCollections';
-import ArtistFull from '../../components/ArtistDescription';
+import ArtistLanding from '../../components/ArtistLanding';
 import styles from './artist.css';
 
 const Artist = () => {
   return (
     <div className={styles.expand}>
       <Header />
-      <main className={styles.main}>
+      <main className={`${styles.main} ${styles.expand}`}>
         <UserCollections />
-        <ArtistFull />
+        <ArtistLanding />
         <RecentsSidebar />
       </main>
       <Player />

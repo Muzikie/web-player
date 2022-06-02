@@ -2,20 +2,24 @@
   /****  Color  ****/
   --green: #01b84a;
   --white: #ffffff;
-  --black: #000000;
+  --dark: rgb(19, 14, 29);
+  --dark-glassy: rgba(19, 14, 29, 0.95);
+  --black: #1a1018;
+  --gray: rgb(167, 167, 167);
+  --brightOutline: rgba(167, 167, 167, 0.12);
 
   /****  Typography  ****/
   --body-font: 'Mulish', sans-serif;
 
   /****  Sizes  ****/
-  --left-sidebar: 90px;
+  --left-sidebar: 140px;
   --right-sidebar: 210px;
-  --header: 70px;
+  --header: 80px;
   --album-size: 146px;
   --track-size: 54px;
-  --border-radius-small: 3px;
-  --border-radius-medium: 6px;
-  --border-radius-large: 12px;
+  --border-radius-small: 5px;
+  --border-radius-medium: 10px;
+  --border-radius-large: 30px;
   --border-radius-round: 50%;
 }
 

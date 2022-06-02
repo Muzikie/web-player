@@ -8,7 +8,7 @@ const UserCollections = () => {
     { title: 'Party 90s', target: 'party90s-href' }
   ];
   return (
-    <aside className={`${styles.sidebar} ${styles.left}`}>
+    <aside className={styles.wrapper}>
       <ul>
         {
           list.map((item) => (<li key={item.target}><TextLink data={item} /></li>))

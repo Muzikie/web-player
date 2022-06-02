@@ -1,12 +1,18 @@
 .wrapper {
+  --thumbnailHeight: 275px;
+  --thumbnailWidth: 210px;
+  --padding: 35px;
+  --figureSize: calc(var(--thumbnailWidth) - calc(2 * var(--padding)));
+
   display: block;
+  height: var(--thumbnailHeight);
+  width: var(--thumbnailWidth);
 
   & a {
     display: block;
     overflow: hidden;
     border-radius: var(--border-radius-medium);
-    padding: 35px 32px;
-    width: var(--album-size);
+    padding: var(--padding);
     text-align: center;
     transition: all ease 100ms;
     background-color: rgba(255, 255, 255, 0);
@@ -20,8 +26,8 @@
   }
 
   & figure {
-    width: 100%;
-    height: 100%;
+    width: var(--figureSize);
+    height: var(--figureSize);
     margin: 0;
     border-radius: var(--border-radius-medium);
     overflow: hidden;

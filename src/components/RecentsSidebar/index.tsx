@@ -6,7 +6,7 @@ import data from './data.json';
 const RecentsSidebar = () => {
   const albums = data;
   return (
-    <aside className={`${styles.sidebar} ${styles.right}`}>
+    <aside className={styles.wrapper}>
       <Collection albums={albums} />
     </aside>
   );
