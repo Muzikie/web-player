@@ -1,9 +1,14 @@
 .wrapper {
+  display: none;
   flex-shrink: 0;
   flex-basis: var(--right-sidebar);
   width: var(--right-sidebar);
   height: 100%;
   overflow-y: scroll;
-  /* background: #1c1b0d5c; */
-  /* background: linear-gradient(180deg, rgba(69, 67, 39, 0.4) 0%, rgb(0, 0, 0) 100%); */
+}
+
+@media (min-width: 1240px) {
+  .wrapper {
+    display: block;
+  }
 }

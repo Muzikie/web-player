@@ -1,6 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExctractPlugin = require('mini-css-extract-plugin');
+const postcssPartialImport = require('postcss-partial-import');
+const postcssMixins = require('postcss-mixins');
+const postcssNesting = require('postcss-nesting');
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.tsx'),
@@ -48,28 +51,25 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              // ident: 'postcss',
-              // sourceMap: true,
-              // sourceComments: true,
               postcssOptions: {
                 plugins: [
-                  require('postcss-partial-import')({}),
-                  require('postcss-mixins')({}),
-                  require('postcss-nesting')({}),
+                  postcssPartialImport({}),
+                  postcssMixins({}),
+                  postcssNesting({}),
                 ],
               },
             },
           },
         ],
       },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
-        exclude: [/images/],
-        options: {
-          name: '[path][name]-[hash:6].[ext]',
-        },
-        loader: 'file-loader',
-      },
+      // {
+      //   test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+      //   exclude: [/images/],
+      //   options: {
+      //     name: '[path][name]-[hash:6].[ext]',
+      //   },
+      //   loader: 'file-loader',
+      // },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         exclude: [/fonts/],

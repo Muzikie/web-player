@@ -1,14 +1,14 @@
 import React from 'react';
 import Track, { TrackType } from '../TrackRow';
-import styles from './artistLanding.css';
+import styles from './mostPopular.css';
 
 interface MostPopularProps {
   data: TrackType[]
 }
 
 const MostPopular = ({ data }: MostPopularProps) => (
-  <section className={styles.mostPopular}>
-    <div className={styles.container}>
+  <section className={styles.wrapper}>
+    <div>
       <h2>Most popular</h2>
       <section className={styles.list}>
         {

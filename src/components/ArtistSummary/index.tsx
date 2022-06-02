@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from './artistLanding.css';
+import styles from './artistSummary.css';
 import selena from '../../assets/images/mocks/selena-gomez.jpg';
 import { PlayButton, SecondaryButton } from '../common/button';
 import { ArtistType } from '../ArtistRow';
 
-interface ArtistDescriptionProps {
+interface ArtistSummaryProps {
   data: ArtistType;
 }
 
-const ArtistDescription = ({ data }: ArtistDescriptionProps) => (
-  <section className={styles.description}>
+const ArtistSummary = ({ data }: ArtistSummaryProps) => (
+  <section className={styles.wrapper}>
     <figure className={styles.artistPhoto}>
       <img src={selena} alt="Selena Gomez" />
     </figure>
@@ -35,4 +35,4 @@ const ArtistDescription = ({ data }: ArtistDescriptionProps) => (
   </section>
 );
 
-export default ArtistDescription;
+export default ArtistSummary;

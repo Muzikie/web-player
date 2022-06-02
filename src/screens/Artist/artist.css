@@ -1,9 +1,11 @@
-.expand {
-  width: 100%;
+.wrapper {
   height: 100%;
-}
+  box-sizing: border-box;
+  overflow-y: scroll;
 
-.main {
-  display: flex;
-  flex-flow: row nowrap;
+  & .discography {
+    width: 100%;
+    padding: 60px 20px 0;
+    box-sizing: border-box;
+  }
 }

@@ -1,0 +1,9 @@
+.wrapper {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  & .list {
+    position: relative;
+  }
+}
