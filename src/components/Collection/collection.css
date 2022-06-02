@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+
+  & > header {
+    flex-basis: 100%;
+  }
+
+  &.row {
+    flex-flow: row wrap;
+  }
+
+  &.column {
+    flex-flow: column nowrap;
+  }
+}

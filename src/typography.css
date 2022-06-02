@@ -1,4 +1,24 @@
 body {
   font-family: var(--body-font);
   color: var(--white);
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 3.4em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h4 {
+  font-size: 1em;
+  line-height: 1.3em;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+  letter-spacing: 0.5px;
+}
+
+span {
+  font-size: 0.8em;
+  letter-spacing: 0.5px;
 }

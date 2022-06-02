@@ -1,13 +1,17 @@
 import React from 'react';
 import { IconButton } from '../common/button';
 import trackImage from '../../assets/images/mocks/album7.png';
-import styles from './track.css';
+import styles from './trackRow.css';
 
 export interface TrackType {
-  title: string;
+  name: string;
+  id: string;
+  image: string;
   albumId: string;
   albumName: string;
   duration: string;
+  artistId: string;
+  artistName: string;
   likes: string;
 }
 
@@ -48,10 +52,10 @@ const Track = ({ data, className = '' }: TrackProps) => (
     />
     <div className={styles.albumArt}>
       <figure>
-        <img src={trackImage} alt={ data.title } />
+        <img src={trackImage} alt={ data.name } />
       </figure>
     </div>
-    <h4>{ data.title }</h4>
+    <h4>{ data.name }</h4>
     <h4>{ data.albumName }</h4>
     <div className={styles.likes}>
       <IconButton

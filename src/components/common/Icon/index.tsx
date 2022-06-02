@@ -9,7 +9,7 @@ interface IconProps {
 const Icon = ({ name, className = '' }: IconProps) => {
   const icon = styles[`icon-${name}`];
   return (
-    <i className={`${icon} ${className}`}></i>
+    <i className={`${icon} ${styles.icon} ${className}`}></i>
   );
 };
 

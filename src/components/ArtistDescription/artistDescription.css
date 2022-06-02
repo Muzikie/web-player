@@ -3,7 +3,12 @@
 .wrapper {
   --footerHeight: 50px;
 
-  padding: var(--left-sidebar) var(--right-sidebar) 0 var(--header);
+  padding: var(--left-sidebar) 0 0 var(--header);
+  width: calc(100% - var(--right-sidebar));
+  height: 100%;
+  box-sizing: border-box;
+  float: left;
+  overflow-y: scroll;
 
   & .description {
     height: 520px;
@@ -65,9 +70,6 @@
       }
 
       & h1 {
-        font-size: 2.2em;
-        margin-top: 20px;
-        margin-bottom: 20px;
         text-transform: uppercase;
       }
 
@@ -82,25 +84,11 @@
         height: var(--footerHeight);
         display: flex;
         margin-left: -25%;
-        transform: translateY(-100%);
         background-color: var(--black);
         background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgb(0, 0, 0) 50%);
         padding: 20px 0 0 0;
 
-        & .play {
-          /* display: block;
-          border-radius: 50%;
-          width: var(--footerHeight);
-          height: var(--footerHeight);
-          border: 0;
-          background-color: var(--green); */
-        }
-
         & .follow {
-          /* border: solid 1px gray;
-          background: transparent;
-          width: 180px;
-          border-radius: 7px; */
           margin-left: 20px;
         }
       }
@@ -109,9 +97,17 @@
 
   & .mostPopular {
     width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
 
     & .list {
       position: relative;
     }
+  }
+
+  & .discography {
+    width: 100%;
+    padding: 60px 20px 0;
+    box-sizing: border-box;
   }
 }

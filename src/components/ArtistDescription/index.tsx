@@ -1,11 +1,12 @@
 import React from 'react';
-import styles from './artistFull.css';
+import styles from './artistDescription.css';
 import selena from '../../assets/images/mocks/selena-gomez.jpg';
 import data from './data.json';
 import { PlayButton, SecondaryButton } from '../common/button';
+import Collections from '../Collection';
 import MostPopular from './MostPopular';
 
-const ArtistFull = () => (
+const ArtistDescription = () => (
   <section className={styles.wrapper}>
     <section className={styles.description}>
       <figure className={styles.artistPhoto}>
@@ -15,9 +16,7 @@ const ArtistFull = () => (
       <article>
         <pre>STATION</pre>
         <h1>{ data.name }</h1>
-        <div>
-          <p>{ data.description }</p>
-        </div>
+        <p>{ data.description }</p>
 
         <footer>
           <PlayButton
@@ -33,8 +32,14 @@ const ArtistFull = () => (
         </footer>
       </article>
       <MostPopular />
+      <Collections
+        className={styles.discography}
+        title="Albums"
+        direction="row"
+        albums={data.albums}
+      />
     </section>
   </section>
 );
 
-export default ArtistFull;
+export default ArtistDescription;

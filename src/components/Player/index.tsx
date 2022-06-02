@@ -5,7 +5,7 @@ import img from '../../assets/images/mocks/album9.png';
 
 const Player = () => {
   return (
-    <section className={styles.player}>
+    <section className={styles.wrapper}>
       <section className={styles.playingMusic}>
         <figure>
           <img src={img} alt="Love the Way You Lie" />
@@ -16,7 +16,7 @@ const Player = () => {
         </header>
       </section>
       <section className={styles.controls}>
-        <button><Icon name="fast-backward" /></button>
+        <button><Icon name="rewind" /></button>
         <button><Icon name="play" /></button>
         <button><Icon name="fast-forward" /></button>
       </section>

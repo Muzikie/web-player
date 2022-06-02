@@ -1,6 +1,6 @@
 import React from 'react';
-import Track, { TrackType } from '../Track';
-import styles from './artistFull.css';
+import Track, { TrackType } from '../TrackRow';
+import styles from './artistDescription.css';
 import data from './data.json';
 
 const MostPopular = () => (
@@ -10,7 +10,7 @@ const MostPopular = () => (
       <section className={styles.list}>
         {
           data.mostPopular.map((track: TrackType) => (
-            <Track data={track} key={track.title} />
+            <Track data={track} key={track.id} />
           ))
         }
       </section>

@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import Player from '../../components/Player';
 import RecentsSidebar from '../../components/RecentsSidebar';
 import UserCollections from '../../components/UserCollections';
-import ArtistFull from '../../components/ArtistFull';
+import ArtistFull from '../../components/ArtistDescription';
 import styles from './artist.css';
 
 const Artist = () => {

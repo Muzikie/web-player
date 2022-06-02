@@ -1,4 +1,4 @@
-.album {
+.wrapper {
   display: block;
   width: 100%;
   padding: 35px 32px;
@@ -7,7 +7,7 @@
   & a {
     display: block;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: var(--border-radius-medium);
     width: var(--album-size);
     height: var(--album-size);
   }

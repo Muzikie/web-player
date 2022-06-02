@@ -1,13 +1,22 @@
  :root {
+  /****  Color  ****/
   --green: #01b84a;
   --white: #ffffff;
   --black: #000000;
+
+  /****  Typography  ****/
   --body-font: 'Mulish', sans-serif;
+
+  /****  Sizes  ****/
   --left-sidebar: 90px;
   --right-sidebar: 210px;
   --header: 70px;
   --album-size: 146px;
   --track-size: 54px;
+  --border-radius-small: 3px;
+  --border-radius-medium: 6px;
+  --border-radius-large: 12px;
+  --border-radius-round: 50%;
 }
 
 :root [data-theme="dark"] {
