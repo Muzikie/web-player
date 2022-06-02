@@ -17,7 +17,7 @@ interface data {
 const Artist = () => (
   <section className={styles.wrapper}>
     <ArtistSummary data={data} />
-    <MostPopular data={data.mostPopular} />
+    <MostPopular data={data.mostPopular} className={styles.mostPopular} />
     <Collections
       className={styles.discography}
       title="Albums"

@@ -10,12 +10,12 @@
 
   /****  Typography  ****/
   --body-font: 'Mulish', sans-serif;
+  --size-h1: 3.6em;
 
   /****  Sizes  ****/
   --left-sidebar: 140px;
   --right-sidebar: 210px;
   --header: 80px;
-
   --box-size-s: 40px;
   --box-size-m: 54px;
   --box-size-l: 100px;
@@ -28,8 +28,8 @@
 
   /****  Media queries  ****/
   --large-viewport: 1240px;
-  --medium-viewport: 768px;
-  --small-viewport: 414px;
+  --medium-viewport: 1000px;
+  --small-viewport: 680px;
   --xSmall-viewport: 320px;
 }
 

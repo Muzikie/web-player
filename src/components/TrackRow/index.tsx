@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '../common/button';
+import Icon from '../common/Icon';
 import trackImage from '../../assets/images/mocks/album7.png';
 import styles from './trackRow.css';
 
@@ -43,29 +43,26 @@ const secondToMinutes = (seconds: number): string => {
   return `${mins}:${sec}`;
 };
 
-const Track = ({ data, className = '' }: TrackProps) => (
-  <section className={`${styles.wrapper} ${className}`}>
-    <IconButton
-      className={styles.playButton}
-      icon="play"
-      onClick={() => { console.log('Implement play logic.'); }}
-    />
+const TrackRow = ({ data, className = '' }: TrackProps) => (
+  <a
+    onClick={() => { console.log('Implement the play logic.'); }}
+    className={`${styles.wrapper} ${className}`}
+  >
+    <div className={styles.playIcon}>
+      <Icon name="play" />
+    </div>
     <div className={styles.albumArt}>
       <figure>
         <img src={trackImage} alt={ data.name } />
       </figure>
     </div>
-    <h4>{ data.name }</h4>
-    <h4>{ data.albumName }</h4>
-    <div className={styles.likes}>
-      <IconButton
-        icon="like"
-        onClick={() => { console.log('Implement like logic.'); }}
-      />
-      <span>{ formatThousands(Number(data.likes)) }</span>
+    <div className={styles.info}>
+      <h4 className={styles.trackName}>{ data.name }</h4>
+      <h4 className={styles.albumName}>{ data.albumName }</h4>
+      <span className={styles.likes}>{ formatThousands(Number(data.likes)) }</span>
+      <span className={styles.duration}>{secondToMinutes(Number(data.duration))}</span>
     </div>
-    <span className={styles.duration}>{secondToMinutes(Number(data.duration))}</span>
-  </section>
+  </a>
 );
 
-export default Track;
+export default TrackRow;

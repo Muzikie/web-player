@@ -1,19 +1,20 @@
 import React from 'react';
-import Track, { TrackType } from '../TrackRow';
+import TrackRow, { TrackType } from '../TrackRow';
 import styles from './mostPopular.css';
 
 interface MostPopularProps {
-  data: TrackType[]
+  data: TrackType[],
+  className?: string;
 }
 
-const MostPopular = ({ data }: MostPopularProps) => (
-  <section className={styles.wrapper}>
+const MostPopular = ({ data, className = '' }: MostPopularProps) => (
+  <section className={`${styles.wrapper} ${className}`}>
     <div>
       <h2>Most popular</h2>
       <section className={styles.list}>
         {
           data.map((track: TrackType) => (
-            <Track data={track} key={track.id} />
+            <TrackRow data={track} key={track.id} />
           ))
         }
       </section>

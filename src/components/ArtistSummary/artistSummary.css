@@ -1,9 +1,12 @@
 .wrapper {
-  height: 520px;
+  
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   position: relative;
-  overflow: hidden;
+  background: #000;
+
+  height: auto;
+  overflow: visible;
 
   &::after {
     content: '';
@@ -22,6 +25,7 @@
     margin: 0;
     max-height: 520px;
     flex: 4 0px;
+    padding: 0 10%;
 
     & img {
       width: 100%;
@@ -30,17 +34,17 @@
 
   & article {
     height: 100%;
-    flex: 2 0px;
-    padding-top: 72px;
+    width: 100%;
     box-sizing: border-box;
-    position: relative;
     z-index: 4;
-    background: #000;
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+    transform: translateY(54px);
+    padding: 0 20px;
 
-    & > * {
-      margin-left: -25%;
-      padding-right: 10%;
-    }
+    
 
     & > div {
       width: 100%;
@@ -60,6 +64,7 @@
     }
 
     & p {
+      display: none;
       color: var(--gray);
       line-height: 1.6em;
       letter-spacing: 0.5px;
@@ -78,6 +83,47 @@
   }
 }
 
+@media (min-width: 680px) {
+  .wrapper {
+    height: 400px;
+    overflow: hidden;
+
+    & article {
+      flex: 2 0px;
+      padding-top: 72px;
+      position: relative;
+
+      & > * {
+        margin-left: -25%;
+        padding-right: 10%;
+      }
+
+      & footer {
+        & .follow {
+          width: 90px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .wrapper {
+    height: 520px;
+    
+
+    & .artistPhoto {
+      padding: 0;
+    }
+
+    & article {
+      & p {
+        display: inline-block;
+      }
+    }
+  }
+}
+
 @media (min-width: 1240px) {
   .wrapper {
     & .artistPhoto {
@@ -85,3 +131,4 @@
     }
   }
 }
+

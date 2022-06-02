@@ -1,18 +1,19 @@
 body {
   font-family: var(--body-font);
   color: var(--white);
-  font-size: 16px;
+  font-size: 12px;
 }
 
 h1 {
-  font-size: 3.4em;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  font-size: calc(var(--size-h1) * 0.7);
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
 }
 
 h4 {
   font-size: 1em;
   line-height: 1.3em;
+  font-weight: 400;
   margin-top: 0.6em;
   margin-bottom: 0.6em;
   letter-spacing: 0.5px;
@@ -21,4 +22,16 @@ h4 {
 span {
   font-size: 0.8em;
   letter-spacing: 0.5px;
+}
+
+@media (min-width: 1000px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: var(--size-h1);
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
 }
