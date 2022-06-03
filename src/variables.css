@@ -9,8 +9,9 @@
   --brightOutline: rgba(167, 167, 167, 0.12);
 
   /****  Typography  ****/
-  --body-font: 'Mulish', sans-serif;
+  --body-font: 'SourceSansPro', sans-serif;
   --size-h1: 3.6em;
+  --size-h2: 3em;
 
   /****  Sizes  ****/
   --left-sidebar: 140px;
@@ -20,11 +21,14 @@
   --box-size-m: 54px;
   --box-size-l: 100px;
   --box-size-xl: 146px;
+  --padding-s: 5px;
+  --padding-m: 20px;
+  --padding-l: 30px;
 
-  --border-radius-small: 5px;
-  --border-radius-medium: 10px;
-  --border-radius-large: 30px;
-  --border-radius-round: 50%;
+  --border-radius-s: 5px;
+  --border-radius-m: 10px;
+  --border-radius-l: 30px;
+  --border-radius-r: 50%;
 
   /****  Media queries  ****/
   --large-viewport: 1240px;

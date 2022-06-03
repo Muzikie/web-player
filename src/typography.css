@@ -1,3 +1,30 @@
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url("./assets/fonts/SourceSansPro/SourceSansPro-ExtraLight.ttf") format(truetype);
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url("./assets/fonts/SourceSansPro/SourceSansPro-Light.ttf") format(truetype);
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url("./assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf") format(truetype);
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url("./assets/fonts/SourceSansPro/SourceSansPro-SemiBold.ttf") format(truetype);
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url("./assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf") format(truetype);
+  font-weight: 600;
+}
+
+
 body {
   font-family: var(--body-font);
   color: var(--white);
@@ -8,10 +35,18 @@ h1 {
   font-size: calc(var(--size-h1) * 0.7);
   margin-top: 0.3em;
   margin-bottom: 0.3em;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: calc(var(--size-h2) * 0.6);
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  font-weight: 400;
 }
 
 h4 {
-  font-size: 1em;
+  font-size: 1.2em;
   line-height: 1.3em;
   font-weight: 400;
   margin-top: 0.6em;
@@ -20,7 +55,7 @@ h4 {
 }
 
 span {
-  font-size: 0.8em;
+  font-size: 0.9em;
   letter-spacing: 0.5px;
 }
 
@@ -33,5 +68,11 @@ span {
     font-size: var(--size-h1);
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+  }
+
+  h1 {
+    font-size: var(--size-h2);
+    margin-top: 0.35em;
+    margin-bottom: 0.35em;
   }
 }
