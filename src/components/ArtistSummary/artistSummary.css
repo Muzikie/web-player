@@ -1,31 +1,18 @@
 .wrapper {
-  
-  display: flex;
-  flex-flow: row nowrap;
   position: relative;
-  background: #000;
-
   height: auto;
   overflow: visible;
-
-  &::after {
-    content: '';
-    width: 100%;
-    height: 50px;
-    position: absolute;
-    display: block;
-    z-index: 3;
-    background: linear-gradient(180deg, rgba(255, 0, 0, 0) 0%, var(--black) 100%);
-    bottom: 0;
-    z-index: 4;
-    left: 0;
-  }
+  padding: var(--padding-m);
+  box-sizing: border-box;
 
   & .artistPhoto {
+    width: calc(100vw - calc(2 * var(--padding-m)));
+    height: calc(100vw - calc(2 * var(--padding-m)));
     margin: 0;
-    max-height: 520px;
-    flex: 4 0px;
-    padding: 0 10%;
+    border: solid 1px var(--brightOutline);
+    border-radius: 30px; /* fix this */
+    background: var(--dark);
+    overflow: hidden;
 
     & img {
       width: 100%;
@@ -37,30 +24,17 @@
     width: 100%;
     box-sizing: border-box;
     z-index: 4;
-    position: absolute;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-end;
-    transform: translateY(54px);
+    align-items: center;
     padding: 0 20px;
-
-    
 
     & > div {
       width: 100%;
       height: 100%;
       overflow-y: scroll;
       box-sizing: border-box;
-    }
-
-    & pre {
-      color: var(--gray);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-    }
-
-    & h1 {
-      text-transform: uppercase;
     }
 
     & p {
@@ -74,10 +48,35 @@
     & footer {
       display: flex;
       align-items: center;
-      padding: 20px 0 0 0;
+      width: 130px;
+      justify-content: space-between;
+      align-content: center;
+      border-radius: 20px;
+      box-shadow: 0 0 0 12px var(--black);
+      margin-top: -10px;
+      background-color: var(--black);
+
+      & .play {
+        border-radius: 50%;
+
+        & i {
+          font-size: 30px;
+          padding-left: 3px
+        }
+      }
 
       & .follow {
-        margin-left: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        border: solid 1px var(--brightOutline);
+
+        & i {
+          font-size: 20px;
+        }
       }
     }
   }
@@ -85,17 +84,17 @@
 
 @media (min-width: 680px) {
   .wrapper {
+    display: flex;
+    flex-flow: row nowrap;
     height: 400px;
     overflow: hidden;
 
     & article {
       flex: 2 0px;
-      padding-top: 72px;
       position: relative;
 
-      & > * {
-        margin-left: -25%;
-        padding-right: 10%;
+      & p {
+        display: inline-block;
       }
 
       & footer {
@@ -110,16 +109,9 @@
 @media (min-width: 1000px) {
   .wrapper {
     height: 520px;
-    
 
     & .artistPhoto {
       padding: 0;
-    }
-
-    & article {
-      & p {
-        display: inline-block;
-      }
     }
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from '../common/Icon';
 import styles from './player.css';
 import img from '../../assets/images/mocks/album9.png';
+import { IconButton } from '../common/button';
 
 const Player = () => {
   return (
@@ -11,14 +12,26 @@ const Player = () => {
           <img src={img} alt="Love the Way You Lie" />
         </figure>
         <header>
-          <h5>Love the Way You Lie</h5>
-          <small>Rihanna</small>
+          <h4>Love the Way You Lie</h4>
+          <span>Rihanna</span>
         </header>
       </section>
       <section className={styles.controls}>
-        <button><Icon name="rewind" /></button>
-        <button><Icon name="play" /></button>
-        <button><Icon name="fast-forward" /></button>
+        <IconButton
+          icon="rewind"
+          className={styles.rewind}
+          onClick={(e) => { console.log('Implement rewind logic', e); }}
+        />
+        <IconButton
+          icon="play"
+          className={styles.play}
+          onClick={(e) => { console.log('Implement play logic', e); }}
+        />
+        <IconButton
+          icon="fast-forward"
+          className={styles.fastForward}
+          onClick={(e) => { console.log('Implement fast-forward logic', e); }}
+        />
       </section>
       <section className={styles.seek}>
         <span className={styles.bar}></span>

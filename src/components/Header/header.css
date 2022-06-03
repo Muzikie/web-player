@@ -2,26 +2,27 @@
   width: calc(100% - var(--right-sidebar));
   height: var(--header);
   box-sizing: border-box;
-  position: absolute;
   z-index: 3;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  padding: 20px 20px 0 20px;
+
+  & .menuButton {
+    width: var(--box-size-m);
+    height: var(--box-size-m);
+    border: solid 1px var(--brightOutline);
+    border-radius: var(--border-radius-r);
+  }
 
   & .logo {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    padding: 0 45px 0 25px;
-
-    & img {
-      height: 45px;
-    }
+    display: none;
   }
 
   & .search {
     margin: 0px 50px;
     position: relative;
+    display: none;
 
     & i {
       position: absolute;

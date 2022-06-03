@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './artistSummary.css';
 import selena from '../../assets/images/mocks/selena-gomez.jpg';
-import { PlayButton, SecondaryButton } from '../common/button';
+import { IconButton, PlayButton } from '../common/button';
 import { ArtistType } from '../ArtistRow';
 
 interface ArtistSummaryProps {
@@ -15,22 +15,19 @@ const ArtistSummary = ({ data }: ArtistSummaryProps) => (
     </figure>
 
     <article>
-      <pre>STATION</pre>
-      <h1>{ data.name }</h1>
-      <p>{ data.description }</p>
-
       <footer>
         <PlayButton
           className={styles.play}
           onClick={() => { console.log('Create the play logic'); }}
         />
-        <SecondaryButton
+        <IconButton
+          icon="heart"
           className={styles.follow}
-          onClick={() => { console.log('Create the follow logic'); }}
-        >
-          + Follow
-        </SecondaryButton>
+          onClick={(e) => { console.log('Create the follow logic', e); }}
+        />
       </footer>
+      <h1>{ data.name }</h1>
+      <p>{ data.description }</p>
     </article>
   </section>
 );

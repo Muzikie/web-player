@@ -1,10 +1,8 @@
 .wrapper {
-  --thumbnailHeight: 275px;
-  --thumbnailWidth: 210px;
-  --padding: 35px;
+  --thumbnailWidth: 160px;
+  --padding: 10px;
   --figureSize: calc(var(--thumbnailWidth) - calc(2 * var(--padding)));
 
-  height: var(--thumbnailHeight);
   min-width: var(--thumbnailWidth);
   max-width: calc(var(--thumbnailWidth) * 1.4);
   flex-basis: var(--thumbnailWidth);
@@ -15,7 +13,7 @@
     display: flex;
     flex-flow: column nowrap;
     overflow: hidden;
-    border-radius: var(--border-radius-medium);
+    border-radius: var(--border-radius-m);
     padding: var(--padding);
     text-align: center;
     transition: all ease 100ms;
@@ -33,7 +31,7 @@
     width: 100%;
     height: var(--figureSize);
     margin: 0;
-    border-radius: var(--border-radius-medium);
+    border-radius: var(--border-radius-m);
     overflow: hidden;
 
     & img {

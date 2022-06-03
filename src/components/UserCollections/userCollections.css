@@ -1,13 +1,37 @@
 .wrapper {
-  display: none;
-  height: 100%;
-  width: var(--left-sidebar);
-  flex-basis: var(--left-sidebar);
-  flex-shrink: 0;
+  position: relative;
+  position: relative;
+  overflow-y: scroll;
+  border-top: solid 1px var(--brightOutline);
+  padding-top: 15px;
+
+  & li {
+    display: block;
+    padding: 10px 20px;
+    line-height: 20px;
+
+    & a {
+      color: var(--gray);
+      font-size: 0.8em;
+      letter-spacing: 0.5px;
+      font-weight: 300;
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.active,
+      &:hover {
+        font-weight: 500;
+        color: var(--white);
+      }
+    }
+  }
 }
 
 @media (min-width: 1000px) {
   .wrapper {
-    display: block;
+    position: relative;
   }
 }

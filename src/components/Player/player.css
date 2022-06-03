@@ -1,16 +1,17 @@
 .wrapper {
   width: 100%;
   height: 90px;
-  position: absolute;
+  position: fixed;
   z-index: 3;
   bottom: 0;
   left: 0;
   background: var(--dark-glassy);
   display: flex;
   flex-flow: row nowrap;
-  padding: 0 90px;
+  justify-content: space-between;
+  padding: 0 20px;
   box-sizing: border-box;
-  border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+  border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
   border-style: solid;
   border-color: var(--brightOutline);
   border-width: 1px 0px 0px 0px;
@@ -20,100 +21,137 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  padding: 2px 35px;
-}
+  padding: 2px;
 
-.playingMusic figure {
-  width: var(--box-size-m);
-  height: var(--box-size-m);
-  overflow: hidden;
-  margin: 0;
-  padding: 0 20px;
-}
+  & figure {
+    width: var(--box-size-m);
+    height: var(--box-size-m);
+    overflow: hidden;
+    border-radius: var(--border-radius-m);
+    margin: 0;
 
-.playingMusic img {
-  width: 100%;
-  height: 100%;
-}
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-.playingMusic h5 {
-  margin: 0;
-  letter-spacing: 0.5px;
-  line-height: 23px;
-}
+  & header {
+    padding: 0 10px;
 
-.playingMusic small {
-  margin: 0;
+    & h4 {
+      margin: 0;
+      letter-spacing: 0.5px;
+      line-height: 23px;
+    }
+
+    & span {
+      margin: 0;
+    }
+  }
 }
 
 .controls {
-  padding: 0 35px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-}
 
-.controls button {
-  background: transparent;
-  border: 0;
-  color: var(--white);
-  width: 45px;
-  height: 45px;
-  border-radius: var(--border-radius-small);
-  cursor: pointer;
-  font-size: 15px;
-}
+  & button {
+    background: transparent;
+    border: 0;
+    color: var(--white);
+    width: 45px;
+    height: 45px;
+    border-radius: var(--border-radius-s);
+    cursor: pointer;
+    font-size: 15px;
 
-.controls button:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
 
-.controls .icon-play {
-  font-size: 28px;
+  & .rewind,
+  & .fastForward {
+    display: none;
+  }
+
+  & .play {
+    width: 40px;
+    height: 40px;
+
+    & i {
+      font-size: 18px;
+    }
+  }
 }
 
 .seek {
-  display: flex;
+  display: none;
   flex-flow: row nowrap;
   flex-grow: 1;
   padding: 0 35px 0 10px;
   box-sizing: border-box;
   align-items: center;
+
+  & .bar {
+    display: block;
+    flex-grow: 1;
+    background: #777;
+    height: 5px;
+    border-radius: var(--border-radius-s);
+    position: relative;
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      background: var(--green);
+    }
+
+    &:before {
+      height: 100%;
+      width: 50%;
+      border-radius: var(--border-radius-s);
+    }
+
+    &:after {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      left: 50%;
+      border-radius: var(--border-radius-r);
+      top: 3px;
+      transform: translateX(-50%) translateY(-50%);
+      cursor: pointer;
+    }
+  }
+
+  & time {
+    display: block;
+    padding: 0 0 0 20px;
+  }
 }
 
-.seek .bar {
-  display: block;
-  flex-grow: 1;
-  background: #777;
-  height: 5px;
-  border-radius: var(--border-radius-small);
-  position: relative;
+@media (min-width: 680px) {
+  .playingMusic {
+    padding: 2px 35px;
+  }
+
+  .controls {
+    & .rewind,
+    & .fastForward {
+      display: block;
+    }
+  }
+
+  .seek {
+    display: flex;
+  }
 }
 
-.seek .bar:before {
-  content: '';
-  display: block;
-  height: 100%;
-  width: 50%;
-  background: var(--green);
-  border-radius: var(--border-radius-small);
-}
-
-.seek .bar:after {
-  content: '';
-  display: block;
-  width: 14px;
-  height: 14px;
-  position: absolute;
-  left: 50%;
-  background: var(--green);
-  border-radius: var(--border-radius-round);
-  top: 3px;
-  transform: translateX(-50%) translateY(-50%);
-  cursor: pointer;
-}
-
-.seek time {
-  display: block;
-  padding: 0 0 0 20px;
+@media (min-width: 1000px) {
+  .wrapper {
+    padding: 0 90px;
+  }
 }

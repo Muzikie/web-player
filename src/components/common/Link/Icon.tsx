@@ -5,10 +5,15 @@ import styles from './link.css';
 interface IconLinkProps {
   icon: string;
   target: string;
+  className: string;
 }
 
-const IconLink = ({ icon, target }: IconLinkProps) => (
-  <a className={styles.iconLink} href={target}>
+const IconLink = ({
+  icon,
+  target,
+  className = '',
+}: IconLinkProps) => (
+  <a className={`${styles.iconLink} ${className}`} href={target}>
     <Icon name={icon} />
   </a>
 );
