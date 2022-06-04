@@ -1,0 +1,9 @@
+{
+  "name": "When The Sun Goes Down",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis?",
+  "id": "album-id-1",
+  "artistName": "Selena Gomez",
+  "artistId": "artist-id-1",
+  "releaseDate": 1559679652,
+  "ownerId": "ownerId1"
+}

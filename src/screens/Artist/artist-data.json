@@ -9,13 +9,5 @@
     { "image": "track3.jpg", "id": "track-id-3", "name": "Come & Get It", "albumId": "album-id-3", "albumName": "Stars Dance", "likes": 3900, "duration": 209 },
     { "image": "track4.jpg", "id": "track-id-4", "name": "Same Old Love", "albumId": "album-id-4", "albumName": "Revival", "likes": 3400, "duration": 199 },
     { "image": "track5.jpg", "id": "track-id-5", "name": "The Heart Wants What It Wants", "albumId": "album-id-5", "albumName": "The Heart Wants What It Wants", "likes": 3300, "duration": 176 }
-  ],
-  "albums": [
-    { "image": "album1", "name": "When The Sun Goes Down", "id": "album-id-1", "artistId": "artistId1", "artistName": "Selena Gomez", "releaseDate": 1654104465, "ownerId": "ownerId1" },
-    { "image": "album2", "name": "Rare", "id": "album-id-2", "artistId": "artistId1", "artistName": "Selena Gomez", "releaseDate": 1654104465, "ownerId": "ownerId1" },
-    { "image": "album3", "name": "Stars Dance", "id": "album-id-3", "artistId": "artistId1", "artistName": "Selena Gomez", "releaseDate": 1654104465, "ownerId": "ownerId1" },
-    { "image": "album4", "name": "Revival", "id": "album-id-4", "artistId": "artistId1", "artistName": "Selena Gomez", "releaseDate": 1654104465, "ownerId": "ownerId1" },
-    { "image": "album5", "name": "The Heart Wants What It Wants", "id": "album-id-5", "artistId": "artistId1", "artistName": "Selena Gomez", "releaseDate": 1654104465, "ownerId": "ownerId1" }
   ]
-  
 }

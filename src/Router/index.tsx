@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Player from '../components/Player';
 import RecentsSidebar from '../components/RecentsSidebar';
 import MainMenu from '../components/MainMenu';
-import Artist from '../screens/Artist/index';
+import Album from '../screens/Album';
 
 function App () {
   return (
@@ -12,7 +12,7 @@ function App () {
       <Header />
       <main className={`${styles.main} ${styles.expand}`}>
         <MainMenu />
-        <Artist />
+        <Album />
         <RecentsSidebar />
       </main>
       <Player />

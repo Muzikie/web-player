@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from './artist.css';
-import artistData from './artist-data.json';
-import artistAlbums from './artist-albums.json';
+import styles from './album.css';
+import albumData from './album-data.json';
+import albumTracks from './album-tracks.json';
+import artistAlbums from './albums.json';
 import Collections from '../../components/Collection';
 import TrackList from '../../components/TrackList';
-import ArtistSummary from '../../components/ArtistSummary';
+import AlbumSummary from '../../components/AlbumSummary';
 // import { TrackType } from '../../components/TrackRow';
 // import { AlbumType } from '../../components/AlbumRow';
 // import { ArtistType } from '../../components/ArtistRow';
@@ -15,20 +16,19 @@ import ArtistSummary from '../../components/ArtistSummary';
 //   albums: AlbumType[],
 // }
 
-const Artist = () => (
+const Album = () => (
   <section className={styles.wrapper}>
-    <ArtistSummary data={artistData} />
+    <AlbumSummary data={albumData} />
     <TrackList
-      title="Most popular"
-      data={artistData.mostPopular}
+      data={albumTracks}
     />
     <Collections
       className={styles.discography}
-      title="Albums"
+      title={`Other Albums by ${albumData.artistName}`}
       direction="row"
       albums={artistAlbums}
     />
   </section>
 );
 
-export default Artist;
+export default Album;

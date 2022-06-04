@@ -6,6 +6,7 @@ export interface AlbumType {
   artistId: string;
   releaseDate: number;
   ownerId: string;
+  description: string;
 }
 
 interface AlbumProps {
