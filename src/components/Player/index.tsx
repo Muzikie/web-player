@@ -1,5 +1,4 @@
 import React from 'react';
-import Icon from '../common/Icon';
 import styles from './player.css';
 import img from '../../assets/images/mocks/album9.png';
 import { IconButton } from '../common/button';
@@ -12,7 +11,7 @@ const Player = () => {
           <img src={img} alt="Love the Way You Lie" />
         </figure>
         <header>
-          <h4>Love the Way You Lie</h4>
+          <h5>Love the Way You Lie</h5>
           <span>Rihanna</span>
         </header>
       </section>

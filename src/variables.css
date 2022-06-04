@@ -10,13 +10,19 @@
 
   /****  Typography  ****/
   --body-font: 'SourceSansPro', sans-serif;
-  --size-h1: 3.6em;
-  --size-h2: 3em;
+  --size-h1: 3em;
+  --size-h2: 2.4em;
+  --size-h3: 1.8em;
+  --size-h4: 1.4em;
+  --size-h5: 1em;
+  --size-span: 0.8em;
+  --size-small: 0.7em;
 
   /****  Sizes  ****/
   --left-sidebar: 140px;
   --right-sidebar: 210px;
-  --header: 80px;
+  --player-height-s: 70px;
+  --player-height-m: 90px;
   --box-size-s: 40px;
   --box-size-m: 54px;
   --box-size-l: 100px;
@@ -24,6 +30,7 @@
   --padding-s: 5px;
   --padding-m: 20px;
   --padding-l: 30px;
+  --header: var(--box-size-m);
 
   --border-radius-s: 5px;
   --border-radius-m: 10px;

@@ -33,12 +33,22 @@
     flex: 4 0;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: space-between;
     padding-left: 10px;
+    height: 34px;
 
     & .duration,
     & .albumName {
       display: none;
+    }
+
+    & .duration,
+    & .likes {
+      color: var(--gray);
+    }
+
+    & .trackName {
+      margin: 0;
     }
   }
 
@@ -94,9 +104,14 @@
         flex: auto;
       }
 
+      & .duration,
       & .likes {
-        width: 40px;
+        width: 60px;
         text-align: right;
+      }
+
+      & .duration {
+        display: inline-block;
       }
     }
   }
@@ -116,6 +131,7 @@
       }
 
       & .albumName {
+        font-weight: 300;
         display: flex;
         justify-content: flex-start;
         flex: 1 0;

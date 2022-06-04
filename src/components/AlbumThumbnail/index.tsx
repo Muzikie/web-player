@@ -16,7 +16,7 @@ const Album = ({ data }: AlbumThumbnailProps) => (
       <figure>
         <img src={trackImage} alt={ data.name } />
       </figure>
-      <h4>{ data.name }</h4>
+      <h5>{ data.name }</h5>
       <span>{ data.artistName }</span>
     </a>
   </div>

@@ -57,8 +57,8 @@ const TrackRow = ({ data, className = '' }: TrackProps) => (
       </figure>
     </div>
     <div className={styles.info}>
-      <h4 className={styles.trackName}>{ data.name }</h4>
-      <h4 className={styles.albumName}>{ data.albumName }</h4>
+      <h5 className={styles.trackName}>{ data.name }</h5>
+      <h5 className={styles.albumName}>{ data.albumName }</h5>
       <span className={styles.likes}>{ formatThousands(Number(data.likes)) }</span>
       <span className={styles.duration}>{secondToMinutes(Number(data.duration))}</span>
     </div>

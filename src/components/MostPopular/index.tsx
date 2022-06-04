@@ -10,7 +10,7 @@ interface MostPopularProps {
 const MostPopular = ({ data, className = '' }: MostPopularProps) => (
   <section className={`${styles.wrapper} ${className}`}>
     <div>
-      <h2>Most popular</h2>
+      <h4>Most popular</h4>
       <section className={styles.list}>
         {
           data.map((track: TrackType) => (

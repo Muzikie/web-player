@@ -18,8 +18,8 @@ const TrackThumbnail = ({ data, className = '' }: TrackThumbnailProps) => (
           <img src={trackImage} alt={ data.name } />
         </figure>
       </div>
-      <h4>{ data.name }</h4>
-      <h4>{ data.artistName }</h4>
+      <h5>{ data.name }</h5>
+      <h5>{ data.artistName }</h5>
     </a>
   </section>
 );

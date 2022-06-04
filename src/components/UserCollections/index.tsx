@@ -11,7 +11,11 @@ const UserCollections = () => {
     <section className={styles.wrapper}>
       <ul>
         {
-          list.map((item) => (<li key={item.target}><TextLink {...item} /></li>))
+          list.map((item) => (
+            <li key={item.target}>
+              <TextLink {...item} />
+            </li>
+          ))
         }
       </ul>
     </section>

@@ -26,8 +26,10 @@ const ArtistSummary = ({ data }: ArtistSummaryProps) => (
           onClick={(e) => { console.log('Create the follow logic', e); }}
         />
       </footer>
-      <h1>{ data.name }</h1>
-      <p>{ data.description }</p>
+      <div>
+        <h1>{ data.name }</h1>
+        <h5>{ data.description }</h5>
+      </div>
     </article>
   </section>
 );

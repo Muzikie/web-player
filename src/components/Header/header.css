@@ -1,66 +1,21 @@
 .header {
-  width: calc(100% - var(--right-sidebar));
   height: var(--header);
+  height: var(--header);
+  position: fixed;
+  bottom: calc(var(--player-height-s) + var(--padding-m));
+  right: var(--padding-m);
   box-sizing: border-box;
-  z-index: 3;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  padding: 20px 20px 0 20px;
+  z-index: 5;
 
   & .menuButton {
     width: var(--box-size-m);
     height: var(--box-size-m);
     border: solid 1px var(--brightOutline);
     border-radius: var(--border-radius-r);
-  }
-
-  & .logo {
-    display: none;
-  }
-
-  & .search {
-    margin: 0px 50px;
-    position: relative;
-    display: none;
+    background-color: var(--dark);
 
     & i {
-      position: absolute;
-      left: 16px;
-      top: 16px;
-      transition: all ease 200ms;
-      z-index: 1;
-    }
-
-    & input {
-      border: solid 1px rgb(83, 83, 83);
-      background: transparent;
-      width: 0px;
-      height: var(--box-size-s);
-      line-height: var(--box-size-s);
-      padding: 0 20px;
-      border-radius: 10px;
-      transition: all ease 200ms;
-      outline: none;
-      position: relative;
-      z-index: 2;
-      color: var(--white);
-
-      &:hover,
-      &:active,
-      &:focus,
-      &:not(:empty) {
-        width: 300px;
-        background-color: var(--brightOutline);
-
-        & + i {
-          opacity: 0;
-        }
-      }
+      font-size: 16px;
     }
   }
 }
-
-
-
-

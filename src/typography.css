@@ -45,18 +45,40 @@ h2 {
   font-weight: 400;
 }
 
-h4 {
-  font-size: 1.2em;
-  line-height: 1.3em;
+h3 {
+  font-size: calc(var(--size-h3) * 0.6);
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
   font-weight: 400;
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
+}
+
+h4 {
+  font-size: calc(var(--size-h4) * 0.6);
+  line-height: 1.2em;
+  font-weight: 300;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
   letter-spacing: 0.5px;
 }
 
-span {
-  font-size: 0.9em;
+h5 {
+  font-size: calc(var(--size-h5) * 0.6);
+  line-height: 1.2em;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
   letter-spacing: 0.5px;
+}
+
+p,
+b,
+span {
+  font-size: var(--size-span);
+  letter-spacing: 0.5px;
+}
+
+small {
+  font-size: var(--size-small);
 }
 
 @media (min-width: 1000px) {
@@ -70,9 +92,27 @@ span {
     margin-bottom: 0.5em;
   }
 
-  h1 {
+  h2 {
     font-size: var(--size-h2);
     margin-top: 0.35em;
     margin-bottom: 0.35em;
+  }
+
+  h3 {
+    font-size: var(--size-h3);
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+
+  h4 {
+    font-size: var(--size-h4);
+    margin-top: 0.15em;
+    margin-bottom: 0.15em;
+  }
+
+  h5 {
+    font-size: var(--size-h5);
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
   }
 }

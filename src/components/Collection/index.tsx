@@ -26,7 +26,7 @@ const Collection = ({
       {
         title ? (
           <header>
-            <h2>{title}</h2>
+            <h4>{title}</h4>
           </header>
         ): null
       }

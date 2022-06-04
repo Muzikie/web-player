@@ -6,7 +6,8 @@
 .main {
   display: flex;
   flex-flow: row nowrap;
-  height: calc(100vh - var(--header));
+  z-index: 4;
+  position: relative;
 }
 
 
