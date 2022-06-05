@@ -19,3 +19,9 @@
     }
   }
 }
+
+@media (min-width: 680px) {
+  .header {
+    display: none;
+  }
+}

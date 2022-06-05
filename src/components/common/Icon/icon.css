@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url("../../../assets/fonts/icons/icomoon.eot?fy18ef");
-  src:  url("../../../assets/fonts/icons/icomoon.eot?fy18ef#iefix") format(embedded-opentype),
-    url("../../../assets/fonts/icons/icomoon.ttf?fy18ef") format(truetype),
-    url("../../../assets/fonts/icons/icomoon.woff?fy18ef") format(woff),
-    url("../../../assets/fonts/icons/icomoon.svg?fy18ef#icomoon") format(svg);
+  src:  url('../../../assets/fonts/icons/icomoon.eot?njsrqc');
+  src:  url('../../../assets/fonts/icons/icomoon.eot?njsrqc#iefix') format('embedded-opentype'),
+    url('../../../assets/fonts/icons/icomoon.ttf?njsrqc') format('truetype'),
+    url('../../../assets/fonts/icons/icomoon.woff?njsrqc') format('woff'),
+    url('../../../assets/fonts/icons/icomoon.svg?njsrqc#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -34,17 +34,38 @@
 .icon-copy:before {
   content: "\e902";
 }
+.icon-eye:before {
+  content: "\e91a";
+}
+.icon-eye-off:before {
+  content: "\e91b";
+}
 .icon-fast-forward:before {
   content: "\e903";
 }
+.icon-file:before {
+  content: "\e91c";
+}
 .icon-heart:before {
   content: "\e904";
+}
+.icon-home:before {
+  content: "\e91d";
+}
+.icon-image:before {
+  content: "\e91e";
+}
+.icon-key:before {
+  content: "\e91f";
 }
 .icon-link-diagonal:before {
   content: "\e905";
 }
 .icon-link-horizontal:before {
   content: "\e906";
+}
+.icon-menu:before {
+  content: "\e920";
 }
 .icon-message:before {
   content: "\e907";
@@ -64,8 +85,17 @@
 .icon-pause:before {
   content: "\e90c";
 }
+.icon-percent:before {
+  content: "\e921";
+}
+.icon-pie-chart:before {
+  content: "\e922";
+}
 .icon-play:before {
   content: "\e90d";
+}
+.icon-power:before {
+  content: "\e923";
 }
 .icon-repeat:before {
   content: "\e90e";
@@ -85,6 +115,12 @@
 .icon-settings:before {
   content: "\e913";
 }
+.icon-share:before {
+  content: "\e924";
+}
+.icon-shuffle:before {
+  content: "\e925";
+}
 .icon-skip-back:before {
   content: "\e914";
 }
@@ -96,6 +132,9 @@
 }
 .icon-trash:before {
   content: "\e917";
+}
+.icon-user:before {
+  content: "\e926";
 }
 .icon-volume:before {
   content: "\e918";

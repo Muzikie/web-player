@@ -17,13 +17,9 @@
       font-weight: 300;
       display: block;
       width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
 
       &.active,
       &:hover {
-        font-weight: 500;
         color: var(--white);
       }
     }
