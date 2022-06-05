@@ -18,6 +18,7 @@ export interface TrackType {
 interface TrackProps {
   data: TrackType;
   className?: string;
+  theme?: 'minimal'|'normal';
 }
 
 const formatThousands = (num: number): string => {
@@ -43,10 +44,10 @@ const secondToMinutes = (seconds: number): string => {
   return `${mins}:${sec}`;
 };
 
-const TrackRow = ({ data, className = '' }: TrackProps) => (
+const TrackRow = ({ data, className = '', theme = 'normal' }: TrackProps) => (
   <a
     onClick={() => { console.log('Implement the play logic.'); }}
-    className={`${styles.wrapper} ${className}`}
+    className={`${styles.wrapper} ${className} ${styles[theme]}`}
   >
     <div className={styles.playIcon}>
       <Icon name="play" />

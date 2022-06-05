@@ -52,40 +52,17 @@
     }
   }
 
-  /* & .albumName,
-  & .trackName {
-    margin: 0;
-    text-align: left;
-  } */
-
-  /* & .trackName {
-    padding-left: 4px;
-    flex: 6 0;
+  &.minimal {
+    & .playIcon {
+      display: none !important;
+    }
+    & .info {
+      & .duration,
+      & .albumName {
+        display: none !important;
+      }
+    }
   }
-
-  & .albumName {
-    flex: 4 0;
-  }
-
-  & .duration,
-  & .albumName {
-    display: none;
-  }
-
-  & .duration,
-  & .albumArt,
-  & .likes {
-    flex: 1 0;
-  }
-
-  & .likes {
-    display: flex;
-    align-items: center;
-  }
-
-  & .duration {
-    text-align: right;
-  } */
 }
 
 @media (min-width: 680px) {
