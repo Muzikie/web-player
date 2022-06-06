@@ -41,10 +41,5 @@
     width: var(--box-size-m);
     height: var(--box-size-m);
     border: 0;
-    background-color: var(--green);
-
-    &:hover {
-      box-shadow: 0 0 0 1px var(--green);
-    }
   }
 }

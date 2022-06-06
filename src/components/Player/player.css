@@ -106,7 +106,7 @@
     &:after {
       content: '';
       display: block;
-      background: var(--green);
+      background: linear-gradient(90deg, rgba(179,189,253,1) 0%, rgba(238,180,205,1) 50%, rgba(232,135,251,1) 100%);
     }
 
     &:before {

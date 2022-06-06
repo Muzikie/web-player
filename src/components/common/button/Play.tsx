@@ -12,7 +12,7 @@ interface PlayButtonProps {
 
 const PlayButton = ({ onClick, className, theme = 'iconOnly' }: PlayButtonProps) => (
   <button
-    className={`${styles.button} ${styles.play} ${styles[theme]} ${className}`}
+    className={`${styles.button} ${styles.play} primaryGradient ${styles[theme]} ${className}`}
     onClick={onClick}
   >
     <Icon name="play"/>

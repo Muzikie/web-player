@@ -49,12 +49,10 @@ const TrackRow = ({ data, className = '', theme = 'normal' }: TrackProps) => (
     onClick={() => { console.log('Implement the play logic.'); }}
     className={`${styles.wrapper} ${className} ${styles[theme]}`}
   >
-    <div className={styles.playIcon}>
-      <Icon name="play" />
-    </div>
     <div className={styles.albumArt}>
       <figure>
         <img src={trackImage} alt={ data.name } />
+        <Icon name="play" className={styles.playIcon} />
       </figure>
     </div>
     <div className={styles.info}>

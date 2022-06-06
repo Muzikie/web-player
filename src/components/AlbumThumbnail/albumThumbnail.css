@@ -20,11 +20,6 @@
     background-color: rgba(255, 255, 255, 0);
     box-shadow: 0px 0px 0px 0px var(--green);
     cursor: pointer;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      box-shadow: 0px 3px 0px 0px var(--green);
-    }
   }
 
   & figure {
@@ -54,5 +49,11 @@
     width: 100%;
     display: block;
     color: var(--gray);
+  }
+
+  &:hover {
+    & figure {
+      box-shadow: 0 6px 12px -10px rgba(179,189,253,1);
+    }
   }
 }
