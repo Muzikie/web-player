@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
+import { useActiveRoute } from '../../../hooks';
 import styles from './link.css';
 
 interface TextLinkProps {
@@ -7,8 +8,16 @@ interface TextLinkProps {
   href: string;
 }
 
-const TextLink = ({ title, href }: TextLinkProps) => (
-  <Link className={styles.textLink} href={href}>{ title }</Link>
-);
+const TextLink = ({ title, href }: TextLinkProps) => {
+  const isActive = useActiveRoute(href);
+  return (
+    <Link
+      className={`${styles.textLink} ${isActive ? 'active' : ''}`}
+      href={href}
+    >
+      { title }
+    </Link>
+  );
+};
 
 export default TextLink;

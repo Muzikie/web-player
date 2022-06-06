@@ -17,7 +17,7 @@ const MainMenu = () => (
     <div className={styles.list}>
       <IconLink
         icon="home"
-        href="home"
+        href="/"
         className={`${styles.menuItem} ${styles.active}`}
       />
       <IconLink
@@ -27,12 +27,12 @@ const MainMenu = () => (
       />
       <IconLink
         icon="user"
-        href="profile"
+        href="/profile"
         className={styles.menuItem}
       />
       <IconLink
         icon="settings"
-        href="settings"
+        href="/settings"
         className={styles.menuItem}
       />
     </div>

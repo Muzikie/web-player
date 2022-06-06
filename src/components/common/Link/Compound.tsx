@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'wouter';
+import { useActiveRoute } from '../../../hooks';
 import Icon from '../Icon';
 import styles from './link.css';
 
@@ -15,15 +16,20 @@ const CompoundLink = ({
   children,
   href,
   className = '',
-}: CompoundLinkProps) => (
-  <Link className={`${styles.compoundLink} ${className}`} href={href}>
-    <Icon name={icon} />
-    {
-      typeof children === 'string'
-        ? <span>{children}</span>
-        : children
-    }
-  </Link>
-);
+}: CompoundLinkProps) => {
+  const isActive = useActiveRoute(href);
+  return (
+    <Link href={href}>
+      <div className={`${styles.compoundLink} ${isActive ? 'active' : ''} ${className}`}>
+        <Icon name={icon} />
+        {
+          typeof children === 'string'
+            ? <span>{children}</span>
+            : children
+        }
+      </div>
+    </Link>
+  );
+};
 
 export default CompoundLink;

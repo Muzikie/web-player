@@ -18,7 +18,7 @@
       display: block;
       width: 100%;
 
-      &.active,
+      &:global(.active),
       &:hover {
         color: var(--white);
       }
