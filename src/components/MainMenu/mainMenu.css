@@ -3,15 +3,14 @@
   height: 100%;
   width: var(--left-sidebar);
   flex-basis: var(--left-sidebar);
-  display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
   flex-flow: column nowrap;
   box-sizing: border-box;
 
   & .logo {
-    margin: 30px auto;
+    margin-top: 30px;
     padding-right: 30px;
 
     & figure {
@@ -26,7 +25,7 @@
   }
 
   & > .list {
-    margin: 30px auto;
+    margin-top: 30px;
 
     & .menuItem {
       display: flex;
@@ -67,6 +66,20 @@
     }
   }
 
+}
+:global(.inModal) .wrapper {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 20px;
+  margin: 0 auto 0 0;
+  width: 300px;
+  max-width: calc(100% - 40px);
+
+   & .logo {
+     & figure {
+       margin: 0;
+     }
+   }
 }
 
 @media (min-width: 1000px) {

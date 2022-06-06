@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import styles from './layout.css';
-import Header from '../../components/Header';
+import MenuButton from '../../components/MenuButton';
 import Player from '../../components/Player';
 import RecentsSidebar from '../../components/RecentsSidebar';
 import MainMenu from '../../components/MainMenu';
@@ -8,7 +8,7 @@ import MainMenu from '../../components/MainMenu';
 const Layout = ({ children }: { children: ReactElement }) => {
   return (
     <div className={styles.expand}>
-      <Header />
+      <MenuButton key="in-layout" />
       <main className={`${styles.main} ${styles.expand}`}>
         <MainMenu />
         { children }

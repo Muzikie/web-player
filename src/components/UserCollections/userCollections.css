@@ -1,6 +1,5 @@
 .wrapper {
   position: relative;
-  position: relative;
   overflow-y: scroll;
   border-top: solid 1px var(--brightOutline);
   padding-top: 15px;

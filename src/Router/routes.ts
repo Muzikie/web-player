@@ -1,6 +1,7 @@
 import Album from '../screens/Album';
 import Artist from '../screens/Artist';
 import Search from '../components/Search';
+import MainMenu from '../components/MainMenu';
 
 interface Route {
   [key: string]: {
@@ -40,5 +41,9 @@ export const modals: Route = {
   search: {
     path: 'search',
     component: Search,
-  }
+  },
+  menu: {
+    path: 'menu',
+    component: MainMenu,
+  },
 };

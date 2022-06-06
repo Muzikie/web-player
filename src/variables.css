@@ -31,7 +31,7 @@
   --padding-s: 5px;
   --padding-m: 20px;
   --padding-l: 30px;
-  --header: var(--box-size-m);
+  --menu-button: var(--box-size-m);
 
   --border-radius-s: 5px;
   --border-radius-m: 10px;
