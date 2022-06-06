@@ -1,21 +1,24 @@
 import React from 'react';
+import { Link } from 'wouter';
 import Icon from '../Icon';
 import styles from './link.css';
 
 interface IconLinkProps {
   icon: string;
-  target: string;
+  href: string;
   className: string;
 }
 
 const IconLink = ({
   icon,
-  target,
+  href,
   className = '',
 }: IconLinkProps) => (
-  <a className={`${styles.iconLink} ${className}`} href={target}>
-    <Icon name={icon} />
-  </a>
+  <Link href={href}>
+    <div className={`${styles.iconLink} ${className}`}>
+      <Icon name={icon} />
+    </div>
+  </Link>
 );
 
 export default IconLink;

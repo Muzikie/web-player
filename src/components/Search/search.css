@@ -1,16 +1,4 @@
 .wrapper {
-  position: fixed;
-  z-index: 5;
-  background: var(--dark-see-through);
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: calc(100vh - var(--player-height-s));
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-items: center;
-
   & .input,
   & .results {
     width: 400px;

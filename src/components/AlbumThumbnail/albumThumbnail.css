@@ -47,6 +47,7 @@
     white-space: nowrap;
     margin-top: 10px;
     margin-bottom: 5px;
+    color: var(--white);
   }
 
   & span {

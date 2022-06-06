@@ -45,7 +45,7 @@ const secondToMinutes = (seconds: number): string => {
 };
 
 const TrackRow = ({ data, className = '', theme = 'normal' }: TrackProps) => (
-  <a
+  <section
     onClick={() => { console.log('Implement the play logic.'); }}
     className={`${styles.wrapper} ${className} ${styles[theme]}`}
   >
@@ -63,7 +63,7 @@ const TrackRow = ({ data, className = '', theme = 'normal' }: TrackProps) => (
       <span className={styles.likes}>{ formatThousands(Number(data.likes)) }</span>
       <span className={styles.duration}>{secondToMinutes(Number(data.duration))}</span>
     </div>
-  </a>
+  </section>
 );
 
 export default TrackRow;

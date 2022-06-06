@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'wouter';
 import { ArtistType } from '../ArtistRow';
 import trackImage from '../../assets/images/mocks/album7.png';
 import styles from './artistThumbnail.css';
@@ -12,14 +13,14 @@ interface ArtistThumbnailProps {
 
 const ArtistThumbnail = ({ data, className = '' }: ArtistThumbnailProps) => (
   <section className={`${styles.wrapper} ${className}`}>
-    <a>
+    <Link href={`/artist/${data.id}`}>
       <div className={styles.albumArt}>
         <figure>
           <img src={trackImage} alt={ data.name } />
         </figure>
       </div>
       <h5>{ data.name }</h5>
-    </a>
+    </Link>
   </section>
 );
 

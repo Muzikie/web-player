@@ -4,16 +4,16 @@ import styles from './userCollections.css';
 
 const UserCollections = () => {
   const list = [
-    { title: 'Party 80s album second', target: 'party80s-href' },
-    { title: 'Party 90s', target: 'party90s-href' }
+    { title: 'Party 80s album second', id: 'playlist-id-1' },
+    { title: 'Party 90s', id: 'playlist-id-2' }
   ];
   return (
     <section className={styles.wrapper}>
       <ul>
         {
           list.map((item) => (
-            <li key={item.target}>
-              <TextLink {...item} />
+            <li key={item.id}>
+              <TextLink title={item.title} href={`/playlist/${item.id}`} />
             </li>
           ))
         }

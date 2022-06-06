@@ -1,23 +1,26 @@
 import React from 'react';
-import styles from './layout.css';
-import Header from '../components/Header';
-import Player from '../components/Player';
-import RecentsSidebar from '../components/RecentsSidebar';
-import MainMenu from '../components/MainMenu';
-import Album from '../screens/Album';
+import { Route, Switch } from 'wouter';
+import { screens } from './routes'
+import Modal from './Modal';
+import Layout from './Layout';
 
-function App () {
-  return (
-    <div className={styles.expand}>
-      <Header />
-      <main className={`${styles.main} ${styles.expand}`}>
-        <MainMenu />
-        <Album />
-        <RecentsSidebar />
-      </main>
-      <Player />
-    </div>
-  );
-}
+const App = () => (
+  <Layout>
+    <>
+      <Switch>
+        {
+          Object.entries(screens).map(([ name, config ]) => (
+            <Route
+              key={name}
+              path={config.path}
+              component={config.component}
+            />
+          ))
+        }
+      </Switch>
+      <Modal />
+    </>
+  </Layout>
+);
 
 export default App;
