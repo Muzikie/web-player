@@ -152,6 +152,7 @@
 
 @media (min-width: 1000px) {
   .wrapper {
+    height: var(--player-height-m);
     padding: 0 90px;
   }
 }

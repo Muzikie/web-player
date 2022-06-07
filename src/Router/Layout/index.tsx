@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import styles from './layout.css';
 import MenuButton from '../../components/MenuButton';
 import Player from '../../components/Player';
-import RecentsSidebar from '../../components/RecentsSidebar';
+import FavArtists from '../../components/favArtists';
 import MainMenu from '../../components/MainMenu';
 
 const Layout = ({ children }: { children: ReactElement }) => {
@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
       <main className={`${styles.main} ${styles.expand}`}>
         <MainMenu />
         { children }
-        <RecentsSidebar />
+        <FavArtists />
       </main>
       <Player />
     </div>

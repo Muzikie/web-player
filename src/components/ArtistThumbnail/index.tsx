@@ -9,17 +9,20 @@ export type ArtistThumbnailType = Pick<ArtistType, 'id'|'name'|'image'>
 interface ArtistThumbnailProps {
   data: ArtistThumbnailType;
   className?: string;
+  theme?: string;
 }
 
-const ArtistThumbnail = ({ data, className = '' }: ArtistThumbnailProps) => (
-  <section className={`${styles.wrapper} ${className}`}>
+const ArtistThumbnail = ({ data, className = '', theme = 'thumbnail' }: ArtistThumbnailProps) => (
+  <section className={`${styles.wrapper} ${styles[theme]} ${className}`}>
     <Link href={`/artist/${data.id}`}>
       <div className={styles.albumArt}>
         <figure>
           <img src={trackImage} alt={ data.name } />
         </figure>
       </div>
-      <h5>{ data.name }</h5>
+      <div>
+        <h5>{ data.name }</h5>
+      </div>
     </Link>
   </section>
 );

@@ -1,6 +1,6 @@
 export interface AlbumType {
   name: string;
-  image: any;
+  image: string;
   id: string;
   artistName: string;
   artistId: string;

@@ -3,6 +3,7 @@
   overflow-y: scroll;
   border-top: solid 1px var(--brightOutline);
   padding-top: 15px;
+  padding-bottom: 80px;
 
   & li {
     display: block;

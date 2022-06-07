@@ -8,6 +8,7 @@ interface CollectionProps {
   className?: string;
   direction?: string;
   title?: string;
+  itemTheme?: string;
   artists?: ArtistThumbnailType[];
   albums?: AlbumThumbnailType[];
   tracks?: TrackThumbnailType[];
@@ -16,6 +17,7 @@ interface CollectionProps {
 const Collection = ({
   className = '',
   direction = 'column',
+  itemTheme,
   title,
   artists = [],
   albums = [],
@@ -31,13 +33,13 @@ const Collection = ({
         ): null
       }
       {
-        artists.map((item) => (<ArtistThumbnail key={item.id} data={item} />))
+        artists.map((item) => (<ArtistThumbnail key={item.id} data={item} theme={itemTheme} />))
       }
       {
-        albums.map((item) => (<AlbumThumbnail key={item.id} data={item} />))
+        albums.map((item) => (<AlbumThumbnail key={item.id} data={item} theme={itemTheme} />))
       }
       {
-        tracks.map((item) => (<TrackThumbnail key={item.id} data={item} />))
+        tracks.map((item) => (<TrackThumbnail key={item.id} data={item} theme={itemTheme} />))
       }
     </section>
   );

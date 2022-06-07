@@ -21,7 +21,7 @@
 
   /****  Sizes  ****/
   --left-sidebar: 140px;
-  --right-sidebar: 210px;
+  --right-sidebar: 350px;
   --player-height-s: 70px;
   --player-height-m: 90px;
   --box-size-s: 40px;
@@ -33,8 +33,8 @@
   --padding-l: 30px;
   --menu-button: var(--box-size-m);
 
-  --border-radius-s: 5px;
-  --border-radius-m: 10px;
+  --border-radius-s: 7px;
+  --border-radius-m: 14px;
   --border-radius-l: 30px;
   --border-radius-r: 50%;
 
