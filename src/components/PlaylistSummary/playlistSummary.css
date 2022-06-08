@@ -5,7 +5,7 @@
   padding: var(--padding-m);
   box-sizing: border-box;
 
-  & .artistPhoto {
+  & .photo {
     width: calc(100vw - calc(2 * var(--padding-m)));
     height: calc(100vw - calc(2 * var(--padding-m)));
     margin: 0;
@@ -80,7 +80,7 @@
     height: 360px;
     overflow: hidden;
 
-    & .artistPhoto {
+    & .photo {
       width: 50%;
       height: 100%;
     }
@@ -121,7 +121,7 @@
   .wrapper {
     height: 470px;
 
-    & .artistPhoto {
+    & .photo {
       flex: 3 0px;
     }
   }

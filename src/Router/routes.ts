@@ -1,5 +1,6 @@
 import Album from '../screens/Album';
 import Artist from '../screens/Artist';
+import Playlist from '../screens/Playlist';
 import Search from '../components/Search';
 import MainMenu from '../components/MainMenu';
 
@@ -18,6 +19,10 @@ export const screens: Route = {
   artist: {
     path: '/artists/:id',
     component: Artist,
+  },
+  playlist: {
+    path: '/playlist/:id',
+    component: Playlist,
   },
   settings: {
     path: '/settings',
