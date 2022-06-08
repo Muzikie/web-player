@@ -1,6 +1,7 @@
 import Album from '../screens/Album';
 import Artist from '../screens/Artist';
 import Playlist from '../screens/Playlist';
+import Profile from '../screens/Profile';
 import Search from '../components/Search';
 import MainMenu from '../components/MainMenu';
 
@@ -30,7 +31,7 @@ export const screens: Route = {
   },
   profile: {
     path: '/profile',
-    component: Artist,
+    component: Profile,
   },
   home: {
     path: '/home',
