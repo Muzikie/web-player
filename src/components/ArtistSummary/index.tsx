@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './artistSummary.css';
 import selena from '../../assets/images/mocks/selena-gomez.jpg';
-import { IconButton, PlayButton } from '../common/button';
+import { IconButton, PlayButton } from '../common/Button';
 import { ArtistType } from '../ArtistRow';
 
 interface ArtistSummaryProps {

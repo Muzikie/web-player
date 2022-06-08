@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Selena Gomez",
+    "id": "artist-id-1",
+    "ownerId": "ownerId1",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis?",
+    "image": "artist1"
+  },
+  {
+    "name": "Ariana Grande",
+    "id": "artist-id-2",
+    "ownerId": "ownerId2",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis?",
+    "image": "artist2"
+  },
+  {
+    "name": "Adele",
+    "id": "artist-id-3",
+    "ownerId": "ownerId3",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis?",
+    "image": "artist3"
+  },
+  {
+    "name": "Rihanna",
+    "id": "artist-id-4",
+    "ownerId": "ownerId4",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis assumenda quod nisi illo quasi soluta labore ad harum molestiae quis esse, voluptate blanditiis?",
+    "image": "artist4"
+  }
+]

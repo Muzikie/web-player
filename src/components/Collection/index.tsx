@@ -32,15 +32,17 @@ const Collection = ({
           </header>
         ): null
       }
-      {
-        artists.map((item) => (<ArtistThumbnail key={item.id} data={item} theme={itemTheme} />))
-      }
-      {
-        albums.map((item) => (<AlbumThumbnail key={item.id} data={item} theme={itemTheme} />))
-      }
-      {
-        tracks.map((item) => (<TrackThumbnail key={item.id} data={item} theme={itemTheme} />))
-      }
+      <div className={styles.itemsContainer}>
+        {
+          artists.map((item) => (<ArtistThumbnail key={item.id} data={item} theme={itemTheme} />))
+        }
+        {
+          albums.map((item) => (<AlbumThumbnail key={item.id} data={item} theme={itemTheme} />))
+        }
+        {
+          tracks.map((item) => (<TrackThumbnail key={item.id} data={item} theme={itemTheme} />))
+        }
+      </div>
     </section>
   );
 }

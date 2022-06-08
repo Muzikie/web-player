@@ -3,13 +3,22 @@
 
   & > header {
     flex-basis: 100%;
+    margin-bottom: 10px;
   }
 
-  &.row {
+  & .itemsContainer {
+    display: flex;
+    margin: 0 -10px;
+    width: 100%;
+  }
+
+  &.row,
+  & .row .itemsContainer {
     flex-flow: row wrap;
   }
 
-  &.column {
+  &.column,
+  &.column .itemsContainer {
     flex-flow: column nowrap;
   }
 }

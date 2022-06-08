@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './albumSummary.css';
 import selena from '../../assets/images/mocks/album1.png';
-import { IconButton, PlayButton } from '../common/button';
+import { IconButton, PlayButton } from '../common/Button';
 import { AlbumType } from '../AlbumRow';
 
 interface AlbumSummaryProps {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './player.css';
 import img from '../../assets/images/mocks/album9.png';
-import { IconButton } from '../common/button';
+import { IconButton } from '../common/Button';
 
 const Player = () => {
   return (

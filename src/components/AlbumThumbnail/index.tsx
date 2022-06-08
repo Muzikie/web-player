@@ -19,7 +19,7 @@ interface AlbumThumbnailProps {
 }
 
 const AlbumThumbnail = ({ data, theme = 'thumbnail' }: AlbumThumbnailProps) => (
-  <div className={`${styles.wrapper} ${styles[theme]}`}>
+  <div className={`${styles.wrapper} ${styles[theme]} ${styles[theme]}`}>
     <Link href={`/albums/${data.id}`}>
       <figure>
         <img src={images[data.image]} alt={ data.name } />
