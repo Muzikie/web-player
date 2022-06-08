@@ -2,6 +2,7 @@ import Album from '../screens/Album';
 import Artist from '../screens/Artist';
 import Playlist from '../screens/Playlist';
 import Profile from '../screens/Profile';
+import Settings from '../screens/Settings';
 import Search from '../components/Search';
 import MainMenu from '../components/MainMenu';
 
@@ -27,7 +28,7 @@ export const screens: Route = {
   },
   settings: {
     path: '/settings',
-    component: Artist,
+    component: Settings,
   },
   profile: {
     path: '/profile',
