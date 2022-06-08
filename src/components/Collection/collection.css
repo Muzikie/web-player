@@ -12,13 +12,19 @@
     width: 100%;
   }
 
-  &.row,
-  & .row .itemsContainer {
+  &.row {
     flex-flow: row wrap;
+
+    & .itemsContainer {
+      flex-flow: row wrap;
+    }
   }
 
-  &.column,
-  &.column .itemsContainer {
+  &.column {
     flex-flow: column nowrap;
+
+    & .itemsContainer {
+      flex-flow: column nowrap;
+    }
   }
 }

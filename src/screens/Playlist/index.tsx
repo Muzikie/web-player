@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './playlist.css';
 import playlistData from './playlist-data.json';
 import similarPlaylists from './similar-playlist.json';
-import similarArtists from '../Artist/similar-artists.json';
+import fromAboveArtists from '../Artist/artist-albums.json';
 import Collections from '../../components/Collection';
 import TrackList from '../../components/TrackList';
 import PlaylistSummary from '../../components/PlaylistSummary';
@@ -15,17 +15,17 @@ const Playlist = () => (
       data={playlistData.tracks}
     />
     <Collections
-      className={styles.discography}
-      title="Albums"
+      className={styles.discoverPlaylists}
+      title="Discover playlists"
       direction="row"
-      albums={similarPlaylists}
+      playlists={similarPlaylists}
     />
     <Collections
-      className={styles.similarArtists}
-      title="Similar artists"
+      className={styles.fromAboveArtists}
+      title="From above artists"
       direction="row"
       itemTheme="smallRow"
-      artists={similarArtists}
+      albums={fromAboveArtists}
     />
   </section>
 );

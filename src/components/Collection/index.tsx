@@ -3,6 +3,7 @@ import styles from './collection.css';
 import ArtistThumbnail, { ArtistThumbnailType } from '../ArtistThumbnail';
 import AlbumThumbnail, { AlbumThumbnailType } from '../AlbumThumbnail';
 import TrackThumbnail, { TrackThumbnailType } from '../TrackThumbnail';
+import PlaylistThumbnail, { PlaylistThumbnailType } from '../PlaylistThumbnail';
 
 interface CollectionProps {
   className?: string;
@@ -12,6 +13,7 @@ interface CollectionProps {
   artists?: ArtistThumbnailType[];
   albums?: AlbumThumbnailType[];
   tracks?: TrackThumbnailType[];
+  playlists?: PlaylistThumbnailType[];
 }
 
 const Collection = ({
@@ -22,6 +24,7 @@ const Collection = ({
   artists = [],
   albums = [],
   tracks = [],
+  playlists = [],
 }: CollectionProps) => {
   return (
     <section className={`${styles.wrapper} ${styles[direction]} ${className}`}>
@@ -41,6 +44,9 @@ const Collection = ({
         }
         {
           tracks.map((item) => (<TrackThumbnail key={item.id} data={item} theme={itemTheme} />))
+        }
+        {
+          playlists.map((item) => (<PlaylistThumbnail key={item.id} data={item} theme={itemTheme} />))
         }
       </div>
     </section>

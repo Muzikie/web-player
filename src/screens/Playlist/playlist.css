@@ -4,8 +4,8 @@
   box-sizing: border-box;
   overflow-y: scroll;
 
-  & .similarArtists,
-  & .discography {
+  & .fromAboveArtists,
+  & .discoverPlaylists {
     width: 100%;
     padding: 40px 20px 0;
     box-sizing: border-box;
