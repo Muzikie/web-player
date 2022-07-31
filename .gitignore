@@ -12,7 +12,11 @@
 # production
 /build
 /dist
+
+# mocks
 src/assets/images/mocks
+/mock
+
 
 # misc
 .DS_Store

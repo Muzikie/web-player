@@ -1,4 +1,5 @@
 const path = require('path');
+const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExctractPlugin = require('mini-css-extract-plugin');
 const postcssPartialImport = require('postcss-partial-import');
@@ -12,6 +13,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      '@mock': resolve('./mock'),
+    },
   },
   module: {
     rules: [

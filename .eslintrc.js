@@ -24,6 +24,15 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-var-requires': 0,
     'quotes': [2, 'single', { 'avoidEscape': true }],
-    'indent': ['error', 2]
+    'indent': ['error', 2],
   },
+  settings: {
+    'import/resolver' : {
+      alias : {
+        map : [
+          ['@mock', './mock/'],
+        ]
+      }
+    }
+  }
 };
