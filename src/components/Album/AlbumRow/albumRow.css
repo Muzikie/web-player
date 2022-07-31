@@ -1,0 +1,61 @@
+.wrapper {
+  width: 100%;
+  padding: 10px 0 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between;
+
+  & .primaryInfo,
+  & .extraInfo {
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    flex-basis: 50em;
+  }
+
+  & .primaryInfo {
+    flex-shrink: 1;
+    flex-grow: 3;
+
+    & .thumbnail + .text {
+      padding-left: var(--padding-s);
+    }
+
+    & h4 {
+      color: var(--color-secondary);
+    }
+
+    & span {
+      color: var(--gray);
+    }
+  }
+
+  & .extraInfo {
+    justify-content: flex-end;
+    flex-shrink: 2;
+    flex-grow: 1;
+    max-width: 80px;
+
+    & > span {
+      flex-grow: 1;
+    }
+
+    & .likeButton,
+    & .contextMenu {
+      opacity: 0;
+      width: 30px;
+      color: var(--gray);
+    }
+  }
+
+  &:hover {
+    & .extraInfo {
+      & .likeButton,
+      & .contextMenu {
+        opacity: 1;
+      }
+    }
+  }
+}

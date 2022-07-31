@@ -1,33 +1,6 @@
-@font-face {
-  font-family: 'SourceSansPro';
-  src: url("./assets/fonts/SourceSansPro/SourceSansPro-ExtraLight.ttf") format(truetype);
-  font-weight: 200;
-}
-@font-face {
-  font-family: 'SourceSansPro';
-  src: url("./assets/fonts/SourceSansPro/SourceSansPro-Light.ttf") format(truetype);
-  font-weight: 300;
-}
-@font-face {
-  font-family: 'SourceSansPro';
-  src: url("./assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf") format(truetype);
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'SourceSansPro';
-  src: url("./assets/fonts/SourceSansPro/SourceSansPro-SemiBold.ttf") format(truetype);
-  font-weight: 500;
-}
-@font-face {
-  font-family: 'SourceSansPro';
-  src: url("./assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf") format(truetype);
-  font-weight: 600;
-}
-
-
 body {
   font-family: var(--body-font);
-  color: var(--white);
+  color: var(--color-text-primary);
   font-size: 12px;
 }
 
@@ -35,14 +8,16 @@ h1 {
   font-size: var(--size-h1);
   margin-top: 0.3em;
   margin-bottom: 0.3em;
-  font-weight: 400;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 h2 {
   font-size: var(--size-h2);
   margin-top: 0.25em;
   margin-bottom: 0.25em;
-  font-weight: 400;
+  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 h3 {
@@ -54,27 +29,28 @@ h3 {
 
 h4 {
   font-size: var(--size-h4);
-  line-height: 1.2em;
-  font-weight: 300;
+  line-height: 1.5em;
+  font-weight: 400;
   margin-top: 0.1em;
   margin-bottom: 0.1em;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  word-spacing: 0.3px;
 }
 
 h5 {
   font-size: var(--size-h5);
   line-height: 1.2em;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 0;
   margin-bottom: 0;
-  letter-spacing: 0.5px;
 }
 
 p,
 b,
 span {
-  font-size: var(--size-span);
+  font-size: var(--size-h5);
   letter-spacing: 0.5px;
+  font-weight: 300;
 }
 
 small {
@@ -83,13 +59,13 @@ small {
 
 @media (min-width: 680px) {
   body {
-    font-size: 14px;
+    /* font-size: 14px; */
   }
 }
 
 @media (min-width: 1000px) {
   body {
-    font-size: 16px;
+    /* font-size: 16px; */
   }
 
   h1 {
@@ -113,7 +89,7 @@ small {
   }
 
   h5 {
-    margin-top: 0.1em;
-    margin-bottom: 0.1em;
+    margin-top: 0.15em;
+    margin-bottom: 0.25em;
   }
 }

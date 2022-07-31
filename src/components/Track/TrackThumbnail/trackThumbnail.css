@@ -1,0 +1,19 @@
+.wrapper {
+  --size: 62px;
+
+  display: block;
+  width: var(--size);
+  height: var(--size);
+
+  & figure {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-m);
+
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+

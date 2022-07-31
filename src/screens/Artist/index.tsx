@@ -1,31 +1,25 @@
 import React from 'react';
 import styles from './artist.css';
-import artistData from './artist-data.json';
-import artistAlbums from './artist-albums.json';
-import similarArtists from './similar-artists.json';
-import Collections from '../../components/Collection';
-import TrackList from '../../components/TrackList';
-import ArtistSummary from '../../components/ArtistSummary';
+import Collection from '../../components/Collection';
+import ArtistSummary from '../../components/Artist/ArtistSummary';
+
+import artistData from '@mock/artist-data.json';
+import artistAlbums from '@mock/artist-albums.json';
 
 const Artist = () => (
   <section className={styles.wrapper}>
     <ArtistSummary data={artistData} />
-    <TrackList
-      title="Most popular"
-      data={artistData.mostPopular}
+    <Collection
+      title="Popular"
+      tracks={artistData.mostPopular}
+      itemsPerColumn="2"
+      className={styles.popularTracks}
     />
-    <Collections
-      className={styles.discography}
-      title="Albums"
-      direction="row"
+    <Collection
+      title="Discography"
       albums={artistAlbums}
-    />
-    <Collections
-      className={styles.similarArtists}
-      title="Similar artists"
-      direction="row"
-      itemTheme="smallRow"
-      artists={similarArtists}
+      itemsPerColumn="2"
+      className={styles.discography}
     />
   </section>
 );

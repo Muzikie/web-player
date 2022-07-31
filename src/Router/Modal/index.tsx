@@ -8,13 +8,11 @@ interface  ModalProps {
 }
 
 function Modal ({ alignment = 'centered' }: ModalProps) {
-  const [queryParams, _, removeQueryParam] = useQueryParams();
+  const [queryParams,, removeQueryParam] = useQueryParams();
   
   const close = () => {
     removeQueryParam('modal');
   };
-
-  console.log('-->', queryParams.modal);
 
   if (!queryParams.modal) {
     return null;

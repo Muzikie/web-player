@@ -1,24 +1,17 @@
 import React from 'react';
 import styles from './collection.css';
-import ArtistThumbnail, { ArtistThumbnailType } from '../ArtistThumbnail';
-import AlbumThumbnail, { AlbumThumbnailType } from '../AlbumThumbnail';
-import TrackThumbnail, { TrackThumbnailType } from '../TrackThumbnail';
-import PlaylistThumbnail, { PlaylistThumbnailType } from '../PlaylistThumbnail';
+import ArtistRow from '../Artist/ArtistRow';
+import AlbumRow from '../Album/AlbumRow';
+import TrackRow from '../Track/TrackRow';
+import PlaylistRow from '../Playlist/PlaylistRow';
+import { CollectionProps } from './types';
 
-interface CollectionProps {
-  className?: string;
-  direction?: string;
-  title?: string;
-  itemTheme?: string;
-  artists?: ArtistThumbnailType[];
-  albums?: AlbumThumbnailType[];
-  tracks?: TrackThumbnailType[];
-  playlists?: PlaylistThumbnailType[];
-}
+
 
 const Collection = ({
   className = '',
-  direction = 'column',
+  direction = 'vertical',
+  itemsPerColumn = '1',
   itemTheme,
   title,
   artists = [],
@@ -26,6 +19,7 @@ const Collection = ({
   tracks = [],
   playlists = [],
 }: CollectionProps) => {
+  const rowItems = `rowItems-${itemsPerColumn}`
   return (
     <section className={`${styles.wrapper} ${styles[direction]} ${className}`}>
       {
@@ -35,19 +29,21 @@ const Collection = ({
           </header>
         ): null
       }
-      <div className={styles.itemsContainer}>
-        {
-          artists.map((item) => (<ArtistThumbnail key={item.id} data={item} theme={itemTheme} />))
-        }
-        {
-          albums.map((item) => (<AlbumThumbnail key={item.id} data={item} theme={itemTheme} />))
-        }
-        {
-          tracks.map((item) => (<TrackThumbnail key={item.id} data={item} theme={itemTheme} />))
-        }
-        {
-          playlists.map((item) => (<PlaylistThumbnail key={item.id} data={item} theme={itemTheme} />))
-        }
+      <div className={styles.itemsFrame}>
+        <div className={`${styles.itemsContainer} ${styles[rowItems]}`}>
+          {
+            artists.map((item) => (<ArtistRow key={item.id} data={item} theme={itemTheme} />))
+          }
+          {
+            albums.map((item) => (<AlbumRow key={item.id} data={item} theme={itemTheme} />))
+          }
+          {
+            tracks.map((track) => (<TrackRow key={track.id} data={track} theme={itemTheme}  />))
+          }
+          {
+            playlists.map((item) => (<PlaylistRow key={item.id} data={item} theme={itemTheme} />))
+          }
+        </div>
       </div>
     </section>
   );

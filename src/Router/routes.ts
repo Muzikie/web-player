@@ -1,3 +1,4 @@
+import Home from '../screens/Home';
 import Album from '../screens/Album';
 import Artist from '../screens/Artist';
 import Playlist from '../screens/Playlist';
@@ -34,21 +35,21 @@ export const screens: Route = {
     path: '/profile',
     component: Profile,
   },
+  search: {
+    path: '/search',
+    component: Search,
+  },
   home: {
     path: '/home',
-    component: Artist,
+    component: Home,
   },
   default: {
     path: '/',
-    component: Artist,
+    component: Playlist,
   },
 };
 
 export const modals: Route = {
-  search: {
-    path: 'search',
-    component: Search,
-  },
   menu: {
     path: 'menu',
     component: MainMenu,

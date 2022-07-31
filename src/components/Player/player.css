@@ -1,52 +1,33 @@
 .wrapper {
   width: 100%;
-  height: var(--player-height-s);
+  height: var(--player-height-m); /* @todo check if we need to make this smaller */
   position: fixed;
-  z-index: 5;
+  z-index: var(--layer-5);
   bottom: 0;
   left: 0;
-  background: var(--dark-glassy);
+  background: var(--color-secondary);
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 var(--padding-m);
   box-sizing: border-box;
-  border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
-  border-style: solid;
-  border-color: var(--brightOutline);
-  border-width: 1px 0px 0px 0px;
+  border-radius: var(--border-radius-x) var(--border-radius-x) 0 0;
 }
 
 .playingMusic {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  padding: 2px;
-
-  & figure {
-    width: var(--box-size-m);
-    height: var(--box-size-m);
-    overflow: hidden;
-    border-radius: var(--border-radius-m);
-    margin: 0;
-
-    & img {
-      width: 100%;
-      height: 100%;
-    }
-  }
 
   & header {
-    padding: 0 10px;
+    padding: 0 var(--padding-m);
 
     & h5 {
-      margin: 0;
-      letter-spacing: 0.5px;
-      line-height: 23px;
+      color: var(--white);
     }
 
     & span {
-      margin: 0;
+      color: var(--gray);
     }
   }
 }
@@ -74,14 +55,18 @@
   & .rewind,
   & .fastForward {
     display: none;
+    width: 30px;
+    height: 30px;
+    border-radius: var(--border-radius-s);
   }
 
   & .play {
-    width: 40px;
-    height: 40px;
+    background-color: var(--white);
+    margin: 0 var(--padding-s);
 
     & i {
       font-size: 18px;
+      color: var(--color-secondary);
     }
   }
 }
@@ -134,10 +119,6 @@
 }
 
 @media (min-width: 680px) {
-  .playingMusic {
-    padding: 2px 35px;
-  }
-
   .controls {
     & .rewind,
     & .fastForward {
@@ -153,6 +134,5 @@
 @media (min-width: 1000px) {
   .wrapper {
     height: var(--player-height-m);
-    padding: 0 90px;
   }
 }

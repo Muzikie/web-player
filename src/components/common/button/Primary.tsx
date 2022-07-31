@@ -1,14 +1,9 @@
 
-import React, { MouseEvent, ReactElement } from 'react';
+import React from 'react';
+import { FlexibleButtonProps } from './type';
 import styles from './button.css';
 
-interface PrimaryButtonProps {
-  className?: string;
-  children: string|ReactElement;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-}
-
-const PrimaryButton = ({ children, onClick, className }: PrimaryButtonProps) => (
+const PrimaryButton = ({ children, onClick, className }: FlexibleButtonProps) => (
   <button
     className={`${styles.button} ${styles.primary} ${className}`}
     onClick={onClick}

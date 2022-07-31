@@ -7,16 +7,15 @@
   }
 
   &.secondary {
-    border: solid 1px var(--gray);
-    background: transparent;
     width: 180px;
-    border-radius: var(--border-radius-m);
-    background-color: rgba(255, 255, 255, 0);
-    transition: all ease 100ms;
-    font-size: 16px;
-    letter-spacing: 1px;
     height: var(--box-size-s);
+    border-radius: var(--border-radius-m);
+    border: solid 1px var(--gray);
     box-sizing: content-box;
+    background-color: transparent;
+    transition: all ease 100ms;
+    font-size: var(--font-size-span);
+    letter-spacing: 1px;
 
     &:hover {
       background-color: var(--brightOutline);
@@ -30,16 +29,62 @@
   &.icon {
     padding: 0;
     background-color: transparent;
-    width: 30px;
-    height: 30px;
-    border: 0;
-  }
-
-  &.play {
-    display: block;
-    border-radius: var(--border-radius-r);
     width: var(--box-size-m);
     height: var(--box-size-m);
+    border-radius: var(--border-radius-m);
     border: 0;
+
+    /** Sizes **/
+    &.medium {
+      width: var(--box-size-s);
+      height: var(--box-size-s);
+
+      & i {
+        font-size: 24px;
+      }
+    }
+
+    &.small {
+      width: var(--box-size-xxs);
+      height: var(--box-size-xxs);
+      border-radius: var(--border-radius-s);
+
+      & i {
+        font-size: 14px;
+      }
+    }
+
+    &.primary {
+      background-color: var(--color-secondary);
+
+      & i {
+        color: var(--white);
+      }
+    }
+
+    &.white {
+      background-color: var(--white);
+
+      & i {
+        color: var(--color-primary);
+      }
+    }
+
+    &.transparent {
+      background-color: transparent;
+
+      & i {
+        color: var(--color-secondary);
+      }
+    }
+
+    &.outlined {
+      background-color: transparent;
+      border: solid 2px var(--gray);
+
+      & i {
+        color: var(--gray);
+      }
+    }
   }
 }

@@ -1,8 +1,10 @@
 import React from 'react';
 import Icon from '../common/Icon';
 import styles from './search.css';
-import data from '../../screens/Album/album-tracks.json';
-import TrackRow, { TrackType } from '../TrackRow';
+import { TrackType } from '../Track/types';
+import TrackRow from '../Track/TrackRow';
+
+import data from '@mock/album-tracks.json';
 
 const Search = () => (
   <section className={styles.wrapper}>
@@ -15,7 +17,7 @@ const Search = () => (
     </div>
     <div className={styles.results}>
       {
-        data.slice(0, 4).map((item: TrackType) => (<TrackRow key={item.id} theme="minimal" data={item} />))
+        data.slice(0, 4).map((item: TrackType) => (<TrackRow key={item.id} data={item} />))
       }
     </div>
   </section>

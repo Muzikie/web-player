@@ -2,49 +2,59 @@
   /****  Color  ****/
   --green: #01b84a;
   --white: #ffffff;
-  --dark: rgb(19, 14, 29);
-  --dark-glassy: rgba(19, 14, 29, 0.95);
-  --dark-see-through: rgba(19, 14, 29, 0.7);
-  --black: #1a1018;
-  --gray: rgb(167, 167, 167);
+  --color-primary: #feeae3;
+  --color-secondary: #453248;
+  --color-primary-see-through: rgba(19, 14, 29, 0.7);
+  --gray: #99868B;
   --brightOutline: rgba(167, 167, 167, 0.12);
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: var(--gray);
 
   /****  Typography  ****/
-  --body-font: 'SourceSansPro', sans-serif;
-  --size-h1: 3em;
-  --size-h2: 2.4em;
-  --size-h3: 1.8em;
-  --size-h4: 1.4em;
-  --size-h5: 1em;
-  --size-span: 0.9em;
-  --size-small: 0.7em;
+  --body-font: 'Poppins', sans-serif;
+  --size-h1: 4em; /* 64 */
+  --size-h2: 2.4em; /* 38 */
+  --size-h3: 1.75em; /* 28 */
+  --size-h4: 1.25em;  /* 20 */
+  --size-h5: 1em; /* 16 -> 15 */
+  --size-span: 0.875em; /* 14 */
+  --size-small: 0.75em; /* 12 */
 
   /****  Sizes  ****/
   --left-sidebar: 140px;
   --right-sidebar: 350px;
   --player-height-s: 70px;
-  --player-height-m: 90px;
-  --box-size-s: 40px;
+  --player-height-m: 84px;
+  --box-size-xxs: 32px;
+  --box-size-xs: 40px;
+  --box-size-s: 46px;
   --box-size-m: 54px;
   --box-size-l: 100px;
   --box-size-xl: 146px;
-  --padding-s: 5px;
-  --padding-m: 20px;
-  --padding-l: 30px;
-  --menu-button: var(--box-size-m);
+  --padding-xs: 8px;
+  --padding-s: 12px;
+  --padding-m: 28px;
+  --padding-l: 36px;
+  --padding-x: 50px;
+  --menu-button: var(--box-size-xs);
 
-  --border-radius-s: 7px;
-  --border-radius-m: 14px;
-  --border-radius-l: 30px;
+  --border-radius-xs: 6px;
+  --border-radius-s: 10px;
+  --border-radius-m: 15px;
+  --border-radius-l: 40px;
+  --border-radius-x: 45px;
   --border-radius-r: 50%;
 
-  /****  Media queries  ****/
-  --large-viewport: 1240px;
-  --medium-viewport: 1000px;
-  --small-viewport: 680px;
-  --xSmall-viewport: 320px;
-}
-
-:root [data-theme="dark"] {
+  /****  Composition  ****/
+  --layer-1: 0;
+  --layer-2: 10;
+  --layer-3: 100;
+  --layer-4: 1000;
+  --layer-5: 10000;
   
+  /****  Media queries  ****/
+  --large-viewport: 1280px;
+  --medium-viewport: 1024px;
+  --small-viewport: 600px;
+  --xSmall-viewport: 360px;
 }

@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'wouter';
 import Collection from '../Collection';
 import styles from './favArtists.css';
-import goPremium from '../../assets/images/mocks/goPremium.png';
-import data from '../../screens/Artist/similar-artists.json';
+import goPremium from '@mock/goPremium.png';
+
+import data from '@mock/similar-artists.json';
 
 const FavArtists = () => {
   return (
