@@ -1,9 +1,6 @@
 import React from 'react';
 import styles from './collection.css';
-import ArtistRow from '../Artist/ArtistRow';
-import AlbumRow from '../Album/AlbumRow';
-import TrackRow from '../Track/TrackRow';
-import PlaylistRow from '../Playlist/PlaylistRow';
+import EntityRow from '../Entity/EntityRow';
 import { CollectionProps } from './types';
 
 
@@ -14,10 +11,7 @@ const Collection = ({
   itemsPerColumn = '1',
   itemTheme,
   title,
-  artists = [],
-  albums = [],
-  tracks = [],
-  playlists = [],
+  items = [],
 }: CollectionProps) => {
   const rowItems = `rowItems-${itemsPerColumn}`
   return (
@@ -32,16 +26,7 @@ const Collection = ({
       <div className={styles.itemsFrame}>
         <div className={`${styles.itemsContainer} ${styles[rowItems]}`}>
           {
-            artists.map((item) => (<ArtistRow key={item.id} data={item} theme={itemTheme} />))
-          }
-          {
-            albums.map((item) => (<AlbumRow key={item.id} data={item} theme={itemTheme} />))
-          }
-          {
-            tracks.map((track) => (<TrackRow key={track.id} data={track} theme={itemTheme}  />))
-          }
-          {
-            playlists.map((item) => (<PlaylistRow key={item.id} data={item} theme={itemTheme} />))
+            items.map((item, index) => (<EntityRow key={`item-${item.id}-${index}`} data={item} theme={itemTheme} />))
           }
         </div>
       </div>

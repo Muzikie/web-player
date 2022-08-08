@@ -18,7 +18,7 @@ const FavArtists = () => {
       </section>
       <Collection
         title="Favorite artists"
-        artists={data}
+        items={data}
         itemTheme="smallRow"
       />
     </aside>

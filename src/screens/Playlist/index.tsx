@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './playlist.css';
 import Collection from '../../components/Collection';
-import PlaylistSummary from '../../components/Playlist/PlaylistSummary';
+import PlaylistSummary from '../../components/Summary/PlaylistSummary';
 
 import playlistData from '@mock/playlist-data.json';
 
@@ -12,7 +12,7 @@ const Playlist = () => (
     />
     <Collection
       className={styles.trackList}
-      tracks={playlistData.tracks}
+      items={playlistData.tracks}
     />
   </section>
 );

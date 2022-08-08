@@ -1,13 +1,14 @@
 import React from 'react';
-import styles from './playlistSummary.css';
-import { PlaylistSummaryProps } from '../types';
+import styles from './artistSummary.css';
 import selena from '@mock/selena-gomez.jpg';
 import { IconButton } from '../../common/Button';
+import { EntityRowProps, ArtistType } from '../../Entity/types';
 
-const PlaylistSummary = ({ data }: PlaylistSummaryProps) => (
+const ArtistSummary = ({ data }: EntityRowProps<ArtistType>) => (
   <section className={styles.wrapper}>
     <header>
       <h1>{ data.name }</h1>
+      <h4 className={styles.releaseDate}>{ data.description }</h4>
       <div className={styles.actionButtons}>
         <IconButton
           icon="play"
@@ -24,9 +25,9 @@ const PlaylistSummary = ({ data }: PlaylistSummaryProps) => (
       </div>
     </header>
     <figure className={styles.photo}>
-      <img src={selena} alt={ data.name } />
+      <img src={selena} alt="Selena Gomez" />
     </figure>
   </section>
 );
 
-export default PlaylistSummary;
+export default ArtistSummary;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Collection from '../../components/Collection';
-import AlbumSummary from '../../components/Album/AlbumSummary';
+import AlbumSummary from '../../components/Summary/AlbumSummary';
 import styles from './album.css';
 
 import albumData from '@mock/album-data.json';
@@ -10,7 +10,7 @@ const Album = () => (
   <section className={styles.wrapper}>
     <AlbumSummary data={albumData} />
     <Collection
-      tracks={albumTracks}
+      items={albumTracks}
       className={styles.trackList}
     />
   </section>

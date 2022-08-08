@@ -1,7 +1,4 @@
-import { ArtistType } from '../Artist/types';
-import { AlbumType } from '../Album/types';
-import { TrackType } from '../Track/types';
-import { PlaylistType } from '../Playlist/types';
+import { Entity } from '../Entity/types';
 
 export interface CollectionProps {
   className?: string;
@@ -9,8 +6,5 @@ export interface CollectionProps {
   title?: string;
   itemTheme?: string;
   itemsPerColumn?: string;
-  artists?: ArtistType[];
-  albums?: AlbumType[];
-  tracks?: TrackType[];
-  playlists?: PlaylistType[];
+  items: Entity[];
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { IconLink } from '../common/Link';
-import UserCollections from '../UserCollections';
+// import UserCollections from '../UserCollections';
 import logo from '../../assets/images/logo.svg';
 import styles from './mainMenu.css';
 
@@ -36,7 +36,7 @@ const MainMenu = () => (
         className={styles.menuItem}
       />
     </div>
-    <UserCollections />
+    {/* <UserCollections /> */}
   </aside>
 );
 

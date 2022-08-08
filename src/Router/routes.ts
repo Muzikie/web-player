@@ -45,7 +45,7 @@ export const screens: Route = {
   },
   default: {
     path: '/',
-    component: Playlist,
+    component: Home,
   },
 };
 

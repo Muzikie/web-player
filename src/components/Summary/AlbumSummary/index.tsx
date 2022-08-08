@@ -3,10 +3,10 @@ import { Link } from 'wouter';
 import styles from './albumSummary.css';
 import selena from '@mock/album1.png';
 import { IconButton } from '../../common/Button';
-import { AlbumSummaryProps } from '../types';
+import { EntityRowProps, AlbumType } from '../../Entity/types';
 
 
-const AlbumSummary = ({ data }: AlbumSummaryProps) => {
+const AlbumSummary = ({ data }: EntityRowProps<AlbumType>) => {
   const year = (new Date(data.releaseDate * 1000)).getFullYear();
   return (
     <section className={styles.wrapper}>

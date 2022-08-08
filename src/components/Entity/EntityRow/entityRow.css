@@ -8,7 +8,7 @@
   justify-content: space-between;
 
   & .primaryInfo,
-  & .extraInfo {
+  & footer {
     display: flex;
     align-items: center;
     flex-flow: row nowrap;
@@ -32,7 +32,7 @@
     }
   }
 
-  & .extraInfo {
+  & footer {
     justify-content: flex-end;
     flex-shrink: 2;
     flex-grow: 1;
@@ -51,10 +51,9 @@
   }
 
   &:hover {
-    & .extraInfo {
-      & .likeButton,
-      & .contextMenu {
-        opacity: 1;
+    & footer {
+      & button {
+        opacity: 1 !important;
       }
     }
   }

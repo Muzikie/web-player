@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './artist.css';
 import Collection from '../../components/Collection';
-import ArtistSummary from '../../components/Artist/ArtistSummary';
+import ArtistSummary from '../../components/Summary/ArtistSummary';
 
 import artistData from '@mock/artist-data.json';
 import artistAlbums from '@mock/artist-albums.json';
@@ -11,13 +11,13 @@ const Artist = () => (
     <ArtistSummary data={artistData} />
     <Collection
       title="Popular"
-      tracks={artistData.mostPopular}
+      items={artistData.mostPopular}
       itemsPerColumn="2"
       className={styles.popularTracks}
     />
     <Collection
       title="Discography"
-      albums={artistAlbums}
+      items={artistAlbums}
       itemsPerColumn="2"
       className={styles.discography}
     />

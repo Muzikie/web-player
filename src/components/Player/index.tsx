@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './player.css';
 import { IconButton } from '../common/Button';
-import AlbumThumbnail from '../Album/AlbumThumbnail';
+import EntityThumbnail from '../Entity/EntityThumbnail';
 
 import artistAlbums from '@mock/albums.json';
 
@@ -9,7 +9,7 @@ const Player = () => {
   return (
     <section className={styles.wrapper}>
       <section className={styles.playingMusic}>
-        <AlbumThumbnail data={artistAlbums[0]} className="circle" />
+        <EntityThumbnail data={artistAlbums[0]} className="circle" />
         <header>
           <h5>Love the Way You Lie</h5>
           <span>Rihanna</span>
