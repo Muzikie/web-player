@@ -3,8 +3,8 @@ import Collection from '../../components/Collection';
 import { greet } from '../../helpers/helpers';
 import styles from './home.css';
 
+import recents from '@mock/recents.json';
 import myPlaylists from '@mock/similar-playlist.json';
-import playlistData from '@mock/album-tracks.json';
 import artists from '@mock/similar-artists.json';
 import albums from '@mock/artist-albums.json';
 
@@ -25,7 +25,7 @@ const Home = () => (
       title="Recent"
       itemTheme="minimal"
       itemsPerColumn="2"
-      items={playlistData}
+      items={recents}
     />
     <Collection
       className={styles.favorite}

@@ -13,3 +13,8 @@ export const formatThousands = (num: number): string => {
     ? num.toString()
     : (num / signItem.value).toFixed(2).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1') + signItem.sign;
 };
+
+export const getYear = (num: number): string => {
+  const year = new Date(num * 1000).getFullYear();
+  return year.toString();
+};

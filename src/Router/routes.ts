@@ -16,11 +16,11 @@ interface Route {
 
 export const screens: Route = {
   album: {
-    path: '/albums/:id',
+    path: '/album/:id',
     component: Album,
   },
   artist: {
-    path: '/artists/:id',
+    path: '/artist/:id',
     component: Artist,
   },
   playlist: {

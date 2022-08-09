@@ -15,7 +15,12 @@
     }
   }
 
-  &.album,
+  &.album {
+    & figure {
+      border-radius: var(--border-radius-m);
+    }
+  }
+
   &.playlist {
     & figure {
       border-radius: var(--border-radius-s);

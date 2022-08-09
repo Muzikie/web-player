@@ -1,11 +1,25 @@
 .wrapper {
   width: 100%;
-  padding: 10px 0 10px;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  padding: 10px;
   box-sizing: border-box;
-  justify-content: space-between;
+
+  & .container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  &.playlist {
+    & .container {
+      padding: 10px;
+      background-color: #ffffff20;
+      border: solid 1px #ffffff40;
+      border-radius: var(--border-radius-m);
+    }
+  }
 
   & .primaryInfo,
   & footer {
@@ -32,27 +46,10 @@
     }
   }
 
-  & footer {
-    justify-content: flex-end;
-    flex-shrink: 2;
-    flex-grow: 1;
-    max-width: 80px;
-
-    & > span {
-      flex-grow: 1;
-    }
-
-    & .likeButton,
-    & .contextMenu {
-      opacity: 0;
-      width: 30px;
-      color: var(--gray);
-    }
-  }
-
   &:hover {
     & footer {
-      & button {
+      & > span,
+      & > button {
         opacity: 1 !important;
       }
     }

@@ -1,56 +1,28 @@
 .wrapper {
+  --item-size: 30px;
+
   justify-content: flex-end !important;
   flex-shrink: 2 !important;
   flex-grow: 1 !important;
-  max-width: 80px !important;
+  max-width: 120px !important;
 
-  &.album {
-    & > span {
-      flex-grow: 1;
-    }
-
-    & .likeButton,
-    & .contextMenu {
-      opacity: 0;
-      width: 30px;
-      color: var(--gray);
-    }
+  & > span {
+    display: block;
+    width: var(--item-size) !important;
+    opacity: 0;
+    flex-grow: 1;
+    color: var(--gray);
   }
 
-  &.artist {
-    & > span {
-      flex-grow: 1;
-    }
-
-    & .likeButton,
-    & .contextMenu {
-      opacity: 0;
-      width: 30px;
-      color: var(--gray);
-    }
-  }
-
-  &.playlist {
-    & > span {
-      flex-grow: 1;
-    }
-
-    & .likeButton,
-    & .contextMenu {
-      opacity: 0;
-      width: 30px;
-      color: var(--gray);
-    }
+  & button {
+    opacity: 0;
+    width: var(--item-size) !important;
+    color: var(--gray);
   }
 
   &.track {
-    & > span {
-      flex-grow: 1;
-    }
-
     & .duration,
     & .streamCount {
-      color: var(--gray);
       text-align: right;
     }
 
@@ -58,12 +30,9 @@
       display: none;
     }
 
-    & .likeButton,
-    & .contextMenu {
+    & button {
       display: none;
       opacity: 0;
-      width: 30px;
-      color: var(--gray);
     }
 
     &.minimal {

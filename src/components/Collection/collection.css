@@ -4,6 +4,7 @@
 
   display: flex;
   flex-flow: row nowrap;
+  padding-bottom: var(--padding-l);
 
   & header {
     display: flex;

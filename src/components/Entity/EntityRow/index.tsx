@@ -25,25 +25,26 @@ const EntityRow = ({ data, theme = '', className = '' }: EntityRowProps<Entity>)
   const entity = getEntity(data);
 
   return (
-    <Link
-      href={`/${entity}/${data.id}`}
-      className={`${styles.wrapper} ${styles[theme]} ${className}`}
-    >
-      <div className={styles.primaryInfo}>
-        {
-          ('duration' in data) ? null : (
-            <EntityThumbnail
-              data={data}
-              className={styles.thumbnail}
-            />
-          )
-        }
-        <div className={styles.text}>
-          <h4 className={styles.albumName}>{ data.name }</h4>
-          <Subtitle data={data} />
+    <Link href={`/${entity}/${data.id}`}>
+      <section className={`${styles.wrapper} ALI ${styles[entity]} ${styles[theme]} ${className}`}>
+        <div className={styles.container}>
+          <div className={styles.primaryInfo}>
+            {
+              ('duration' in data) ? null : (
+                <EntityThumbnail
+                  data={data}
+                  className={styles.thumbnail}
+                />
+              )
+            }
+            <div className={styles.text}>
+              <h4 className={styles.albumName}>{ data.name }</h4>
+              <Subtitle data={data} />
+            </div>
+          </div>
+          <Actions data={data} />
         </div>
-      </div>
-      <Actions data={data} />
+      </section>
     </Link>
   );
 };
