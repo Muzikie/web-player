@@ -1,9 +1,24 @@
 .wrapper {
-  --size: 62px;
+  --size-s: 62px;
+  --size-m: 70px;
+  --size-l: 80px;
 
   display: block;
-  width: var(--size);
-  height: var(--size);
+
+  &.minimal {
+    width: var(--size-s);
+    height: var(--size-s);
+  }
+
+  &.normal {
+    width: var(--size-m);
+    height: var(--size-m);
+  }
+
+  &.large {
+    width: var(--size-l);
+    height: var(--size-l);
+  }
 
   & figure {
     width: 100%;
@@ -15,13 +30,13 @@
     }
   }
 
-  &.album {
+  &.playlist {
     & figure {
       border-radius: var(--border-radius-m);
     }
   }
 
-  &.playlist {
+  &.album {
     & figure {
       border-radius: var(--border-radius-s);
     }
@@ -32,7 +47,6 @@
       border-radius: var(--border-radius-xs);
     }
   }
-
 }
 
 :global(.circle) {

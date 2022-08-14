@@ -1,43 +1,55 @@
-import React from 'react';
-import { Link } from 'wouter';
+import React, { useState } from 'react';
 import { IconLink } from '../common/Link';
-// import UserCollections from '../UserCollections';
-import logo from '../../assets/images/logo.svg';
+import { IconButton } from '../common/Button';
+
 import styles from './mainMenu.css';
 
-const MainMenu = () => (
-  <aside className={styles.wrapper}>
-    <div className={styles.logo}>
-      <figure>
-        <Link href="/">
-          <img src={logo} alt="Free Muse" />
-        </Link>
-      </figure>
-    </div>
-    <div className={styles.list}>
-      <IconLink
-        icon="home"
-        href="/"
-        className={`${styles.menuItem} ${styles.active}`}
+const MainMenu = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  const onClick = () => setIsActive(!isActive);
+
+  return (
+    <aside className={styles.wrapper}>
+      <IconButton
+        className={styles.menuButton}
+        icon={isActive ? 'cross' : 'menu'}
+        onClick={onClick}
       />
-      <IconLink
-        icon="search"
-        href="?modal=search"
-        className={styles.menuItem}
-      />
-      <IconLink
-        icon="user"
-        href="/profile"
-        className={styles.menuItem}
-      />
-      <IconLink
-        icon="settings"
-        href="/settings"
-        className={styles.menuItem}
-      />
-    </div>
-    {/* <UserCollections /> */}
-  </aside>
-);
+      <section className={`${styles.container} ${isActive ? styles.active : ''}`}>
+        <div className={styles.list}>
+          <IconLink
+            title="Home"
+            icon="home"
+            href="/"
+            className={`${styles.menuItem} ${styles.active}`}
+            onClick={onClick}
+          />
+          <IconLink
+            title="Search"
+            icon="search"
+            href="/search"
+            className={styles.menuItem}
+            onClick={onClick}
+          />
+          <IconLink
+            title="Profile"
+            icon="user"
+            href="/profile"
+            className={styles.menuItem}
+            onClick={onClick}
+          />
+          {/* <IconLink
+            title="settings"
+            icon="settings"
+            href="/settings"
+            className={styles.menuItem}
+            onClick={onClick}
+          /> */}
+        </div>
+      </section>
+    </aside>
+  );
+};
 
 export default MainMenu;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Collection from '../../components/Collection';
 import AlbumSummary from '../../components/Summary/AlbumSummary';
+import { collectionThemes } from '../../components/Collection/types';
 import styles from './album.css';
 
 import albumData from '@mock/album-data.json';
@@ -12,6 +13,7 @@ const Album = () => (
     <Collection
       items={albumTracks}
       className={styles.trackList}
+      theme={collectionThemes.wide}
     />
   </section>
 );

@@ -4,10 +4,14 @@
   padding-bottom: var(--player-height-m);
 
   & > header {
-    padding: 0 var(--padding-l) 10px;
+    padding: 0 var(--padding-l) var(--padding-s);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 
     & h2 {
       color: var(--color-secondary);
+      padding-left: var(--padding-s);
     }
   }
 }

@@ -4,8 +4,7 @@ import Artist from '../screens/Artist';
 import Playlist from '../screens/Playlist';
 import Profile from '../screens/Profile';
 import Settings from '../screens/Settings';
-import Search from '../components/Search';
-import MainMenu from '../components/MainMenu';
+import Search from '../screens/Search';
 
 interface Route {
   [key: string]: {
@@ -50,8 +49,4 @@ export const screens: Route = {
 };
 
 export const modals: Route = {
-  menu: {
-    path: 'menu',
-    component: MainMenu,
-  },
 };

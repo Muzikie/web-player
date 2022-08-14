@@ -19,6 +19,7 @@
       transform-origin: 100% 100%;
       color: black;
       display: inline-block;
+      text-transform: capitalize;
     }
   }
 
@@ -30,47 +31,88 @@
     width: calc(100% - var(--title-width));
   }
 
-  &.horizontal {
-    & .itemsFrame {
-      width: calc(100% - var(--title-width));
-      height: 100%;
-      flex-grow: 1;
-      flex-shrink: 0;
-      overflow-y: hidden;
-      overflow-x: scroll;
-    }
-
+  &.vertical {
     & .itemsContainer {
-      height: 100%;
-      width: auto;
       display: flex;
-      flex-flow: row nowrap;
+      flex-flow: row wrap;
+
+      &.wide,
+      &.normal,
+      &.compressed {
+        & > * {
+          width: 100%;
+        }
+      }
     }
   }
 }
 
-@media (min-width: 680px) {
+@media (min-width: 600px) {
   .wrapper {
     &.vertical {
       & .itemsContainer {
-        display: flex;
-        flex-flow: row wrap;
-
-        &.rowItems-1 {
+        &.wide,
+        &.normal {
           & > * {
             width: 100%;
           }
         }
 
-        &.rowItems-2 {
+        &.compressed {
+          & > * {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    &.vertical {
+      & .itemsContainer {
+        &.wide{
+          & > * {
+            width: 100%;
+          }
+        }
+        
+        &.normal {
           & > * {
             width: 50%;
           }
         }
 
-        &.rowItems-3 {
+        &.compressed {
           & > * {
-            width: 33.3333%;
+            width: 33.333%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .wrapper {
+    &.vertical {
+      & .itemsContainer {
+        &.wide{
+          & > * {
+            width: 100%;
+          }
+        }
+        
+        &.normal {
+          & > * {
+            width: 33.333%;
+          }
+        }
+
+        &.compressed {
+          & > * {
+            width: 25%;
           }
         }
       }

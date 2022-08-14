@@ -1,19 +1,17 @@
 import React from 'react';
 import styles from './collection.css';
 import EntityRow from '../Entity/EntityRow';
-import { CollectionProps } from './types';
-
-
+import { CollectionProps, collectionThemes } from './types';
+import { entityThemes } from '../Entity/types';
 
 const Collection = ({
   className = '',
   direction = 'vertical',
-  itemsPerColumn = '1',
-  itemTheme,
+  theme = collectionThemes.normal,
+  itemTheme = entityThemes.normal,
   title,
   items = [],
 }: CollectionProps) => {
-  const rowItems = `rowItems-${itemsPerColumn}`
   return (
     <section className={`${styles.wrapper} ${styles[direction]} ${className}`}>
       {
@@ -24,9 +22,15 @@ const Collection = ({
         ): null
       }
       <div className={styles.itemsFrame}>
-        <div className={`${styles.itemsContainer} ${styles[rowItems]}`}>
+        <div className={`${styles.itemsContainer} ${styles[theme]}`}>
           {
-            items.map((item, index) => (<EntityRow key={`item-${item.id}-${index}`} data={item} theme={itemTheme} />))
+            items.map((item, index) => (
+              <EntityRow
+                key={`item-${item.id}-${index}`}
+                data={item}
+                theme={itemTheme}
+              />
+            ))
           }
         </div>
       </div>

@@ -12,13 +12,11 @@ const Artist = () => (
     <Collection
       title="Popular"
       items={artistData.mostPopular}
-      itemsPerColumn="2"
       className={styles.popularTracks}
     />
     <Collection
       title="Discography"
       items={artistAlbums}
-      itemsPerColumn="2"
       className={styles.discography}
     />
   </section>

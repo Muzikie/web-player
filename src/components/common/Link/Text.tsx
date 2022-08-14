@@ -1,20 +1,21 @@
 import React from 'react';
 import { Link } from 'wouter';
 import { useActiveRoute } from '../../../hooks';
+import { TextLinkProps, BaseProps } from './type';
 import styles from './link.css';
 
-interface TextLinkProps {
-  title: string;
-  href: string;
-}
-
-const TextLink = ({ title, href }: TextLinkProps) => {
+const TextLink = ({ title, href, onClick }: TextLinkProps) => {
   const isActive = useActiveRoute(href);
+  const props: any = {
+    href: `${styles.textLink} ${isActive ? 'active' : ''}`,
+  };
+
+  if (typeof onClick === 'function') {
+    props.onClick = onClick;
+  }
+
   return (
-    <Link
-      className={`${styles.textLink} ${isActive ? 'active' : ''}`}
-      href={href}
-    >
+    <Link {...props}>
       { title }
     </Link>
   );

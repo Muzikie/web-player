@@ -5,6 +5,14 @@ interface BaseEntity {
   image: string;
 }
 
+export enum entityThemes {
+  minimal = 'minimal',
+  normal = 'normal',
+  large = 'large',
+}
+
+export type entityTheme = entityThemes | undefined;
+
 export interface AlbumType extends BaseEntity {
   artistName: string;
   artistId: string;
@@ -37,6 +45,6 @@ export type Entity = AlbumType | ArtistType | TrackType | PlaylistType;
 
 export interface EntityRowProps<Entity> {
   data: Entity;
-  theme?: string;
+  theme?: entityTheme;
   className?: string;
 }

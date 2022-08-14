@@ -3,7 +3,7 @@ import { Link } from 'wouter';
 import EntityThumbnail from '../EntityThumbnail';
 import Actions from '../Actions';
 import styles from './entityRow.css';
-import { Entity, EntityRowProps } from '../types';
+import { Entity, EntityRowProps, entityThemes } from '../types';
 import { getEntity } from '../utils';
 
 const Subtitle = ({ data }: EntityRowProps<Entity>) => {
@@ -21,8 +21,11 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
   )
 };
 
-const EntityRow = ({ data, theme = '', className = '' }: EntityRowProps<Entity>) => {
+const EntityRow = ({
+  data, className = '', theme = entityThemes.normal,
+}: EntityRowProps<Entity>) => {
   const entity = getEntity(data);
+  console.log('theme', theme);
 
   return (
     <Link href={`/${entity}/${data.id}`}>
@@ -33,6 +36,7 @@ const EntityRow = ({ data, theme = '', className = '' }: EntityRowProps<Entity>)
               ('duration' in data) ? null : (
                 <EntityThumbnail
                   data={data}
+                  theme={theme}
                   className={styles.thumbnail}
                 />
               )
