@@ -1,0 +1,11 @@
+.component.layout {
+  width: 100%;
+
+  & .main {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    z-index: 4;
+    position: relative;
+  }
+}

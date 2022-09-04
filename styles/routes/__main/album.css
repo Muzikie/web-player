@@ -1,0 +1,14 @@
+.screen.album {
+  height: 100%;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+
+  & .trackList,
+  & .similarArtists,
+  & .discography {
+    width: 100%;
+    padding: 40px 20px 0;
+    box-sizing: border-box;
+  }
+}
