@@ -1,5 +1,6 @@
 # Editor
 .vscode
+.cache
 
 # dependencies
 /node_modules
@@ -10,8 +11,10 @@
 /coverage
 
 # production
+public/build/
 /build
 /dist
+app/styles/
 
 # mocks
 src/assets/images/mocks
