@@ -1,0 +1,13 @@
+.component {
+  &.text {
+    font-size: var(--size-span);
+  }
+
+  &.icon {
+    position: initial;
+  }
+
+  &.compound {
+    position: initial;
+  }
+}

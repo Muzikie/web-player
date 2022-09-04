@@ -1,0 +1,149 @@
+.component.player {
+  width: 100%;
+  height: var(--player-height-m); /* @todo check if we need to make this smaller */
+  position: fixed;
+  z-index: var(--layer-5);
+  bottom: 0;
+  left: 0;
+  background: var(--color-secondary);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 0 var(--padding-m);
+  box-sizing: border-box;
+  border-radius: var(--border-radius-x) var(--border-radius-x) 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+
+  &.playing {
+    transform: translateY(0);
+  }
+
+  & .playingMusic {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    & header {
+      padding: 0 var(--padding-m);
+
+      & h5 {
+        color: var(--white);
+      }
+
+      & span {
+        color: var(--gray);
+      }
+    }
+  }
+
+  & .controls {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    & button {
+      background: transparent;
+      border: 0;
+      color: var(--white);
+      width: 45px;
+      height: 45px;
+      border-radius: var(--border-radius-s);
+      cursor: pointer;
+      font-size: 15px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    & .rewind,
+    & .fastForward {
+      display: none;
+      width: 30px;
+      height: 30px;
+      border-radius: var(--border-radius-s);
+    }
+
+    & .play {
+      background-color: var(--white);
+      margin: 0 var(--padding-s);
+
+      & i {
+        font-size: 18px;
+        color: var(--color-secondary);
+      }
+    }
+  }
+
+  & .seek {
+    display: none;
+    flex-flow: row nowrap;
+    flex-grow: 1;
+    padding: 0 35px 0 10px;
+    box-sizing: border-box;
+    align-items: center;
+
+    & .bar {
+      display: block;
+      flex-grow: 1;
+      background: #777;
+      height: 5px;
+      border-radius: var(--border-radius-s);
+      position: relative;
+
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        background: linear-gradient(90deg, rgba(179,189,253,1) 0%, rgba(238,180,205,1) 50%, rgba(232,135,251,1) 100%);
+      }
+
+      &:before {
+        height: 100%;
+        width: 50%;
+        border-radius: var(--border-radius-s);
+      }
+
+      &:after {
+        width: 14px;
+        height: 14px;
+        position: absolute;
+        left: 50%;
+        border-radius: var(--border-radius-r);
+        top: 3px;
+        transform: translateX(-50%) translateY(-50%);
+        cursor: pointer;
+      }
+    }
+
+    & time {
+      display: block;
+      padding: 0 0 0 20px;
+    }
+  }
+}
+
+
+
+
+@media (min-width: 680px) {
+  .component.player {
+    & .controls {
+      & .rewind,
+      & .fastForward {
+        display: block;
+      }
+    }
+
+    & .seek {
+      display: flex;
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .component.player {
+    height: var(--player-height-m);
+  }
+}

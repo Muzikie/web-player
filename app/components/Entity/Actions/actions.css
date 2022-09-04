@@ -1,0 +1,58 @@
+.component.entity.action {
+  --item-size: 30px;
+
+  justify-content: flex-end !important;
+  flex-shrink: 2 !important;
+  flex-grow: 1 !important;
+  max-width: 120px !important;
+
+  & > span {
+    display: block;
+    width: var(--item-size) !important;
+    opacity: 0;
+    flex-grow: 1;
+    color: var(--gray);
+  }
+
+  & button {
+    opacity: 0;
+    width: var(--item-size) !important;
+    color: var(--gray);
+  }
+
+  &.track {
+    & .duration,
+    & .streamCount {
+      text-align: right;
+    }
+
+    & .streamCount {
+      display: none;
+    }
+
+    & button {
+      display: none;
+      opacity: 0;
+    }
+
+    &.minimal {
+      max-width: 100px;
+
+      & .streamCount {
+        display: none !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 680px) {
+  .component.entity.action {
+    &.track {
+      & .streamCount,
+      & .likeButton,
+      & .contextMenu {
+        display: block;
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+.component.mainMenu {
+  --menu-width: 200px;
+  --menu-button: var(--box-size-xs);
+
+
+  height: var(--menu-button);
+  height: var(--menu-button);
+  position: absolute;
+  top: 50px;
+  right: var(--padding-m);
+  box-sizing: border-box;
+  z-index: 5;
+
+  & .menuButton {
+    width: var(--box-size-xs);
+    height: var(--box-size-xs);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & i {
+      font-size: 24px;
+      color: var(--color-secondary);
+    }
+  }
+
+  & .container {
+    display: none;
+    height: auto;
+    width: var(--menu-width);
+    position: absolute;
+    box-sizing: border-box;
+    right: 0;
+    background: var(--color-secondary);
+    padding: 0px 30px;
+    border-radius: 14px;
+    box-shadow: -10px 10px 20px 0px #4532483b;
+
+    &.active {
+      display: block;
+    }
+
+    & > .list {
+      margin-top: 20px;
+
+      & .menuItem {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        margin-bottom: 20px;
+        cursor: pointer;
+
+        & i {
+          color: var(--gray);
+          font-size: 20px;
+        }
+
+        & span {
+          flex-grow: 1;
+          padding-left: 10px;
+          box-sizing: border-box;
+        }
+
+        &:after {
+          display: block;
+          content: '';
+          width: 3px;
+          height: 20px;
+          border-radius: 2px;
+        }
+
+        &:hover:after {
+          background: var(--gray);
+        }
+
+        &.active {
+          & i {
+            color: var(--white);
+            filter: drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.6));
+          }
+
+          &:after {
+            background: var(--white);
+          }
+        }
+      }
+    }
+  }
+}
