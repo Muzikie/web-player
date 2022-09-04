@@ -1,4 +1,4 @@
-import { useLocation } from 'wouter';
+import { useLocation, Navigate } from 'react-router-dom';
 
 interface QueryParam { 
   [key: string]: string;
@@ -7,9 +7,8 @@ type SetQueryParam = (paramsToSet: QueryParam) => void;
 type RemoveQueryParam = (key: string) => void;
 
 const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] => {
-  const [location, setLocation] = useLocation();
-  const params = window.location.search;
-  const parsed = new URLSearchParams(params);
+  const location = useLocation();
+  const parsed = new URLSearchParams(location.search.toString());
   const queryParams: QueryParam = {};
   parsed.forEach((value, key) => {
     queryParams[key] = value;
@@ -24,7 +23,7 @@ const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] => {
     const newParsed = new URLSearchParams(newParams);
     const stringified = newParsed.toString();
 
-    setLocation(`${location}?${stringified}`);
+    Navigate({ to: `${location}?${stringified}` });
   };
 
   const removeQueryParam: RemoveQueryParam = (key) => {
@@ -40,7 +39,7 @@ const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] => {
     const newParsed = new URLSearchParams(newParams);
     const stringified = newParsed.toString();
 
-    setLocation(`${location}?${stringified}`);
+    Navigate({ to: `${location}?${stringified}` });
   };
 
   return [queryParams, setQueryParam, removeQueryParam];
