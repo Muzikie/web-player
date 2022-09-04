@@ -4,7 +4,7 @@ import type {
   TrackType,
   PlaylistType,
   Entity,
-} from "~/components/Entity/types";
+} from '~/components/Entity/types';
 
 type SearchResultType = {
   [key: string]: Entity[];

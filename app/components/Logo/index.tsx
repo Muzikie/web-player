@@ -1,4 +1,5 @@
-import { Link } from "@remix-run/react";
+import React from 'react';
+import { Link } from '@remix-run/react';
 import { LogoProps } from './types';
 
 const Logo = ({ size = 'medium' }: LogoProps) => (

@@ -1,3 +1,4 @@
+import React from 'react';
 import { EntityRowProps, Entity, entityThemes } from '../types';
 import { getEntity } from '../utils';
 

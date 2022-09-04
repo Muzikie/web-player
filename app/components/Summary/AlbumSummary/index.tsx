@@ -1,4 +1,5 @@
-import { Link } from "@remix-run/react";
+import React from 'react';
+import { Link } from '@remix-run/react';
 import { IconButton } from '~/components/common/Button';
 import { EntityRowProps, AlbumType } from '~/components/Entity/types';
 

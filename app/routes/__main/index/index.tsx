@@ -1,6 +1,7 @@
 /* External dependencies */
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import React from 'react';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
 import {
@@ -8,16 +9,16 @@ import {
   getRecentlyPlayed,
   getArtists,
   getAlbums,
-} from "~/models/entity.server";
+} from '~/models/entity.server';
 import Collection from '~/components/Collection';
 import Logo from '~/components/Logo';
 import { greet } from '~/helpers/helpers';
 import { entityThemes } from '~/components/Entity/types';
 import { collectionThemes } from '~/components/Collection/types';
-import styles from "~/styles/routes/__main/index.css";
+import styles from '~/styles/routes/__main/index.css';
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 type LoaderData = {

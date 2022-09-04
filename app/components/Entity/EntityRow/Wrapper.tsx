@@ -1,6 +1,7 @@
+import React from 'react';
 import { memo, ReactNode, MouseEvent, useContext } from 'react';
 import { PlayerContext } from '~/context/playerContextProvider';
-import { Link } from "@remix-run/react";
+import { Link } from '@remix-run/react';
 import { Entity, TrackType } from '../types';
 
 interface WrapperProps {

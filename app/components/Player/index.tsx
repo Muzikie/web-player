@@ -1,5 +1,6 @@
+import React from 'react';
 import { useContext, MouseEvent } from 'react';
-import { Link } from "@remix-run/react";
+import { Link } from '@remix-run/react';
 import { PlayerContext } from '~/context/playerContextProvider';
 import { IconButton } from '~/components/common/Button';
 import EntityThumbnail from '~/components/Entity/EntityThumbnail';

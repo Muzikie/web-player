@@ -1,7 +1,8 @@
-import styles from "~/styles/routes/__main/settings.css";
+import React from 'react';
+import styles from '~/styles/routes/__main/settings.css';
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 const Settings = () => (

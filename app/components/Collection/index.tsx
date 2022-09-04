@@ -1,3 +1,4 @@
+import React from 'react';
 import EntityRow from '~/components/Entity/EntityRow';
 import { CollectionProps, collectionThemes } from './types';
 import { entityThemes } from '~/components/Entity/types';

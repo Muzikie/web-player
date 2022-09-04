@@ -13,7 +13,8 @@
     "dev:remix": "remix watch",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "dev:css": "sh collectStyles.sh && postcss styles --base styles --dir app/styles -w",
-    "build:css": "sh collectStyles.sh && postcss styles --base styles --dir app/styles --env production"
+    "build:css": "sh collectStyles.sh && postcss styles --base styles --dir app/styles --env production",
+    "lint": "npx eslint app --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "@remix-run/express": "^1.7.0",

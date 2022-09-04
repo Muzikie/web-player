@@ -1,3 +1,4 @@
+import React from 'react';
 import { IconButton } from '~/components/common/Button';
 import { EntityRowProps, ArtistType } from '~/component/Entity/types';
 

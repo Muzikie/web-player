@@ -1,11 +1,12 @@
-import { Outlet } from "@remix-run/react";
+import React from 'react';
+import { Outlet } from '@remix-run/react';
 import PlayerProvider from '~/context/playerContextProvider';
 import MainMenu from '~/components/MainMenu';
 import Player from '~/components/Player';
-import styles from "~/styles/routes/__main.css";
+import styles from '~/styles/routes/__main.css';
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 const Main = () => (
@@ -13,7 +14,7 @@ const Main = () => (
     <div id="layout" className="component layout">
       <MainMenu />
       <main className="main">
-      <Outlet />
+        <Outlet />
       </main>
       <Player />
     </div>

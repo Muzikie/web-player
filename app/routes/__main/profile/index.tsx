@@ -1,7 +1,8 @@
-import styles from "~/styles/routes/__main/profile.css";
+import React from 'react';
+import styles from '~/styles/routes/__main/profile.css';
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 const Profile = () => (

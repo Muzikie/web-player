@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { IconLink } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
@@ -40,7 +41,7 @@ const MainMenu = () => {
             title="settings"
             icon="settings"
             to="/settings"
-            className={styles.menuItem}
+            className="menuItem"
             onClick={onClick}
           /> */}
         </div>

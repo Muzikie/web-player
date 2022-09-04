@@ -1,3 +1,4 @@
+import React from 'react';
 import { IconButton } from '~/components/common/Button';
 import { getYear } from '~/helpers/formatters';
 import { AlbumType, EntityRowProps } from '../types';

@@ -1,19 +1,20 @@
 /* External dependencies */
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import React from 'react';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
 import {
   getAlbum,
   getAlbumTracks,
-} from "~/models/entity.server";
+} from '~/models/entity.server';
 import Collection from '~/components/Collection';
 import AlbumSummary from '~/components/Summary/AlbumSummary';
 import { collectionThemes } from '~/components/Collection/types';
-import styles from "~/styles/routes/__main/album.css";
+import styles from '~/styles/routes/__main/album.css';
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 type LoaderData = {

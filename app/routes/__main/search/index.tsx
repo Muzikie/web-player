@@ -1,20 +1,20 @@
 /* External dependencies */
-import { useState } from 'react';
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import React, { useState } from 'react';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
 import {
   search,
-} from "~/models/entity.server";
+} from '~/models/entity.server';
 import Collection from '~/components/Collection';
 import Icon from '~/components/common/Icon';
 import Logo from '~/components/Logo';
 import { Entity, entityThemes } from '~/components/Entity/types';
-import styles from "~/styles/routes/__main/search.css";
+import styles from '~/styles/routes/__main/search.css';
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 type LoaderData = {

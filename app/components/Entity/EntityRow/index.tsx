@@ -1,3 +1,4 @@
+import React from 'react';
 import Wrapper from './Wrapper';
 import EntityThumbnail from '../EntityThumbnail';
 import Actions from '../Actions';

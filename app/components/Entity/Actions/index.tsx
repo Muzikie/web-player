@@ -1,3 +1,4 @@
+import React from 'react';
 import { Entity, EntityRowProps } from '../types';
 import ArtistActions from './ArtistActions';
 import AlbumActions from './AlbumActions';

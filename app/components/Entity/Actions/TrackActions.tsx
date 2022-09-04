@@ -1,3 +1,4 @@
+import React from 'react';
 import { formatThousands } from '~/helpers/formatters';
 import { secondToMinutes } from '~/helpers/convertors';
 import { IconButton } from '~/components/common/Button';

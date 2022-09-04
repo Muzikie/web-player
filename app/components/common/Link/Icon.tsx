@@ -1,9 +1,8 @@
-import { Link } from "@remix-run/react";
+import React from 'react';
+import { Link } from '@remix-run/react';
 import { useActiveRoute } from '~/hooks';
 import Icon from '~/components/common/Icon';
 import { IconLinkProps } from './type';
-// const styles: {[key: string]: string} = {};
-//import styles from './link.css';
 
 const IconLink = ({
   icon,
