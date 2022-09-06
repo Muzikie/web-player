@@ -55,25 +55,34 @@
       &:hover {
         background: rgba(255, 255, 255, 0.3);
       }
-    }
-
-    & .rewind,
-    & .fastForward {
-      display: none;
-      width: 30px;
-      height: 30px;
-      border-radius: var(--border-radius-s);
-    }
-
-    & .play {
-      background-color: var(--white);
-      margin: 0 var(--padding-s);
 
       & i {
-        font-size: 18px;
-        color: var(--color-secondary);
+        background: transparent;
+      }
+
+      &.rewind,
+      &.fastForward {
+        display: none;
+        width: 30px;
+        height: 30px;
+        border-radius: var(--border-radius-s);
+      }
+
+      &.play {
+        background-color: rgba(255, 255, 255, 0.9);
+        margin: 0 var(--padding-s);
+
+        & i {
+          font-size: 18px;
+          color: var(--color-secondary);
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 1);
+        }
       }
     }
+
   }
 
   & .seek {
@@ -92,24 +101,24 @@
       border-radius: var(--border-radius-s);
       position: relative;
 
-      &:before,
-      &:after {
+      & i,
+      & span {
         content: '';
         display: block;
         background: linear-gradient(90deg, rgba(179,189,253,1) 0%, rgba(238,180,205,1) 50%, rgba(232,135,251,1) 100%);
       }
 
-      &:before {
+      & span {
         height: 100%;
-        width: 50%;
+        width: 0%;
         border-radius: var(--border-radius-s);
       }
 
-      &:after {
+      & i {
         width: 14px;
         height: 14px;
         position: absolute;
-        left: 50%;
+        left: 0%;
         border-radius: var(--border-radius-r);
         top: 3px;
         transform: translateX(-50%) translateY(-50%);
@@ -118,6 +127,7 @@
     }
 
     & time {
+      width: 20px;
       display: block;
       padding: 0 0 0 20px;
     }
@@ -130,9 +140,11 @@
 @media (min-width: 680px) {
   .component.player {
     & .controls {
-      & .rewind,
-      & .fastForward {
-        display: block;
+      & button {
+        &.rewind,
+        &.fastForward {
+          display: block;
+        }
       }
     }
 
