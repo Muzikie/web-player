@@ -14,7 +14,7 @@ interface WrapperProps {
 const Wrapper = ({
   entity, data, children, className,
 }: WrapperProps) => {
-  const { setCurrent } = useContext(PlayerContext);
+  const { setCurrent, current } = useContext(PlayerContext);
 
   if (entity === 'track') {
     const play = (e: MouseEvent) => {
@@ -27,7 +27,7 @@ const Wrapper = ({
     return (
       <section
         onClick={play}
-        className={className}
+        className={`${className} ${current?.id === data.id ? 'isPlaying' : ''}`}
       >
         {children}
       </section>

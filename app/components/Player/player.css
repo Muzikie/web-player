@@ -139,14 +139,14 @@
 
 @media (min-width: 680px) {
   .component.player {
-    & .controls {
+    /* & .controls {
       & button {
         &.rewind,
         &.fastForward {
           display: block;
         }
       }
-    }
+    } */
 
     & .seek {
       display: flex;

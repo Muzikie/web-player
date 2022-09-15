@@ -1,11 +1,14 @@
-import React, { useState, createContext, MouseEvent } from 'react';
-import { PlayerContextType, PlayerProviderProps } from './types';
+import React, { useState, createContext, MouseEvent, useEffect } from 'react';
+import { PlayerContextType, PlayerProviderProps, PlayerState, Current } from './types';
+import useLocalStorage from '~/hooks/useLocalStorage';
 import { TrackType } from '~/components/Entity/types';
 
 export const PlayerContext = createContext<PlayerContextType>({
   current: null,
   queue: [],
-  setCurrent: (track: TrackType|null) => { console.log('Methods are not ready.', track); },
+  isPlaying: false,
+  setIsPlaying: (state: boolean) => { console.log('Methods are not ready.', state); },
+  setCurrent: (data: Current) => { console.log('Methods are not ready.', data); },
   addToQueue: (track: TrackType) => { console.log('Methods are not ready.', track); },
   removeFromQueue: (track: TrackType) => { console.log('Methods are not ready.', track); },
   prevTrack: (e: MouseEvent) => { console.log('Methods are not ready.', e); },
@@ -13,8 +16,13 @@ export const PlayerContext = createContext<PlayerContextType>({
 });
 
 const PlayerProvider = ({ children }: PlayerProviderProps) => {
-  const [current, setCurrent] = useState<TrackType|null>(null);
-  const [queue, setQueue] = useState<TrackType[]>([]);
+  const [storedQueue, setStoredQueue] = useLocalStorage<PlayerState>('playerState', {
+    current: null,
+    queue: [],
+  });
+  const [current, setCurrent] = useState<TrackType|null>(storedQueue.current);
+  const [queue, setQueue] = useState<TrackType[]>(storedQueue.queue);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const addToQueue = (track: TrackType) => {
     setQueue([...queue, track]);
@@ -39,9 +47,18 @@ const PlayerProvider = ({ children }: PlayerProviderProps) => {
     removeFromQueue(prev);
   };
 
+  useEffect(() => {
+    setStoredQueue({
+      current,
+      queue,
+    });
+  }, [current, queue]);
+
   const value = {
     current,
     queue,
+    isPlaying,
+    setIsPlaying,
     setCurrent,
     addToQueue,
     removeFromQueue,

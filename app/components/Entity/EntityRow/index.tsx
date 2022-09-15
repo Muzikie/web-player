@@ -2,6 +2,7 @@ import React from 'react';
 import Wrapper from './Wrapper';
 import EntityThumbnail from '../EntityThumbnail';
 import Actions from '../Actions';
+import Icon from '~/components/common/Icon';
 import { Entity, EntityRowProps, entityThemes } from '../types';
 import { getEntity } from '../utils';
 
@@ -34,13 +35,15 @@ const EntityRow = ({
       <div className="container">
         <div className="primaryInfo">
           {
-            ('duration' in data) ? null : (
-              <EntityThumbnail
-                data={data}
-                theme={theme}
-                className="thumbnail"
-              />
-            )
+            ('duration' in data)
+              ? (<Icon name="play" />)
+              : (
+                <EntityThumbnail
+                  data={data}
+                  theme={theme}
+                  className="thumbnail"
+                />
+              )
           }
           <div className="text">
             <h4 className="albumName">{ data.name }</h4>

@@ -16,6 +16,7 @@ const Player = () => {
     prevTrack,
     nextTrack,
   } = useContext(PlayerContext);
+  const [init, setInit] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const audio = useRef();
 
@@ -38,14 +39,19 @@ const Player = () => {
   };
 
   useEffect(() => {
-    audio.current.addEventListener('timeupdate', updateProgress);
-  }, [audio.current]);
-
+    if (init) {
+      audio.current.play();
+      setIsPlaying(true);
+    }
+  }, [current?.id]);
 
   useEffect(() => {
-    return () => {
-      audio.current.removeEventListener('timeupdate', updateProgress);
-    }
+    audio.current.addEventListener('timeupdate', updateProgress);
+    setInit(true);
+  }, [audio.current]);
+
+  useEffect(() => () => {
+    audio.current.removeEventListener('timeupdate', updateProgress);
   }, []);
 
   return (
