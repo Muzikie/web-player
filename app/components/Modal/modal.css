@@ -1,0 +1,28 @@
+.component.modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: var(--color-secondary);
+  border-radius: 45px 45px 0 0;
+  box-shadow: 0 -10px 18px 0px var(--color-primary-shadow);
+  transition: all ease 200ms;
+
+  & .discardButton {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 20px;
+  }
+
+  & .content {
+    padding: var(--padding-m);
+  }
+
+  &.discarded {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
