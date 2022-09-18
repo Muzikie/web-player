@@ -3,6 +3,7 @@ import { MouseEvent, ReactElement } from 'react';
 export interface ButtonType {
   className?: string;
   disabled?: boolean;
+  theme?: string;
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 

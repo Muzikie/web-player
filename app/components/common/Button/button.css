@@ -7,20 +7,44 @@
     cursor: pointer;
   }
 
+  &.primaryButton,
+  &.secondaryButton {
+    width: 100%;
+    height: var(--box-size-s);
+    border-radius: var(--border-radius-m);
+    transition: all ease 100ms;
+    font-size: var(--size-h4);
+    letter-spacing: 1px;
+    outline: none;
+  }
+
   &.primaryButton {
-    position: relative;
+    background-color: var(--color-secondary);
+    color: var(--white);
+    box-shadow: 0 -6px 6px 0px var(--color-primary-shadow);
+    border: 0;
+
+    &.disabled {
+      background-color: var(--color-secondary-disabled);
+      box-shadow: none;
+    }
+
+    &.white {
+      background-color: var(--white);
+      color: var(--color-secondary);
+      box-shadow: 0 -6px 6px 0px #ffffff21;
+
+      &.disabled {
+        box-shadow: none;
+        color: var(--color-secondary-disabled);
+      }
+    }
   }
 
   &.secondaryButton {
-    width: 180px;
-    height: var(--box-size-s);
-    border-radius: var(--border-radius-m);
     border: solid 1px var(--gray);
     box-sizing: content-box;
     background-color: transparent;
-    transition: all ease 100ms;
-    font-size: var(--font-size-span);
-    letter-spacing: 1px;
 
     &:hover {
       background-color: var(--brightOutline);

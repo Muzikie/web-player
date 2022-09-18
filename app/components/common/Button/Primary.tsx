@@ -6,10 +6,11 @@ const PrimaryButton = ({
   children,
   onClick,
   className,
+  theme = '',
   disabled = false,
 }: FlexibleButtonProps) => (
   <button
-    className={`component primaryButton ${className}`}
+    className={`component primaryButton ${theme} ${disabled ? 'disabled' : ''} ${className}`}
     onClick={onClick}
     disabled={disabled}
   >
