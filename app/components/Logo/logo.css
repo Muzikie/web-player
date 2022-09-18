@@ -31,4 +31,47 @@
       width: 100%;
     }
   }
+
+  &.extended {
+    & a {
+      height: 45px;
+      width: 240px;
+      display: flex;
+      flex-flow: column wrap;
+      align-content: flex-start;
+    }
+
+    & figure {
+      height: 100%;
+      width: 45px;
+      flex-grow: 2;
+      flex-shrink: 0;
+
+      & img {
+        width: auto;
+        height: 100%;
+      }
+    }
+
+    & h1,
+    & sub {
+      box-sizing: border-box;
+      padding-left: 10px;
+      flex-grow: 0;
+      flex-shrink: 1;
+      color: var(--color-secondary);
+    }
+
+    & h1 {
+      font-size: var(--size-h2);
+      margin: 0;
+      height: 70%;
+    }
+
+    & sub {
+      font-size: var(--size-h5);
+      height: 30%;
+    }
+  }
 }
+

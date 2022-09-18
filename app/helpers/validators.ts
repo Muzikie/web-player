@@ -1,3 +1,4 @@
+/* External dependencies */
 import { Mnemonic } from '@liskhq/lisk-passphrase';
 
 /**

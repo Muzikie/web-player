@@ -5,10 +5,13 @@
   --color-primary: #feeae3;
   --color-secondary: #453248;
   --color-primary-see-through: rgba(19, 14, 29, 0.7);
+  --color-primary-shadow: rgba(19, 14, 29, 0.2);
   --gray: #99868B;
+  --color-secondary-disabled: var(--gray);
   --brightOutline: rgba(167, 167, 167, 0.12);
   --color-text-primary: var(--color-primary);
   --color-text-secondary: var(--gray);
+  --color-error: #F44E7A;
 
   /****  Typography  ****/
   --body-font: 'Poppins', sans-serif;
