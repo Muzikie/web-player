@@ -1,11 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
 import { IconLink } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
+import { ProfileContext } from '~/context/profileContextProvider';
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
+  const { info } = useContext(ProfileContext);
 
   return (
     <aside className="component mainMenu">
@@ -37,13 +39,13 @@ const MainMenu = () => {
             className="menuItem"
             onClick={onClick}
           />
-          {/* <IconLink
-            title="settings"
-            icon="settings"
-            to="/settings"
+          <IconLink
+            title={ info.address ? 'Logout' : 'Login' }
+            icon="key"
+            to="/login"
             className="menuItem"
             onClick={onClick}
-          /> */}
+          />
         </div>
       </section>
     </aside>
