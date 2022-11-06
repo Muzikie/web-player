@@ -1,10 +1,11 @@
-# Welcome to Remix!
+# Muzikie Web Player
 
-- [Remix Docs](https://remix.run/docs)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
+The web player of Muzikie decentralized streaming platform
 
 ## Development
-
-Start the Remix development asset server and the Express server by running:
+Run 
 
 ```sh
 npm run dev
@@ -35,17 +36,26 @@ If you're familiar with deploying express applications you should be right at ho
 - `build/`
 - `public/build/`
 
-### Using a Template
 
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
+## Contributors
 
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
+https://github.com/Muzikie/web-player/graphs/contributors
+
+## License
+
+Copyright 2022 Block Made GmbH
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+[Muzikie site]: https://muzikie.com/
+[Block Made GmbH site]: https://block-made.com/
