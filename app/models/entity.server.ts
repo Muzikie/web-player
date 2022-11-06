@@ -7,7 +7,7 @@ import type {
 } from '~/components/Entity/types';
 import { API_URLS } from '~/constants/api';
 
-type SearchResultType = {
+export type SearchResultType = {
   [key: string]: Entity[];
 }
 

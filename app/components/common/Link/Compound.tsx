@@ -20,7 +20,6 @@ const CompoundLink = ({
 
   return (
     <Link {...props} className={`component link compound ${isActive ? 'active' : ''} ${className}`}>
-      {/* @todo removed an anchor from here. Did it break the styles? */}
       <Icon name={icon} />
       {
         typeof children === 'string'

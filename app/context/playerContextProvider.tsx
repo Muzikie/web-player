@@ -20,8 +20,8 @@ const PlayerProvider = ({ children }: PlayerProviderProps) => {
     current: null,
     queue: [],
   });
-  const [current, setCurrent] = useState<TrackType|null>(storedQueue.current);
-  const [queue, setQueue] = useState<TrackType[]>(storedQueue.queue);
+  const [current, setCurrent] = useState<TrackType|null>();
+  const [queue, setQueue] = useState<TrackType[]>([]);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const addToQueue = (track: TrackType) => {

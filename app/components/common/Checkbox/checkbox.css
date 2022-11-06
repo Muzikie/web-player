@@ -1,0 +1,18 @@
+.component.checkbox {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  background: var(--color-primary-light);
+  padding: var(--padding-xs);
+  border-radius: var(--border-radius-s);
+  box-sizing: border-box;
+  
+  font-size: var(--size-h5);
+  font-family: var(--body-font);
+
+  & span {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    box-sizing: border-box;
+  }
+}

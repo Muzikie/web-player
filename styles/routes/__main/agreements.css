@@ -1,0 +1,78 @@
+.screen.agreements {
+  width: 100%;
+  height: 100vh;
+
+  & .popup {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+  }
+
+  & .header {
+    padding: 50px 0 0 30px;
+  }
+
+  & .wrapper {
+    color: var(--color-secondary);
+    width: 100%;
+    padding: 0 var(--padding-m);
+    box-sizing: border-box;
+
+    & h3,
+    & h4 {
+      font-weight: 700;
+    }
+
+    & h4 {
+      margin: 30px 0;
+    }
+
+    & .checkbox {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    & .loginButton {
+      margin-top: 20px;
+    }
+  }
+
+  & footer {
+    padding: 0 var(--padding-m) var(--padding-m);
+
+    & a,
+    & p {
+      color: var(--color-secondary);
+      font-size: 14px;
+    }
+
+    & a {
+      color: var(--color-purple);
+      text-decoration: none;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .screen.agreements {
+    background-image: url('../../../images/guitars.jpg');
+    display: flex;
+    background-size: cover;
+    justify-content: flex-start;
+    align-items: center;
+
+    & .popup {
+      width: 80vw;
+      height: 80vh;
+      max-width: 570px;
+      max-height: 710px;
+      margin-left: 10vw;
+      justify-content: space-between;
+      background-color: var(--color-primary);
+      border-radius: var(--border-radius-l);
+      overflow: hidden;
+    }
+  }
+}

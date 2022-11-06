@@ -17,6 +17,7 @@ export function links() {
 const Login = () => {
   const [secret, setSecret] = useState({ value: '', isValid: false });
   const { setProfileInfo, setSecretKey } = useContext(ProfileContext);
+  const agreed = false;
   const navigate = useNavigate();
 
   const login = () => {
@@ -29,7 +30,7 @@ const Login = () => {
       publicKey: '0x1234567890',
     });
 
-    navigate('/');
+    navigate(agreed ? '/' : '/agreement');
   };
 
   return (

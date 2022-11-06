@@ -27,7 +27,7 @@ const Wrapper = ({
     return (
       <section
         onClick={play}
-        className={`${className} ${current?.id === data.id ? 'isPlaying' : ''}`}
+        className={`${className} ${current?.id === data.id && false ? 'isPlaying' : ''}`}
       >
         {children}
       </section>
@@ -36,7 +36,6 @@ const Wrapper = ({
 
   return (
     <Link to={`/${entity}/${data.id}`} className={className}>
-      {/* @todo Remove a anchor from here. Are the styles ok? */}
       {children}
     </Link>
   );

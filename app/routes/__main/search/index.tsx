@@ -47,12 +47,12 @@ const Search = () => {
       </section>
       <section className="results">
         {
-          result ? Object.keys(result).map((key: string) => (
+          result ? Object.entries(result).map(([key, items]) => (
             <Collection
               title={key}
               key={key}
               itemTheme={entityThemes.minimal}
-              items={result[key] as Entity[]}
+              items={items as Entity[]}
             />
           )) : null
         }
