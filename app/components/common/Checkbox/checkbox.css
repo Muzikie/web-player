@@ -6,8 +6,7 @@
   padding: var(--padding-xs);
   border-radius: var(--border-radius-s);
   box-sizing: border-box;
-  
-  font-size: var(--size-h5);
+  font-size: var(--size-h4);
   font-family: var(--body-font);
 
   & span {

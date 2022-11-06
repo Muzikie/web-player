@@ -2,6 +2,7 @@
   /****  Color  ****/
   --green: #01b84a;
   --white: #ffffff;
+  --white-disabled: #cccccc;
   --color-primary: #feeae3;
   --color-primary-light: #fef2ee;
   --color-secondary: #453248;
@@ -13,7 +14,7 @@
   --brightOutline: rgba(167, 167, 167, 0.12);
   --color-text-primary: var(--color-primary);
   --color-text-secondary: var(--gray);
-  --color-error: #F44E7A;
+  --color-error: #f44e4e;
 
   /****  Typography  ****/
   --body-font: 'Poppins', sans-serif;

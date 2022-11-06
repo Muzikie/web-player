@@ -6,8 +6,17 @@ import { ProfileContext } from '~/context/profileContextProvider';
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
-  const { info } = useContext(ProfileContext);
+  const { info, setProfileInfo } = useContext(ProfileContext);
+
+  const onClick = () => {
+    if (info.address) {
+      setProfileInfo({
+        address: '',
+        publicKey: '',
+      });
+    }
+    setIsActive(!isActive);
+  };
 
   return (
     <aside className="component mainMenu">
@@ -22,7 +31,7 @@ const MainMenu = () => {
             title="Home"
             icon="home"
             to="/"
-            className="menuItem active"
+            className="menuItem"
             onClick={onClick}
           />
           <IconLink

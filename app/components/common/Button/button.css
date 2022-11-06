@@ -37,6 +37,7 @@
       &.disabled {
         box-shadow: none;
         color: var(--color-secondary-disabled);
+        background-color: var(--white-disabled);
       }
     }
   }
