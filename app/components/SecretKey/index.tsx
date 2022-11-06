@@ -1,10 +1,13 @@
 /* External dependencies */
 import React, { useState, useRef, useEffect } from 'react';
+import { generateMnemonic } from 'bip39';
+
+/* Internal dependencies */
 import { IconButton } from '../common/Button';
 
 export const SecretKey = () => {
   const timeout = useRef();
-  const secretKey = 'grief like hint ranch steak fuel danger despair submit sadness crack envelope';
+  const [secretKey, setSecretKey] = useState('');
   const [copyIcon, setCopyIcon] = useState('copy');
   const copy = () => {
     setCopyIcon('check');
@@ -17,7 +20,12 @@ export const SecretKey = () => {
       });
   };
 
-  useEffect(() => () => clearTimeout(timeout.current));
+  useEffect(() => {
+    const value = generateMnemonic();
+    setSecretKey(value);
+
+    return () => clearTimeout(timeout.current);
+  }, []);
 
   return (
     <section className='component secretKey'>
