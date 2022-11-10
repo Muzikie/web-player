@@ -5,6 +5,16 @@
 The web player of Muzikie decentralized streaming platform
 
 ## Development
+
+#### prerequisite
+- [NVM](https://github.com/nvm-sh/nvm/blob/master/README.md) (Used to set up the required node version)
+- [Node v16.15.0](https://nodejs.org)
+- [Muzikie Blockchain](https://github.com/Muzikie/blockchain)
+- [Streamer](https://github.com/Muzikie/streamer)
+
+
+#### Scripts
+
 Run 
 
 ```sh
@@ -28,6 +38,17 @@ npm start
 ```
 
 Now you'll need to pick a host to deploy it to.
+
+
+## Tests
+
+Unit tests are stored next to their corresponding modules. To run tests, you can use
+
+```
+npm test
+```
+
+You may pass a file path to run a single file.
 
 ### DIY
 
