@@ -1,6 +1,6 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests
 
-name: Node.js CI
+name: Muzikie Web Player CI
 
 on:
   push:
@@ -24,5 +24,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    - run: npm run build:css
     - run: npm run build
     - run: npm test
