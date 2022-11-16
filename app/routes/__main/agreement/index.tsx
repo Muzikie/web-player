@@ -1,8 +1,9 @@
 /* External dependencies */
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 /* Internal dependencies */
+import { SettingsContext } from '~/context/settingsContextProvider';
 import { PrimaryButton } from '~/components/common/Button';
 import { Checkbox } from '~/components/common/Checkbox';
 import { PartialView } from '~/components/PartialView';
@@ -52,8 +53,13 @@ const AgreementForm = ({
 
 const ActionAndInfo = ({ disabled }: AgreementInfoProps) => {
   const navigate = useNavigate();
+  const { settings, updateSettings } = useContext(SettingsContext);
 
   const submit = () => {
+    updateSettings({
+      ...settings,
+      agreement: true,
+    });
     navigate('/');
   };
 

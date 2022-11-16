@@ -1,9 +1,10 @@
 import { isEmpty, isNil } from '~/helpers/helpers';
 import { hydrate } from '~/helpers/convertors';
 import { migrations } from './migrations';
+import { RetrievedValue } from './types';
 
-export const useStorage = () => {
-  const storeData = (key: string, version: number, value: any) => {
+export const useStorage = <Type>() => {
+  const storeData = (key: string, version: number, value: Type) => {
     const data = {
       version,
       value,
@@ -16,9 +17,9 @@ export const useStorage = () => {
     }
   };
 
-  const retrieveData = (key: string) => {
-    const storedValue = localStorage.getItem(key);
-    const data = JSON.parse(storedValue ?? '{}');
+  const retrieveData = (key: string, defaultValue: Type) => {
+    const storedValue = localStorage.getItem(key) ?? '';
+    const data: RetrievedValue<Type> = JSON.parse(storedValue) ?? defaultValue;
     const migration = migrations.find((item) => item.key === key);
     
     if (migration) {
