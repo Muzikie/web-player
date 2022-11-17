@@ -1,9 +1,9 @@
 import { useEffect, useState, useMemo } from 'react';
 
-import { isEmpty, isNil } from '~/helpers/helpers';
 import { hydrate } from '~/helpers/convertors';
 import { getSessionStorage } from './getSessionStorage';
 import { migration } from './migration';
+import { Session } from './types';
 
 const defaultSession = {
   address: '',
@@ -12,7 +12,7 @@ const defaultSession = {
 
 export const useSession = () => {
   const storage = useMemo(getSessionStorage, []);
-  const [session, setSession] = useState(defaultSession);
+  const [session, setSession] = useState<Session>(defaultSession);
 
   // rehydrate data from session storage
   useEffect(() => {
@@ -23,9 +23,6 @@ export const useSession = () => {
 
   // hydrate data to session storage
   useEffect(() => {
-    if (isNil(session) || isEmpty(session)) {
-      storage.removeItem(migration.key);
-    }
     storage.setItem(migration.key, hydrate(session));
   }, [session]);
   
