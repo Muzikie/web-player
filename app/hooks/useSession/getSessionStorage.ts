@@ -1,4 +1,4 @@
-export const getStorage = () => {
+export const getSessionStorage = () => {
   if (typeof document === 'undefined') {
     return {
       getItem: (key: string) => {
@@ -13,5 +13,5 @@ export const getStorage = () => {
       },
     };
   }
-  return localStorage;
+  return sessionStorage;
 };

@@ -1,4 +1,6 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
+
+import { useSession } from '~/hooks/useSession';
 import { ProfileInfoType, ProfileContextType, ProfileProviderProps } from './types';
 
 export const ProfileContext = createContext<ProfileContextType>({
@@ -12,16 +14,19 @@ export const ProfileContext = createContext<ProfileContextType>({
 });
 
 const ProfileProvider = ({ children }: ProfileProviderProps) => {
-  const [info, setInfo] = useState<ProfileInfoType>({
-    address: '',
-    publicKey: '',
-  });
+  const { session, setSession } = useSession();
+  const [info, setInfo] = useState<ProfileInfoType>(session);
   const [secretKey, setSecretKey] = useState<string>('');
 
   const setProfileInfo = (data: ProfileInfoType) => {
     // @todo validate profile info
     setInfo(data);
+    setSession(data);
   };
+
+  useEffect(() => {
+    setInfo(session);
+  }, [session])
 
   const value = {
     secretKey,

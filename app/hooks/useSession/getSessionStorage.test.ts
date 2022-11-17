@@ -1,11 +1,11 @@
-import { getStorage } from './storage';
+import { getSessionStorage } from './getSessionStorage';
 
 describe('storage', () => {
   describe('Server side', () => {
     it('should return a function to mock localStorage', () => {
-      expect(typeof getStorage().getItem).toBe('function');
-      expect(typeof getStorage().removeItem).toBe('function');
-      expect(typeof getStorage().setItem).toBe('function');
+      expect(typeof getSessionStorage().getItem).toBe('function');
+      expect(typeof getSessionStorage().removeItem).toBe('function');
+      expect(typeof getSessionStorage().setItem).toBe('function');
     });
   });
 
@@ -17,7 +17,7 @@ describe('storage', () => {
           addEventListener: jest.fn(),
         },
       });
-      expect(getStorage()).toEqual(localStorage);
+      expect(getSessionStorage()).toEqual(localStorage);
     });
   });
 });

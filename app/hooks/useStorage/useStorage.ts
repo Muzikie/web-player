@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 
 import { isEmpty, isNil } from '~/helpers/helpers';
 import { hydrate } from '~/helpers/convertors';
-import { getStorage } from './storage';
+import { getLocalStorage } from './getLocalStorage';
 import { migrations } from './migrations';
 import { RetrievedValue } from './types';
 
 export const useStorage = <Type>() => {
-  const storage = useMemo(getStorage, []);
+  const storage = useMemo(getLocalStorage, []);
 
   const storeData = (key: string, version: number, value: Type) => {
     const data = {
