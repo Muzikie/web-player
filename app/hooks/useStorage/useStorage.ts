@@ -1,9 +1,14 @@
+import { useMemo } from 'react';
+
 import { isEmpty, isNil } from '~/helpers/helpers';
 import { hydrate } from '~/helpers/convertors';
+import { getStorage } from './storage';
 import { migrations } from './migrations';
 import { RetrievedValue } from './types';
 
 export const useStorage = <Type>() => {
+  const storage = useMemo(getStorage, []);
+
   const storeData = (key: string, version: number, value: Type) => {
     const data = {
       version,
@@ -11,28 +16,26 @@ export const useStorage = <Type>() => {
     };
 
     if (isNil(value) || isEmpty(value)) {
-      localStorage.removeItem(key);
+      storage.removeItem(key);
     } else {
-      localStorage.setItem(key, hydrate(data));
+      storage.setItem(key, hydrate(data));
     }
   };
 
   const retrieveData = (key: string, defaultValue: Type) => {
-    const storedValue = localStorage.getItem(key) ?? '';
-    const data: RetrievedValue<Type> = JSON.parse(storedValue) ?? defaultValue;
+    const storedValue = storage.getItem(key);
+    const parseData: RetrievedValue<Type> = storedValue ? JSON.parse(storedValue) : { value: defaultValue };
     const migration = migrations.find((item) => item.key === key);
-    
-    if (migration) {
-      const { version, migrate } = migration;
-      if (data?.version === version || !migrate) {
-        return data.value;
-      }
-      const migrated = migrate(data.value);
-      storeData(key, version, migrated);
+
+    if (storedValue && migration?.migrate && migration.version > parseData.version) {
+      const migrated = migration.migrate(parseData.value);
+      storeData(key, migration.version, migrated);
       return migrated;
     }
+
+    return parseData.value;
   };
-  
+
   return {
     storeData,
     retrieveData,

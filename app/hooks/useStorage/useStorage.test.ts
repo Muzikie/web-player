@@ -1,3 +1,4 @@
+import { renderHook, act } from '@testing-library/react-hooks';
 import { useStorage } from './useStorage';
 
 jest.mock('./migrations', () => ({
@@ -11,44 +12,65 @@ jest.mock('./migrations', () => ({
 }));
 
 describe('useStorage', () => {
+  afterEach(() => {
+    localStorage.clear();
+  });
+
   describe('storeData', () => {
     it('should store data', () => {
-      const { storeData } = useStorage();
+      const { result } = renderHook(() => useStorage());
       const key = '@test';
       const version = 1;
       const value = { test: 'test' };
-      storeData(key, version, value);
-      expect(localStorage.getItem(key)).toEqual(JSON.stringify({ version, value }));
+      act(() => {
+        result.current.storeData(key, version, value);
+        expect(localStorage.getItem(key)).toEqual(JSON.stringify({ version, value }));
+      });
     });
 
     it('should remove data', () => {
-      const { storeData } = useStorage();
+      const { result } = renderHook(() => useStorage());
       const key = '@test';
       const version = 1;
       const value = {};
-      storeData(key, version, value);
-      expect(localStorage.getItem(key)).toEqual(null);
+      act(() => {
+        result.current.storeData(key, version, value);
+        expect(localStorage.getItem(key)).toEqual(null);
+      });
     });
   });
 
   describe('retrieveData', () => {
     it('should retrieve data', () => {
-      const { retrieveData } = useStorage();
+      const { result } = renderHook(() => useStorage());
       const key = '@test';
       const version = 1;
       const value = { test: 'test' };
-      localStorage.setItem(key, JSON.stringify({ version, value }));
 
-      expect(retrieveData(key)).toEqual(value);
+      act(() => {
+        localStorage.setItem(key, JSON.stringify({ version, value }));
+        expect(result.current.retrieveData(key, { test: 'default' })).toEqual(value);
+      });
     });
 
     it('should migrate data', () => {
-      const { retrieveData } = useStorage();
+      const { result } = renderHook(() => useStorage());
       const key = '@test';
       const value = { test: 'test' };
-      localStorage.setItem(key, JSON.stringify({ version: 0, value }));
 
-      expect(retrieveData(key)).toEqual({ test: value.test + '-migrated' });
+      act(() => {
+        localStorage.setItem(key, JSON.stringify({ version: 0, value }));
+        expect(result.current.retrieveData(key, { test: 'default' })).toEqual({ test: value.test + '-migrated' });
+      });
+    });
+
+    it('should return default value', () => {
+      const { result } = renderHook(() => useStorage());
+      const key = '@test';
+
+      act(() => {
+        expect(result.current.retrieveData(key, { test: 'default' })).toEqual({ test: 'default' });
+      });
     });
   });
 });
