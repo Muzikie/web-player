@@ -8,13 +8,18 @@ const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
   const { info, setProfileInfo } = useContext(ProfileContext);
 
-  const onClick = () => {
+  const handleLogout = () => {
     if (info.address) {
       setProfileInfo({
         address: '',
         publicKey: '',
       });
     }
+
+    setIsActive(!isActive);
+  };
+
+  const onClick = () => {
     setIsActive(!isActive);
   };
 
@@ -53,7 +58,7 @@ const MainMenu = () => {
             icon="key"
             to="/login"
             className="menuItem"
-            onClick={onClick}
+            onClick={handleLogout}
           />
         </div>
       </section>
