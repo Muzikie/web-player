@@ -8,24 +8,21 @@ describe('useSession', () => {
     });
 
     it('should set session', () => {
-      const session = { foo: 'bar' };
+      const session = {
+        address: '0x123',
+        publicKey: '0x123',
+      };
       const { result } = renderHook(() => useSession());
 
-      expect(result.current.session).toEqual({});
+      expect(result.current.session).toEqual({
+        address: '',
+        publicKey: '',
+      });
       act(() => {
         result.current.setSession(session);
+        expect(sessionStorage.setItem)
+          .toHaveBeenCalledWith('@session', '{"address":"","publicKey":""}');
       });
-      expect(sessionStorage.setItem).toHaveBeenCalledWith('@session', '{"foo":"bar"}');
-    });
-
-    it('should remove session', () => {
-      const { result } = renderHook(() => useSession());
-
-      expect(result.current.session).toEqual({});
-      act(() => {
-        result.current.setSession({});
-      });
-      expect(sessionStorage.removeItem).toHaveBeenCalledWith('@session');
     });
   });
 });

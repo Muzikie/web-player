@@ -1,9 +1,10 @@
 /* External dependencies */
 import React, { useState, useContext } from 'react';
+import { ed, address as liskAddress } from '@liskhq/lisk-cryptography';
 import { useNavigate } from 'react-router-dom';
-// import { ed, address as liskAddress } from '@liskhq/lisk-cryptography';
 
 /* Internal dependencies */
+import { defaultDerivationPath } from '~/constants/app';
 import { ProfileContext } from '~/context/profileContextProvider';
 import { SettingsContext } from '~/context/settingsContextProvider';
 import { PrimaryButton } from '~/components/common/Button';
@@ -21,19 +22,17 @@ const LoginForm = () => {
   const { settings } = useContext(SettingsContext);
   const navigate = useNavigate();
 
-  const login = () => {
+  const login = async () => {
     setSecretKey(secret.value);
-    // derive keys from secret key
-
-    // const privateKey = await ed.getPrivateKeyFromPhraseAndPath(secret.value, false);
-    // const publicKey = ed.getPublicKeyFromPrivateKey(privateKey).toString('hex');
-    // const address = liskAddress.getLisk32AddressFromPublicKey(publicKey).toString('hex');
+    const privateKey = await ed.getPrivateKeyFromPhraseAndPath(secret.value, defaultDerivationPath);
+    const publicKey = ed.getPublicKeyFromPrivateKey(privateKey);
+    const address = liskAddress.getLisk32AddressFromPublicKey(publicKey);
 
     // @todo Make API call to retrieve account info
     // If they have subscribed, navigate to home, else, navigate to subscription page
     setProfileInfo({
-      address: 'lsk3ay4z7wqjczbo5ogcqxgxx23xyacxmycwxfh4d',
-      publicKey: 'cf434a889d6c7a064e8de61bb01759a76f585e5ff45a78ba8126ca332601f535',
+      address,
+      publicKey: publicKey.toString('hex'),
     });
 
     navigate(settings.agreement ? '/' : '/agreement');

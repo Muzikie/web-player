@@ -1,24 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
-import { isEmpty, isNil } from '~/helpers/helpers';
 import { hydrate } from '~/helpers/convertors';
+import { getSessionStorage } from './getSessionStorage';
 import { migration } from './migration';
+import { Session } from './types';
+
+const defaultSession = {
+  address: '',
+  publicKey: '',
+};
 
 export const useSession = () => {
-  const [session, setSession] = useState({});
+  const storage = useMemo(getSessionStorage, []);
+  const [session, setSession] = useState<Session>(defaultSession);
 
   // rehydrate data from session storage
   useEffect(() => {
-    const value = sessionStorage.getItem(migration.key);
-    setSession(JSON.parse(value ?? '{}'));
+    const storedValue = storage.getItem(migration.key);
+    const parsedValue = storedValue ? JSON.parse(storedValue) : defaultSession;
+    setSession(parsedValue);
   }, []);
 
   // hydrate data to session storage
   useEffect(() => {
-    if (isNil(session) || isEmpty(session)) {
-      sessionStorage.removeItem(migration.key);
-    }
-    sessionStorage.setItem(migration.key, hydrate(session));
+    storage.setItem(migration.key, hydrate(session));
   }, [session]);
   
   return {

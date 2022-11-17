@@ -1,8 +1,12 @@
 const { withEsbuildOverride } = require('remix-esbuild-override');
 const GlobalsPolyfills = require('@esbuild-plugins/node-globals-polyfill').default;
+const alias = require('esbuild-plugin-alias');
 
 withEsbuildOverride((option) => {
   option.plugins = [
+    alias({
+      crypto: require.resolve('crypto-browserify'),
+    }),
     GlobalsPolyfills({
       buffer: true,
     }),

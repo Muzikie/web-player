@@ -27,7 +27,7 @@ const Wrapper = ({
     return (
       <section
         onClick={play}
-        className={`${className} ${current?.id === data.id && false ? 'isPlaying' : ''}`}
+        className={`${className} ${current?.id === data.id ? 'isPlaying' : ''}`}
       >
         {children}
       </section>
