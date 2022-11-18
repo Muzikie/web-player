@@ -3,9 +3,9 @@ import React from 'react';
 import { Outlet } from '@remix-run/react';
 
 /* Internal dependencies */
-import PlayerProvider from '~/context/playerContextProvider';
-import ProfileProvider from '~/context/profileContextProvider';
-import SettingsProvider from '~/context/settingsContextProvider';
+import PlayerProvider from '~/context/playerContext/playerContextProvider';
+import ProfileProvider from '~/context/profileContext/profileContextProvider';
+import SettingsProvider from '~/context/settingsContext/settingsContextProvider';
 import MainMenu from '~/components/MainMenu';
 import Player from '~/components/Player';
 import styles from '~/styles/routes/__main.css';

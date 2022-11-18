@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 
 import { IconLink } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
-import { ProfileContext } from '~/context/profileContextProvider';
+import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);

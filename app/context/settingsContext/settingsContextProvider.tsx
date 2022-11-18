@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 
 /* Internal dependencies */
 import { useStorage } from '~/hooks/useStorage';
-import { SettingsType, SettingsContextType, SettingsProviderProps } from './types';
+import { SettingsType, SettingsContextType, SettingsProviderProps } from '../types';
 
 export const SettingsContext = createContext<SettingsContextType>({
   settings: {

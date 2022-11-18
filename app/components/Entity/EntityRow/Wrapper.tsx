@@ -1,6 +1,6 @@
 import React from 'react';
 import { memo, ReactNode, MouseEvent, useContext } from 'react';
-import { PlayerContext } from '~/context/playerContextProvider';
+import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { Link } from '@remix-run/react';
 import { Entity, TrackType } from '../types';
 
@@ -14,7 +14,7 @@ interface WrapperProps {
 const Wrapper = ({
   entity, data, children, className,
 }: WrapperProps) => {
-  const { setCurrent, current } = useContext(PlayerContext);
+  const { setCurrent } = useContext(PlayerContext);
 
   if (entity === 'track') {
     const play = (e: MouseEvent) => {
@@ -27,7 +27,7 @@ const Wrapper = ({
     return (
       <section
         onClick={play}
-        className={`${className} ${current?.id === data.id ? 'isPlaying' : ''}`}
+        className={className}
       >
         {children}
       </section>
