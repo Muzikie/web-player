@@ -93,36 +93,30 @@
     box-sizing: border-box;
     align-items: center;
 
-    & .bar {
-      display: block;
+    & input {
       flex-grow: 1;
-      background: #777;
-      height: 5px;
-      border-radius: var(--border-radius-s);
-      position: relative;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      -ms-progress-appearance: none;
+      appearance: none;
+      background: var(--black);
+      height: 6px;
+      border-radius: 3px;
 
-      & i,
-      & span {
-        content: '';
-        display: block;
-        background: linear-gradient(90deg, rgba(179,189,253,1) 0%, rgba(238,180,205,1) 50%, rgba(232,135,251,1) 100%);
+      &::focus {
+        outline: none;
       }
 
-      & span {
-        height: 100%;
-        width: 0%;
-        border-radius: var(--border-radius-s);
-      }
-
-      & i {
-        width: 14px;
-        height: 14px;
-        position: absolute;
-        left: 0%;
-        border-radius: var(--border-radius-r);
-        top: 3px;
-        transform: translateX(-50%) translateY(-50%);
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        background: var(--black);
         cursor: pointer;
+         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
       }
     }
 
@@ -133,9 +127,6 @@
     }
   }
 }
-
-
-
 
 @media (min-width: 680px) {
   .component.player {

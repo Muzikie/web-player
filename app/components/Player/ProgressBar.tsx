@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { ProgressBarProps } from './type';
+
+const range = {
+  max: 100,
+  min: 0,
+};
 
 const zeroPad = (num: number) => num.toString().padStart(2, '0');
 
@@ -14,18 +19,26 @@ const formatCurrentTime = (currentTime: number) => {
 };
 
 const updateProgress = (currentTime: number, duration: number) =>
-  duration > 0 ? `${(currentTime / duration) * 100}%` : '0%';
+  duration > 0 ? 100 * currentTime / duration : 0;
 
-const ProgressBar = ({ currentTime, duration }: ProgressBarProps) => {
-  const percentage = updateProgress(currentTime, duration);
+const ProgressBar = ({ progress, duration, setProgress }: ProgressBarProps) => {
+  const percentage = updateProgress(progress, duration);
+
+  const onSeek = (e: ChangeEvent<HTMLAudioElement>) => {
+    setProgress(e.target.value * duration / range.max);
+  };
+
   return (
     <section className="seek">
-      <div className="bar">
-        <span style={{ width: percentage }}></span>
-        <i style={{ left: percentage }}></i>
-      </div>
+      <input
+        type="range"
+        min={range.min}
+        max={range.max}
+        onChange={onSeek}
+        value={percentage}
+      />
       <time>
-        <span>{ formatCurrentTime(currentTime) }</span>
+        <span>{ formatCurrentTime(progress) }</span>
       </time>
     </section>
   );
