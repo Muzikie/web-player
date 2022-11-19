@@ -1,9 +1,9 @@
 /* External dependencies */
-import React, { useContext } from 'react';
+import React, { useContext, useRef, MutableRefObject } from 'react';
 import { Link } from '@remix-run/react';
 
 /* Internal dependencies */
-import { useAudio } from '~/hooks/useAudio';
+import { useAudio } from '~/hooks/useAudio/useAudio';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { IconButton } from '~/components/common/Button';
@@ -13,13 +13,13 @@ import PlaceHolderImage from './PlaceHolderImage';
 import ProgressBar from './ProgressBar';
 
 const Player = () => {
+  const audioRef = useRef() as MutableRefObject<HTMLAudioElement>;
   const {
-    audioRef,
     playPause,
     onTimeUpdate,
     progress,
     setProgress,
-  } = useAudio();
+  } = useAudio(audioRef);
   const {
     current,
     isPlaying,
@@ -41,7 +41,7 @@ const Player = () => {
         </header>
       </section>
       <audio
-        src={`${API_URLS.STREAMER}/${current?.id}`}
+        src={`${API_URLS.STREAMER}/${current?.id}?publicKey=${info.publicKey}`}
         ref={audioRef}
         onTimeUpdate={onTimeUpdate}
       />

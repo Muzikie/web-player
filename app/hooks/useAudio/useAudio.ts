@@ -1,18 +1,16 @@
 import {
   useEffect,
   useState,
-  useRef,
   MutableRefObject,
   useContext,
 } from 'react';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 
-export const useAudio = () => {
+export const useAudio = (audioRef: MutableRefObject<HTMLAudioElement>) => {
   const {
     isPlaying,
     setIsPlaying,
   } = useContext(PlayerContext);
-  const audioRef = useRef() as MutableRefObject<HTMLAudioElement>;
   const [progress, setProgress] = useState(0);
 
   const playPause = () => {
@@ -43,7 +41,6 @@ export const useAudio = () => {
   }, []);
 
   return {
-    audioRef,
     playPause,
     onTimeUpdate,
     progress,
