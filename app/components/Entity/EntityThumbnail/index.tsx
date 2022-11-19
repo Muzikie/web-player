@@ -6,13 +6,13 @@ const EntityThumbnail = ({
   data, className = '', theme = entityThemes.normal,
 }: EntityRowProps<Entity>) => {
 
-  const entity = getEntity(data);
+  const entity = data ? getEntity(data) : 'empty';
   const wrapper = `component entity thumbnail ${entity} ${theme} ${className}`;
 
   return (
     <section className={wrapper}>
       <figure>
-        <img src={data.image} alt={ data.name } />
+        <img src={data?.image ?? '/images/logo.svg'} alt={data?.name ?? 'Loading...'} />
       </figure>
     </section>
   );

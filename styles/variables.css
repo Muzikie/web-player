@@ -9,6 +9,7 @@
   --black: #000000;
   --color-purple: #a755af;
   --color-primary-see-through: rgba(19, 14, 29, 0.7);
+  --color-primary-opaque: rgba(19, 14, 29, 0.35);
   --color-primary-shadow: rgba(19, 14, 29, 0.2);
   --gray: #99868B;
   --color-secondary-disabled: var(--gray);

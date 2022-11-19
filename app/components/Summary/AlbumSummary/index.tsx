@@ -10,7 +10,6 @@ const AlbumSummary = ({ data }: EntityRowProps<AlbumType>) => {
       <header>
         <h1>{ data.name }</h1>
         <Link to={`/artist/${data.artistId}`} className="artist">
-          {/* @todo Removed a anchor from here. Are the styles ok? */}
           <figure>
             <img src={data.image} alt={data.artistName} />
           </figure>

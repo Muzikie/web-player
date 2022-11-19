@@ -40,7 +40,7 @@ const Album = () => {
   return (
     <section className="screen album">
       {
-        <AlbumSummary data={album} />
+        album && <AlbumSummary data={album} />
       }
       <Collection
         items={!tracks?.length ? [] : tracks}
