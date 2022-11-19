@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 /* Internal dependencies */
 import { defaultDerivationPath } from '~/constants/app';
-import { ProfileContext } from '~/context/profileContextProvider';
-import { SettingsContext } from '~/context/settingsContextProvider';
+import { ProfileContext } from '~/context/profileContext/profileContextProvider';
+import { SettingsContext } from '~/context/settingsContext/settingsContextProvider';
 import { PrimaryButton } from '~/components/common/Button';
 import { PartialView } from '~/components/PartialView';
 import SecretKeyInput from '~/components/SecretKeyInput';

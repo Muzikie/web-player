@@ -9,7 +9,6 @@ import {
 } from '~/models/entity.server';
 import Collection from '~/components/Collection';
 import Icon from '~/components/common/Icon';
-import Logo from '~/components/Logo';
 import { Entity, entityThemes } from '~/components/Entity/types';
 import styles from '~/styles/routes/__main/search.css';
 
@@ -35,9 +34,6 @@ const Search = () => {
 
   return (
     <section className="screen search">
-      <header className="header">
-        <Logo size="large" />
-      </header>
       <section className="input">
         <Icon name="search" />
         <input

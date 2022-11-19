@@ -11,8 +11,6 @@ import {
   getAlbums,
 } from '~/models/entity.server';
 import Collection from '~/components/Collection';
-import Logo from '~/components/Logo';
-import { greet } from '~/helpers/helpers';
 import { entityThemes } from '~/components/Entity/types';
 import { collectionThemes } from '~/components/Collection/types';
 import styles from '~/styles/routes/__main/index.css';
@@ -47,10 +45,6 @@ const Home = () => {
 
   return (
     <section className="screen home">
-      <header>
-        <Logo size="large" />
-        <h2>{greet()}</h2>
-      </header>
       <Collection
         className="playlists"
         title="Playlists"

@@ -1,4 +1,5 @@
 .component.entity.thumbnail {
+  --size-xs: 59px;
   --size-s: 62px;
   --size-m: 70px;
   --size-l: 80px;
@@ -42,20 +43,20 @@
     }
   }
 
+  &.empty,
   &.artist {
     & figure {
       border-radius: var(--border-radius-xs);
     }
   }
-}
 
-.circle {
-  &.component.entity.thumbnail {
+  &.track {
     & figure {
-      width: 59px;
-      height: 59px;
+      width: var(--size-xs);
+      height: var(--size-xs);
       border-radius: var(--border-radius-r);
       border: solid 2px var(--white);
+      box-shadow: 0 8px 8px 0 var(--color-primary-opaque);
     }
   }
 }

@@ -1,4 +1,5 @@
 export type ProgressBarProps = {
   duration: number;
-  currentTime: number;
+  progress: number;
+  setProgress: (progress: number) => void;
 };

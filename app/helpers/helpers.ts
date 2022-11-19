@@ -1,5 +1,6 @@
-export const greet = (timestamp: number) => {
-  const hour = new Date(timestamp).getHours();
+export const greet = (timestamp = 0) => {
+  const date = timestamp ? new Date(timestamp) : new Date();
+  const hour = date.getHours();
   if (hour < 12) {
     return 'Good morning';
   }

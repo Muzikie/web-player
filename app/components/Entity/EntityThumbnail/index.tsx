@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { EntityRowProps, Entity, entityThemes } from '../types';
 import { getEntity } from '../utils';
 
@@ -12,7 +13,7 @@ const EntityThumbnail = ({
   return (
     <section className={wrapper}>
       <figure>
-        <img src={data.image} alt={ data.name } />
+        <img src={data.image} alt={data.name} />
       </figure>
     </section>
   );

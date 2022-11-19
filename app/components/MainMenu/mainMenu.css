@@ -5,9 +5,6 @@
 
   height: var(--menu-button);
   height: var(--menu-button);
-  position: absolute;
-  top: 50px;
-  right: var(--padding-m);
   box-sizing: border-box;
   z-index: 5;
 
