@@ -12,6 +12,9 @@ export const useAudio = (audioRef: MutableRefObject<HTMLAudioElement>) => {
     setIsPlaying,
   } = useContext(PlayerContext);
   const [progress, setProgress] = useState(0);
+  const onAudioEnd = () => {
+    setIsPlaying(false);
+  };
 
   const playPause = () => {
     if (isPlaying) {
@@ -34,9 +37,9 @@ export const useAudio = (audioRef: MutableRefObject<HTMLAudioElement>) => {
   }, [progress]);
 
   useEffect(() => {
-    audioRef.current.addEventListener('ended', () => setIsPlaying(false));
+    audioRef.current.addEventListener('ended', onAudioEnd);
     return () => {
-      audioRef.current.removeEventListener('ended', () => setIsPlaying(false));
+      audioRef.current.removeEventListener('ended', onAudioEnd);
     };
   }, []);
 
