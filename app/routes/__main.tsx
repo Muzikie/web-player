@@ -6,7 +6,7 @@ import { Outlet } from '@remix-run/react';
 import PlayerProvider from '~/context/playerContext/playerContextProvider';
 import ProfileProvider from '~/context/profileContext/profileContextProvider';
 import SettingsProvider from '~/context/settingsContext/settingsContextProvider';
-import MainMenu from '~/components/MainMenu';
+import MainHeader from '~/components/MainHeader';
 import Player from '~/components/Player';
 import styles from '~/styles/routes/__main.css';
 
@@ -19,7 +19,7 @@ const Main = () => (
     <ProfileProvider>
       <PlayerProvider>
         <div id="layout" className="component layout">
-          <MainMenu />
+          <MainHeader />
           <main className="main">
             <Outlet />
           </main>

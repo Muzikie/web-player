@@ -1,9 +1,5 @@
 .screen.search {
-  & .header {
-    height: auto;
-    display: flex;
-    padding: 50px var(--padding-l) var(--padding-l);
-  }
+  padding-top: 50px;
 
   & .input {
     width: 100%;

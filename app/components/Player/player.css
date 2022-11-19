@@ -128,6 +128,13 @@
   }
 }
 
+.component.imagePlaceHolder {
+  display: block;
+  width: 59px;
+  height: 59xp;
+  border-radius: (--border-radius-r);
+}
+
 @media (min-width: 680px) {
   .component.player {
     /* & .controls {

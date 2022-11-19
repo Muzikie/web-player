@@ -1,0 +1,22 @@
+.component.mainHeader {
+  width: 100vw;
+  height: 70px;
+  padding: 20px 28px 0;
+  box-sizing: border-box;
+
+  & .container {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  &.public {
+    margin-bottom: -70px;
+  }
+
+  & .component.logo.extended {
+    position: relative;
+    z-index: 9;
+  }
+}

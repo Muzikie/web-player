@@ -1,11 +1,15 @@
+/* External dependencies */
 import React, { useContext } from 'react';
 import { Link } from '@remix-run/react';
+
+/* Internal dependencies */
 import { useAudio } from '~/hooks/useAudio';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { IconButton } from '~/components/common/Button';
 import EntityThumbnail from '~/components/Entity/EntityThumbnail';
 import { API_URLS } from '~/constants/api';
+import PlaceHolderImage from './PlaceHolderImage';
 import ProgressBar from './ProgressBar';
 
 const Player = () => {
@@ -26,7 +30,10 @@ const Player = () => {
     <section className={`component player ${current && info.address ? 'playing' : ''}`}>
       <section className="playingMusic">
         <Link to={`/album/${current?.id ?? ''}`}>
-          { current && <EntityThumbnail data={current} /> }
+          { current
+            ? <EntityThumbnail data={current} />
+            : <PlaceHolderImage />
+          }
         </Link>
         <header>
           <h5>{ current?.name ?? '...' }</h5>
