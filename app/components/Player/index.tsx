@@ -1,63 +1,28 @@
 /* External dependencies */
-import React, { useContext, useRef, MutableRefObject } from 'react';
-import { Link } from '@remix-run/react';
+import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 
 /* Internal dependencies */
-import { useAudio } from '~/hooks/useAudio/useAudio';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { IconButton } from '~/components/common/Button';
-import { API_URLS } from '~/constants/api';
 import Modal from '~/components/Modal';
-import EntityThumbnail from '~/components/Entity/EntityThumbnail';
-import PlaceHolderImage from './PlaceHolderImage';
-import ProgressBar from './ProgressBar';
+import PlayerContent from './PlayerContent';
+import LoginPrompt from './LoginPrompt';
 
 const Player = () => {
-  const audioRef = useRef() as MutableRefObject<HTMLAudioElement>;
-  const {
-    playPause,
-    onTimeUpdate,
-    progress,
-    setProgress,
-  } = useAudio(audioRef);
-  const {
-    current,
-    isPlaying,
-  } = useContext(PlayerContext);
+  const { current } = useContext(PlayerContext);
+  const location = useLocation();
   const { info } = useContext(ProfileContext);
 
+  const isAuthPath = ['/registered', '/login'].includes(location.pathname);
+
   return (
-    <Modal className={`component player ${current && info.address ? 'playing' : ''}`}>
-      <section className="playingMusic">
-        <Link to={`/album/${current?.id ?? ''}`}>
-          { current
-            ? <EntityThumbnail data={current} />
-            : <PlaceHolderImage />
-          }
-        </Link>
-        <header>
-          <h5>{ current?.name ?? '...' }</h5>
-          <span>{ current?.artistName ?? '...' }</span>
-        </header>
-      </section>
-      <audio
-        src={`${API_URLS.STREAMER}/${current?.id}?publicKey=${info.publicKey}`}
-        ref={audioRef}
-        onTimeUpdate={onTimeUpdate}
-      />
-      <ProgressBar
-        duration={Number(current?.duration) ?? 0}
-        progress={progress}
-        setProgress={setProgress}
-      />
-      <section className="controls">
-        <IconButton
-          icon={isPlaying ? 'pause' : 'play'}
-          className="play"
-          onClick={playPause}
-        />
-      </section>
+    <Modal className={`component player ${current && !isAuthPath ? 'visible' : ''}`}>
+      {
+        info.address
+          ? <PlayerContent />
+          : <LoginPrompt />
+      }
     </Modal>
   );
 }

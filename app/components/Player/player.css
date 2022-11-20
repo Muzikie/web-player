@@ -10,7 +10,7 @@
     padding: var(--padding-xs) var(--padding-m);
   }
 
-  &.playing {
+  &.visible {
     transform: translateY(0);
   }
 
@@ -20,7 +20,9 @@
     align-items: center;
 
     & header {
-      padding: 0 var(--padding-m);
+      &:not(:first-child) {
+        padding: 0 var(--padding-m);
+      }
 
       & h5 {
         color: var(--white);
@@ -119,6 +121,10 @@
       display: block;
       padding: 0 0 0 20px;
     }
+  }
+
+  & .loginButton {
+    width: 75px;
   }
 }
 
