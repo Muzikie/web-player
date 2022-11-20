@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { EntityRowProps, ArtistType } from '~/component/Entity/types';
+import { EntityRowProps, ArtistType } from '~/components/Entity/types';
 
 const ArtistSummary = ({ data }: EntityRowProps<ArtistType>) => (
   <section className="component artistSummary">
@@ -23,7 +23,7 @@ const ArtistSummary = ({ data }: EntityRowProps<ArtistType>) => (
       </div>
     </header>
     <figure className="photo">
-      {/* <img src={selena} alt="Selena Gomez" /> */}
+      <img src={data.image} alt={ data.name } />
     </figure>
   </section>
 );

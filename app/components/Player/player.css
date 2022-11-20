@@ -1,21 +1,16 @@
 .component.player {
-  width: 100%;
-  height: var(--player-height-m); /* @todo check if we need to make this smaller */
-  position: fixed;
   z-index: var(--layer-5);
-  bottom: 0;
-  left: 0;
-  background: var(--color-secondary);
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  padding: 0 var(--padding-m);
-  box-sizing: border-box;
-  border-radius: var(--border-radius-x) var(--border-radius-x) 0 0;
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
   transform: translateY(100%);
-  transition: transform 0.3s ease-in-out;
 
-  &.playing {
+  & .content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: var(--padding-xs) var(--padding-m);
+  }
+
+  &.visible {
     transform: translateY(0);
   }
 
@@ -25,7 +20,9 @@
     align-items: center;
 
     & header {
-      padding: 0 var(--padding-m);
+      &:not(:first-child) {
+        padding: 0 var(--padding-m);
+      }
 
       & h5 {
         color: var(--white);
@@ -70,7 +67,6 @@
 
       &.play {
         background-color: rgba(255, 255, 255, 0.9);
-        margin: 0 var(--padding-s);
 
         & i {
           font-size: 18px;
@@ -126,6 +122,10 @@
       padding: 0 0 0 20px;
     }
   }
+
+  & .loginButton {
+    width: 75px;
+  }
 }
 
 .component.imagePlaceHolder {
@@ -149,11 +149,5 @@
     & .seek {
       display: flex;
     }
-  }
-}
-
-@media (min-width: 1000px) {
-  .component.player {
-    height: var(--player-height-m);
   }
 }
