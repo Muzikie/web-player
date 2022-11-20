@@ -46,7 +46,7 @@ const PlayerContent = () => {
         onTimeUpdate={onTimeUpdate}
       />
       <ProgressBar
-        duration={Number(current?.duration) ?? 0}
+        duration={!current || isNaN(Number(current.duration)) ? 0 : Number(current.duration)}
         progress={progress}
         setProgress={setProgress}
       />
