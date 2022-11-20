@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@remix-run/react';
-import { useActiveRoute } from '~/hooks';
+import { useActiveRoute } from '~/hooks/useActiveRoute/useActiveRoute';
 import Icon from '~/components/common/Icon';
 import { CompoundLinkProps } from './type';
 

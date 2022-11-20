@@ -6,7 +6,7 @@ interface QueryParam {
 type SetQueryParam = (paramsToSet: QueryParam) => void;
 type RemoveQueryParam = (key: string) => void;
 
-const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] => {
+export const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] => {
   const location = useLocation();
   const parsed = new URLSearchParams(location.search.toString());
   const queryParams: QueryParam = {};
@@ -44,5 +44,3 @@ const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] => {
 
   return [queryParams, setQueryParam, removeQueryParam];
 };
-
-export default useQueryParams;

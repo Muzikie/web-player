@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@remix-run/react';
-import { useActiveRoute } from '~/hooks';
+import { useActiveRoute } from '~/hooks/useActiveRoute/useActiveRoute';
 import { TextLinkProps } from './type';
 
 const TextLink = ({ title, to, onClick, className = '' }: TextLinkProps) => {

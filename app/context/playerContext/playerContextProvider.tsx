@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { PlayerContextType, PlayerProviderProps, PlayerState, Current } from './types';
-import useLocalStorage from '~/hooks/useLocalStorage';
+import { useStorage, STORAGE_KEYS } from '~/hooks/useStorage';
 import { TrackType } from '~/components/Entity/types';
 
 export const PlayerContext = createContext<PlayerContextType>({
@@ -11,15 +11,15 @@ export const PlayerContext = createContext<PlayerContextType>({
 });
 
 const PlayerProvider = ({ children }: PlayerProviderProps) => {
-  const [storedState, setStoredState] = useLocalStorage<PlayerState>('playerState', {
+  const { data, storeData } = useStorage<PlayerState>(STORAGE_KEYS.PLAYER_STATE, {
     current: null,
     isPlaying: false,
   });
-  const [current, setCurrent] = useState<TrackType|null>(storedState.current);
-  const [isPlaying, setIsPlaying] = useState<boolean>(storedState.isPlaying);
+  const [current, setCurrent] = useState<TrackType|null>(data.current);
+  const [isPlaying, setIsPlaying] = useState<boolean>(data.isPlaying);
 
   useEffect(() => {
-    setStoredState({
+    storeData({
       current,
       isPlaying: false,
     });

@@ -38,5 +38,4 @@ export const isEmpty = (value: any) => {
  * @returns {boolean} True if the value is an object or array
  */
 export const isObjectLiked = (value: any) =>
-  value.constructor.name == 'Array' ||
-  value.constructor.name == 'Object';
+  Array.isArray(value) || typeof value === 'object';

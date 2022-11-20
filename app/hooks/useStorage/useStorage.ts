@@ -1,43 +1,55 @@
-import { useMemo } from 'react';
+/* External dependencies */
+import { useMemo, useState, useEffect } from 'react';
 
+/* Internal dependencies */
 import { isEmpty, isNil } from '~/helpers/helpers';
-import { hydrate } from '~/helpers/convertors';
+import { hydrate, rehydrate } from '~/helpers/convertors';
 import { getLocalStorage } from './getLocalStorage';
-import { migrations } from './migrations';
+import { migrations, MIN_STORAGE_VERSION } from './migrations';
 import { RetrievedValue } from './types';
 
-export const useStorage = <Type>() => {
+export const useStorage = <Type>(key: string, defaultValue: Type) => {
   const storage = useMemo(getLocalStorage, []);
+  const migration = useMemo(() =>
+    migrations.find((item) => item.key === key) ?? { key, version: MIN_STORAGE_VERSION }, [key]);
+  const [data, setData] = useState<Type>(defaultValue);
 
-  const storeData = (key: string, version: number, value: Type) => {
-    const data = {
-      version,
-      value,
-    };
-
+  const storeData = (value: Type) => {
     if (isNil(value) || isEmpty(value)) {
       storage.removeItem(key);
     } else {
-      storage.setItem(key, hydrate(data));
+      storage.setItem(key, hydrate({
+        version: migration.version,
+        value,
+      }));
     }
   };
 
-  const retrieveData = (key: string, defaultValue: Type) => {
+  // rehydrate data from session storage
+  useEffect(() => {
     const storedValue = storage.getItem(key);
-    const parseData: RetrievedValue<Type> = storedValue ? JSON.parse(storedValue) : { value: defaultValue };
-    const migration = migrations.find((item) => item.key === key);
+    const defaultForHydration: RetrievedValue<Type> = {
+      value: defaultValue,
+      version: migration.version,
+    };
+    const parseData: RetrievedValue<Type> = rehydrate(storedValue, defaultForHydration) as RetrievedValue<Type>;
 
     if (storedValue && migration?.migrate && migration.version > parseData.version) {
       const migrated = migration.migrate(parseData.value);
-      storeData(key, migration.version, migrated);
-      return migrated;
+      storeData(migrated);
+      setData(migrated);
+    } else {
+      setData(parseData.value);
     }
+  }, []);
 
-    return parseData.value;
-  };
+  // hydrate data to session storage
+  useEffect(() => {
+    storeData(data);
+  }, [data]);
 
   return {
+    data,
     storeData,
-    retrieveData,
   };
 };
