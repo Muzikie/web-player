@@ -29,6 +29,7 @@ const SecretKeyInput = ({
         type="password"
         placeholder="Secret Key"
         icon="key"
+        name="passphrase"
         value={secretKey.value}
         message={secretKey.value && !secretKey.isValid ? 'Please enter a valid secret key' : ''}
         onChange={handleChange}

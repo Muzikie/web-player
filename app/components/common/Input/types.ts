@@ -10,4 +10,5 @@ export interface InputProps {
   className?: string;
   icon?: string;
   message?: string;
+  name?: string;
 }
