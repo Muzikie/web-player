@@ -1,0 +1,41 @@
+.component.tabs {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  & > li {
+    flex-grow: 1;
+    text-align: center;
+    position: relative;
+    padding-top: var(--padding-s);
+
+    & h4 {
+      & a,
+      & span {
+        color: var(--gray);
+        font-weight: 500;
+      }
+    }
+
+    &.active {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 5px;
+        height: 5px;
+        background-color: var(--color-secondary);
+        border-radius: var(--border-radius-r);
+      }
+
+      & h4 {
+        & a,
+        & span {
+          color: var(--color-secondary);
+        }
+      }
+    }
+  }
+}
