@@ -2,6 +2,7 @@
 import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import invariant from 'tiny-invariant';
 
 /* Internal dependencies */
 import {
@@ -23,7 +24,15 @@ type LoaderData = {
   id: number;
 };
 
-export const loader = async ({ params }) => {
+type loaderParams = {
+  params: {
+    id: number;
+  },
+};
+
+export const loader = async ({ params }: loaderParams) => {
+  invariant(params.id, 'Expected params.id');
+
   return json<LoaderData>({
     album: await getAlbum(params.id),
     tracks: await getAlbumTracks(params.id),

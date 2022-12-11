@@ -2,6 +2,7 @@
 import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import invariant from 'tiny-invariant';
 
 /* Internal dependencies */
 import {
@@ -22,10 +23,25 @@ type LoaderData = {
   id: number;
 };
 
-export const loader = async ({ params }) => {
+type loaderParams = {
+  params: {
+    id: number;
+  },
+};
+
+export const loader = async ({ params }: loaderParams) => {
+  invariant(params.id, 'Expected params.id');
+
+  const playlist = await getPlaylist(params.id);
+  const tracks = await getPlaylistTracks(params.id);
+
+  if (!playlist) {
+    throw new Response('Not Found', { status: 404 });
+  }
+
   return json<LoaderData>({
-    playlist: await getPlaylist(params.id),
-    tracks: await getPlaylistTracks(params.id),
+    playlist,
+    tracks,
     id: params.id,
   });
 };
