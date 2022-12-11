@@ -6,12 +6,14 @@ const SecondaryButton = ({
   children,
   onClick,
   className,
+  type = 'button',
   disabled = false,
 }: FlexibleButtonProps) => (
   <button
     className={`component secondaryButton ${className}`}
     onClick={onClick}
     disabled={disabled}
+    type={type}
   >
     { children }
   </button>
