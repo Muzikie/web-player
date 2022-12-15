@@ -1,5 +1,5 @@
 /* External dependencies */
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
@@ -10,6 +10,9 @@ import {
   getArtistAlbums,
   getArtistTracks,
 } from '~/models/entity.server';
+import { ProfileInfoType } from '~/context/profileContext/types';
+import { ProfileContext } from '~/context/profileContext/profileContextProvider';
+import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import ArtistSummary from '~/components/Summary/ArtistSummary';
 import styles from '~/styles/routes/__main/artist.css';
@@ -23,16 +26,27 @@ type LoaderData = {
   albums: Awaited<ReturnType<typeof getArtistAlbums>>;
   tracks: Awaited<ReturnType<typeof getArtistTracks>>;
   id: number;
+  profileInfo: ProfileInfoType;
 };
 
 type loaderParams = {
   params: {
     id: number;
   },
+  request: Request,
 };
 
-export const loader = async ({ params }: loaderParams) => {
+export const loader = async ({ params, request }: loaderParams) => {
   invariant(params.id, 'Expected params.id');
+
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+  const profileInfo = {
+    address: `${session.get('address') ?? ''}`,
+    publicKey: `${session.get('publicKey') ?? ''}`,
+    privateKey: `${session.get('privateKey') ?? ''}`,
+  };
 
   const artist = await getArtist(params.id);
   const albums = await getArtistAlbums(params.id);
@@ -43,6 +57,7 @@ export const loader = async ({ params }: loaderParams) => {
   }
 
   return json<LoaderData>({
+    profileInfo,
     artist,
     albums,
     tracks,
@@ -51,11 +66,20 @@ export const loader = async ({ params }: loaderParams) => {
 };
 
 const Artist = () => {
+  const { setProfileInfo } = useContext(ProfileContext);
   const {
     artist,
     albums,
     tracks,
+    profileInfo,
   } = useLoaderData() as LoaderData;
+
+  useEffect(() => {
+    if (profileInfo.address) {
+      setProfileInfo(profileInfo);
+    }
+  }, [profileInfo]);
+
   return (
     <section className="screen artist">
       <ArtistSummary data={artist} />

@@ -13,6 +13,7 @@ const MainMenu = () => {
       setProfileInfo({
         address: '',
         publicKey: '',
+        privateKey: '',
       });
     }
 

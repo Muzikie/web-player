@@ -1,1 +1,1 @@
-export const defaultDerivationPath = "m/44'/134'/0'";
+export const DERIVATION_PATH = "m/44'/134'/0'";

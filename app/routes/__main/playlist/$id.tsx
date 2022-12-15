@@ -1,5 +1,5 @@
 /* External dependencies */
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
@@ -9,6 +9,9 @@ import {
   getPlaylist,
   getPlaylistTracks,
 } from '~/models/entity.server';
+import { ProfileInfoType } from '~/context/profileContext/types';
+import { ProfileContext } from '~/context/profileContext/profileContextProvider';
+import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import PlaylistSummary from '~/components/Summary/PlaylistSummary';
 import styles from '~/styles/routes/__main/playlist.css';
@@ -21,16 +24,27 @@ type LoaderData = {
   playlist: Awaited<ReturnType<typeof getPlaylist>>;
   tracks: Awaited<ReturnType<typeof getPlaylistTracks>>;
   id: number;
+  profileInfo: ProfileInfoType;
 };
 
 type loaderParams = {
   params: {
     id: number;
   },
+  request: Request,
 };
 
-export const loader = async ({ params }: loaderParams) => {
+export const loader = async ({ params, request }: loaderParams) => {
   invariant(params.id, 'Expected params.id');
+
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+  const profileInfo = {
+    address: `${session.get('address') ?? ''}`,
+    publicKey: `${session.get('publicKey') ?? ''}`,
+    privateKey: `${session.get('privateKey') ?? ''}`,
+  };
 
   const playlist = await getPlaylist(params.id);
   const tracks = await getPlaylistTracks(params.id);
@@ -40,6 +54,7 @@ export const loader = async ({ params }: loaderParams) => {
   }
 
   return json<LoaderData>({
+    profileInfo,
     playlist,
     tracks,
     id: params.id,
@@ -48,10 +63,19 @@ export const loader = async ({ params }: loaderParams) => {
 
 
 const Playlist = () => {
+  const { setProfileInfo } = useContext(ProfileContext);
   const {
     playlist,
     tracks,
+    profileInfo,
   } = useLoaderData() as LoaderData;
+
+  useEffect(() => {
+    if (profileInfo.address) {
+      setProfileInfo(profileInfo);
+    }
+  }, [profileInfo]);
+
   return (
     <section className="screen playlist">
       <PlaylistSummary data={playlist} />
