@@ -3,6 +3,7 @@ import { ReactElement } from 'react';
 export interface ProfileInfoType {
   address: string;
   publicKey: string;
+  privateKey: string;
 }
 
 export interface ProfileContextType {
