@@ -50,7 +50,7 @@ const MainMenu = () => {
           <IconLink
             title="Profile"
             icon="user"
-            to="/profile"
+            to="/profile/discography"
             className="menuItem"
             onClick={onClick}
           />

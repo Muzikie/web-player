@@ -4,22 +4,23 @@ import { TextLink } from '~/components/common/Link';
 
 export const Tabs = ({
   items,
-}: TabsProps) => {
-  const activeIndex = 0;
-  return (
-    <ul className='component tabs'>
-      {
-        items.map((item: TabItem, index: number) => (
-          <li key={item.to} className={index === activeIndex ? 'active' : ''}>
-            <h4>
-              <TextLink
-                title={item.title}
-                to={item.to}
-              />
-            </h4>
-          </li>
-        ))
-      }
-    </ul>
-  );
-};
+}: TabsProps) => (
+  <div className='component tabs'>
+    {
+      items.map((item: TabItem) => (
+        <TextLink
+          className='tab'
+          key={item.to}
+          title={
+            <div className='item'>
+              <h4>
+                {item.title}
+              </h4>
+            </div>
+          }
+          to={item.to}
+        />
+      ))
+    }
+  </div>
+);

@@ -3,18 +3,15 @@
   flex-flow: row nowrap;
   justify-content: space-between;
 
-  & > li {
+  & > .tab {
     flex-grow: 1;
     text-align: center;
     position: relative;
     padding-top: var(--padding-s);
 
     & h4 {
-      & a,
-      & span {
-        color: var(--gray);
-        font-weight: 500;
-      }
+      color: var(--gray);
+      font-weight: 500;
     }
 
     &.active {
@@ -31,10 +28,7 @@
       }
 
       & h4 {
-        & a,
-        & span {
-          color: var(--color-secondary);
-        }
+        color: var(--color-secondary);
       }
     }
   }
