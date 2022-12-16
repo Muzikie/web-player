@@ -16,7 +16,6 @@ import { LoginLoaderProps } from '../../types';
 import styles from '~/styles/routes/__main/login.css';
 
 export const validateCredentials = async (secret: string) => {
-  console.log('validateCredentials', secret);
   const privateKey = await ed.getPrivateKeyFromPhraseAndPath(secret, DERIVATION_PATH);
   const publicKey = ed.getPublicKeyFromPrivateKey(privateKey);
   const address = liskAddress.getLisk32AddressFromPublicKey(publicKey);

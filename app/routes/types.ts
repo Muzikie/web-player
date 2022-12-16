@@ -5,8 +5,8 @@ import { ProfileInfoType } from '~/context/profileContext/types';
 
 export interface AgreementFormProps {
   terms: {
-    value: boolean[],
-    isValid: boolean,
+    value: boolean[];
+    isValid: boolean;
   };
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -30,14 +30,14 @@ export interface albumLoaderProps {
   params: {
     id: number;
   };
-  request: Request,
+  request: Request;
 }
 
 export interface HomeLoaderData {
   playlists: Awaited<PlaylistType[]>;
   recentlyPlayed: Awaited<Entity[]>;
   artists: Awaited<ArtistType[]>;
-  albums: Awaited<AlbumLoaderData[]>;
+  albums: Awaited<AlbumType[]>;
   profileInfo: ProfileInfoType;
 }
 
@@ -59,8 +59,8 @@ export interface PlaylistLoaderData {
 export interface playlistLoaderParams {
   params: {
     id: number;
-  },
-  request: Request,
+  };
+  request: Request;
 }
 
 export interface ArtistLoaderData {
@@ -74,6 +74,19 @@ export interface ArtistLoaderData {
 export interface artistLoaderProps {
   params: {
     id: number;
-  },
-  request: Request,
+  };
+  request: Request;
+}
+
+export interface ProfileLoaderProps {
+  params: {
+    tab: number;
+  };
+  request: Request;
+}
+
+export interface ProfileLoaderData {
+  albums: Awaited<AlbumType[]>;
+  tracks: Awaited<TrackType[]>;
+  profileInfo: ProfileInfoType;
 }
