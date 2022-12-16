@@ -10,7 +10,7 @@ import {
   getArtists,
   getAlbums,
 } from '~/models/entity.server';
-import { ProfileInfoType } from '~/context/profileContext/types';
+import { HomeLoaderProps, HomeLoaderData } from '../../types';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
@@ -22,19 +22,7 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-type LoaderData = {
-  playlists: Awaited<ReturnType<typeof getPlaylists>>;
-  recentlyPlayed: Awaited<ReturnType<typeof getRecentlyPlayed>>;
-  artists: Awaited<ReturnType<typeof getArtists>>;
-  albums: Awaited<ReturnType<typeof getAlbums>>;
-  profileInfo: ProfileInfoType;
-};
-
-type LoaderProps = {
-  request: Request;
-}
-
-export const loader = async ({ request }: LoaderProps) => {
+export const loader = async ({ request }: HomeLoaderProps) => {
   const session = await getSession(
     request.headers.get('Cookie')
   );
@@ -44,7 +32,7 @@ export const loader = async ({ request }: LoaderProps) => {
     privateKey: `${session.get('privateKey') ?? ''}`,
   };
 
-  return json<LoaderData>({
+  return json<HomeLoaderData>({
     profileInfo,
     playlists: await getPlaylists(),
     recentlyPlayed: await getRecentlyPlayed(),
@@ -61,7 +49,7 @@ const Home = () => {
     artists,
     albums,
     profileInfo,
-  } = useLoaderData() as LoaderData;
+  } = useLoaderData() as HomeLoaderData;
 
   useEffect(() => {
     if (profileInfo.address) {

@@ -4,6 +4,7 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
+import { SearchLoaderData } from '../../types';
 import {
   search,
 } from '~/models/entity.server';
@@ -16,12 +17,8 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-type LoaderData = {
-  result: Awaited<ReturnType<typeof search>>;
-};
-
 export const loader = async () => {
-  return json<LoaderData>({
+  return json<SearchLoaderData>({
     result: await search('query'),
   });
 };
@@ -30,7 +27,7 @@ const Search = () => {
   const [query, setQuery] = useState('');
 
   // @todo implement debounce
-  const { result } = useLoaderData() as LoaderData;
+  const { result } = useLoaderData() as SearchLoaderData;
 
   return (
     <section className="screen search">

@@ -9,7 +9,7 @@ import {
   getAlbum,
   getAlbumTracks,
 } from '~/models/entity.server';
-import { ProfileInfoType } from '~/context/profileContext/types';
+import { albumLoaderProps, AlbumLoaderData } from '../../types';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
@@ -21,21 +21,7 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-type LoaderData = {
-  album: Awaited<ReturnType<typeof getAlbum>>;
-  tracks: Awaited<ReturnType<typeof getAlbumTracks>>;
-  id: number;
-  profileInfo: ProfileInfoType;
-};
-
-type loaderParams = {
-  params: {
-    id: number;
-  },
-  request: Request,
-};
-
-export const loader = async ({ params, request }: loaderParams) => {
+export const loader = async ({ params, request }: albumLoaderProps) => {
   invariant(params.id, 'Expected params.id');
 
   const session = await getSession(
@@ -47,7 +33,7 @@ export const loader = async ({ params, request }: loaderParams) => {
     privateKey: `${session.get('privateKey') ?? ''}`,
   };
 
-  return json<LoaderData>({
+  return json<AlbumLoaderData>({
     profileInfo,
     album: await getAlbum(params.id),
     tracks: await getAlbumTracks(params.id),
@@ -61,7 +47,7 @@ const Album = () => {
     album,
     tracks,
     profileInfo,
-  } = useLoaderData() as LoaderData;
+  } = useLoaderData() as AlbumLoaderData;
 
   useEffect(() => {
     if (profileInfo.address) {

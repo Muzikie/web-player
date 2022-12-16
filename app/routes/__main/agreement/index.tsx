@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 /* Internal dependencies */
+import { AgreementFormProps, AgreementInfoProps } from '../../types';
 import { SettingsContext } from '~/context/settingsContext/settingsContextProvider';
 import { PrimaryButton } from '~/components/common/Button';
 import { Checkbox } from '~/components/common/Checkbox';
@@ -13,17 +14,6 @@ import styles from '~/styles/routes/__main/agreements.css';
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
-
-type AgreementFormProps = {
-  terms: {
-    value: boolean[],
-    isValid: boolean,
-  };
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
-type AgreementInfoProps = {
-  disabled: boolean;
-};
 
 const AgreementForm = ({
   terms, handleChange,

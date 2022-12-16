@@ -10,33 +10,18 @@ import {
   getArtistAlbums,
   getArtistTracks,
 } from '~/models/entity.server';
-import { ProfileInfoType } from '~/context/profileContext/types';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import ArtistSummary from '~/components/Summary/ArtistSummary';
 import styles from '~/styles/routes/__main/artist.css';
+import { artistLoaderProps, ArtistLoaderData } from '../../types';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-type LoaderData = {
-  artist: Awaited<ReturnType<typeof getArtist>>;
-  albums: Awaited<ReturnType<typeof getArtistAlbums>>;
-  tracks: Awaited<ReturnType<typeof getArtistTracks>>;
-  id: number;
-  profileInfo: ProfileInfoType;
-};
-
-type loaderParams = {
-  params: {
-    id: number;
-  },
-  request: Request,
-};
-
-export const loader = async ({ params, request }: loaderParams) => {
+export const loader = async ({ params, request }: artistLoaderProps) => {
   invariant(params.id, 'Expected params.id');
 
   const session = await getSession(
@@ -56,7 +41,7 @@ export const loader = async ({ params, request }: loaderParams) => {
     throw new Response('Not Found', { status: 404 });
   }
 
-  return json<LoaderData>({
+  return json<ArtistLoaderData>({
     profileInfo,
     artist,
     albums,
@@ -72,7 +57,7 @@ const Artist = () => {
     albums,
     tracks,
     profileInfo,
-  } = useLoaderData() as LoaderData;
+  } = useLoaderData() as ArtistLoaderData;
 
   useEffect(() => {
     if (profileInfo.address) {

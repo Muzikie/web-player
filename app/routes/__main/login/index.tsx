@@ -12,6 +12,7 @@ import { PrimaryButton } from '~/components/common/Button';
 import { PartialView } from '~/components/PartialView';
 import SecretKeyInput from '~/components/SecretKeyInput';
 import { DERIVATION_PATH } from '~/constants/app';
+import { LoginLoaderProps } from '../../types';
 import styles from '~/styles/routes/__main/login.css';
 
 export const validateCredentials = async (secret: string) => {
@@ -27,15 +28,11 @@ export const validateCredentials = async (secret: string) => {
   }
 }
 
-type LoaderProps = {
-  request: Request;
-}
-
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export async function loader({ request }: LoaderProps) {
+export async function loader({ request }: LoginLoaderProps) {
   const session = await getSession(
     request.headers.get('Cookie')
   );
@@ -58,7 +55,7 @@ export async function loader({ request }: LoaderProps) {
   });
 }
 
-export async function action({ request }: LoaderProps) {
+export async function action({ request }: LoginLoaderProps) {
   const session = await getSession(
     request.headers.get('Cookie')
   );

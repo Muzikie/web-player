@@ -9,7 +9,7 @@ import {
   getPlaylist,
   getPlaylistTracks,
 } from '~/models/entity.server';
-import { ProfileInfoType } from '~/context/profileContext/types';
+import { playlistLoaderParams, PlaylistLoaderData } from '../../types';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
@@ -20,21 +20,7 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-type LoaderData = {
-  playlist: Awaited<ReturnType<typeof getPlaylist>>;
-  tracks: Awaited<ReturnType<typeof getPlaylistTracks>>;
-  id: number;
-  profileInfo: ProfileInfoType;
-};
-
-type loaderParams = {
-  params: {
-    id: number;
-  },
-  request: Request,
-};
-
-export const loader = async ({ params, request }: loaderParams) => {
+export const loader = async ({ params, request }: playlistLoaderParams) => {
   invariant(params.id, 'Expected params.id');
 
   const session = await getSession(
@@ -53,7 +39,7 @@ export const loader = async ({ params, request }: loaderParams) => {
     throw new Response('Not Found', { status: 404 });
   }
 
-  return json<LoaderData>({
+  return json<PlaylistLoaderData>({
     profileInfo,
     playlist,
     tracks,
@@ -68,7 +54,7 @@ const Playlist = () => {
     playlist,
     tracks,
     profileInfo,
-  } = useLoaderData() as LoaderData;
+  } = useLoaderData() as PlaylistLoaderData;
 
   useEffect(() => {
     if (profileInfo.address) {
