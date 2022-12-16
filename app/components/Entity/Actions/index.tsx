@@ -1,11 +1,15 @@
 import React from 'react';
-import { Entity, EntityRowProps } from '../types';
+import { Entity, entityMode, EntityRowProps } from '../types';
 import ArtistActions from './ArtistActions';
 import AlbumActions from './AlbumActions';
 import PlaylistActions from './PlaylistActions';
 import TrackActions from './TrackActions';
+import EditActions from './EditActions';
 
-const Actions = ({ data }: EntityRowProps<Entity>) => {
+const Actions = ({ data, mode }: EntityRowProps<Entity>) => {
+  if (mode === entityMode.edit) {
+    return <EditActions data={data} />;
+  }
   if ('albums' in data) {
     return <ArtistActions data={data} />;
   }

@@ -3,7 +3,7 @@ import Wrapper from './Wrapper';
 import EntityThumbnail from '../EntityThumbnail';
 import Actions from '../Actions';
 import Icon from '~/components/common/Icon';
-import { Entity, EntityRowProps, entityThemes } from '../types';
+import { Entity, EntityRowProps, entityThemes, entityMode } from '../types';
 import { getEntity } from '../utils';
 
 const Subtitle = ({ data }: EntityRowProps<Entity>) => {
@@ -22,7 +22,7 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
 };
 
 const EntityRow = ({
-  data, className = '', theme = entityThemes.normal,
+  data, className = '', theme = entityThemes.normal, mode = entityMode.view,
 }: EntityRowProps<Entity>) => {
   const entity = getEntity(data);
 
@@ -30,6 +30,7 @@ const EntityRow = ({
     <Wrapper
       entity={entity}
       data={data}
+      mode={mode}
       className={`component entity row ${entity} ${theme} ${className}`}
     >
       <div className="container">
@@ -50,7 +51,7 @@ const EntityRow = ({
             <Subtitle data={data} />
           </div>
         </div>
-        <Actions data={data} />
+        <Actions data={data} mode={mode} />
       </div>
     </Wrapper>
   );
