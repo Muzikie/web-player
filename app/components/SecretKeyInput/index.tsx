@@ -2,7 +2,7 @@
 import React, { useState, ChangeEvent } from 'react';
 
 /* Internal dependencies */
-import Input from '~/components/common/Input';
+import { Input } from '~/components/common/Input';
 import { validateSecretKey } from '~/helpers/validators';
 import { SecretKeyInputProps } from './type';
 
