@@ -12,3 +12,10 @@ export interface InputProps {
   message?: string;
   name?: string;
 }
+
+export interface FileInputProps {
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  title: string;
+  className?: string;
+  icon?: string;
+}
