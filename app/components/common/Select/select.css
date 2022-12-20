@@ -1,0 +1,31 @@
+.component.select {
+  position: relative;
+  width: 100%;
+
+  & select {
+    width: 100%;
+    height: var(--box-size-s);
+    line-height: var(--box-size-xs);
+    padding: 0 var(--padding-s);
+    background-color: var(--white-see-through);
+    background-image: url('../../../images/arrow-down.png');
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 10px);
+    background-position-y: center;
+    border: solid 1px var(--brightOutline);
+    position: relative;
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    border-radius: var(--border-radius-s);
+    color: var(--color-secondary);
+    font-size: var(--size-h4);
+    font-weight: 300;
+  }
+
+  &.notSelected {
+    & select {
+      color: #a499a2;
+    }
+  }
+}
