@@ -1,30 +1,32 @@
 import React, { useState, ChangeEvent } from 'react';
 
 export const useCreateTrack = () => {
-  const [title, setTitle] = useState<string>('');
-  const [lyrics, setLyrics] = useState<string>('');
-  const [artist, setArtist] = useState<string>('');
-  const [genre, setGenre] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [releaseYear, setReleaseYear] = useState<string>('');
+  const [artistName, setArtistName] = useState<string>('');
+  const [collectionID, setCollectionID] = useState<string>('');
+  const [genre, setGenre] = useState<number>(0);
   const [file, setFile] = useState<File | null>(null);
 
   const onChange = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
-    const { name, value, files } = e.target;
-
-    switch (name) {
-    case 'title':
-      setTitle(value);
+    switch (e.target.name) {
+    case 'name':
+      setName(e.target.value);
       break;
-    case 'lyrics':
-      setLyrics(value);
+    case 'releaseYear':
+      setReleaseYear(e.target.value);
       break;
-    case 'artist':
-      setArtist(value);
+    case 'artistName':
+      setArtistName(e.target.value);
+      break;
+    case 'collectionID':
+      setCollectionID(e.target.value);
       break;
     case 'file':
-      setFile(files?.[0] ?? null);
+      setFile(e.target.files?.[0] ?? null);
       break;
     case 'genre':
-      setGenre(value);
+      setGenre(Number(e.target.value));
       break;
     default:
       break;
@@ -38,11 +40,12 @@ export const useCreateTrack = () => {
   };
 
   return {
-    title,
-    lyrics,
-    artist,
+    name,
+    releaseYear,
+    artistName,
     file,
     genre,
+    collectionID,
     onChange,
     broadcast,
   };

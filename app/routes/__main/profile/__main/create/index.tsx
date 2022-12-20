@@ -4,13 +4,15 @@ import { useCreateTrack } from '~/hooks/useCreateEntity';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
+import { VALID_GENRES } from '~/constants/app';
 
 const Create = () => {
   const {
-    title,
-    lyrics,
-    artist,
+    name,
+    releaseYear,
+    artistName,
     genre,
+    collectionID,
     onChange,
     broadcast,
   } = useCreateTrack();
@@ -20,30 +22,37 @@ const Create = () => {
       <form>
         <fieldset>
           <Input
-            value={title}
+            value={name}
             onChange={onChange}
-            name="title"
-            placeholder="Enter title"
+            name="name"
+            placeholder="Enter name"
             type="text"
           />
           <Input
-            value={lyrics}
+            value={releaseYear}
             onChange={onChange}
-            name="lyrics"
-            placeholder="Enter lyrics"
+            name="releaseYear"
+            placeholder="Release year"
             type="text"
           />
           <Input
-            value={artist}
+            value={artistName}
             onChange={onChange}
-            name="artist"
-            placeholder="Enter artist"
+            name="artistName"
+            placeholder="Enter artist name"
+            type="text"
+          />
+          <Input
+            value={collectionID}
+            onChange={onChange}
+            name="collectionID"
+            placeholder="Enter collectionID"
             type="text"
           />
           <Select
             placeholder="Select a genre"
             name="genre"
-            options={['pop', 'rock', 'rap', 'jazz']}
+            options={VALID_GENRES}
             value={genre}
             onChange={onChange}
           />
