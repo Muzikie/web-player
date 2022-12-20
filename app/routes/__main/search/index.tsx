@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
@@ -9,7 +9,7 @@ import {
   search,
 } from '~/models/entity.server';
 import Collection from '~/components/Collection';
-import Icon from '~/components/common/Icon';
+import { Input } from '~/components/common/Input';
 import { Entity, entityThemes } from '~/components/Entity/types';
 import styles from '~/styles/routes/__main/search.css';
 
@@ -31,11 +31,13 @@ const Search = () => {
 
   return (
     <section className="screen search">
-      <section className="input">
-        <Icon name="search" />
-        <input
+      <section className="inputHeader">
+        <Input
           type="text"
-          onChange={(e) => setQuery(e.target.value)}
+          value={query}
+          icon="search"
+          placeholder="Search"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
         />
       </section>
       <section className="results">
