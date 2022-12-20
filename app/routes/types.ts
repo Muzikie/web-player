@@ -86,7 +86,15 @@ export interface ProfileLoaderProps {
 }
 
 export interface ProfileLoaderData {
+  profileInfo: ProfileInfoType;
+}
+
+export interface UserDiscographyLoaderData {
   albums: Awaited<AlbumType[]>;
   tracks: Awaited<TrackType[]>;
-  profileInfo: ProfileInfoType;
+}
+
+export interface UserDiscographyProps {
+  tracks: TrackType[];
+  albums: AlbumType[];
 }

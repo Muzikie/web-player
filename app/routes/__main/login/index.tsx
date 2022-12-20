@@ -42,9 +42,9 @@ export async function loader({ request }: LoginLoaderProps) {
   }
 
   const data = {
-    address: session.get('address'),
-    publicKey: session.get('publicKey').toString('hex'),
-    privateKey: session.get('privateKey').toString('hex'),
+    address: session.get('address') ?? '',
+    publicKey: session.get('publicKey')?.toString('hex') ?? '',
+    privateKey: session.get('privateKey')?.toString('hex') ?? '',
   };
 
   return json(data, {

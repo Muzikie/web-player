@@ -12,3 +12,19 @@
     padding-top: var(--padding-x);
   }
 }
+
+.screen.create {
+  & form {
+    background-color: var(--color-primary-light);
+    padding: var(--padding-s) var(--padding-s) var(--padding-m);
+    border-radius: var(--border-radius-m);
+
+    & fieldset {
+      padding-bottom: var(--padding-m);
+
+      & section {
+        margin-bottom: var(--padding-s);
+      }
+    }
+  }
+}

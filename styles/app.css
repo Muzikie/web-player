@@ -34,6 +34,11 @@ figure {
   overflow: hidden;
 }
 
+fieldset {
+  border: 0;
+  padding: 0;
+}
+
 .mainWrapper {
   width: 100%;
   height: 100vh;
