@@ -6,9 +6,11 @@ const defaultValue = {
     address: '',
     publicKey: '',
     privateKey: '',
+    nonce: BigInt(0),
+    balance: BigInt(0),
   },
   secretKey: '',
-  setProfileInfo: (data: ProfileInfoType) => { console.log('Methods are not ready.', data); },
+  setProfileInfo: (data: Partial<ProfileInfoType>) => { console.log('Methods are not ready.', data); },
   setSecretKey: (data: string) => { console.log('Methods are not ready.', data); },
 };
 
@@ -18,8 +20,11 @@ const ProfileProvider = ({ children }: ProfileProviderProps) => {
   const [info, setInfo] = useState<ProfileInfoType>(defaultValue.info);
   const [secretKey, setSecretKey] = useState<string>('');
 
-  const setProfileInfo = (data: ProfileInfoType) => {
-    setInfo(data);
+  const setProfileInfo = (data: Partial<ProfileInfoType>) => {
+    setInfo({
+      ...info,
+      ...data,
+    });
   };
 
   const value = {

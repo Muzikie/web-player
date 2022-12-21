@@ -19,7 +19,8 @@
     "test": "jest --config ./jest.config.js"
   },
   "dependencies": {
-    "@liskhq/lisk-cryptography": "^4.0.0-alpha.4",
+    "@liskhq/lisk-api-client": "^6.0.0-alpha.7",
+    "@liskhq/lisk-client": "^6.0.0-alpha.7",
     "@remix-run/express": "^1.7.0",
     "@remix-run/node": "^1.7.0",
     "@remix-run/react": "^1.7.0",

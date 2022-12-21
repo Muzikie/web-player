@@ -1,6 +1,6 @@
 /* External dependencies */
 import React, { useEffect, useState, useContext } from 'react';
-import { ed, address as liskAddress } from '@liskhq/lisk-cryptography';
+import { cryptography } from '@liskhq/lisk-client';
 import { useFetcher, useLoaderData } from '@remix-run/react';
 import { json, redirect } from '@remix-run/node';
 import { useNavigate } from 'react-router-dom';
@@ -16,9 +16,9 @@ import { LoginLoaderProps } from '../../types';
 import styles from '~/styles/routes/__main/login.css';
 
 export const validateCredentials = async (secret: string) => {
-  const privateKey = await ed.getPrivateKeyFromPhraseAndPath(secret, DERIVATION_PATH);
-  const publicKey = ed.getPublicKeyFromPrivateKey(privateKey);
-  const address = liskAddress.getLisk32AddressFromPublicKey(publicKey);
+  const privateKey = await cryptography.ed.getPrivateKeyFromPhraseAndPath(secret, DERIVATION_PATH);
+  const publicKey = cryptography.ed.getPublicKeyFromPrivateKey(privateKey);
+  const address = cryptography.address.getLisk32AddressFromPublicKey(publicKey);
 
   return {
     address,

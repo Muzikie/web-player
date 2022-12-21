@@ -1,3 +1,5 @@
+import { createWSClient } from '@liskhq/lisk-api-client';
+
 import type {
   AlbumType,
   ArtistType,
@@ -10,6 +12,9 @@ import { API_URLS } from '~/constants/api';
 export type SearchResultType = {
   [key: string]: Entity[];
 }
+
+export const ws = (endpoint: string, params: { [key: string]: any }) =>
+  createWSClient(API_URLS.WS).then((wsClient) => wsClient.invoke(endpoint, params));
 
 export async function getAlbums(): Promise<Array<AlbumType>> {
   return fetch(`${API_URLS.SERVICE}/albums`).then((res) => res.json());
