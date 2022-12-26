@@ -41,7 +41,7 @@ const PlayerContent = () => {
         </header>
       </section>
       <audio
-        src={`${API_URLS.STREAMER}/${current?.id}?publicKey=${info.publicKey}`}
+        src={current?.id ? `${API_URLS.STREAMER}/${current?.id}` : ''}
         ref={audioRef}
         onTimeUpdate={onTimeUpdate}
       />
