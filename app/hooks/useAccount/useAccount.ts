@@ -12,12 +12,17 @@ export const useAccount = () => {
   const updateAccount = async () => {
     const auth = <AuthResponse> await request(Method.auth_getAuthAccount, { address: info.address });
     const token = <TokenResponse> await request(Method.token_getBalances, { address: info.address });
+    const data = { ...info };
     if (!auth.error) {
       setProfileInfo({ nonce: auth.data.nonce });
+      data.nonce = auth.data.nonce;
     }
     if (!token.error) {
       setProfileInfo(token.data);
+      data.balances = token.data.balances;
     }
+
+    return data;
   };
 
   return {
