@@ -10,11 +10,9 @@ export const useWS = () => {
   const [isConnected, setIsConnected] = useState(false);
 
   const request = (method: Method, params: RequestParams) =>
-    new Promise<RequestResult>((resolve, reject) => {
-      console.log(' -- Promise -- ', isConnected);
+    new Promise<RequestResult<Method>>((resolve, reject) => {
       if (ws && isConnected) {
         ws.addEventListener(EVENTS.MESSAGE, (event) => {
-          console.log(' -- MESSAGE -- ', event);
           try {
             const parsedData = JSON.parse(event.data);
             resolve({
@@ -37,7 +35,6 @@ export const useWS = () => {
           }),
         );
       } else {
-        console.log(' -- ELSE -- ');
         reject({
           message: 'WS connection is not established',
           error: true,

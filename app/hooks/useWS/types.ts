@@ -5,7 +5,7 @@ interface AuthData {
   optionalKeys: string[];
 }
 
-export interface TokenData {
+interface TokenData {
   balances: {
     tokenID: string;
     availableBalance: string;
@@ -24,16 +24,20 @@ export interface DefaultValues {
 }
 
 export interface RequestParams {
-  [key: string]: any;
+  [key: string]: string;
 }
 
-export interface ErrorResponse {
+interface ErrorResponse {
   message: string;
   error: true;
 }
 
-export type SuccessResponse = {
-  data: TokenData | AuthData;
+export type SuccessResponse<T extends Method> = {
+  data: DefaultValues[T];
   error: false;
 };
-export type RequestResult = SuccessResponse | ErrorResponse;
+
+export type AuthResponse = SuccessResponse<Method.auth_getAuthAccount> | ErrorResponse;
+export type TokenResponse = SuccessResponse<Method.token_getBalances> | ErrorResponse;
+
+export type RequestResult<T extends Method> = SuccessResponse<T> | ErrorResponse;

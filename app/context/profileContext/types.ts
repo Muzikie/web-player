@@ -1,11 +1,17 @@
 import { ReactElement } from 'react';
 
+export interface TokenBalance {
+  tokenID: string;
+  availableBalance: string;
+  lockedBalances: string[];
+}
+
 export interface ProfileInfoType {
   address: string;
   publicKey: string;
   privateKey: string;
-  nonce: bigint;
-  balance: bigint;
+  nonce: string;
+  balances: TokenBalance[];
 }
 
 export interface ProfileContextType {
