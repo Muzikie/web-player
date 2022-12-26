@@ -13,7 +13,6 @@ describe('useWS', () => {
     act(() => {
       expect(result.current.ws).toBeDefined();
       expect(typeof result.current.isConnected === 'boolean').toBeTruthy();
-      console.log(result.current.isConnected)
       expect(typeof result.current.request === 'function').toBeTruthy();
     });
   });
@@ -27,10 +26,11 @@ describe('useWS', () => {
         result.current.request(
           Method.auth_getAuthAccount,
           { address: 'lsk3ay4z7wqjczbo5ogcqxgxx23xyacxmycwxfh4d' },
-        ).catch((err) => {
-          console.log('err', err);
-          expect(err.error).toBe(true);
-        });
+        )
+          .then((res) => res)
+          .catch((err) => {
+            expect(err.error).toBe(true);
+          });
       });
     });
   });
