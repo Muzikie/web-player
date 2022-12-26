@@ -29,8 +29,8 @@ export const loader = async ({ params, request }: albumLoaderProps) => {
   );
   const profileInfo = {
     address: `${session.get('address') ?? ''}`,
-    publicKey: `${session.get('publicKey') ?? ''}`,
-    privateKey: `${session.get('privateKey') ?? ''}`,
+    publicKey: `${Buffer.from(session.get('publicKey')).toString('hex') ?? ''}`,
+    privateKey: `${Buffer.from(session.get('privateKey')).toString('hex') ?? ''}`,
   };
 
   return json<AlbumLoaderData>({

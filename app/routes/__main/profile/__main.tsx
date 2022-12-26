@@ -18,8 +18,8 @@ export const loader = async ({ request }: ProfileLoaderProps) => {
   ); 
   const profileInfo = {
     address: `${session.get('address') ?? ''}`,
-    publicKey: `${session.get('publicKey') ?? ''}`,
-    privateKey: `${session.get('privateKey') ?? ''}`,
+    publicKey: `${Buffer.from(session.get('publicKey')).toString('hex') ?? ''}`,
+    privateKey: `${Buffer.from(session.get('privateKey')).toString('hex') ?? ''}`,
   };
 
   return json<ProfileLoaderData>({
