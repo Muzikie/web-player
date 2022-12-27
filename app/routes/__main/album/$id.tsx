@@ -1,13 +1,17 @@
 /* External dependencies */
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import invariant from 'tiny-invariant';
 
 /* Internal dependencies */
 import {
   getAlbum,
   getAlbumTracks,
 } from '~/models/entity.server';
+import { albumLoaderProps, AlbumLoaderData } from '../../types';
+import { ProfileContext } from '~/context/profileContext/profileContextProvider';
+import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import AlbumSummary from '~/components/Summary/AlbumSummary';
 import { collectionThemes } from '~/components/Collection/types';
@@ -17,14 +21,20 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-type LoaderData = {
-  album: Awaited<ReturnType<typeof getAlbum>>;
-  tracks: Awaited<ReturnType<typeof getAlbumTracks>>;
-  id: number;
-};
+export const loader = async ({ params, request }: albumLoaderProps) => {
+  invariant(params.id, 'Expected params.id');
 
-export const loader = async ({ params }) => {
-  return json<LoaderData>({
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+  const profileInfo = {
+    address: `${session.get('address') ?? ''}`,
+    publicKey: `${Buffer.from(session.get('publicKey')).toString('hex') ?? ''}`,
+    privateKey: `${Buffer.from(session.get('privateKey')).toString('hex') ?? ''}`,
+  };
+
+  return json<AlbumLoaderData>({
+    profileInfo,
     album: await getAlbum(params.id),
     tracks: await getAlbumTracks(params.id),
     id: params.id,
@@ -32,10 +42,18 @@ export const loader = async ({ params }) => {
 };
 
 const Album = () => {
+  const { setProfileInfo } = useContext(ProfileContext);
   const {
     album,
     tracks,
-  } = useLoaderData() as LoaderData;
+    profileInfo,
+  } = useLoaderData() as AlbumLoaderData;
+
+  useEffect(() => {
+    if (profileInfo.address) {
+      setProfileInfo(profileInfo);
+    }
+  }, [profileInfo]);
 
   return (
     <section className="screen album">

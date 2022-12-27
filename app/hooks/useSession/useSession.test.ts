@@ -1,28 +1,29 @@
-import { renderHook, act } from '@testing-library/react-hooks';
-import { useSession } from './useSession';
+import { getSession, commitSession, destroySession } from './index';
+
+jest.mock('@remix-run/node', () => ({
+  createCookieSessionStorage: jest.fn(() => ({
+    getSession: jest.fn(),
+    commitSession: jest.fn(),
+    destroySession: jest.fn(),
+  })),
+}));
 
 describe('useSession', () => {
-  describe('setSession', () => {
-    afterEach(() => {
-      sessionStorage.clear();
-    });
+  it('should export a getSession, commitSession, and destroySession functions', () => {
+    expect(typeof getSession).toBe('function');
+    expect(typeof commitSession).toBe('function');
+    expect(typeof destroySession).toBe('function');
+  });
 
-    it('should set session', () => {
-      const session = {
-        address: '0x123',
-        publicKey: '0x123',
-      };
-      const { result } = renderHook(() => useSession());
+  describe('getSession', () => {
+    it.todo('should return a session object');
+  });
 
-      expect(result.current.session).toEqual({
-        address: '',
-        publicKey: '',
-      });
-      act(() => {
-        result.current.setSession(session);
-        expect(sessionStorage.setItem)
-          .toHaveBeenCalledWith('@session', '{"address":"","publicKey":""}');
-      });
-    });
+  describe('commitSession', () => {
+    it.todo('should commit a session object');
+  });
+
+  describe('destroySession', () => {
+    it.todo('should destroy a session object');
   });
 });

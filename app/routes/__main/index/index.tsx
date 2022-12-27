@@ -1,5 +1,5 @@
 /* External dependencies */
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
@@ -10,6 +10,9 @@ import {
   getArtists,
   getAlbums,
 } from '~/models/entity.server';
+import { HomeLoaderProps, HomeLoaderData } from '../../types';
+import { ProfileContext } from '~/context/profileContext/profileContextProvider';
+import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import { entityThemes } from '~/components/Entity/types';
 import { collectionThemes } from '~/components/Collection/types';
@@ -19,15 +22,18 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-type LoaderData = {
-  playlists: Awaited<ReturnType<typeof getPlaylists>>;
-  recentlyPlayed: Awaited<ReturnType<typeof getRecentlyPlayed>>;
-  artists: Awaited<ReturnType<typeof getArtists>>;
-  albums: Awaited<ReturnType<typeof getAlbums>>;
-};
+export const loader = async ({ request }: HomeLoaderProps) => {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+  const profileInfo = {
+    address: `${session.get('address') ?? ''}`,
+    publicKey: `${session.get('publicKey') ?? ''}`,
+    privateKey: `${session.get('privateKey') ?? ''}`,
+  };
 
-export const loader = async () => {
-  return json<LoaderData>({
+  return json<HomeLoaderData>({
+    profileInfo,
     playlists: await getPlaylists(),
     recentlyPlayed: await getRecentlyPlayed(),
     artists: await getArtists(),
@@ -36,12 +42,20 @@ export const loader = async () => {
 };
 
 const Home = () => {
+  const { setProfileInfo } = useContext(ProfileContext);
   const {
     playlists,
     recentlyPlayed,
     artists,
     albums,
-  } = useLoaderData() as LoaderData;
+    profileInfo,
+  } = useLoaderData() as HomeLoaderData;
+
+  useEffect(() => {
+    if (profileInfo.address) {
+      setProfileInfo(profileInfo);
+    }
+  }, [profileInfo]);
 
   return (
     <section className="screen home">

@@ -5,7 +5,6 @@ import { Link } from '@remix-run/react';
 /* Internal dependencies */
 import { useAudio } from '~/hooks/useAudio/useAudio';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { IconButton } from '~/components/common/Button';
 import { API_URLS } from '~/constants/api';
 import EntityThumbnail from '~/components/Entity/EntityThumbnail';
@@ -24,7 +23,6 @@ const PlayerContent = () => {
     current,
     isPlaying,
   } = useContext(PlayerContext);
-  const { info } = useContext(ProfileContext);
 
   return (
     <>
@@ -41,7 +39,7 @@ const PlayerContent = () => {
         </header>
       </section>
       <audio
-        src={`${API_URLS.STREAMER}/${current?.id}?publicKey=${info.publicKey}`}
+        src={current?.id ? `${API_URLS.STREAMER}/${current?.id}` : ''}
         ref={audioRef}
         onTimeUpdate={onTimeUpdate}
       />

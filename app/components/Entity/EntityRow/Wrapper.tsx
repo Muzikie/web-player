@@ -2,19 +2,26 @@ import React from 'react';
 import { memo, ReactNode, MouseEvent, useContext } from 'react';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { Link } from '@remix-run/react';
-import { Entity, TrackType } from '../types';
+import { Entity, entityMode, TrackType } from '../types';
 
 interface WrapperProps {
   entity: string;
   className: string;
   data: Entity;
+  mode: entityMode;
   children: ReactNode;
 }
 
 const Wrapper = ({
-  entity, data, children, className,
+  entity, data, children, className, mode,
 }: WrapperProps) => {
   const { setCurrent } = useContext(PlayerContext);
+
+  if (mode == entityMode.edit) {
+    return (
+      <section className={className}>{children}</section>
+    );
+  }
 
   if (entity === 'track') {
     const play = (e: MouseEvent) => {

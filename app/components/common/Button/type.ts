@@ -4,7 +4,8 @@ export interface ButtonType {
   className?: string;
   disabled?: boolean;
   theme?: string;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 export interface IconButtonProps extends ButtonType {

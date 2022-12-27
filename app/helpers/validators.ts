@@ -1,5 +1,5 @@
 /* External dependencies */
-import { validateMnemonic } from 'bip39';
+import { passphrase } from '@liskhq/lisk-client';
 
 /**
  * Checks if a given value is a valid mnemonic passphrase
@@ -8,4 +8,4 @@ import { validateMnemonic } from 'bip39';
  * @returns {boolean} True if valid
  */
 export const validateSecretKey = (value: string): boolean =>
-  validateMnemonic(value);
+  passphrase.Mnemonic.validateMnemonic(value);

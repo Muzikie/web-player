@@ -18,5 +18,5 @@ export interface CompoundLinkProps extends BaseProps {
 }
 
 export interface TextLinkProps extends BaseProps {
-  title: string;
+  title: string|ReactElement;
 }

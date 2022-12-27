@@ -11,6 +11,11 @@ export enum entityThemes {
   large = 'large',
 }
 
+export enum entityMode {
+  edit = 'edit',
+  view = 'view',
+}
+
 export type entityTheme = entityThemes | undefined;
 
 export interface AlbumType extends BaseEntity {
@@ -46,5 +51,6 @@ export type Entity = AlbumType | ArtistType | TrackType | PlaylistType;
 export interface EntityRowProps<Entity> {
   data: Entity;
   theme?: entityTheme;
+  mode?: entityMode;
   className?: string;
 }

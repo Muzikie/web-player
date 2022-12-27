@@ -1,6 +1,6 @@
 /* External dependencies */
 import React, { useState, useRef, useEffect } from 'react';
-import { generateMnemonic } from 'bip39';
+import { passphrase } from '@liskhq/lisk-client';
 
 /* Internal dependencies */
 import { IconButton } from '../common/Button';
@@ -21,7 +21,8 @@ export const SecretKey = () => {
   };
 
   useEffect(() => {
-    const value = generateMnemonic();
+    // const value = generateMnemonic();
+    const value = passphrase.Mnemonic.generateMnemonic();
     setSecretKey(value);
 
     return () => clearTimeout(timeout.current);

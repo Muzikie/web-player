@@ -7,7 +7,14 @@ import Icon from '../Icon';
 import { InputProps } from './types';
 
 const Input = ({
-  type = 'text', value, onChange, placeholder, className = '', icon = '', message = '',
+  type = 'text',
+  value,
+  onChange,
+  placeholder,
+  className = '',
+  icon = '',
+  message = '',
+  name = '',
 }: InputProps) => {
   const [visibility, setVisibility] = useState(false);
 
@@ -27,6 +34,7 @@ const Input = ({
       <input
         type={type === 'password' && visibility ? 'text' : type}
         value={value}
+        name={name}
         onChange={onChange}
         placeholder={placeholder}
         className={`component input ${className}`}

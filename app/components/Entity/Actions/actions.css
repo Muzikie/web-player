@@ -20,6 +20,13 @@
     color: var(--gray);
   }
 
+  &.edit {
+    & button {
+      height: 18px;
+      font-size: 12px;
+    }
+  }
+
   &.track {
     & .duration,
     & .streamCount {

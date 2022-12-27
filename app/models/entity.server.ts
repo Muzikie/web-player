@@ -62,3 +62,11 @@ export async function getPlaylistTracks(id: number): Promise<Array<PlaylistType>
 export async function search(query: string): Promise<Array<SearchResultType>> {
   return fetch(`${API_URLS.SERVICE}/search/${query}`).then((res) => res.json());
 }
+
+export async function getUserAlbums(address: string): Promise<Array<AlbumType>> {
+  return fetch(`${API_URLS.SERVICE}/users/${address}/albums`).then((res) => res.json());
+}
+
+export async function getUserTracks(address: string): Promise<Array<TrackType>> {
+  return fetch(`${API_URLS.SERVICE}/users/${address}/tracks`).then((res) => res.json());
+}

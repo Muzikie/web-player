@@ -15,6 +15,7 @@ const IconButton = ({
     className={`component iconButton ${theme} ${className}`}
     onClick={onClick}
     disabled={disabled}
+    type="button"
   >
     <Icon name={icon}/>
   </button>
