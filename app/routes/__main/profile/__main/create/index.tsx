@@ -5,6 +5,7 @@ import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
 import { VALID_GENRES } from '~/constants/app';
+import Feedback from './Feedback';
 
 const Create = () => {
   const {
@@ -15,7 +16,9 @@ const Create = () => {
     collectionID,
     onChange,
     broadcast,
+    feedback,
   } = useCreateTrack();
+  console.log('feedback', feedback);
 
   return (
     <section className="screen create tabContainer">
@@ -68,6 +71,7 @@ const Create = () => {
         >
           Create
         </PrimaryButton>
+        <Feedback data={feedback} />
       </form>
     </section>
   );

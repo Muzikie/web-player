@@ -18,6 +18,8 @@
   --color-text-primary: var(--color-primary);
   --color-text-secondary: var(--gray);
   --color-error: #f44e4e;
+  --color-success: var(--green);
+  --color-success-see-through: #01b84a10;
   --border-light: #d9d9d9;
 
   /****  Typography  ****/
