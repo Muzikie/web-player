@@ -11,6 +11,13 @@ export const DEFAULT_VALUES: DefaultValues = {
   [Method.token_getBalances]: {
     balances: [],
   },
+  [Method.txpool_postTransaction]: {
+    transactionID: '',
+  },
+  [Method.txpool_dryRunTransaction]: {
+    events: [],
+    success: false,
+  },
 };
 
 export enum EVENTS {
