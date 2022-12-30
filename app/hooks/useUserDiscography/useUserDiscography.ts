@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 /* Internal dependencies */
 import  { useAccount } from '../useAccount/useAccount';
 import { useWS } from '../useWS/useWS';
-import { AudioAccountResponse, CollectionAccountResponse } from '../useWS/types';
-import { Method } from '../useWS/types';
+import { Method, AudioAccountResponse, CollectionAccountResponse } from '~/context/socketContext/types';
 import { FEEDBACK_MESSAGES } from './constants';
 
 export const useUserDiscography = () => {

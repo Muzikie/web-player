@@ -5,7 +5,7 @@ import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
 import { AUDIO_CREATE_SCHEMA } from '~/constants/schemas';
 import { CHAIN_ID } from '~/constants/app';
-import { Method } from '../useWS/types';
+import { Method } from '~/context/socketContext/types';
 import { useWS } from '../useWS/useWS';
 
 export const useCreateTrack = () => {
