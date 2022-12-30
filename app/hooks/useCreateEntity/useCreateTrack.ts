@@ -18,6 +18,7 @@ export const useCreateTrack = () => {
   const [collectionID, setCollectionID] = useState<string>('');
   const [genre, setGenre] = useState<number>(-1);
   const [file, setFile] = useState<File | null>(null);
+  const [feedback, setFeedback] = useState<{ message: string; error: boolean }>({ message: '', error: false });
 
   const onChange = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
     switch (e.target.name) {
@@ -86,8 +87,15 @@ export const useCreateTrack = () => {
         { transaction: txBytes.toString('hex') },
       );
       // Check if the NFT is created correctly
-      // If successful, make an API call to the server to save the entity
+      console.log('response', response);
+      if (response.data.transactionId) {
+        setFeedback({ message: 'Audio created successfully', error: false });
+        // If successful, make an API call to the server to save the entity
+      } else {
+        setFeedback({ message: 'Error creating audio. Try again.', error: true });
+      }
     } else {
+      setFeedback({ message: 'Audio was invalid. Please review the data.', error: true });
       // Set errors and display to user
     }
   };
@@ -101,5 +109,6 @@ export const useCreateTrack = () => {
     collectionID,
     onChange,
     broadcast,
+    feedback,
   };
 };
