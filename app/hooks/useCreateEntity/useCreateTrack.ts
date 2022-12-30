@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react';
 import { transactions, cryptography } from '@liskhq/lisk-client';
 
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { MODULES, COMMANDS } from './constants';
+import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
 import { AUDIO_CREATE_SCHEMA } from '~/constants/schemas';
 import { CHAIN_ID } from '~/constants/app';
 import { Method } from '../useWS/types';
@@ -87,15 +87,14 @@ export const useCreateTrack = () => {
         { transaction: txBytes.toString('hex') },
       );
       // Check if the NFT is created correctly
-      console.log('response', response);
       if (response.data.transactionId) {
-        setFeedback({ message: 'Audio created successfully', error: false });
-        // If successful, make an API call to the server to save the entity
+        setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
+        // @todo If successful, make an API call to the server to save the entity
       } else {
-        setFeedback({ message: 'Error creating audio. Try again.', error: true });
+        setFeedback({ message: FEEDBACK_MESSAGES.BROADCAST_ERROR, error: true });
       }
     } else {
-      setFeedback({ message: 'Audio was invalid. Please review the data.', error: true });
+      setFeedback({ message: FEEDBACK_MESSAGES.INVALID_PARAMS, error: true });
       // Set errors and display to user
     }
   };
