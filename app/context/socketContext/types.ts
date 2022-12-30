@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 interface AuthData {
   nonce: string;
   numberOfSignatures: number;
@@ -74,3 +76,13 @@ export type CollectionAccountResponse = SuccessResponse<Method.collection_getAcc
 export type AudioAccountResponse = SuccessResponse<Method.audio_getAccount> | ErrorResponse;
 
 export type RequestResult<T extends Method> = SuccessResponse<T> | ErrorResponse;
+
+export interface SocketProviderProps {
+  children: ReactElement;
+}
+
+export interface SocketContextType {
+  ws: WebSocket | null;
+  isConnected: boolean;
+  request: (method: Method, params: RequestParams) => Promise<RequestResult<Method>>;
+}
