@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useCreateTrack } from '~/hooks/useCreateEntity';
+import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
@@ -18,6 +19,7 @@ const CreateAudio = () => {
     broadcast,
     feedback,
   } = useCreateTrack();
+  const { albums } = useUserDiscography();
 
   // @todo improve validation
   const disabled = !name || !releaseYear || !artistName || !genre || !collectionID;
@@ -46,12 +48,12 @@ const CreateAudio = () => {
           placeholder="Enter artist name"
           type="text"
         />
-        <Input
+        <Select
+          placeholder="Select a collection (Album)"
+          name="collectionID"
+          options={albums}
           value={collectionID}
           onChange={onChange}
-          name="collectionID"
-          placeholder="Enter collectionID"
-          type="text"
         />
         <Select
           placeholder="Select a genre"

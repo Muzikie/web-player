@@ -3,7 +3,7 @@ import { useContext } from 'react';
 /* Internal dependencies */
 import { useWS } from '~/hooks/useWS/useWS';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { Method, AuthResponse, TokenResponse } from '../useWS/types';
+import { Method, AuthResponse, TokenResponse } from '~/context/socketContext/types';
 
 export const useAccount = () => {
   const { info, setProfileInfo } = useContext(ProfileContext);
