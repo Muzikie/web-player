@@ -79,9 +79,6 @@ export interface artistLoaderProps {
 }
 
 export interface ProfileLoaderProps {
-  params: {
-    tab: number;
-  };
   request: Request;
 }
 
@@ -89,12 +86,12 @@ export interface ProfileLoaderData {
   profileInfo: Partial<ProfileInfoType>;
 }
 
-export interface UserDiscographyLoaderData {
+export interface DiscographyLoaderData {
   albums: Awaited<AlbumType[]>;
   tracks: Awaited<TrackType[]>;
 }
 
-export interface UserDiscographyProps {
+export interface DiscographyProps {
   tracks: TrackType[];
   albums: AlbumType[];
 }
