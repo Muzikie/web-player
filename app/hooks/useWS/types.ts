@@ -16,6 +16,8 @@ interface TokenData {
 export enum Method {
   auth_getAuthAccount = 'auth_getAuthAccount',
   token_getBalances = 'token_getBalances',
+  txpool_postTransaction = 'txpool_postTransaction',
+  txpool_dryRunTransaction = 'txpool_dryRunTransaction',
 }
 
 export interface DefaultValues {

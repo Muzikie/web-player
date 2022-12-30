@@ -1,4 +1,5 @@
 export const DERIVATION_PATH = "m/44'/134'/0'";
+export const CHAIN_ID = '00000000';
 export const VALID_GENRES = [
   { value: 0, label: 'Pop' },
   { value: 1, label: 'Soul' },

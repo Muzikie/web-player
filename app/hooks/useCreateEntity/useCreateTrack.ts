@@ -4,15 +4,19 @@ import { transactions, cryptography } from '@liskhq/lisk-client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS } from './constants';
 import { AUDIO_CREATE_SCHEMA } from '~/constants/schemas';
+import { CHAIN_ID } from '~/constants/app';
+import { Method } from '../useWS/types';
+import { useWS } from '../useWS/useWS';
 
 export const useCreateTrack = () => {
   const { updateAccount } = useAccount();
+  const { request } = useWS();
 
   const [name, setName] = useState<string>('');
   const [releaseYear, setReleaseYear] = useState<string>('');
   const [artistName, setArtistName] = useState<string>('');
   const [collectionID, setCollectionID] = useState<string>('');
-  const [genre, setGenre] = useState<number>(0);
+  const [genre, setGenre] = useState<number>(-1);
   const [file, setFile] = useState<File | null>(null);
 
   const onChange = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
@@ -44,11 +48,10 @@ export const useCreateTrack = () => {
     // update account state
     const data = await updateAccount();
     // Create blockchain transaction and broadcast it
-    const txObject = {
-      module: MODULES.TOKEN,
+    const tx = {
+      module: MODULES.AUDIO,
       command: COMMANDS.CREATE,
       nonce: BigInt(data.nonce),
-      fee: BigInt('10000000'), // @todo calculate fee dynamically
       senderPublicKey: Buffer.from(data.publicKey, 'hex'),
       params: {
         name,
@@ -62,18 +65,31 @@ export const useCreateTrack = () => {
         }]
       },
     };
+    const fee = transactions.computeMinFee(tx, AUDIO_CREATE_SCHEMA);
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
-      txObject,
-      Buffer.from('00000000', 'hex'),
+      { ...tx, fee },
+      Buffer.from(CHAIN_ID, 'hex'),
       Buffer.from(data.privateKey, 'hex'),
       AUDIO_CREATE_SCHEMA
     );
-    console.log('signedTx', signedTx);
-    // dry-run transaction to get the transaction ID
+    const txBytes = transactions.getBytes(signedTx, AUDIO_CREATE_SCHEMA);
+    // dry-run transaction to get the errors
+    const dryRunResponse = await request(
+      Method.txpool_dryRunTransaction,
+      { transaction: txBytes.toString('hex') },
+    );
     // broadcast transaction
-    // Check if the NFT is created correctly
-    // If successful, make an API call to the server to save the entity
+    if (dryRunResponse.data?.success) {
+      const response = await request(
+        Method.txpool_postTransaction,
+        { transaction: txBytes.toString('hex') },
+      );
+      // Check if the NFT is created correctly
+      // If successful, make an API call to the server to save the entity
+    } else {
+      // Set errors and display to user
+    }
   };
 
   return {
