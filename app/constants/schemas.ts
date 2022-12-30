@@ -60,3 +60,39 @@ export const AUDIO_CREATE_SCHEMA = {
     },
   },
 };
+
+export const COLLECTION_CREATE_SCHEMA = {
+  $id: 'collection/create',
+  title: 'CreateAsset transaction asset for collection module',
+  type: 'object',
+  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType'],
+  properties: {
+    name: {
+      dataType: 'string',
+      fieldNumber: 1,
+      minLength: 3,
+      maxLength: 40,
+    },
+    releaseYear: {
+      dataType: 'string',
+      fieldNumber: 2,
+    },
+    artistName: {
+      dataType: 'string',
+      fieldNumber: 3,
+      minLength: 3,
+      maxLength: 40,
+    },
+    coArtists: {
+      type: 'array',
+      fieldNumber: 4,
+      items: {
+        dataType: 'string',
+      },
+    },
+    collectionType: {
+      dataType: 'uint32',
+      fieldNumber: 5,
+    },
+  },
+};

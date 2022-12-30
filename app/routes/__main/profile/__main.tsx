@@ -49,7 +49,8 @@ const Main = () => {
         <Tabs
           items={[
             { title: 'Discography', to: '/profile/discography' },
-            { title: 'Create', to: '/profile/create' },
+            { title: 'Add a audio', to: '/profile/createAudio' },
+            { title: 'Add an album', to: '/profile/createAlbum' },
           ]}
         />
       </header>
