@@ -1,65 +1,34 @@
 /* External dependencies */
-import React, { useMemo } from 'react';
+import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
-import EntityRow from '~/components/Entity/EntityRow';
-import { entityMode, TrackType } from '~/components/Entity/types';
-import { UserDiscographyLoaderData, ProfileLoaderProps } from '../../../types';
+import { DiscographyLoaderData, ProfileLoaderProps } from '../../../../types';
+import { getSession } from '~/hooks/useSession';
 import { getUserAlbums, getUserTracks } from '~/models/entity.server';
+import UserDiscography from '~/components/UserDiscography';
 
-export const loader = async ({ params, request }: ProfileLoaderProps) => {
-  return json<UserDiscographyLoaderData>({
-    albums: await getUserAlbums('some'),
-    tracks: await getUserTracks('some'),
+export const loader = async ({ request }: ProfileLoaderProps) => {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+  const address = `${session.get('address') ?? ''}`;
+
+  return json<DiscographyLoaderData>({
+    albums: await getUserAlbums(address),
+    tracks: await getUserTracks(address),
   });
 };
 
-const UserDiscography = () => {
+const Discography = () => {
   const {
     tracks,
     albums,
-  } = useLoaderData() as UserDiscographyLoaderData;
+  } = useLoaderData() as DiscographyLoaderData;
 
-  const discography = useMemo(() => {
-    return tracks.reduce((acc: {[key: string]: TrackType[]}, item: TrackType) => {
-      if (!acc[item.albumId]) {
-        acc[item.albumId] = [];
-      }
 
-      acc[item.albumId].push(item);
-      return acc;
-    }, {});
-  }, [albums]);
-
-  return (
-    <section className="component createEntity tabContainer">
-      <div>
-        {
-          albums.map((album, index) => (
-            <section key={`album-${album.id}-${index}`}>
-              <EntityRow
-                data={albums[0]}
-                mode={entityMode.edit}
-              />
-              <section className='albumTracks'>
-                {
-                  discography[album.id].map((track, index) => (
-                    <EntityRow
-                      key={`track-${track.id}-${index}`}
-                      data={track}
-                      mode={entityMode.edit}
-                    />
-                  ))
-                }
-              </section>
-            </section>
-          ))
-        }
-      </div>
-    </section>
-  );
+  return (<UserDiscography tracks={tracks} albums={albums} />);
 };
 
-export default UserDiscography;
+export default Discography;
