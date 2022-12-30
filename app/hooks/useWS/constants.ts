@@ -18,6 +18,16 @@ export const DEFAULT_VALUES: DefaultValues = {
     events: [],
     success: false,
   },
+  [Method.collection_getAccount]: {
+    collection: {
+      collections: [],
+    },
+  },
+  [Method.audio_getAccount]: {
+    audio: {
+      audios: [],
+    },
+  },
 };
 
 export enum EVENTS {
