@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { transactions, cryptography } from '@liskhq/lisk-client';
+import { transactions } from '@liskhq/lisk-client';
 
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
