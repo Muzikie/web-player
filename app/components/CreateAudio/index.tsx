@@ -5,6 +5,7 @@ import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscograph
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
+import { IconLink } from '~/components/common/Link';
 import { VALID_GENRES } from '~/constants/app';
 import Feedback from './Feedback';
 
@@ -48,13 +49,20 @@ const CreateAudio = () => {
           placeholder="Enter artist name"
           type="text"
         />
-        <Select
-          placeholder="Select a collection (Album)"
-          name="collectionID"
-          options={albums}
-          value={collectionID}
-          onChange={onChange}
-        />
+        <div className='collectionRow'>
+          <Select
+            placeholder="Select a collection (Album)"
+            name="collectionID"
+            options={albums}
+            value={collectionID}
+            onChange={onChange}
+          />
+          <IconLink
+            to="/profile/createAlbum"
+            icon="cross"
+            className='addCollection'
+          />
+        </div>
         <Select
           placeholder="Select a genre"
           name="genre"
