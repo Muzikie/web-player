@@ -10,6 +10,40 @@
       margin-bottom: var(--padding-s);
     }
   }
+
+  & .collectionRow {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    gap: var(--padding-s);
+
+    & .select {
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+
+    & .addCollection {
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: var(--box-size-s);
+      height: var(--box-size-s);
+      background-color: var(--white-see-through);
+      color: var(--color-secondary);
+      border-radius: var(--border-radius-s);
+      border: solid 1px var(--brightOutline);
+      box-sizing: border-box;
+
+      & i {
+        display: block;
+        font-size: var(--size-h3);
+        width: var(--box-size-s);
+        height: var(--box-size-s);
+        line-height: var(--box-size-s);
+        text-align: center;
+        transform: rotate(45deg);
+      }
+    }
+  }
 }
 
 .component.feedback {

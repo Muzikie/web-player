@@ -27,3 +27,8 @@ export const VALID_GENRES = [
   { value: 23, label: 'Grime' },
   { value: 24, label: 'Trap' },
 ];
+
+export const VALID_COLLECTION_TYPES = [
+  { value: 1, label: 'Album' },
+  { value: 2, label: 'Podcast series' },
+];

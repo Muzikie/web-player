@@ -1,32 +1,28 @@
 import React from 'react';
 
-import { useCreateTrack } from '~/hooks/useCreateEntity';
-import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
+import { useCreateAlbum } from '~/hooks/useCreateEntity';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
-import { IconLink } from '~/components/common/Link';
-import { VALID_GENRES } from '~/constants/app';
+import { VALID_COLLECTION_TYPES } from '~/constants/app';
 import Feedback from './Feedback';
 
-const CreateAudio = () => {
+const CreateAlbum = () => {
   const {
     name,
     releaseYear,
     artistName,
-    genre,
-    collectionID,
+    collectionType,
     onChange,
     broadcast,
     feedback,
-  } = useCreateTrack();
-  const { albums } = useUserDiscography();
+  } = useCreateAlbum();
 
   // @todo improve validation
-  const disabled = !name || !releaseYear || !artistName || !genre || !collectionID;
+  const disabled = !name || !releaseYear || !artistName || !collectionType;
 
   return (
-    <form className="component createAudio">
+    <form className="component createAlbum">
       <fieldset>
         <Input
           value={name}
@@ -49,30 +45,16 @@ const CreateAudio = () => {
           placeholder="Enter artist name"
           type="text"
         />
-        <div className='collectionRow'>
-          <Select
-            placeholder="Select a collection (Album)"
-            name="collectionID"
-            options={albums}
-            value={collectionID}
-            onChange={onChange}
-          />
-          <IconLink
-            to="/profile/createAlbum"
-            icon="cross"
-            className='addCollection'
-          />
-        </div>
         <Select
-          placeholder="Select a genre"
-          name="genre"
-          options={VALID_GENRES}
-          value={genre}
+          placeholder="Select a collection type"
+          name="collectionType"
+          options={VALID_COLLECTION_TYPES}
+          value={collectionType}
           onChange={onChange}
         />
         <FileInput
           icon="file"
-          title="Upload MP3"
+          title="Upload cover image"
           onChange={onChange}
         />
       </fieldset>
@@ -88,4 +70,4 @@ const CreateAudio = () => {
   );
 };
 
-export default CreateAudio;
+export default CreateAlbum;
