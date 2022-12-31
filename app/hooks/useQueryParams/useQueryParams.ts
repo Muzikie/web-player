@@ -1,12 +1,13 @@
 import { useLocation, Navigate } from 'react-router-dom';
 
-interface QueryParam { 
-  [key: string]: string;
-}
-type SetQueryParam = (paramsToSet: QueryParam) => void;
-type RemoveQueryParam = (key: string) => void;
+import {
+  QueryParam,
+  SetQueryParam,
+  RemoveQueryParam,
+  Response,
+} from './types';
 
-export const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] => {
+export const useQueryParams = (): Response => {
   const location = useLocation();
   const parsed = new URLSearchParams(location.search.toString());
   const queryParams: QueryParam = {};
@@ -23,7 +24,7 @@ export const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] 
     const newParsed = new URLSearchParams(newParams);
     const stringified = newParsed.toString();
 
-    Navigate({ to: `${location}?${stringified}` });
+    Navigate({ to: `${location.pathname}?${stringified}` });
   };
 
   const removeQueryParam: RemoveQueryParam = (key) => {
@@ -39,8 +40,12 @@ export const useQueryParams = (): [QueryParam, SetQueryParam, RemoveQueryParam] 
     const newParsed = new URLSearchParams(newParams);
     const stringified = newParsed.toString();
 
-    Navigate({ to: `${location}?${stringified}` });
+    Navigate({ to: `${location.pathname}?${stringified}` });
   };
 
-  return [queryParams, setQueryParam, removeQueryParam];
+  return {
+    queryParams,
+    setQueryParam,
+    removeQueryParam
+  };
 };
