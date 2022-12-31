@@ -1,3 +1,5 @@
+import { address as cryptoAddress } from '@liskhq/lisk-cryptography';
+
 export const DERIVATION_PATH = "m/44'/134'/0'";
 export const CHAIN_ID = '00000000';
 export const VALID_GENRES = [
@@ -32,3 +34,14 @@ export const VALID_COLLECTION_TYPES = [
   { value: 1, label: 'Album' },
   { value: 2, label: 'Podcast series' },
 ];
+
+const lisk32DevAddress = 'lskh96jgzfftzff2fta2zvsmba9mvs5cnz9ahr3ke';
+const lisk32Treasury = 'lskyg9ujmpkbn7ex96ejedhfrkj6avryn5nwgngbp';
+export const DEV_ACCOUNT = {
+  ADDRESS: lisk32DevAddress,
+  LISK32: cryptoAddress.getAddressFromLisk32Address(lisk32DevAddress)
+};
+export const TREASURY_ACCOUNT = {
+  ADDRESS: lisk32Treasury,
+  LISK32: cryptoAddress.getAddressFromLisk32Address(lisk32Treasury)
+};

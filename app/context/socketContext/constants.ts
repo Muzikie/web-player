@@ -28,6 +28,12 @@ export const DEFAULT_VALUES: DefaultValues = {
       audios: [],
     },
   },
+  [Method.subscription_getAccount]: {
+    subscription: {
+      owned: [],
+      shared: '',
+    },
+  },
 };
 
 export enum EVENTS {
