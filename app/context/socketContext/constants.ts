@@ -34,6 +34,14 @@ export const DEFAULT_VALUES: DefaultValues = {
       shared: '',
     },
   },
+  [Method.subscription_getSubscription]: {
+    price: '0',
+    consumable: '0',
+    streams: '0',
+    members: [],
+    maxMembers: 0,
+    creatorAddress: '',
+  },
 };
 
 export enum EVENTS {
