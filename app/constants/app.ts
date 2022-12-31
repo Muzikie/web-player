@@ -32,3 +32,5 @@ export const VALID_COLLECTION_TYPES = [
   { value: 1, label: 'Album' },
   { value: 2, label: 'Podcast series' },
 ];
+
+export const METHOD_NOT_READY = 'Method not ready';
