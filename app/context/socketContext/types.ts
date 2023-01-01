@@ -43,6 +43,15 @@ interface SubscriptionAccountData {
   };
 }
 
+export interface SubscriptionData {
+  price: string;
+  consumable: string;
+  streams: string;
+  members: string[];
+  maxMembers: number;
+  creatorAddress: string;
+}
+
 export enum Method {
   auth_getAuthAccount = 'auth_getAuthAccount',
   token_getBalances = 'token_getBalances',
@@ -51,6 +60,7 @@ export enum Method {
   collection_getAccount = 'collection_getAccount',
   audio_getAccount = 'audio_getAccount',
   subscription_getAccount = 'subscription_getAccount',
+  subscription_getSubscription = 'subscription_getSubscription',
 }
 
 export interface DefaultValues {
@@ -61,6 +71,7 @@ export interface DefaultValues {
   [Method.collection_getAccount]: CollectionAccountData;
   [Method.audio_getAccount]: AudioAccountData;
   [Method.subscription_getAccount]: SubscriptionAccountData;
+  [Method.subscription_getSubscription]: SubscriptionData;
 }
 
 export interface RequestParams {
@@ -84,6 +95,7 @@ export type DryRunTxResponse = SuccessResponse<Method.txpool_dryRunTransaction> 
 export type CollectionAccountResponse = SuccessResponse<Method.collection_getAccount> | ErrorResponse;
 export type AudioAccountResponse = SuccessResponse<Method.audio_getAccount> | ErrorResponse;
 export type SubsAccountResponse = SuccessResponse<Method.subscription_getAccount> | ErrorResponse;
+export type SubscriptionResponse = SuccessResponse<Method.subscription_getSubscription> | ErrorResponse;
 
 export type RequestResult<T extends Method> = SuccessResponse<T> | ErrorResponse;
 
