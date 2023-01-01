@@ -39,7 +39,7 @@ export const useAudio = (audioRef: MutableRefObject<HTMLAudioElement>) => {
   useEffect(() => {
     audioRef.current.addEventListener('ended', onAudioEnd);
     return () => {
-      audioRef.current.removeEventListener('ended', onAudioEnd);
+      audioRef.current?.removeEventListener('ended', onAudioEnd);
     };
   }, []);
 

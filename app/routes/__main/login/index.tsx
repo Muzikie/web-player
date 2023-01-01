@@ -36,8 +36,15 @@ export async function loader({ request }: LoginLoaderProps) {
     request.headers.get('Cookie')
   );
 
-  // Redirect to the home page if they are already signed in.
-  if (session.has('address')) {
+  const chunks = request.url.split(/\?action=/);
+
+  // Logout if the user is already logged in and they are trying to logout.
+  if (chunks.length === 2 && chunks[1] === 'logout') {
+    session.unset('address');
+    session.unset('publicKey');
+    session.unset('privateKey');
+  // Redirect to the home page if they are already signed in and they are not trying to logout.
+  } else if (session.has('address')) {
     return redirect('/');
   }
 

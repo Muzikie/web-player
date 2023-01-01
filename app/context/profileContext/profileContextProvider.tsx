@@ -1,4 +1,6 @@
 import React, { useState, createContext } from 'react';
+
+import { METHOD_NOT_READY } from '~/constants/app';
 import { ProfileInfoType, ProfileContextType, ProfileProviderProps } from './types';
 
 const defaultValue = {
@@ -10,8 +12,8 @@ const defaultValue = {
     balances: [],
   },
   secretKey: '',
-  setProfileInfo: (data: Partial<ProfileInfoType>) => { console.log('Methods are not ready.', data); },
-  setSecretKey: (data: string) => { console.log('Methods are not ready.', data); },
+  setProfileInfo: (data: Partial<ProfileInfoType>) => { console.log(METHOD_NOT_READY, data); },
+  setSecretKey: (data: string) => { console.log(METHOD_NOT_READY, data); },
 };
 
 export const ProfileContext = createContext<ProfileContextType>(defaultValue);
