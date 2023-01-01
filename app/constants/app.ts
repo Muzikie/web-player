@@ -1,4 +1,4 @@
-import { address as cryptoAddress } from '@liskhq/lisk-cryptography';
+import { cryptography } from '@liskhq/lisk-client';
 
 export const DERIVATION_PATH = "m/44'/134'/0'";
 export const CHAIN_ID = '00000000';
@@ -39,9 +39,9 @@ const lisk32DevAddress = 'lskh96jgzfftzff2fta2zvsmba9mvs5cnz9ahr3ke';
 const lisk32Treasury = 'lskyg9ujmpkbn7ex96ejedhfrkj6avryn5nwgngbp';
 export const DEV_ACCOUNT = {
   ADDRESS: lisk32DevAddress,
-  LISK32: cryptoAddress.getAddressFromLisk32Address(lisk32DevAddress)
+  LISK32: cryptography.address.getAddressFromLisk32Address(lisk32DevAddress),
 };
 export const TREASURY_ACCOUNT = {
   ADDRESS: lisk32Treasury,
-  LISK32: cryptoAddress.getAddressFromLisk32Address(lisk32Treasury)
+  LISK32: cryptography.address.getAddressFromLisk32Address(lisk32Treasury),
 };
