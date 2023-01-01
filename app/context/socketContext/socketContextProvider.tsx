@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 
 /* Internal dependencies */
 import { API_URLS, JSON_RPC_VERSION } from '~/constants/api';
-import { DEFAULT_VALUES, EVENTS } from './constants';
+import { DEFAULT_VALUES, EVENTS, MESSAGES } from './constants';
 import {
   SocketContextType,
   Method,
@@ -12,13 +12,16 @@ import {
   RequestResult,
 } from './types';
 
+// @todo - generate a random id
+const getID = () => '1234';
+
 export const SocketContext = createContext<SocketContextType>({
   ws: null,
   isConnected: false,
   request: () => new Promise(
     (_resolve, reject) => {
       reject({
-        message: 'WS connection yet is not established',
+        message: MESSAGES.NOT_READY,
         error: true,
       });
     }
@@ -41,7 +44,7 @@ const SocketProvider = ({ children }: SocketProviderProps) => {
             });
           } catch (e) {
             reject({
-              message: 'Request failed',
+              message: MESSAGES.FAILED,
               error: true,
             });
           }
@@ -49,14 +52,14 @@ const SocketProvider = ({ children }: SocketProviderProps) => {
         ws.send(
           JSON.stringify({
             jsonrpc: JSON_RPC_VERSION,
-            id: '123', // @todo - generate a random id
+            id: getID(),
             method,
             params
           }),
         );
       } else {
         reject({
-          message: 'WS connection is still not established',
+          message: MESSAGES.NOT_READY,
           error: true,
         });
       }
