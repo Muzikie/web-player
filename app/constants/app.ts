@@ -45,3 +45,5 @@ export const TREASURY_ACCOUNT = {
   ADDRESS: lisk32Treasury,
   LISK32: cryptography.address.getAddressFromLisk32Address(lisk32Treasury),
 };
+
+export const METHOD_NOT_READY = 'Method not ready';

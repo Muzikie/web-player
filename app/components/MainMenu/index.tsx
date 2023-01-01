@@ -6,19 +6,7 @@ import { ProfileContext } from '~/context/profileContext/profileContextProvider'
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
-  const { info, setProfileInfo } = useContext(ProfileContext);
-
-  const handleLogout = () => {
-    if (info.address) {
-      setProfileInfo({
-        address: '',
-        publicKey: '',
-        privateKey: '',
-      });
-    }
-
-    setIsActive(!isActive);
-  };
+  const { info } = useContext(ProfileContext);
 
   const onClick = () => {
     setIsActive(!isActive);
@@ -57,9 +45,9 @@ const MainMenu = () => {
           <IconLink
             title={ info.address ? 'Logout' : 'Login' }
             icon="key"
-            to="/login"
+            to={`/login?action=${info.address ? 'logout' : 'login' }`}
             className="menuItem"
-            onClick={handleLogout}
+            onClick={onClick}
           />
         </div>
       </section>

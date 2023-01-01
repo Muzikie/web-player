@@ -24,7 +24,7 @@ export const loader = async () => {
 };
 
 const Search = () => {
-  const [_query, setQuery] = useState('');
+  const [query, setQuery] = useState('');
 
   // @todo implement debounce
   const { result } = useLoaderData() as SearchLoaderData;
