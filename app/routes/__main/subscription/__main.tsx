@@ -3,7 +3,7 @@ import React from "react";
 import {Outlet} from "@remix-run/react";
 
 /* Internal dependencies */
-import styles from "~/styles/routes/__main/profile.css";
+import styles from "~/styles/routes/__main/subscription.css";
 import {Tabs} from "~/components/common/Tabs";
 
 export function links() {
@@ -12,12 +12,12 @@ export function links() {
 
 const Main = () => {
    return (
-      <section className="screen profile">
+      <section className="screen subscription">
          <header className="tabsHeader">
             <Tabs
                items={[
-                  {title: "All", to: "/subscription/allSubscription"},
-                  {title: "Active", to: "/subscription/activeSubscription"}
+                  {title: "Active", to: "/subscription/active"},
+                  {title: "Purchase", to: "/subscription/purchase"}
                ]}
             />
          </header>
