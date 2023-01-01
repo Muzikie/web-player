@@ -28,6 +28,12 @@ export const DEFAULT_VALUES: DefaultValues = {
       audios: [],
     },
   },
+  [Method.subscription_getAccount]: {
+    subscription: {
+      owned: [],
+      shared: '',
+    },
+  },
 };
 
 export enum EVENTS {
@@ -35,3 +41,8 @@ export enum EVENTS {
   CLOSE = 'close',
   MESSAGE = 'message',
 }
+
+export const MESSAGES = {
+  NOT_READY: 'WS connection is not established',
+  FAILED: 'WS request failed',
+};
