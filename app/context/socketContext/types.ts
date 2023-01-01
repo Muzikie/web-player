@@ -43,7 +43,7 @@ interface SubscriptionAccountData {
   };
 }
 
-interface SubscriptionData {
+export interface SubscriptionData {
   price: string;
   consumable: string;
   streams: string;
