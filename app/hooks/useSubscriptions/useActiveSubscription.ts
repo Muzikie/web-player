@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useWS } from '../useWS/useWS';
 import {
@@ -48,6 +48,12 @@ export const useActiveSubscription = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (info.address) {
+      updateSubscription();
+    }
+  }, [info.address]);
 
   return {
     subscriptionStatus,
