@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { ProgressBarProps } from './type';
+import { ProgressBarProps } from './types';
 
 const range = {
   max: 100,

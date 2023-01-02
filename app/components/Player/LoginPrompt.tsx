@@ -2,41 +2,46 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 
-import {PrimaryButton} from '~/components/common/Button';
+/* Internal dependencies */
+import { PrimaryButton } from '~/components/common/Button';
+import { LoginPromptProps, PlayerState } from './types';
 
-const LoginPrompt = ({prop}: any) => {
-   const navigate = useNavigate();
+const LoginPrompt = ({ type }: LoginPromptProps) => {
+  const navigate = useNavigate();
+  const config = type === PlayerState.loginError
+    ? {
+      title: 'Login before you continue',
+      subtitle: 'Or sign up and get 2 month free',
+      destination : '/login',
+      buttonTitle: 'Login',
+    } : {
+      title: 'You need subscription',
+      subtitle: 'to continue listening to music',
+      destination : '/subscription',
+      buttonTitle: 'Subscribe',
+    };
 
-   const goTo = () => {
-      if (prop === 'login') {
-         navigate('/login');
-      } else if (prop === 'subscribe') {
-         navigate('/subscription');
-      }
-   };
+  const goTo = () => {
+    navigate(config.destination);
+  };
 
-   return (
-      <>
-         <section className="playingMusic">
-            <header>
-               {prop === 'login' ? (
-                  <>
-                     <h5>login before you continue</h5>
-                     <span>Or sign up and get 2 month free</span>
-                  </>
-               ) : (
-                  <>
-                     <h5>you need subscription</h5>
-                     <span>to continue listening to music</span>
-                  </>
-               )}
-            </header>
-         </section>
-         <PrimaryButton className="loginButton" theme="white" onClick={goTo}>
-            {prop}
-         </PrimaryButton>
-      </>
-   );
+  return (
+    <>
+      <section className="playingMusic">
+        <header>
+          <h5>{config.title}</h5>
+          <span>{config.subtitle}</span>
+        </header>
+      </section>
+      <PrimaryButton
+        className="loginButton"
+        theme="white"
+        onClick={goTo}
+      >
+        {config.buttonTitle}
+      </PrimaryButton>
+    </>
+  );
 };
 
 export default LoginPrompt;
