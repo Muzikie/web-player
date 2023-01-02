@@ -29,7 +29,7 @@ export const useActiveSubscription = () => {
         Method.subscription_getAccount,
         { address: info.address },
       );
-      if (!accountInfo.error && accountInfo.data.subscription.shared.length > 0) {
+      if (!accountInfo.error && accountInfo.data.subscription?.shared.length > 0) {
         const response = <SubscriptionResponse> await request(
           Method.subscription_getSubscription,
           { subscriptionID: accountInfo.data.subscription.shared },
