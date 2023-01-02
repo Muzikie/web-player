@@ -10,6 +10,6 @@ export enum PlayerState {
   readyToPlay = 'readyToPlay',
 }
 
-export interface LoginPromptProps {
+export interface FeedbackProps {
   type: PlayerState;
 }

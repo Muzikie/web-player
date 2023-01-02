@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import Modal from '~/components/Modal';
 import PlayerContent from './PlayerContent';
-import LoginPrompt from './LoginPrompt';
+import Feedback from './Feedback';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { useActiveSubscription } from '~/hooks/useSubscriptions';
 import { SubscriptionStatus } from '~/hooks/useSubscriptions/types';
@@ -31,7 +31,7 @@ const Player = () => {
             <PlayerContent />
           )
           : (
-            <LoginPrompt
+            <Feedback
               type={ !isLogin ? PlayerState.loginError : PlayerState.subscriptionError }
             />
           )

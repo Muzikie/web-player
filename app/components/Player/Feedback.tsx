@@ -4,9 +4,9 @@ import {useNavigate} from 'react-router-dom';
 
 /* Internal dependencies */
 import { PrimaryButton } from '~/components/common/Button';
-import { LoginPromptProps, PlayerState } from './types';
+import { FeedbackProps, PlayerState } from './types';
 
-const LoginPrompt = ({ type }: LoginPromptProps) => {
+const Feedback = ({ type }: FeedbackProps) => {
   const navigate = useNavigate();
   const config = type === PlayerState.loginError
     ? {
@@ -44,4 +44,4 @@ const LoginPrompt = ({ type }: LoginPromptProps) => {
   );
 };
 
-export default LoginPrompt;
+export default Feedback;
