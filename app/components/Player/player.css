@@ -14,10 +14,14 @@
     transform: translateY(0);
   }
 
-  & .playingMusic {
+  & .primaryInfo {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+
+    &.extraPadded {
+      padding-left: var(--padding-s);
+    }
 
     & header {
       &:not(:first-child) {
@@ -123,8 +127,8 @@
     }
   }
 
-  & .loginButton {
-    width: 75px;
+  & .actionButton {
+    width: 100px;
   }
 }
 

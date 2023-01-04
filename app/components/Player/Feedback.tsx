@@ -17,7 +17,7 @@ const Feedback = ({ type }: FeedbackProps) => {
     } : {
       title: 'You need subscription',
       subtitle: 'to continue listening to music',
-      destination : '/subscription',
+      destination : '/subscription/purchase',
       buttonTitle: 'Subscribe',
     };
 
@@ -27,14 +27,14 @@ const Feedback = ({ type }: FeedbackProps) => {
 
   return (
     <>
-      <section className="playingMusic">
+      <section className="primaryInfo extraPadded">
         <header>
           <h5>{config.title}</h5>
           <span>{config.subtitle}</span>
         </header>
       </section>
       <PrimaryButton
-        className="loginButton"
+        className="actionButton"
         theme="white"
         onClick={goTo}
       >

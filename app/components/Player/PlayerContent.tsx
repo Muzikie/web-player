@@ -26,7 +26,7 @@ const PlayerContent = () => {
 
   return (
     <>
-      <section className="playingMusic">
+      <section className="primaryInfo">
         <Link to={`/album/${current?.id ?? ''}`}>
           { current
             ? <EntityThumbnail data={current} />
