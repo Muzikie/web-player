@@ -1,0 +1,130 @@
+.component.activeSubscription {
+   position: relative;
+   width: 100%;
+
+   & header {
+      width: 50.5%;
+      text-align: center;
+
+      & h3 {
+         color: #453248;
+         display: inline-block;
+         text-transform: capitalize;
+         font-size: 1.25rem;
+         font-weight: 600;
+      }
+   }
+
+   & .listItem {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+
+      & .itemOne {
+         color: hsl(293, 13%, 40%);
+         flex-grow: 1;
+         text-align: center;
+         font-size: 1rem;
+         font-weight: 400;
+         opacity: 50%;
+         margin-right: 8.1rem;
+         margin-top: 1rem;
+         position: relative;
+      }
+
+      & .itemTwo {
+         color: #453248;
+         flex-grow: 1;
+         font-size: 1rem;
+         margin-right: 6px;
+         margin-top: 1rem;
+         text-align: center;
+         font-weight: 500;
+         position: relative;
+      }
+   }
+}
+
+.component.footer {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   height: auto;
+   background: var(--color-secondary);
+   border-radius: 45px 45px 0 0;
+   box-shadow: 0 -10px 18px 0px var(--color-primary-shadow);
+   transition: all ease 200ms;
+}
+
+.content {
+   height: 20vh;
+   padding: var(--padding-m);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   & figure {
+      & .svg {
+         height: 34px;
+      }
+   }
+}
+
+.spread {
+   margin: 1rem 2rem;
+   color: white;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 1.5;
+   display: inline;
+   text-align: center;
+
+   & span {
+      font-weight: 400;
+   }
+}
+
+@media (max-width: 580px) {
+   .component.activeSubscription {
+      & header {
+         width: 50.5%;
+         text-align: center;
+      }
+      & .listItem {
+         font-size: 1rem;
+         display: flex;
+         flex-flow: row nowrap;
+         justify-content: space-between;
+
+         & .itemOne {
+            margin-right: 134px;
+            position: relative;
+         }
+
+         & .itemTwo {
+            font-weight: 500;
+            font-size: 1rem;
+         }
+      }
+   }
+}
+
+.shareLink {
+   width: 254px;
+   height: 39px;
+
+   background: #ffffff;
+   border-radius: 12px;
+
+   & span {
+      font-weight: 400;
+   }
+}
+
+.line {
+   border-top: 1px solid #e8e0dd;
+   width: 77%;
+   margin: 0 auto;
+}

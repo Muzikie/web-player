@@ -43,6 +43,13 @@ const MainMenu = () => {
             onClick={onClick}
           />
           <IconLink
+            title="Subscription"
+            icon="file"
+            to="/subscription/active"
+            className="menuItem"
+            onClick={onClick}
+          />
+          <IconLink
             title={ info.address ? 'Logout' : 'Login' }
             icon="key"
             to={`/login?action=${info.address ? 'logout' : 'login' }`}
