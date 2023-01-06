@@ -3,6 +3,8 @@ interface BaseEntity {
   name: string;
   ownerId: string;
   image: string;
+  hash: string;
+  meta: string;
 }
 
 export enum entityThemes {

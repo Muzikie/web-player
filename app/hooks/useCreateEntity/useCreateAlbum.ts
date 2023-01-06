@@ -1,13 +1,14 @@
 /* External dependencies */
 import { useState, ChangeEvent, useEffect } from 'react';
-import { transactions } from '@liskhq/lisk-client';
+import { transactions, cryptography } from '@liskhq/lisk-client';
+import md5 from 'md5';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
-import { COLLECTION_CREATE_SCHEMA } from '~/constants/schemas';
 import { CHAIN_ID } from '~/constants/app';
 import { Method } from '~/context/socketContext/types';
+import { COLLECTION_CREATE_SCHEMA } from './schemas';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
@@ -47,8 +48,22 @@ export const useCreateAlbum = () => {
   };
 
   const broadcast = async () => {
+    if (!files) {
+      return false;
+    }
+
     // update account state
     const data = await updateAccount();
+
+    const fileContent = await files[0].arrayBuffer();
+    const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
+    const { message: hash } = cryptography.ed.signMessageWithPrivateKey(
+      md5Hash, Buffer.from(data.privateKey, 'hex'),
+    ); // Takes around 350 ms
+
+    // @todo request storage info from Streamer
+    const meta = hash;
+
     // Create blockchain transaction and broadcast it
     const tx = {
       module: MODULES.COLLECTION,
@@ -59,6 +74,8 @@ export const useCreateAlbum = () => {
         name,
         releaseYear,
         artistName,
+        hash,
+        meta,
         coArtists: [],
         collectionType,
       },
