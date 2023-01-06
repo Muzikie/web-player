@@ -1,25 +1,30 @@
-import { useState, ChangeEvent } from 'react';
+/* External dependencies */
+import { useState, ChangeEvent, useEffect } from 'react';
 import { transactions } from '@liskhq/lisk-client';
 
+/* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
 import { COLLECTION_CREATE_SCHEMA } from '~/constants/schemas';
 import { CHAIN_ID } from '~/constants/app';
 import { Method } from '~/context/socketContext/types';
 import { useWS } from '../useWS/useWS';
+import { ValidationStatus } from './types';
+import { validate } from './validator';
 
 export const useCreateAlbum = () => {
   const { updateAccount } = useAccount();
   const { request } = useWS();
 
+  const [status, setStatus] = useState<ValidationStatus>(ValidationStatus.clean);
   const [name, setName] = useState<string>('');
   const [releaseYear, setReleaseYear] = useState<string>('');
   const [artistName, setArtistName] = useState<string>('');
   const [collectionType, setCollectionType] = useState<number>(-1);
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<FileList | null>(null);
   const [feedback, setFeedback] = useState<{ message: string; error: boolean }>({ message: '', error: false });
 
-  const onChange = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
     case 'name':
       setName(e.target.value);
@@ -33,8 +38,8 @@ export const useCreateAlbum = () => {
     case 'collectionType':
       setCollectionType(Number(e.target.value));
       break;
-    case 'file':
-      setFile(e.target.files?.[0] ?? null);
+    case 'files':
+      setFiles(e.target.files ?? null);
       break;
     default:
       break;
@@ -73,13 +78,13 @@ export const useCreateAlbum = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    if (dryRunResponse.data?.success) {
+    if (!dryRunResponse.error) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
       );
       // Check if the NFT is created correctly
-      if (response.data.transactionId) {
+      if (!response.error) {
         setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
         // @todo If successful, make an API call to the server to save the entity
       } else {
@@ -91,6 +96,25 @@ export const useCreateAlbum = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(files);
+    validate('album', {
+      name,
+      releaseYear,
+      artistName,
+      collectionType,
+      files,
+    }).then((result: ValidationStatus) => {
+      setStatus(result);
+    });
+  }, [
+    name,
+    releaseYear,
+    artistName,
+    collectionType,
+    files,
+  ]);
+
   return {
     name,
     releaseYear,
@@ -99,5 +123,6 @@ export const useCreateAlbum = () => {
     onChange,
     broadcast,
     feedback,
+    status,
   };
 };

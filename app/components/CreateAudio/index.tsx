@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useCreateTrack } from '~/hooks/useCreateEntity';
+import { useCreateTrack, ValidationStatus } from '~/hooks/useCreateEntity';
 import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
@@ -16,14 +16,12 @@ const CreateAudio = () => {
     artistName,
     genre,
     collectionID,
+    status,
     onChange,
     broadcast,
     feedback,
   } = useCreateTrack();
   const { albums } = useUserDiscography();
-
-  // @todo improve validation
-  const disabled = !name || !releaseYear || !artistName || !genre || !collectionID;
 
   return (
     <form className="component createAudio">
@@ -72,13 +70,16 @@ const CreateAudio = () => {
         />
         <FileInput
           icon="file"
+          name="files"
+          accept='.mp3,.wav'
+          multiple={false}
           title="Upload MP3"
           onChange={onChange}
         />
       </fieldset>
       <PrimaryButton
         onClick={broadcast}
-        disabled={disabled}
+        disabled={status !== ValidationStatus.valid}
         type="button"
       >
         Create

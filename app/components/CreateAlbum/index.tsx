@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useCreateAlbum } from '~/hooks/useCreateEntity';
+import { ValidationStatus, useCreateAlbum } from '~/hooks/useCreateEntity';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
@@ -16,10 +16,8 @@ const CreateAlbum = () => {
     onChange,
     broadcast,
     feedback,
+    status,
   } = useCreateAlbum();
-
-  // @todo improve validation
-  const disabled = !name || !releaseYear || !artistName || !collectionType;
 
   return (
     <form className="component createAlbum">
@@ -54,13 +52,16 @@ const CreateAlbum = () => {
         />
         <FileInput
           icon="file"
+          name="files"
+          accept='.png,.jpg,.jpeg'
+          multiple={false}
           title="Upload cover image"
           onChange={onChange}
         />
       </fieldset>
       <PrimaryButton
         onClick={broadcast}
-        disabled={disabled}
+        disabled={status !== ValidationStatus.valid}
         type="button"
       >
         Create
