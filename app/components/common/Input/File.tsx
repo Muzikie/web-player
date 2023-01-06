@@ -8,6 +8,9 @@ import { FileInputProps } from './types';
 const FileInput = ({
   onChange,
   title,
+  name,
+  accept,
+  multiple = true,
   className = '',
   icon = '',
 }: FileInputProps) => (
@@ -19,6 +22,9 @@ const FileInput = ({
     }
     <input
       type="file"
+      name={name}
+      accept={accept}
+      multiple={multiple}
       onChange={onChange}
     />
     <span>{title}</span>

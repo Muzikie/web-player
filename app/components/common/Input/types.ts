@@ -18,4 +18,7 @@ export interface FileInputProps {
   title: string;
   className?: string;
   icon?: string;
+  name?: string;
+  accept?: string;
+  multiple?: boolean;
 }
