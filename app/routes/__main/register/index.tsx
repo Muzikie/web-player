@@ -7,7 +7,7 @@ import { PrimaryButton } from '~/components/common/Button';
 import { PartialView } from '~/components/PartialView';
 import { SecretKey } from '~/components/SecretKey';
 import Icon from '~/components/common/Icon';
-import styles from '~/styles/routes/__main/register.css';
+import styles from '~/css/routes/__main/register.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];

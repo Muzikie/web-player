@@ -3,7 +3,7 @@ import React from 'react';
 import {Outlet} from '@remix-run/react';
 
 /* Internal dependencies */
-import styles from '~/styles/routes/__main/subscription.css';
+import styles from '~/css/routes/__main/subscription.css';
 import {Tabs} from '~/components/common/Tabs';
 
 export function links() {

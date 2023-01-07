@@ -15,7 +15,7 @@ import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import AlbumSummary from '~/components/Summary/AlbumSummary';
 import { collectionThemes } from '~/components/Collection/types';
-import styles from '~/styles/routes/__main/album.css';
+import styles from '~/css/routes/__main/album.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
