@@ -15,7 +15,7 @@ public/build/
 /build
 /dist
 app/styles/
-styles/components/
+styles/index.css
 
 # mocks
 src/assets/images/mocks

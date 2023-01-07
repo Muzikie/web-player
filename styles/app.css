@@ -1,6 +1,6 @@
 @import './variables.css';
 @import './typography.css';
-@import './components/index.css';
+@import './index.css';
 
 body {
   padding: 0;
