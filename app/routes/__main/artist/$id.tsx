@@ -14,7 +14,7 @@ import { ProfileContext } from '~/context/profileContext/profileContextProvider'
 import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import ArtistSummary from '~/components/Summary/ArtistSummary';
-import styles from '~/styles/routes/__main/artist.css';
+import styles from '~/css/routes/__main/artist.css';
 import { artistLoaderProps, ArtistLoaderData } from '../../types';
 
 export function links() {

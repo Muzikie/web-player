@@ -14,7 +14,7 @@ import { ProfileContext } from '~/context/profileContext/profileContextProvider'
 import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import PlaylistSummary from '~/components/Summary/PlaylistSummary';
-import styles from '~/styles/routes/__main/playlist.css';
+import styles from '~/css/routes/__main/playlist.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];

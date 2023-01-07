@@ -9,7 +9,7 @@ import SettingsProvider from '~/context/settingsContext/settingsContextProvider'
 import SocketContext from '~/context/socketContext/socketContextProvider';
 import MainHeader from '~/components/MainHeader';
 import Player from '~/components/Player';
-import styles from '~/styles/routes/__main.css';
+import styles from '~/css/routes/__main.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
