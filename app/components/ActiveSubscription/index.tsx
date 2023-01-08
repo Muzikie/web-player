@@ -1,8 +1,6 @@
 import React from 'react';
 import {useActiveSubscription} from '~/hooks/useSubscriptions';
-import {PrimaryButton} from '../common/Button';
 import Modal from '../Modal';
-import {PartialView} from '../PartialView';
 
 const List = [
   {title: 'Price', content: 'Free'},
@@ -17,7 +15,7 @@ const Form = () => {
       <h3>Free terial</h3>
 
       {List.map(({title, content}) => (
-        <>
+        <div key={title}>
           <ul className="listItem">
             <li className="itemOne">
               <span>{title}</span>
@@ -27,7 +25,7 @@ const Form = () => {
             </li>
           </ul>
           <div className="line"></div>
-        </>
+        </div>
       ))}
     </div>
   );
