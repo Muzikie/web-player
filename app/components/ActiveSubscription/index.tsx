@@ -1,49 +1,61 @@
 import React from 'react';
+import {useActiveSubscription} from '~/hooks/useSubscriptions';
+import {PrimaryButton} from '../common/Button';
+import Modal from '../Modal';
+import {PartialView} from '../PartialView';
 
-const ActiveSubscription = () => (
-  <section className="component activeSubscription">
-    <header>
-      <h3>Free terial</h3>
-    </header>
+const List = [
+   {title: 'Price', content: 'Free'},
+   {title: 'Value to spend', content: '30 MZK'},
+   {title: 'Consumed', content: '10.12330 MZK'},
+   {title: 'Members', content: 'I user'}
+];
 
-    <div className="listItem">
-      <span className="itemOne">Price</span>
-      <span className="itemTwo">Free</span>
-    </div>
-    <div className="line"></div>
-    <div className="listItem">
-      <span className="itemOne">Price</span>
-      <span className="itemTwo">Free</span>
-    </div>
-    <div className="line"></div>
+const Form = () => {
+   return (
+      <div className="listContainer">
+         <h3>Free terial</h3>
 
-    <div className="listItem">
-      <span className="itemOne">Price</span>
-      <span className="itemTwo">Free</span>
-    </div>
-    <div className="line"></div>
-
-    <div className="listItem">
-      <span className="itemOne">Price</span>
-      <span className="itemTwo">Free</span>
-    </div>
-
-    <section className="component footer discarded">
-      <div className="content">
-        <figure className="">
-          <img className="svg" src="/images/letter.svg" alt="Muzikie" />
-        </figure>
-        <p className="spread">
-          <span>Spread the word of Muzikie </span>
-          <br />
-               let others enjoy free music too
-        </p>
-        <button className="shareLink">
-          <span>Share link</span>
-        </button>
+         {List.map(({title, content}) => (
+            <>
+               <ul className="listItem">
+                  <li className="itemOne">
+                     <span>{title}</span>
+                  </li>{' '}
+                  <li className="itemTwo">
+                     <span>{content}</span>
+                  </li>
+               </ul>
+               <div className="line"></div>
+            </>
+         ))}
       </div>
-    </section>
-  </section>
-);
+   );
+};
+const ActiveSubscription = () => {
+   const {subscription} = useActiveSubscription();
+
+   console.log('sub', subscription);
+   return (
+      <section className="component activeSubscription">
+         <Form />
+         <Modal>
+            <div className="wrapper">
+               <figure className="">
+                  <img className="svg" src="/images/letter.svg" alt="Muzikie" />
+               </figure>
+               <p className="spread">
+                  <span>Spread the word of Muzikie </span>
+                  <br />
+                  let others enjoy free music too
+               </p>
+               <button className="shareLink">
+                  <span>Share link</span>
+               </button>
+            </div>
+         </Modal>
+      </section>
+   );
+};
 
 export default ActiveSubscription;
