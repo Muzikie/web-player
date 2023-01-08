@@ -2,16 +2,18 @@ import React from 'react';
 import {useActiveSubscription} from '~/hooks/useSubscriptions';
 import Modal from '../Modal';
 import { PrimaryButton } from '../common/Button';
+import { SubscriptionInfoProps } from './types';
 import NoSubscription from './NoSubscription';
 
-const list = [
-  {title: 'Price', content: 'Free'},
-  {title: 'Value to spend', content: '30 MZK'},
-  {title: 'Consumed', content: '10.12330 MZK'},
-  {title: 'Members', content: 'I user'}
-];
+// @todo convert the numeric values to MZK
+const SubscriptionInfo = ({ data }: SubscriptionInfoProps) => {
+  const list = [
+    { title: 'Price', content: data.price },
+    { title: 'Value to spend', content: data.consumable },
+    { title: 'Consumed', content: (data.price * 0.8) - data.consumable },
+    { title: 'Members', content: `${data.maxMembers} user` }
+  ];
 
-const SubscriptionInfo = () => {
   return (
     <div className="subscriptionInfo">
       <h3>Free trial</h3>
@@ -29,7 +31,7 @@ const SubscriptionInfo = () => {
   );
 };
 const ActiveSubscription = () => {
-  const {subscription} = useActiveSubscription();
+  const { subscription } = useActiveSubscription();
 
   if (!subscription) {
     return <NoSubscription
@@ -39,7 +41,7 @@ const ActiveSubscription = () => {
   }
   return (
     <section className="component activeSubscription">
-      <SubscriptionInfo />
+      <SubscriptionInfo data={subscription} />
       <Modal className="subscriptionFooter">
         <div className="wrapper">
           <figure>

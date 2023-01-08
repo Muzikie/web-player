@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { NoSubscriptionProps } from './types';
+
 const NoSubscription = ({
   title,
   content,
-}) => (
+}: NoSubscriptionProps) => (
   <section className="component noSubscription">
     <div className="wrapper">
       <figure>
