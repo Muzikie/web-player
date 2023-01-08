@@ -16,7 +16,7 @@ const Main = () => {
       <header className="tabsHeader">
         <Tabs
           items={[
-            {title: 'Active', to: '/subscription/active'},
+            {title: 'Active Subscription', to: '/subscription/active'},
             {title: 'Purchase', to: '/subscription/purchase'}
           ]}
         />
