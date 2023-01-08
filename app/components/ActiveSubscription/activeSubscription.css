@@ -85,7 +85,6 @@
 .shareLink {
    width: 254px;
    height: 39px;
-
    background: #ffffff;
    border-radius: 12px;
 
@@ -119,26 +118,3 @@
       margin: var(--padding-s) -2px;
    }
 }
-
-/* @media (min-width: 580px) {
-   .component.activeSubscription {
-      & .listContainer {
-         width: var(--small-viewport);
-         margin-inline: auto;
-
-         & h3 {
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-         }
-      }
-   }
-}
-
-@media (min-width 900px) {
-   .component.activeSubscription {
-      & .listContainer {
-         width: var(--small-viewport);
-         margin-inline: auto;
-      }
-   }
-} */
