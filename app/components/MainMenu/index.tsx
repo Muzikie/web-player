@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, {useState, useContext} from 'react';
 
-import { IconLink } from '~/components/common/Link';
-import { IconButton } from '~/components/common/Button';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
+import {IconLink} from '~/components/common/Link';
+import {IconButton} from '~/components/common/Button';
+import {ProfileContext} from '~/context/profileContext/profileContextProvider';
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
-  const { info } = useContext(ProfileContext);
+  const {info} = useContext(ProfileContext);
 
   const onClick = () => {
     setIsActive(!isActive);
@@ -35,24 +35,31 @@ const MainMenu = () => {
             className="menuItem"
             onClick={onClick}
           />
+
+          {!!info.address && (
+            <>
+              {' '}
+              <IconLink
+                title="Profile"
+                icon="user"
+                to="/profile/discography"
+                className="menuItem"
+                onClick={onClick}
+              />
+              <IconLink
+                title="Subscription"
+                icon="file"
+                to="/subscription/active"
+                className="menuItem"
+                onClick={onClick}
+              />
+            </>
+          )}
+
           <IconLink
-            title="Profile"
-            icon="user"
-            to="/profile/discography"
-            className="menuItem"
-            onClick={onClick}
-          />
-          <IconLink
-            title="Subscription"
-            icon="file"
-            to="/subscription/active"
-            className="menuItem"
-            onClick={onClick}
-          />
-          <IconLink
-            title={ info.address ? 'Logout' : 'Login' }
+            title={info.address ? 'Logout' : 'Login'}
             icon="key"
-            to={`/login?action=${info.address ? 'logout' : 'login' }`}
+            to={`/login?action=${info.address ? 'logout' : 'login'}`}
             className="menuItem"
             onClick={onClick}
           />
