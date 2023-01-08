@@ -2,6 +2,7 @@ import React from 'react';
 import {useActiveSubscription} from '~/hooks/useSubscriptions';
 import Modal from '../Modal';
 import { PrimaryButton } from '../common/Button';
+import NoSubscription from './NoSubscription';
 
 const list = [
   {title: 'Price', content: 'Free'},
@@ -30,7 +31,12 @@ const SubscriptionInfo = () => {
 const ActiveSubscription = () => {
   const {subscription} = useActiveSubscription();
 
-  console.log('sub', subscription);
+  if (!subscription) {
+    return <NoSubscription
+      title="You don't have an active subscription"
+      content="You can subscribe to a plan to enjoy free music"
+    />;
+  }
   return (
     <section className="component activeSubscription">
       <SubscriptionInfo />

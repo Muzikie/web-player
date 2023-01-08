@@ -65,3 +65,32 @@
       }
    }
 }
+
+.component.noSubscription {
+   & .wrapper {
+      height: 30vh;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+
+      & figure,
+      & header {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+      & figure {
+         flex-flow: row nowrap;
+      }
+
+      & header {
+         flex-flow: column nowrap;
+
+         & h3,
+         & p {
+            color: var(--color-secondary);
+         }
+      }
+   }
+}
