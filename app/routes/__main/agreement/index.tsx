@@ -9,7 +9,7 @@ import { PrimaryButton } from '~/components/common/Button';
 import { Checkbox } from '~/components/common/Checkbox';
 import { PartialView } from '~/components/PartialView';
 import { TextLink } from '~/components/common/Link';
-import styles from '~/styles/routes/__main/agreements.css';
+import styles from '~/css/routes/__main/agreements.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];

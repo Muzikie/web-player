@@ -5,7 +5,7 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
-import styles from '~/styles/routes/__main/profile.css';
+import styles from '~/css/routes/__main/profile.css';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { Tabs } from '~/components/common/Tabs';
 import { ProfileLoaderProps, ProfileLoaderData } from '../../types';

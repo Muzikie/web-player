@@ -13,7 +13,7 @@ import { PartialView } from '~/components/PartialView';
 import SecretKeyInput from '~/components/SecretKeyInput';
 import { DERIVATION_PATH } from '~/constants/app';
 import { LoginLoaderProps } from '../../types';
-import styles from '~/styles/routes/__main/login.css';
+import styles from '~/css/routes/__main/login.css';
 
 export const validateCredentials = async (secret: string) => {
   const privateKey = await cryptography.ed.getPrivateKeyFromPhraseAndPath(secret, DERIVATION_PATH);

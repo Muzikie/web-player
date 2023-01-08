@@ -16,7 +16,7 @@ import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import { entityThemes } from '~/components/Entity/types';
 import { collectionThemes } from '~/components/Collection/types';
-import styles from '~/styles/routes/__main/index.css';
+import styles from '~/css/routes/__main/index.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
