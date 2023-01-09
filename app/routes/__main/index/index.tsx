@@ -23,15 +23,6 @@ export function links() {
 }
 
 export const loader = async ({ request }: HomeLoaderProps) => {
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
-  const profileInfo = {
-    address: `${session.get('address') ?? ''}`,
-    publicKey: `${session.get('publicKey') ?? ''}`,
-    privateKey: `${session.get('privateKey') ?? ''}`,
-  };
-
   return json<HomeLoaderData>({
     profileInfo,
     playlists: await getPlaylists(),

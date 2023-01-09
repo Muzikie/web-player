@@ -32,10 +32,6 @@ export function links() {
 }
 
 export async function loader({ request }: LoginLoaderProps) {
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
-
   const chunks = request.url.split(/\?action=/);
 
   // Logout if the user is already logged in and they are trying to logout.

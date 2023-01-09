@@ -23,15 +23,6 @@ export function links() {
 export const loader = async ({ params, request }: playlistLoaderParams) => {
   invariant(params.id, 'Expected params.id');
 
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
-  const profileInfo = {
-    address: `${session.get('address') ?? ''}`,
-    publicKey: `${Buffer.from(session.get('publicKey')).toString('hex') ?? ''}`,
-    privateKey: `${Buffer.from(session.get('privateKey')).toString('hex') ?? ''}`,
-  };
-
   const playlist = await getPlaylist(params.id);
   const tracks = await getPlaylistTracks(params.id);
 

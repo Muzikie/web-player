@@ -13,15 +13,6 @@ import { getSession } from '~/hooks/useSession';
 
 
 export const loader = async ({ request }: ProfileLoaderProps) => {
-  const session = await getSession(
-    request.headers.get('Cookie')
-  ); 
-  const profileInfo = {
-    address: `${session.get('address') ?? ''}`,
-    publicKey: `${Buffer.from(session.get('publicKey')).toString('hex') ?? ''}`,
-    privateKey: `${Buffer.from(session.get('privateKey')).toString('hex') ?? ''}`,
-  };
-
   return json<ProfileLoaderData>({
     profileInfo,
   });
