@@ -4,11 +4,11 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
-import { DiscographyLoaderData, ProfileLoaderProps } from '../../../../types';
+import { DiscographyLoaderData } from '../../../../types';
 import { getUserAlbums, getUserTracks } from '~/models/entity.server';
 import UserDiscography from '~/components/UserDiscography';
 
-export const loader = async ({ request }: ProfileLoaderProps) => {
+export const loader = async () => {
   return json<DiscographyLoaderData>({
     albums: await getUserAlbums(address),
     tracks: await getUserTracks(address),

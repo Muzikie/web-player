@@ -1,24 +1,18 @@
 /* External dependencies */
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Outlet } from '@remix-run/react';
-import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+
 
 /* Internal dependencies */
 import styles from '~/css/routes/__main/profile.css';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { Tabs } from '~/components/common/Tabs';
-import { ProfileLoaderProps, ProfileLoaderData } from '../../types';
 
-
-export const loader = async ({ request }: ProfileLoaderProps) => {};
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
 const Main = () => {
-  const {} = useLoaderData() as ProfileLoaderData;
 
   return (
     <section className="screen profile">

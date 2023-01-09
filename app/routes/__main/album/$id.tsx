@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
@@ -19,7 +19,7 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ params, request }: albumLoaderProps) => {
+export const loader = async ({ params }: albumLoaderProps) => {
   invariant(params.id, 'Expected params.id');
 
   return json<AlbumLoaderData>({

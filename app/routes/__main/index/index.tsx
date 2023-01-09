@@ -10,7 +10,7 @@ import {
   getArtists,
   getAlbums,
 } from '~/models/entity.server';
-import { HomeLoaderProps, HomeLoaderData } from '../../types';
+import { HomeLoaderData } from '../../types';
 import Collection from '~/components/Collection';
 import { entityThemes } from '~/components/Entity/types';
 import { collectionThemes } from '~/components/Collection/types';
@@ -20,7 +20,7 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ request }: HomeLoaderProps) => {
+export const loader = async () => {
   return json<HomeLoaderData>({
     playlists: await getPlaylists(),
     recentlyPlayed: await getRecentlyPlayed(),

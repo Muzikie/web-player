@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
 import { useFetcher } from '@remix-run/react';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +43,9 @@ export async function loader({ request }: LoginLoaderProps) {
 }
 
 export async function action({ request }: LoginLoaderProps) {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
   const form = await request.formData();
   const passphrase = `${form.get('passphrase') ?? ''}`;
 
@@ -50,11 +53,27 @@ export async function action({ request }: LoginLoaderProps) {
     passphrase
   );
 
-    // Redirect back to the login page with errors.
+  if (address == null) {
+    session.flash('error', 'Invalid username/password');
 
+    // Redirect back to the login page with errors.
+    return redirect('/login', {
+      headers: {
+        'Set-Cookie': await commitSession(session),
+      },
+    });
+  }
+
+  session.set('address', address);
+  session.set('publicKey', publicKey);
+  session.set('privateKey', privateKey);
 
   // Login succeeded, send them to the home page.
-
+  return redirect('/', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
 }
 
 const LoginForm = () => {
