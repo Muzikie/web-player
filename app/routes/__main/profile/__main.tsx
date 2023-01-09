@@ -9,30 +9,16 @@ import styles from '~/css/routes/__main/profile.css';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { Tabs } from '~/components/common/Tabs';
 import { ProfileLoaderProps, ProfileLoaderData } from '../../types';
-import { getSession } from '~/hooks/useSession';
 
 
-export const loader = async ({ request }: ProfileLoaderProps) => {
-  return json<ProfileLoaderData>({
-    profileInfo,
-  });
-};
+export const loader = async ({ request }: ProfileLoaderProps) => {};
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
 const Main = () => {
-  const { setProfileInfo } = useContext(ProfileContext);
-  const {
-    profileInfo,
-  } = useLoaderData() as ProfileLoaderData;
-
-  useEffect(() => {
-    if (profileInfo.address) {
-      setProfileInfo(profileInfo);
-    }
-  }, [profileInfo]);
+  const {} = useLoaderData() as ProfileLoaderData;
 
   return (
     <section className="screen profile">

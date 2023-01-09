@@ -5,7 +5,6 @@ import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
 import { DiscographyLoaderData, ProfileLoaderProps } from '../../../../types';
-import { getSession } from '~/hooks/useSession';
 import { getUserAlbums, getUserTracks } from '~/models/entity.server';
 import UserDiscography from '~/components/UserDiscography';
 

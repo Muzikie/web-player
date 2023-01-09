@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
@@ -11,8 +11,6 @@ import {
   getAlbums,
 } from '~/models/entity.server';
 import { HomeLoaderProps, HomeLoaderData } from '../../types';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import { entityThemes } from '~/components/Entity/types';
 import { collectionThemes } from '~/components/Collection/types';
@@ -24,7 +22,6 @@ export function links() {
 
 export const loader = async ({ request }: HomeLoaderProps) => {
   return json<HomeLoaderData>({
-    profileInfo,
     playlists: await getPlaylists(),
     recentlyPlayed: await getRecentlyPlayed(),
     artists: await getArtists(),
@@ -33,20 +30,13 @@ export const loader = async ({ request }: HomeLoaderProps) => {
 };
 
 const Home = () => {
-  const { setProfileInfo } = useContext(ProfileContext);
   const {
     playlists,
     recentlyPlayed,
     artists,
     albums,
-    profileInfo,
   } = useLoaderData() as HomeLoaderData;
 
-  useEffect(() => {
-    if (profileInfo.address) {
-      setProfileInfo(profileInfo);
-    }
-  }, [profileInfo]);
 
   return (
     <section className="screen home">

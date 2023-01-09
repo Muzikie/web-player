@@ -1,13 +1,10 @@
 /* External dependencies */
 import React, { useEffect, useState, useContext } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
-import { useFetcher, useLoaderData } from '@remix-run/react';
-import { json, redirect } from '@remix-run/node';
+import { useFetcher } from '@remix-run/react';
 import { useNavigate } from 'react-router-dom';
 
 /* Internal dependencies */
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { getSession, commitSession } from '~/hooks/useSession';
 import { PrimaryButton } from '~/components/common/Button';
 import { PartialView } from '~/components/PartialView';
 import SecretKeyInput from '~/components/SecretKeyInput';
@@ -35,32 +32,17 @@ export async function loader({ request }: LoginLoaderProps) {
   const chunks = request.url.split(/\?action=/);
 
   // Logout if the user is already logged in and they are trying to logout.
-  if (chunks.length === 2 && chunks[1] === 'logout') {
-    session.unset('address');
-    session.unset('publicKey');
-    session.unset('privateKey');
+
   // Redirect to the home page if they are already signed in and they are not trying to logout.
-  } else if (session.has('address')) {
-    return redirect('/');
-  }
 
-  const data = {
-    address: session.get('address') ?? '',
-    publicKey: session.get('publicKey')?.toString('hex') ?? '',
-    privateKey: session.get('privateKey')?.toString('hex') ?? '',
-  };
-
-  return json(data, {
-    headers: {
-      'Set-Cookie': await commitSession(session),
-    },
-  });
+  // return json(data, {
+  //   headers: {
+  //     'Set-Cookie': await commitSession(session),
+  //   },
+  // });
 }
 
 export async function action({ request }: LoginLoaderProps) {
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
   const form = await request.formData();
   const passphrase = `${form.get('passphrase') ?? ''}`;
 
@@ -68,42 +50,17 @@ export async function action({ request }: LoginLoaderProps) {
     passphrase
   );
 
-  if (address == null) {
-    session.flash('error', 'Invalid username/password');
-
     // Redirect back to the login page with errors.
-    return redirect('/login', {
-      headers: {
-        'Set-Cookie': await commitSession(session),
-      },
-    });
-  }
 
-  session.set('address', address);
-  session.set('publicKey', publicKey);
-  session.set('privateKey', privateKey);
 
   // Login succeeded, send them to the home page.
-  return redirect('/', {
-    headers: {
-      'Set-Cookie': await commitSession(session),
-    },
-  });
+
 }
 
 const LoginForm = () => {
   const fetcher = useFetcher();
   const [secret, setSecret] = useState({ value: '', isValid: false });
-  const { setProfileInfo } = useContext(ProfileContext);
-  const { address, publicKey, privateKey } = useLoaderData();
 
-  useEffect(() => {
-    if (address) {
-      setProfileInfo({
-        address, publicKey, privateKey,
-      });
-    }
-  }, [address]);
 
   return (
     <fetcher.Form method="post">

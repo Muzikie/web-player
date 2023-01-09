@@ -10,8 +10,6 @@ import {
   getArtistAlbums,
   getArtistTracks,
 } from '~/models/entity.server';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import ArtistSummary from '~/components/Summary/ArtistSummary';
 import styles from '~/css/routes/__main/artist.css';
@@ -24,15 +22,6 @@ export function links() {
 export const loader = async ({ params, request }: artistLoaderProps) => {
   invariant(params.id, 'Expected params.id');
 
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
-  const profileInfo = {
-    address: `${session.get('address') ?? ''}`,
-    publicKey: `${Buffer.from(session.get('publicKey')).toString('hex') ?? ''}`,
-    privateKey: `${Buffer.from(session.get('privateKey')).toString('hex') ?? ''}`,
-  };
-
   const artist = await getArtist(params.id);
   const albums = await getArtistAlbums(params.id);
   const tracks = await getArtistTracks(params.id);
@@ -42,7 +31,6 @@ export const loader = async ({ params, request }: artistLoaderProps) => {
   }
 
   return json<ArtistLoaderData>({
-    profileInfo,
     artist,
     albums,
     tracks,
@@ -51,19 +39,11 @@ export const loader = async ({ params, request }: artistLoaderProps) => {
 };
 
 const Artist = () => {
-  const { setProfileInfo } = useContext(ProfileContext);
   const {
     artist,
     albums,
     tracks,
-    profileInfo,
   } = useLoaderData() as ArtistLoaderData;
-
-  useEffect(() => {
-    if (profileInfo.address) {
-      setProfileInfo(profileInfo);
-    }
-  }, [profileInfo]);
 
   return (
     <section className="screen artist">

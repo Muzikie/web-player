@@ -10,8 +10,6 @@ import {
   getPlaylistTracks,
 } from '~/models/entity.server';
 import { playlistLoaderParams, PlaylistLoaderData } from '../../types';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { getSession } from '~/hooks/useSession';
 import Collection from '~/components/Collection';
 import PlaylistSummary from '~/components/Summary/PlaylistSummary';
 import styles from '~/css/routes/__main/playlist.css';
@@ -31,7 +29,6 @@ export const loader = async ({ params, request }: playlistLoaderParams) => {
   }
 
   return json<PlaylistLoaderData>({
-    profileInfo,
     playlist,
     tracks,
     id: params.id,
@@ -40,18 +37,10 @@ export const loader = async ({ params, request }: playlistLoaderParams) => {
 
 
 const Playlist = () => {
-  const { setProfileInfo } = useContext(ProfileContext);
   const {
     playlist,
     tracks,
-    profileInfo,
   } = useLoaderData() as PlaylistLoaderData;
-
-  useEffect(() => {
-    if (profileInfo.address) {
-      setProfileInfo(profileInfo);
-    }
-  }, [profileInfo]);
 
   return (
     <section className="screen playlist">
