@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
 import { useFetcher } from '@remix-run/react';
 import { useNavigate } from 'react-router-dom';
+import { redirect } from '@remix-run/node';
 
 /* Internal dependencies */
 import { PrimaryButton } from '~/components/common/Button';
+import { getSession, commitSession } from '~/hooks/useSession';
 import { PartialView } from '~/components/PartialView';
 import SecretKeyInput from '~/components/SecretKeyInput';
 import { DERIVATION_PATH } from '~/constants/app';
@@ -26,20 +28,6 @@ export const validateCredentials = async (secret: string) => {
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
-}
-
-export async function loader({ request }: LoginLoaderProps) {
-  const chunks = request.url.split(/\?action=/);
-
-  // Logout if the user is already logged in and they are trying to logout.
-
-  // Redirect to the home page if they are already signed in and they are not trying to logout.
-
-  // return json(data, {
-  //   headers: {
-  //     'Set-Cookie': await commitSession(session),
-  //   },
-  // });
 }
 
 export async function action({ request }: LoginLoaderProps) {

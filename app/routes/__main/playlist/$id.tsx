@@ -35,7 +35,6 @@ export const loader = async ({ params }: playlistLoaderParams) => {
   });
 };
 
-
 const Playlist = () => {
   const {
     playlist,

@@ -23,7 +23,6 @@ export interface AlbumLoaderData {
   album: Awaited<AlbumType>;
   tracks: Awaited<TrackType[]>;
   id: number;
-  profileInfo: Partial<ProfileInfoType>;
 }
 
 export interface albumLoaderProps {
@@ -38,7 +37,6 @@ export interface HomeLoaderData {
   recentlyPlayed: Awaited<Entity[]>;
   artists: Awaited<ArtistType[]>;
   albums: Awaited<AlbumType[]>;
-  profileInfo: Partial<ProfileInfoType>;
 }
 
 export interface HomeLoaderProps {
@@ -53,7 +51,6 @@ export interface PlaylistLoaderData {
   playlist: Awaited<PlaylistType>;
   tracks: Awaited<TrackType[]>;
   id: number;
-  profileInfo: Partial<ProfileInfoType>;
 }
 
 export interface playlistLoaderParams {
@@ -68,7 +65,6 @@ export interface ArtistLoaderData {
   albums: Awaited<AlbumType[]>;
   tracks: Awaited<TrackType[]>;
   id: number;
-  profileInfo: Partial<ProfileInfoType>;
 }
 
 export interface artistLoaderProps {

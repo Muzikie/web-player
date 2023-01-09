@@ -21,6 +21,7 @@ export function links() {
 }
 
 export const loader = async () => {
+  // @todo replace this with the list of all albums on the node
   return json<HomeLoaderData>({
     playlists: await getPlaylists(),
     recentlyPlayed: await getRecentlyPlayed(),
@@ -36,7 +37,6 @@ const Home = () => {
     artists,
     albums,
   } = useLoaderData() as HomeLoaderData;
-
 
   return (
     <section className="screen home">
