@@ -1,5 +1,4 @@
 import React, from 'react';
-import { useSubscriptions } from '~/hooks/useSubscriptions';
 import Modal from '~/components/Modal';
 import Icon from '~/components/common/Icon';
 import { PrimaryButton } from '~/components/common/Button';
