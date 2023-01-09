@@ -1,10 +1,10 @@
 import React from 'react';
 
+import PurchaseSubscription from '~/components/PurchaseSubscription';
+
 const AllSubscription = () => (
-  <section className="screen purchase tabContainer">
-    <div>
-      <h1 style={{color: 'black'}}>hello</h1>
-    </div>
+  <section className="screen subscription tabContainer">
+    <PurchaseSubscription />
   </section>
 );
 
