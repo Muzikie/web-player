@@ -24,10 +24,14 @@ export async function loader({ request }: LoaderBaseProps) {
     request.headers.get('Cookie')
   );
 
+  const address = session.get('address');
+  const publicKey = session.get('publicKey');
+  const privateKey = session.get('privateKey');
+
   const data = {
-    address: session.get('address') ?? '',
-    publicKey: session.get('publicKey')?.toString('hex') ?? '',
-    privateKey: session.get('privateKey')?.toString('hex') ?? '',
+    address: address ?? '',
+    publicKey: publicKey ? Buffer.from(publicKey).toString('hex') : '',
+    privateKey: privateKey ? Buffer.from(privateKey).toString('hex') : '',
   };
 
   return json(data, {
