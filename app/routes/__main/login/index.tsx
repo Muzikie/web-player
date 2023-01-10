@@ -1,9 +1,9 @@
 /* External dependencies */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
-import { useFetcher } from '@remix-run/react';
+import { useFetcher, useLoaderData } from '@remix-run/react';
 import { useNavigate } from 'react-router-dom';
-import { redirect } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 
 /* Internal dependencies */
 import { PrimaryButton } from '~/components/common/Button';
@@ -11,8 +11,9 @@ import { getSession, commitSession } from '~/hooks/useSession';
 import { PartialView } from '~/components/PartialView';
 import SecretKeyInput from '~/components/SecretKeyInput';
 import { DERIVATION_PATH } from '~/constants/app';
-import { LoginLoaderProps } from '../../types';
+import { LoaderBaseProps } from '../../types';
 import styles from '~/css/routes/__main/login.css';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 
 export const validateCredentials = async (secret: string) => {
   const privateKey = await cryptography.ed.getPrivateKeyFromPhraseAndPath(secret, DERIVATION_PATH);
@@ -30,7 +31,40 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export async function action({ request }: LoginLoaderProps) {
+export async function loader({ request }: LoaderBaseProps) {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+
+  let address = session.get('address') ?? '';
+
+  // Handle logout and login
+  const chunks = request.url.split(/\?action=/);
+  if (chunks.length === 2 && chunks[1] === 'logout') {
+    session.unset('address');
+    session.unset('publicKey');
+    session.unset('privateKey');
+  // Redirect to the home page if they are already signed in and they are not trying to logout.
+  } else if (address) {
+    return redirect('/');
+  }
+
+  address = session.get('address') ?? '';
+  const publicKey = session.get('publicKey')?.toString('hex') ?? '';
+  const privateKey = session.get('privateKey')?.toString('hex') ?? '';
+
+  return json({
+    address,
+    publicKey,
+    privateKey,
+  }, {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
+}
+
+export async function action({ request }: LoaderBaseProps) {
   const session = await getSession(
     request.headers.get('Cookie')
   );
@@ -65,9 +99,16 @@ export async function action({ request }: LoginLoaderProps) {
 }
 
 const LoginForm = () => {
+  const profileInfo = useLoaderData();
   const fetcher = useFetcher();
   const [secret, setSecret] = useState({ value: '', isValid: false });
+  const { setProfileInfo, info } = useAccount();
 
+  useEffect(() => {
+    if (profileInfo.address !== info.address) {
+      setProfileInfo(profileInfo);
+    }
+  }, [profileInfo]);
 
   return (
     <fetcher.Form method="post">

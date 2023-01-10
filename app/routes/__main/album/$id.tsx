@@ -35,7 +35,6 @@ const Album = () => {
     tracks,
   } = useLoaderData() as AlbumLoaderData;
 
-
   return (
     <section className="screen album">
       {

@@ -22,7 +22,6 @@ const Discography = () => {
     albums,
   } = useLoaderData() as DiscographyLoaderData;
 
-
   return (<UserDiscography tracks={tracks} albums={albums} />);
 };
 

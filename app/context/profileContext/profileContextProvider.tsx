@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 
 import { METHOD_NOT_READY } from '~/constants/app';
 import { ProfileInfoType, ProfileContextType, ProfileProviderProps } from './types';
@@ -18,7 +18,7 @@ const defaultValue = {
 
 export const ProfileContext = createContext<ProfileContextType>(defaultValue);
 
-const ProfileProvider = ({ children }: ProfileProviderProps) => {
+const ProfileProvider = ({ children, sessionData }: ProfileProviderProps) => {
   const [info, setInfo] = useState<ProfileInfoType>(defaultValue.info);
   const [secretKey, setSecretKey] = useState<string>('');
 
@@ -28,6 +28,12 @@ const ProfileProvider = ({ children }: ProfileProviderProps) => {
       ...data,
     });
   };
+
+  useEffect(() => {
+    if (info.address !== sessionData.address) {
+      setInfo(sessionData);
+    }
+  }, [sessionData]);
 
   const value = {
     secretKey,

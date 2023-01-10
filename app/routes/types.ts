@@ -39,11 +39,7 @@ export interface HomeLoaderData {
   albums: Awaited<AlbumType[]>;
 }
 
-export interface HomeLoaderProps {
-  request: Request;
-}
-
-export interface LoginLoaderProps {
+export interface LoaderBaseProps {
   request: Request;
 }
 
@@ -71,10 +67,6 @@ export interface artistLoaderProps {
   params: {
     id: number;
   };
-  request: Request;
-}
-
-export interface ProfileLoaderProps {
   request: Request;
 }
 
