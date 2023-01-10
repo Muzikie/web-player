@@ -11,7 +11,7 @@ import {
 import Collection from '~/components/Collection';
 import { Input } from '~/components/common/Input';
 import { Entity, entityThemes } from '~/components/Entity/types';
-import styles from '~/styles/routes/__main/search.css';
+import styles from '~/css/routes/__main/search.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];

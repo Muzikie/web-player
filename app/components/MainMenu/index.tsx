@@ -35,17 +35,31 @@ const MainMenu = () => {
             className="menuItem"
             onClick={onClick}
           />
+
+          {!!info.address && (
+            <>
+              {' '}
+              <IconLink
+                title="Profile"
+                icon="user"
+                to="/profile/discography"
+                className="menuItem"
+                onClick={onClick}
+              />
+              <IconLink
+                title="Subscription"
+                icon="file"
+                to="/subscription/active"
+                className="menuItem"
+                onClick={onClick}
+              />
+            </>
+          )}
+
           <IconLink
-            title="Profile"
-            icon="user"
-            to="/profile/discography"
-            className="menuItem"
-            onClick={onClick}
-          />
-          <IconLink
-            title={ info.address ? 'Logout' : 'Login' }
+            title={info.address ? 'Logout' : 'Login'}
             icon="key"
-            to={`/login?action=${info.address ? 'logout' : 'login' }`}
+            to={`/login?action=${info.address ? 'logout' : 'login'}`}
             className="menuItem"
             onClick={onClick}
           />

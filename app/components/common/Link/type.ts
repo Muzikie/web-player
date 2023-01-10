@@ -19,4 +19,5 @@ export interface CompoundLinkProps extends BaseProps {
 
 export interface TextLinkProps extends BaseProps {
   title: string|ReactElement;
+  theme?: 'dark';
 }

@@ -6,15 +6,15 @@
   "author": "Block Made GmbH",
   "license": "ISC",
   "scripts": {
-    "build": "remix build",
+    "build": "npm run build:css && remix build",
     "remix:dev": "remix build && run-p \"dev:*\"",
     "dev": "concurrently \"npm run dev:css\" \"npm run remix:dev\"",
     "dev:node": "cross-env NODE_ENV=development nodemon ./server.js --watch ./server.js",
     "postinstall": "patch-package && remix-esbuild-override",
     "dev:remix": "remix watch",
     "start": "cross-env NODE_ENV=production node ./server.js",
-    "dev:css": "sh collectStyles.sh && postcss styles --base styles --dir app/styles -w",
-    "build:css": "sh collectStyles.sh && postcss styles --base styles --dir app/styles --env production",
+    "dev:css": "sh collectStyles.sh && postcss styles --base styles --dir app/css -w",
+    "build:css": "sh collectStyles.sh && postcss styles --base styles --dir app/css --env production",
     "lint": "npx eslint app --ext .js,.jsx,.ts,.tsx --fix",
     "test": "jest --config ./jest.config.js"
   },

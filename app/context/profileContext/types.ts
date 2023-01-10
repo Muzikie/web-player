@@ -23,4 +23,5 @@ export interface ProfileContextType {
 
 export interface ProfileProviderProps {
   children: ReactElement;
+  sessionData: ProfileInfoType;
 }

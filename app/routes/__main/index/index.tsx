@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
@@ -10,30 +10,19 @@ import {
   getArtists,
   getAlbums,
 } from '~/models/entity.server';
-import { HomeLoaderProps, HomeLoaderData } from '../../types';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { getSession } from '~/hooks/useSession';
+import { HomeLoaderData } from '../../types';
 import Collection from '~/components/Collection';
 import { entityThemes } from '~/components/Entity/types';
 import { collectionThemes } from '~/components/Collection/types';
-import styles from '~/styles/routes/__main/index.css';
+import styles from '~/css/routes/__main/index.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ request }: HomeLoaderProps) => {
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
-  const profileInfo = {
-    address: `${session.get('address') ?? ''}`,
-    publicKey: `${session.get('publicKey') ?? ''}`,
-    privateKey: `${session.get('privateKey') ?? ''}`,
-  };
-
+export const loader = async () => {
+  // @todo replace this with the list of all albums on the node
   return json<HomeLoaderData>({
-    profileInfo,
     playlists: await getPlaylists(),
     recentlyPlayed: await getRecentlyPlayed(),
     artists: await getArtists(),
@@ -42,20 +31,12 @@ export const loader = async ({ request }: HomeLoaderProps) => {
 };
 
 const Home = () => {
-  const { setProfileInfo } = useContext(ProfileContext);
   const {
     playlists,
     recentlyPlayed,
     artists,
     albums,
-    profileInfo,
   } = useLoaderData() as HomeLoaderData;
-
-  useEffect(() => {
-    if (profileInfo.address) {
-      setProfileInfo(profileInfo);
-    }
-  }, [profileInfo]);
 
   return (
     <section className="screen home">

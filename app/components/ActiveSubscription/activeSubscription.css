@@ -1,0 +1,96 @@
+.component.activeSubscription {
+   --info-height: 50px;
+
+
+   position: relative;
+   width: 100%;
+
+   & .subscriptionInfo {
+      max-width: 600px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 var(--padding-m);
+
+      & h3 {
+         margin: 0;
+         color: var(--color-secondary);
+         display: inline-block;
+         font-weight: var(--font-weight-black);
+         padding-bottom: var(--padding-xs);
+      }
+
+      & ul {
+         display: flex;
+         flex-flow: column nowrap;
+         justify-content: space-between;
+
+         & li {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            height: var(--info-height);
+            line-height: var(--info-height);
+
+            &:not(:last-child) {
+               border-bottom: 1px solid var(--border-light);
+            }
+         }
+
+         & span {
+            color: var(--gray);
+         }
+
+         & strong,
+         & b {
+            color: var(--color-secondary);
+            font-weight: var(--font-weight-normal);
+         }
+      }
+   }
+
+   & .subscriptionFooter {
+      & figure {
+         & .svg {
+            height: 34px;
+         }
+      }
+
+       & header {
+         margin: 18px 2rem;
+
+         & h4 {
+            text-align: center;
+            color: var(--white);
+         }
+      }
+   }
+}
+
+.component.noSubscription {
+   & .wrapper {
+      height: 30vh;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+
+      & figure,
+      & header {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+      & figure {
+         flex-flow: row nowrap;
+      }
+
+      & header {
+         flex-flow: column nowrap;
+
+         & h3,
+         & p {
+            color: var(--color-secondary);
+         }
+      }
+   }
+}

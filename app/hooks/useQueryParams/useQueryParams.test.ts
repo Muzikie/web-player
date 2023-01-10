@@ -1,7 +1,7 @@
-import {renderHook, act} from '@testing-library/react-hooks';
-import {Navigate} from 'react-router-dom';
+import { renderHook, act } from '@testing-library/react-hooks';
+import { Navigate } from 'react-router-dom';
 
-import {useQueryParams} from './useQueryParams';
+import { useQueryParams } from './useQueryParams';
 
 jest.mock('react-router-dom', () => ({
   useLocation: jest.fn(() => ({
@@ -17,7 +17,7 @@ describe('useQueryParams', () => {
   });
 
   it('should convert querystring to an object', () => {
-    const {result} = renderHook(() => useQueryParams());
+    const { result } = renderHook(() => useQueryParams());
 
     expect(result.current.queryParams).toEqual({
       foo: 'bar',
@@ -26,10 +26,10 @@ describe('useQueryParams', () => {
   });
 
   it('should set new key-values to the query string and navigate to the new url', () => {
-    const {result} = renderHook(() => useQueryParams());
+    const { result } = renderHook(() => useQueryParams());
 
     act(() => {
-      result.current.setQueryParam({foo: 'baz', koo: 'liz'});
+      result.current.setQueryParam({ foo: 'baz', koo: 'liz' });
     });
 
     expect(Navigate).toHaveBeenCalledWith({
@@ -38,7 +38,7 @@ describe('useQueryParams', () => {
   });
 
   it('should remove given key and its value from the query string and navigate to the new url', () => {
-    const {result} = renderHook(() => useQueryParams());
+    const { result } = renderHook(() => useQueryParams());
 
     act(() => {
       result.current.removeQueryParam('foo');
