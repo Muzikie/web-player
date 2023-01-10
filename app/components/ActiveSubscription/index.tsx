@@ -1,5 +1,5 @@
 import React from 'react';
-import {useActiveSubscription} from '~/hooks/useSubscriptions';
+import { useActiveSubscription } from '~/hooks/useSubscriptions';
 import Modal from '../Modal';
 import { PrimaryButton } from '../common/Button';
 import { SubscriptionInfoProps } from './types';
@@ -19,7 +19,7 @@ const SubscriptionInfo = ({ data }: SubscriptionInfoProps) => {
       <h3>Free trial</h3>
       <ul>
         {
-          list.map(({title, content}) => (
+          list.map(({ title, content }) => (
             <li key={title}>
               <span>{title}</span>
               <strong>{content}</strong>
