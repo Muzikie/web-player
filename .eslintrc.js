@@ -25,6 +25,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 0,
     'quotes': [2, 'single', { 'avoidEscape': true }],
     'indent': ['error', 2],
+    'no-multiple-empty-lines': 'error',
   },
   settings: {
     'import/resolver' : {

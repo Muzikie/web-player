@@ -1,5 +1,6 @@
 import { cryptography } from '@liskhq/lisk-client';
 
+export const ABORT_DELAY = 5000;
 export const DERIVATION_PATH = "m/44'/134'/0'";
 export const CHAIN_ID = '00000000';
 export const VALID_GENRES = [

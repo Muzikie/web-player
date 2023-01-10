@@ -55,7 +55,7 @@ export async function getPlaylist(id: number): Promise<PlaylistType> {
   return fetch(`${API_URLS.SERVICE}/playlists/${id}`).then((res) => res.json());
 }
 
-export async function getPlaylistTracks(id: number): Promise<Array<PlaylistType>> {
+export async function getPlaylistTracks(id: number): Promise<Array<TrackType>> {
   return fetch(`${API_URLS.SERVICE}/playlists/${id}/tracks`).then((res) => res.json());
 }
 
