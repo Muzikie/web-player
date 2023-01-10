@@ -23,6 +23,17 @@ export const DEFAULT_VALUES: DefaultValues = {
       collections: [],
     },
   },
+  [Method.collection_getCollection]: {
+    name: '',
+    releaseYear: '',
+    artistName: '',
+    coArtists: [],
+    collectionType: 1,
+    audios: [],
+    hash: '',
+    meta: '',
+    creatorAddress: '',
+  },
   [Method.audio_getAccount]: {
     audio: {
       audios: [],
