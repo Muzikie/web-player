@@ -19,4 +19,5 @@ export const FEEDBACK_MESSAGES = {
   INVALID_PARAMS: 'Audio parameters were invalid. Please review the data.',
   BROADCAST_ERROR: 'Error creating audio. Try again.',
   SUCCESS: 'Audio created successfully',
+  PENDING: 'Wait while audio is being create. (~10 seconds)',
 };

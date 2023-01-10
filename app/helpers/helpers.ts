@@ -39,3 +39,16 @@ export const isEmpty = (value: any) => {
  */
 export const isObjectLiked = (value: any) =>
   Array.isArray(value) || typeof value === 'object';
+
+/**
+ * Creates a promise to wait for given time in seconds
+ *
+ * @param {number} seconds - Seconds to wait
+ * @returns 
+ */
+export const waitFor = (seconds: number): Promise<void> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, seconds * 1000);
+  });

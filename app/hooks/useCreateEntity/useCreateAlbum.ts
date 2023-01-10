@@ -6,12 +6,14 @@ import md5 from 'md5';
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
+import { waitFor } from '~/helpers/helpers';
 import { CHAIN_ID } from '~/constants/app';
-import { Method } from '~/context/socketContext/types';
+import { CollectionAccountResponse, Method, CollectionResponse } from '~/context/socketContext/types';
 import { COLLECTION_CREATE_SCHEMA } from './schemas';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
+import { postAlbum } from '~/models/entity.server';
 
 export const useCreateAlbum = () => {
   const { updateAccount } = useAccount();
@@ -54,6 +56,13 @@ export const useCreateAlbum = () => {
 
     // update account state
     const data = await updateAccount();
+
+    const curr = <CollectionAccountResponse> await request(
+      Method.collection_getAccount,
+      { address: data.address },
+    );
+
+    const albumsCount = !curr.error ? curr.data.collection?.collections.length : 0;
 
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
@@ -102,8 +111,27 @@ export const useCreateAlbum = () => {
       );
       // Check if the NFT is created correctly
       if (!response.error) {
-        setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
-        // @todo If successful, make an API call to the server to save the entity
+        setFeedback({ message: FEEDBACK_MESSAGES.PENDING, error: true });
+        await waitFor(12);
+        const nextState = <CollectionAccountResponse> await request(
+          Method.collection_getAccount,
+          { address: data.address },
+        );
+        if (!nextState.error && nextState.data.collection.collections.length > albumsCount) {
+          const collectionID = nextState.data.collection.collections[nextState.data.collection.collections.length - 1];
+          const createdAlbum = <CollectionResponse> await request(
+            Method.collection_getCollection,
+            { collectionID },
+          );
+          // Call Streamer
+          if (!createdAlbum.error) {
+            postAlbum({
+              ...createdAlbum.data,
+              collectionID,
+            });
+            setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
+          }
+        }
       } else {
         setFeedback({ message: FEEDBACK_MESSAGES.BROADCAST_ERROR, error: true });
       }
