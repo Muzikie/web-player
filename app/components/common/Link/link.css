@@ -1,6 +1,10 @@
 .component {
   &.text {
     font-size: var(--size-span);
+
+    & .dark {
+      color: var(--color-secondary);
+    }
   }
 
   &.icon {
@@ -9,8 +13,5 @@
 
   &.compound {
     position: initial;
-  }
-  & .dark {
-    color: var(--color-secondary);
   }
 }
