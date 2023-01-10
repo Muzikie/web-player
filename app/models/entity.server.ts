@@ -11,62 +11,80 @@ export type SearchResultType = {
   [key: string]: Entity[];
 }
 
+const get = (url: string) => fetch(url).then((res) => res.json()).then(res => res.data);
+const post = (url: string, data: any) => fetch(
+  url,
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  }
+).then((res) => res.json()).then(res => res.data);
+
+export async function postAlbum(data: AlbumType): Promise<Array<AlbumType>> {
+  return post(`${API_URLS.STREAMER}/api/v1/collections`, data);
+}
+
+export async function postTrack(data: TrackType): Promise<Array<TrackType>> {
+  return post(`${API_URLS.STREAMER}/api/v1/audios`, data);
+}
+
 export async function getAlbums(): Promise<Array<AlbumType>> {
-  return fetch(`${API_URLS.SERVICE}/albums`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/collections`);
 }
 
 export async function getAlbum(id: number): Promise<AlbumType> {
-  return fetch(`${API_URLS.SERVICE}/albums/${id}`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/collections/${id}`);
 }
 
 export async function getAlbumTracks(id: number): Promise<Array<TrackType>> {
-  return fetch(`${API_URLS.SERVICE}/albums/${id}/tracks`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/collections/${id}/audios`);
 }
 
 export async function getTracks(): Promise<Array<TrackType>> {
-  return fetch(`${API_URLS.SERVICE}/tracks`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/audios`);
 }
 
 export async function getArtists(): Promise<Array<ArtistType>> {
-  return fetch(`${API_URLS.SERVICE}/artists`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/users`);
 }
 
 export async function getArtist(id: number): Promise<ArtistType> {
-  return fetch(`${API_URLS.SERVICE}/artists/${id}`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/users/${id}`);
 }
 
 export async function getArtistAlbums(id: number): Promise<Array<AlbumType>> {
-  return fetch(`${API_URLS.SERVICE}/artists/${id}/albums`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/users/${id}/collections`);
 }
 
 export async function getArtistTracks(id: number): Promise<Array<TrackType>> {
-  return fetch(`${API_URLS.SERVICE}/artists/${id}/tracks`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/users/${id}/audios`);
 }
 
 export async function getRecentlyPlayed(): Promise<Array<Entity>> {
-  return fetch(`${API_URLS.SERVICE}/recentlyPlayed`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/recentlyPlayed`);
 }
 
 export async function getPlaylists(): Promise<Array<PlaylistType>> {
-  return fetch(`${API_URLS.SERVICE}/playlists`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/playlists`);
 }
 
 export async function getPlaylist(id: number): Promise<PlaylistType> {
-  return fetch(`${API_URLS.SERVICE}/playlists/${id}`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/playlists/${id}`);
 }
 
 export async function getPlaylistTracks(id: number): Promise<Array<TrackType>> {
-  return fetch(`${API_URLS.SERVICE}/playlists/${id}/tracks`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/playlists/${id}/tracks`);
 }
 
 export async function search(query: string): Promise<Array<SearchResultType>> {
-  return fetch(`${API_URLS.SERVICE}/search/${query}`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/search/${query}`);
 }
 
 export async function getUserAlbums(address: string): Promise<Array<AlbumType>> {
-  return fetch(`${API_URLS.SERVICE}/users/${address}/albums`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/users/${address}/collections`);
 }
 
 export async function getUserTracks(address: string): Promise<Array<TrackType>> {
-  return fetch(`${API_URLS.SERVICE}/users/${address}/tracks`).then((res) => res.json());
+  return get(`${API_URLS.STREAMER}/api/v1/users/${address}/audios`);
 }
