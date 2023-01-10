@@ -3,7 +3,7 @@ import { IconButton } from '~/components/common/Button';
 import { ModalProps } from './types';
 
 const Modal = ({
-  discardable = false, onDiscard, children, className = '',
+  discardable = false, theme = 'dark', notStickyInMobile, onDiscard, children, className = '',
 }: ModalProps) => {
   const [discarded, setDiscarded] = useState(false);
   const discard = () => {
@@ -17,7 +17,7 @@ const Modal = ({
   };
 
   return (
-    <section className={`component modal ${discarded ? 'discarded' : ''} ${className}`}>
+    <section className={`component modal ${discarded ? 'discarded' : ''} ${className} ${theme} ${notStickyInMobile ? 'modalRelative' : ''}`}>
       {
         discardable
           ? (

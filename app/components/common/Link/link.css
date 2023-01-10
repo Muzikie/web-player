@@ -10,4 +10,7 @@
   &.compound {
     position: initial;
   }
+  & .dark {
+    color: var(--color-secondary);
+  }
 }

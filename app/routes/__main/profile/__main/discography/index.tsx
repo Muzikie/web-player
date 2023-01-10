@@ -4,17 +4,12 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
-import { DiscographyLoaderData, ProfileLoaderProps } from '../../../../types';
-import { getSession } from '~/hooks/useSession';
+import { DiscographyLoaderData } from '../../../../types';
 import { getUserAlbums, getUserTracks } from '~/models/entity.server';
 import UserDiscography from '~/components/UserDiscography';
 
-export const loader = async ({ request }: ProfileLoaderProps) => {
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
-  const address = `${session.get('address') ?? ''}`;
-
+export const loader = async () => {
+  const address = 'lskhqy429nwm2tew3j5j29ef6pguyynf6jxcmgrh2';
   return json<DiscographyLoaderData>({
     albums: await getUserAlbums(address),
     tracks: await getUserTracks(address),
@@ -26,7 +21,6 @@ const Discography = () => {
     tracks,
     albums,
   } = useLoaderData() as DiscographyLoaderData;
-
 
   return (<UserDiscography tracks={tracks} albums={albums} />);
 };

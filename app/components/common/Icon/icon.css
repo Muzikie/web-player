@@ -152,5 +152,11 @@
   &.cross:before {
     content: "\e919";
   }
+  &.telegram:before {
+    content: "\ea95";
+  }
+  &.twitter1:before {
+    content: "\ea96";
+  }
 }
 
