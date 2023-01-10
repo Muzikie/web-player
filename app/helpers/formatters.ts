@@ -1,11 +1,11 @@
 export const formatThousands = (num: number): string => {
   const si = [
-    {value: 1E18, sign: 'E'},
-    {value: 1E15, sign: 'P'},
-    {value: 1E12, sign: 'T'},
-    {value: 1E9, sign: 'B'},
-    {value: 1E6, sign: 'M'},
-    {value: 1E3, sign: 'K'},
+    { value: 1E18, sign: 'E' },
+    { value: 1E15, sign: 'P' },
+    { value: 1E12, sign: 'T' },
+    { value: 1E9, sign: 'B' },
+    { value: 1E6, sign: 'M' },
+    { value: 1E3, sign: 'K' },
   ];
 
   const signItem = si.find((item) => (num >= item.value));

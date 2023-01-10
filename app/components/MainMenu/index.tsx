@@ -1,12 +1,12 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 
-import {IconLink} from '~/components/common/Link';
-import {IconButton} from '~/components/common/Button';
-import {ProfileContext} from '~/context/profileContext/profileContextProvider';
+import { IconLink } from '~/components/common/Link';
+import { IconButton } from '~/components/common/Button';
+import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
-  const {info} = useContext(ProfileContext);
+  const { info } = useContext(ProfileContext);
 
   const onClick = () => {
     setIsActive(!isActive);

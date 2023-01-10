@@ -1,13 +1,13 @@
 /* External dependencies */
 import React from 'react';
-import {Outlet} from '@remix-run/react';
+import { Outlet } from '@remix-run/react';
 
 /* Internal dependencies */
 import styles from '~/css/routes/__main/subscription.css';
-import {Tabs} from '~/components/common/Tabs';
+import { Tabs } from '~/components/common/Tabs';
 
 export function links() {
-  return [{rel: 'stylesheet', href: styles}];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 const Main = () => {
@@ -16,8 +16,8 @@ const Main = () => {
       <header className="tabsHeader">
         <Tabs
           items={[
-            {title: 'Active Subscription', to: '/subscription/active'},
-            {title: 'Purchase', to: '/subscription/purchase'}
+            { title: 'Active Subscription', to: '/subscription/active' },
+            { title: 'Purchase', to: '/subscription/purchase' }
           ]}
         />
       </header>
