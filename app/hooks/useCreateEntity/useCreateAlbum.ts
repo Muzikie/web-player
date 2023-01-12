@@ -8,7 +8,12 @@ import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
 import { waitFor } from '~/helpers/helpers';
 import { CHAIN_ID } from '~/constants/app';
-import { CollectionAccountResponse, Method, CollectionResponse } from '~/context/socketContext/types';
+import {
+  CollectionAccountResponse,
+  CollectionResponse,
+  DryRunTxResponse,
+  Method,
+} from '~/context/socketContext/types';
 import { COLLECTION_CREATE_SCHEMA } from './schemas';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
@@ -96,7 +101,7 @@ export const useCreateAlbum = () => {
     );
     const txBytes = transactions.getBytes(signedTx, COLLECTION_CREATE_SCHEMA);
     // dry-run transaction to get the errors
-    const dryRunResponse = await request(
+    const dryRunResponse = <DryRunTxResponse> await request(
       Method.txpool_dryRunTransaction,
       { transaction: txBytes.toString('hex') },
     );

@@ -6,12 +6,20 @@ import md5 from 'md5';
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
+import { waitFor } from '~/helpers/helpers';
 import { CHAIN_ID } from '~/constants/app';
-import { Method, DryRunTxResponse, PostTxResponse } from '~/context/socketContext/types';
+import {
+  AudioAccountResponse,
+  AudioResponse,
+  DryRunTxResponse,
+  PostTxResponse,
+  Method,
+} from '~/context/socketContext/types';
 import { AUDIO_CREATE_SCHEMA } from './schemas';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
+import { postTrack } from '~/models/entity.client';
 
 export const useCreateTrack = () => {
   const { updateAccount } = useAccount();
@@ -58,15 +66,19 @@ export const useCreateTrack = () => {
     // update account state
     const data = await updateAccount();
 
+    const curr = <AudioAccountResponse> await request(
+      Method.audio_getAccount,
+      { address: data.address },
+    );
+
+    const audiosCount = !curr.error ? curr.data.audio?.audios.length : 0;
+
     // Get file hash
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
-    const { message: hash } = cryptography.ed.signMessageWithPrivateKey(
+    const { signature } = cryptography.ed.signMessageWithPrivateKey(
       md5Hash, Buffer.from(data.privateKey, 'hex'),
     ); // Takes around 350 ms
-
-    // @todo request storage info from Streamer
-    const meta = hash;
 
     // Create blockchain transaction and broadcast it
     const tx = {
@@ -78,8 +90,8 @@ export const useCreateTrack = () => {
         name,
         releaseYear,
         artistName,
-        hash,
-        meta,
+        hash: signature,
+        meta: Buffer.from(md5Hash, 'hex'),
         genre: [genre],
         collectionID: Buffer.from(collectionID, 'hex'),
         owners: [{
@@ -103,15 +115,37 @@ export const useCreateTrack = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    if (!dryRunResponse.error) {
+    if (!dryRunResponse.error && dryRunResponse.data.result > -1) {
       const response = <PostTxResponse> await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
       );
       // Check if the NFT is created correctly
       if (!response.error) {
-        setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
-        // @todo If successful, make an API call to the server to save the entity
+        setFeedback({ message: FEEDBACK_MESSAGES.PENDING, error: true });
+        await waitFor(12);
+        const nextState = <AudioAccountResponse> await request(
+          Method.audio_getAccount,
+          { address: data.address },
+        );
+        if (!nextState.error && nextState.data.audio.audios.length > audiosCount) {
+          const audioID = nextState.data.audio.audios[nextState.data.audio.audios.length - 1];
+          const createdAudio = <AudioResponse> await request(
+            Method.audio_getAudio,
+            { audioID },
+          );
+          // Call Streamer
+          if (!createdAudio.error) {
+            const postResponse = await postTrack({
+              ...createdAudio.data,
+              creatorAddress: cryptography.address.getLisk32AddressFromAddress(Buffer.from(createdAudio.data.creatorAddress, 'hex')),
+              audioID,
+            }, files[0]);
+            if (postResponse?.audioID === audioID) {
+              setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
+            }
+          }
+        }
       } else {
         setFeedback({ message: FEEDBACK_MESSAGES.BROADCAST_ERROR, error: true });
       }

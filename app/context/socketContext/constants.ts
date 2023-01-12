@@ -17,6 +17,7 @@ export const DEFAULT_VALUES: DefaultValues = {
   [Method.txpool_dryRunTransaction]: {
     events: [],
     success: false,
+    result: -1,
   },
   [Method.collection_getAccount]: {
     collection: {
@@ -38,6 +39,17 @@ export const DEFAULT_VALUES: DefaultValues = {
     audio: {
       audios: [],
     },
+  },
+  [Method.audio_getAudio]: {
+    name: '',
+    releaseYear: '',
+    artistName: '',
+    collectionID: '',
+    genre: [],
+    owners: [],
+    hash: '',
+    meta: '',
+    creatorAddress: '',
   },
   [Method.subscription_getAccount]: {
     subscription: {

@@ -17,13 +17,16 @@ const post = (url: string, body: any) => fetch(
   }
 ).then((res) => res.json()).then(res => res.data).catch(console.log);
 
-export async function postAlbum(json: Entity, file: File): Promise<Array<AlbumType>> {
+export async function postAlbum(json: Entity, file: File): Promise<AlbumType> {
   const data = new FormData();
   data.append('file', file);
   data.append('data', JSON.stringify(json));
   return post(`${API_URLS.STREAMER}/api/v1/collections`, data);
 }
 
-export async function postTrack(data: TrackType): Promise<Array<TrackType>> {
+export async function postTrack(json: Entity, file: File): Promise<TrackType> {
+  const data = new FormData();
+  data.append('file', file);
+  data.append('data', JSON.stringify(json));
   return post(`${API_URLS.STREAMER}/api/v1/audios`, data);
 }
