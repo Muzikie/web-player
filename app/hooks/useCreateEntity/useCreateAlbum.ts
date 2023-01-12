@@ -5,7 +5,12 @@ import md5 from 'md5';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
+import {
+  MODULES,
+  COMMANDS,
+  FEEDBACK_MESSAGES,
+  COLLECTION_CREATE_SCHEMA
+} from '~/constants/blockchain';
 import { waitFor } from '~/helpers/helpers';
 import { CHAIN_ID } from '~/constants/app';
 import {
@@ -14,7 +19,6 @@ import {
   DryRunTxResponse,
   Method,
 } from '~/context/socketContext/types';
-import { COLLECTION_CREATE_SCHEMA } from './schemas';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
