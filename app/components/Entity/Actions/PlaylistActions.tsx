@@ -1,11 +1,11 @@
 import React from 'react';
-import { IconButton } from '~/components/common/Button';
+// import { IconButton } from '~/components/common/Button';
 import { PlaylistType, EntityRowProps } from '../types';
 
 const PlaylistActions = ({ data }: EntityRowProps<PlaylistType>) => (
   <footer className="component entity action playlist">
-    <span>{`${data.tracks.length} tracks`}</span>
-    <IconButton
+    <span>{`${data.description} tracks`}</span>
+    {/* <IconButton
       icon="heart"
       className="likeButton"
       onClick={() => console.log('Implement like functionality', data)}
@@ -14,7 +14,7 @@ const PlaylistActions = ({ data }: EntityRowProps<PlaylistType>) => (
       icon="more-vertical"
       className="contextMenu"
       onClick={() => console.log('Implement context menu functionality', data)}
-    />
+    /> */}
   </footer>
 );
 

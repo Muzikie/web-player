@@ -17,16 +17,39 @@ export const DEFAULT_VALUES: DefaultValues = {
   [Method.txpool_dryRunTransaction]: {
     events: [],
     success: false,
+    result: -1,
   },
   [Method.collection_getAccount]: {
     collection: {
       collections: [],
     },
   },
+  [Method.collection_getCollection]: {
+    name: '',
+    releaseYear: '',
+    artistName: '',
+    coArtists: [],
+    collectionType: 1,
+    audios: [],
+    hash: '',
+    meta: '',
+    creatorAddress: '',
+  },
   [Method.audio_getAccount]: {
     audio: {
       audios: [],
     },
+  },
+  [Method.audio_getAudio]: {
+    name: '',
+    releaseYear: '',
+    artistName: '',
+    collectionID: '',
+    genre: [],
+    owners: [],
+    hash: '',
+    meta: '',
+    creatorAddress: '',
   },
   [Method.subscription_getAccount]: {
     subscription: {

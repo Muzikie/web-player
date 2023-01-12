@@ -1,21 +1,24 @@
 import React from 'react';
 import { Link } from '@remix-run/react';
+
 import { IconButton } from '~/components/common/Button';
+import { API_URLS } from '~/constants/api';
 import { EntityRowProps, AlbumType } from '~/components/Entity/types';
+import { getID } from '~/components/Entity/utils';
 
 const AlbumSummary = ({ data }: EntityRowProps<AlbumType>) => {
-  const year = (new Date(data.releaseDate * 1000)).getFullYear();
+  const id = getID(data);
   return (
     <section className="component albumSummary">
       <header>
         <h1>{ data.name }</h1>
-        <Link to={`/artist/${data.artistId}`} className="artist">
+        <Link to={`/artist/${data.creatorAddress}`} className="artist">
           <figure>
-            <img src={data.image} alt={data.artistName} />
+            <img src={`${API_URLS.STREAMER}/${id}.jpg`} alt={data.artistName} />
           </figure>
           <h4>{data.artistName}</h4>
         </Link>
-        <span className="releaseDate">{`${year} Album`}</span>
+        <span className="releaseDate">{`${data.releaseYear} Album`}</span>
 
         <div className="actionButtons">
           <IconButton
@@ -33,7 +36,7 @@ const AlbumSummary = ({ data }: EntityRowProps<AlbumType>) => {
         </div>
       </header>
       <figure className="photo">
-        <img src={data.image} alt={ data.name } />
+        <img src={`${API_URLS.STREAMER}/${id}.jpg`} alt={ data.name } />
       </figure>
     </section>
   );

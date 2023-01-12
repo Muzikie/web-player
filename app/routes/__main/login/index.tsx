@@ -36,7 +36,7 @@ export async function loader({ request }: LoaderBaseProps) {
     request.headers.get('Cookie')
   );
 
-  let address = session.get('address') ?? '';
+  let address = session.get('address');
 
   // Handle logout and login
   const chunks = request.url.split(/\?action=/);
@@ -49,14 +49,14 @@ export async function loader({ request }: LoaderBaseProps) {
     return redirect('/');
   }
 
-  address = session.get('address') ?? '';
-  const publicKey = session.get('publicKey')?.toString('hex') ?? '';
-  const privateKey = session.get('privateKey')?.toString('hex') ?? '';
+  address = session.get('address');
+  const publicKey = session.get('publicKey');
+  const privateKey = session.get('privateKey');
 
   return json({
-    address,
-    publicKey,
-    privateKey,
+    address: address ?? '',
+    publicKey: publicKey ? Buffer.from(publicKey).toString('hex') : '',
+    privateKey: privateKey ? Buffer.from(privateKey).toString('hex') : '',
   }, {
     headers: {
       'Set-Cookie': await commitSession(session),

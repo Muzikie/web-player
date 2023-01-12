@@ -2,6 +2,7 @@ import React from 'react';
 import EntityRow from '~/components/Entity/EntityRow';
 import { CollectionProps, collectionThemes } from './types';
 import { entityThemes } from '~/components/Entity/types';
+import { getID } from '~/components/Entity/utils';
 
 const Collection = ({
   className = '',
@@ -25,7 +26,7 @@ const Collection = ({
           {
             items.map((item, index) => (
               <EntityRow
-                key={`item-${item.id}-${index}`}
+                key={`item-${getID(item)}-${index}`}
                 data={item}
                 theme={itemTheme}
               />
