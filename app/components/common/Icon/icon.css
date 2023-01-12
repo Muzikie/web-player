@@ -26,6 +26,9 @@
 }
 
 .component.icon {
+  &.menuCut:before {
+    content: "\e900";
+  }
   &.check:before {
     content: "\e928";
   }
