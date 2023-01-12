@@ -25,7 +25,7 @@ const UserDiscography = ({ tracks, albums }: UserDiscographyProps) => {
           albums.map((album, index) => (
             <section key={`album-${album.collectionID}-${index}`}>
               <EntityRow
-                data={albums[0]}
+                data={albums[index]}
                 mode={entityMode.edit}
               />
               <section className='albumTracks'>
