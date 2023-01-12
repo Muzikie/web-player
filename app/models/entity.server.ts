@@ -46,7 +46,7 @@ export async function getArtistTracks(id: number): Promise<Array<TrackType>> {
 }
 
 export async function getRecentlyPlayed(): Promise<Array<Entity>> {
-  return get(`${API_URLS.STREAMER}/api/v1/audios`);
+  return get(`${API_URLS.STREAMER}/api/v1/audios?limit=6`);
 }
 
 export async function getPlaylists(): Promise<Array<PlaylistType>> {

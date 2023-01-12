@@ -29,7 +29,7 @@ export const loader = async () => {
 const Home = () => {
   const {
     recentlyPlayed,
-    artists,
+    // artists,
     albums,
   } = useLoaderData() as HomeLoaderData;
 
@@ -41,12 +41,12 @@ const Home = () => {
         itemTheme={entityThemes.minimal}
         items={!recentlyPlayed?.length ? [] : recentlyPlayed}
       />
-      <Collection
+      {/* <Collection
         className="favorite"
         title="Favorite"
         itemTheme={entityThemes.minimal}
         items={!artists?.length ? [] : artists}
-      />
+      /> */}
       <Collection
         className="favorite"
         title="Favorite"
