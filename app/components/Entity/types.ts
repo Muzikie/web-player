@@ -1,8 +1,6 @@
 interface BaseEntity {
-  id: string;
+  creatorAddress: string;
   name: string;
-  ownerId: string;
-  image: string;
   hash: string;
   meta: string;
 }
@@ -21,31 +19,39 @@ export enum entityMode {
 export type entityTheme = entityThemes | undefined;
 
 export interface AlbumType extends BaseEntity {
+  coArtists: string[];
+  collectionType: number;
+  audios: string[];
+  releaseYear: string;
   artistName: string;
-  artistId: string;
-  releaseDate: number;
-  description: string;
-  tracks: TrackType[];
+  collectionID: string;
 }
 
 export interface ArtistType extends BaseEntity {
   description?: string;
-  mostPopular?: TrackType[];
-  albums: string[],
+}
+
+interface LoyaltyOwnerJSON {
+  address: string;
+  shares: number;
+  income: string;
 }
 
 export interface TrackType extends BaseEntity {
-  albumId: string;
-  albumName: string;
-  duration: string;
-  artistId: string;
+  genre: number[];
+  collectionID: string;
+  owners: LoyaltyOwnerJSON[];
+  releaseYear: string;
   artistName: string;
-  likes: string;
+  audioID: string;
 }
 
 export interface PlaylistType extends BaseEntity {
-  creationDate: number;
+  playlistID: string;
+  owners: LoyaltyOwnerJSON[];
+  releaseYear: string;
   tracks: TrackType[];
+  description: string;
 }
 
 export type Entity = AlbumType | ArtistType | TrackType | PlaylistType;

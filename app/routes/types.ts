@@ -33,7 +33,6 @@ export interface albumLoaderProps {
 }
 
 export interface HomeLoaderData {
-  playlists: Awaited<PlaylistType[]>;
   recentlyPlayed: Awaited<Entity[]>;
   artists: Awaited<ArtistType[]>;
   albums: Awaited<AlbumType[]>;
