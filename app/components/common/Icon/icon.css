@@ -27,130 +27,130 @@
 
 .component.icon {
   &.check:before {
-    content: "\e927";
-  }
-  &.chevron-left:before {
-    content: "\e900";
-  }
-  &.chevron-right:before {
-    content: "\e901";
-  }
-  &.copy:before {
-    content: "\e902";
-  }
-  &.eye:before {
-    content: "\e91a";
-  }
-  &.eye-off:before {
-    content: "\e91b";
-  }
-  &.fast-forward:before {
-    content: "\e903";
-  }
-  &.file:before {
-    content: "\e91c";
-  }
-  &.flag:before {
     content: "\e928";
   }
-  &.heart:before {
+  &.chevron-left:before {
+    content: "\e901";
+  }
+  &.chevron-right:before {
+    content: "\e902";
+  }
+  &.copy:before {
+    content: "\e903";
+  }
+  &.eye:before {
+    content: "\e91b";
+  }
+  &.eye-off:before {
+    content: "\e91c";
+  }
+  &.fast-forward:before {
     content: "\e904";
   }
-  &.home:before {
+  &.file:before {
     content: "\e91d";
   }
-  &.image:before {
-    content: "\e91e";
-  }
-  &.info:before {
+  &.flag:before {
     content: "\e929";
   }
-  &.key:before {
-    content: "\e91f";
-  }
-  &.link-diagonal:before {
+  &.heart:before {
     content: "\e905";
   }
-  &.link-horizontal:before {
-    content: "\e906";
+  &.home:before {
+    content: "\e91e";
   }
-  &.menu:before {
+  &.image:before {
+    content: "\e91f";
+  }
+  &.info:before {
+    content: "\e92a";
+  }
+  &.key:before {
     content: "\e920";
   }
-  &.message:before {
+  &.link-diagonal:before {
+    content: "\e906";
+  }
+  &.link-horizontal:before {
     content: "\e907";
   }
-  &.dark:before {
-    content: "\e908";
-  }
-  &.more-horizontal:before {
-    content: "\e909";
-  }
-  &.more-vertical:before {
-    content: "\e90a";
-  }
-  &.music:before {
-    content: "\e90b";
-  }
-  &.pause:before {
-    content: "\e90c";
-  }
-  &.percent:before {
+  &.menu:before {
     content: "\e921";
   }
-  &.pie-chart:before {
-    content: "\e922";
+  &.message:before {
+    content: "\e908";
   }
-  &.play:before {
+  &.dark:before {
+    content: "\e909";
+  }
+  &.more-horizontal:before {
+    content: "\e90a";
+  }
+  &.more-vertical:before {
+    content: "\e90b";
+  }
+  &.music:before {
+    content: "\e90c";
+  }
+  &.pause:before {
     content: "\e90d";
   }
-  &.power:before {
+  &.percent:before {
+    content: "\e922";
+  }
+  &.pie-chart:before {
     content: "\e923";
   }
-  &.repeat:before {
+  &.play:before {
     content: "\e90e";
   }
-  &.rewind:before {
-    content: "\e90f";
-  }
-  &.rotate-ccw:before {
-    content: "\e910";
-  }
-  &.rotate-cw:before {
-    content: "\e911";
-  }
-  &.search:before {
-    content: "\e912";
-  }
-  &.settings:before {
-    content: "\e913";
-  }
-  &.share:before {
+  &.power:before {
     content: "\e924";
   }
-  &.shuffle:before {
-    content: "\e925";
+  &.repeat:before {
+    content: "\e90f";
   }
-  &.skip-back:before {
+  &.rewind:before {
+    content: "\e910";
+  }
+  &.rotate-ccw:before {
+    content: "\e911";
+  }
+  &.rotate-cw:before {
+    content: "\e912";
+  }
+  &.search:before {
+    content: "\e913";
+  }
+  &.settings:before {
     content: "\e914";
   }
-  &.skip-forward:before {
-    content: "\e915";
+  &.share:before {
+    content: "\e925";
   }
-  &.sun:before {
-    content: "\e916";
-  }
-  &.trash:before {
-    content: "\e917";
-  }
-  &.user:before {
+  &.shuffle:before {
     content: "\e926";
   }
-  &.volume:before {
+  &.skip-back:before {
+    content: "\e915";
+  }
+  &.skip-forward:before {
+    content: "\e916";
+  }
+  &.sun:before {
+    content: "\e917";
+  }
+  &.trash:before {
     content: "\e918";
   }
-  &.cross:before {
+  &.user:before {
+    content: "\e927";
+  }
+  &.volume:before {
     content: "\e919";
+  }
+  &.cross:before {
+    content: "\e91a";
   }
   &.telegram:before {
     content: "\ea95";
