@@ -3,6 +3,7 @@ import { memo, ReactNode, MouseEvent, useContext } from 'react';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { Link } from '@remix-run/react';
 import { Entity, entityMode, TrackType } from '../types';
+import { getID } from '../utils';
 
 interface WrapperProps {
   entity: string;
@@ -42,7 +43,7 @@ const Wrapper = ({
   }
 
   return (
-    <Link to={`/${entity}/${data.id}`} className={className}>
+    <Link to={`/${entity}/${getID(data)}`} className={className}>
       {children}
     </Link>
   );

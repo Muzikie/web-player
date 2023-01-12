@@ -8,12 +8,12 @@ import { getEntity } from '../utils';
 
 const Subtitle = ({ data }: EntityRowProps<Entity>) => {
   let subtitle = '-';
-  if ('creationDate' in data) {
-    subtitle = 'Lana Del Rey and others';
-  } else if ('releaseDate' in data || 'duration' in data) {
+  if ('playlistID' in data) {
+    subtitle = data.description;
+  } else if ('audioID' in data) {
     subtitle = data.artistName;
   } else {
-    subtitle = `${data.albums.length} Albums`;
+    subtitle = 'Artist';
   }
 
   return (
@@ -36,7 +36,7 @@ const EntityRow = ({
       <div className="container">
         <div className="primaryInfo">
           {
-            ('duration' in data)
+            ('audioID' in data)
               ? (<Icon name="play" />)
               : (
                 <EntityThumbnail

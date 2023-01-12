@@ -13,7 +13,7 @@ import { COLLECTION_CREATE_SCHEMA } from './schemas';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
-import { postAlbum } from '~/models/entity.server';
+import { postAlbum } from '~/models/entity.client';
 
 export const useCreateAlbum = () => {
   const { updateAccount } = useAccount();
@@ -66,12 +66,9 @@ export const useCreateAlbum = () => {
 
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
-    const { message: hash } = cryptography.ed.signMessageWithPrivateKey(
+    const { signature } = cryptography.ed.signMessageWithPrivateKey(
       md5Hash, Buffer.from(data.privateKey, 'hex'),
     ); // Takes around 350 ms
-
-    // @todo request storage info from Streamer
-    const meta = hash;
 
     // Create blockchain transaction and broadcast it
     const tx = {
@@ -83,8 +80,8 @@ export const useCreateAlbum = () => {
         name,
         releaseYear,
         artistName,
-        hash,
-        meta,
+        hash: signature,
+        meta: Buffer.from(md5Hash, 'hex'),
         coArtists: [],
         collectionType,
       },
@@ -104,7 +101,7 @@ export const useCreateAlbum = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    if (!dryRunResponse.error) {
+    if (!dryRunResponse.error && dryRunResponse.data.result > -1) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
@@ -125,11 +122,14 @@ export const useCreateAlbum = () => {
           );
           // Call Streamer
           if (!createdAlbum.error) {
-            postAlbum({
+            const postResponse = await postAlbum({
               ...createdAlbum.data,
+              creatorAddress: cryptography.address.getLisk32AddressFromAddress(Buffer.from(createdAlbum.data.creatorAddress, 'hex')),
               collectionID,
-            });
-            setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
+            }, files[0]);
+            if (postResponse?.collectionID === collectionID) {
+              setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
+            }
           }
         }
       } else {
@@ -142,7 +142,6 @@ export const useCreateAlbum = () => {
   };
 
   useEffect(() => {
-    console.log(files);
     validate('album', {
       name,
       releaseYear,

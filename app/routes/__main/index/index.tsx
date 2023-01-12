@@ -5,7 +5,6 @@ import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
 import {
-  // getPlaylists,
   getRecentlyPlayed,
   getArtists,
   getAlbums,
@@ -13,7 +12,6 @@ import {
 import { HomeLoaderData } from '../../types';
 import Collection from '~/components/Collection';
 import { entityThemes } from '~/components/Entity/types';
-// import { collectionThemes } from '~/components/Collection/types';
 import styles from '~/css/routes/__main/index.css';
 
 export function links() {
@@ -21,9 +19,7 @@ export function links() {
 }
 
 export const loader = async () => {
-  // @todo replace this with the list of all albums on the node
   return json<HomeLoaderData>({
-    playlists: [],
     recentlyPlayed: await getRecentlyPlayed(),
     artists: await getArtists(),
     albums: await getAlbums(),
@@ -39,13 +35,6 @@ const Home = () => {
 
   return (
     <section className="screen home">
-      {/* <Collection
-        className="playlists"
-        title="Playlists"
-        itemTheme={entityThemes.large}
-        theme={collectionThemes.normal}
-        items={!playlists?.length ? [] : playlists}
-      /> */}
       <Collection
         className="recent"
         title="Recent"
@@ -56,13 +45,13 @@ const Home = () => {
         className="favorite"
         title="Favorite"
         itemTheme={entityThemes.minimal}
-        items={!artists.length ? [] : artists}
+        items={!artists?.length ? [] : artists}
       />
       <Collection
         className="favorite"
         title="Favorite"
         itemTheme={entityThemes.minimal}
-        items={!albums.length ? [] : albums}
+        items={!albums?.length ? [] : albums}
       />
     </section>
   );
