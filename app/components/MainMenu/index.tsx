@@ -16,7 +16,7 @@ const MainMenu = () => {
     <aside className="component mainMenu">
       <IconButton
         className="menuButton"
-        icon={isActive ? 'cross' : 'menu'}
+        icon={isActive ? 'cross' : 'menuCut'}
         onClick={onClick}
       />
       <section className={`container ${isActive ? 'active' : ''}`}>

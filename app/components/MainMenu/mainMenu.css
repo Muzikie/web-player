@@ -18,6 +18,10 @@
     & i {
       font-size: 24px;
       color: var(--color-secondary);
+
+      &.menuCut {
+        font-size: 7px;
+      }
     }
   }
 
