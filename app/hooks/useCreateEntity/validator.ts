@@ -11,7 +11,6 @@ export const validate = async (entityName: EntityName, props: validateProps): Pr
     await schemas[entityName].validate(props);
     return ValidationStatus.valid;
   } catch (_error) {
-    console.log(_error);
     return ValidationStatus.invalid;
   }
 };

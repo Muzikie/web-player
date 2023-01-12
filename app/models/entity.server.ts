@@ -12,29 +12,13 @@ export type SearchResultType = {
 }
 
 const get = (url: string) => fetch(url).then((res) => res.json()).then(res => res.data);
-const post = (url: string, data: any) => fetch(
-  url,
-  {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  }
-).then((res) => res.json()).then(res => res.data);
-
-export async function postAlbum(data: AlbumType): Promise<Array<AlbumType>> {
-  return post(`${API_URLS.STREAMER}/api/v1/collections`, data);
-}
-
-export async function postTrack(data: TrackType): Promise<Array<TrackType>> {
-  return post(`${API_URLS.STREAMER}/api/v1/audios`, data);
-}
 
 export async function getAlbums(): Promise<Array<AlbumType>> {
-  return get(`${API_URLS.STREAMER}/api/v1/collections`);
+  return get(`${API_URLS.STREAMER}/api/v1/collections`).then(res => res);
 }
 
 export async function getAlbum(id: number): Promise<AlbumType> {
-  return get(`${API_URLS.STREAMER}/api/v1/collections/${id}`);
+  return get(`${API_URLS.STREAMER}/api/v1/collections/${id}`).then(res => res[0]);
 }
 
 export async function getAlbumTracks(id: number): Promise<Array<TrackType>> {
@@ -50,7 +34,7 @@ export async function getArtists(): Promise<Array<ArtistType>> {
 }
 
 export async function getArtist(id: number): Promise<ArtistType> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${id}`);
+  return get(`${API_URLS.STREAMER}/api/v1/users/${id}`).then(res => res[0]);
 }
 
 export async function getArtistAlbums(id: number): Promise<Array<AlbumType>> {
@@ -62,7 +46,7 @@ export async function getArtistTracks(id: number): Promise<Array<TrackType>> {
 }
 
 export async function getRecentlyPlayed(): Promise<Array<Entity>> {
-  return get(`${API_URLS.STREAMER}/api/v1/recentlyPlayed`);
+  return get(`${API_URLS.STREAMER}/api/v1/audios`);
 }
 
 export async function getPlaylists(): Promise<Array<PlaylistType>> {
