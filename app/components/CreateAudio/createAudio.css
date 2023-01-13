@@ -51,23 +51,54 @@
   padding: 10px 0;
   text-align: center;
 
-  & h5 {
+  & h4 {
     padding: 10px;
     border-radius: 8px;
     font-weight: 300;
   }
 
   &.success {
-    & h5 {
+    & h4 {
       background-color: var(--color-success-see-through);
       color: var(--color-success);
     }
   }
 
-  &.error {
-    & h5 {
-      background-color: var(--color-error-see-through);
-      color: var(--color-error);
+  &.progressContainer {
+    margin: 10px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 15px;
+    border-radius: var(--border-radius-xs);
+    overflow: hidden;
+    width: 100%;
+
+    & h4 {
+      position: inherit;
+      text-align: center;
+      color: var(--color-primary-opaque);
+      height: 100%;
+      width: 100%;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: #5297ff;
+      width: 0;
+      box-shadow: inset 0 1px 1px 0px #5297ff, inset 0 -1px 1px 0px rgba(255, 255, 255, 0.25),
+        1px 1px 3px 0 rgba(0, 0, 0, 0.33);
+      animation: progress-animation 12s ease-in forwards;
+    }
+
+    & progress {
+      position: relative;
+      display: none;
     }
   }
 }
