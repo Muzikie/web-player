@@ -17,9 +17,7 @@ const Feedback = ({ data }: FeedbackProps) => {
         </div>
       ) : (
         <div className="component feedback progressContainer">
-          <div>
-            <h4>{data.message}hello</h4>
-          </div>
+          <h4>{data.message}hello</h4>
           <progress className="progress" max="100"></progress>
         </div>
       )}

@@ -42,18 +42,14 @@
   &.progressContainer {
     margin: 10px 0;
     position: relative;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     text-align: center;
     height: 15px;
     border-radius: 6px;
     overflow: hidden;
     width: 100%;
 
-    & div {
-      display: flex;
-      align-items: center;
-      margin-top: -12px;
-    }
     & h4 {
       position: inherit;
       text-align: center;
