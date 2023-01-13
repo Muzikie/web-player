@@ -8,27 +8,13 @@ import { VALID_COLLECTION_TYPES } from '~/constants/app';
 import Feedback from './Feedback';
 
 const CreateAlbum = () => {
-  const {
-    name,
-    releaseYear,
-    artistName,
-    collectionType,
-    onChange,
-    broadcast,
-    feedback,
-    status,
-  } = useCreateAlbum();
+  const { name, releaseYear, artistName, collectionType, onChange, broadcast, feedback, status } =
+    useCreateAlbum();
 
   return (
     <form className="component createAlbum">
       <fieldset>
-        <Input
-          value={name}
-          onChange={onChange}
-          name="name"
-          placeholder="Enter name"
-          type="text"
-        />
+        <Input value={name} onChange={onChange} name="name" placeholder="Enter name" type="text" />
         <Input
           value={releaseYear}
           onChange={onChange}
@@ -53,7 +39,7 @@ const CreateAlbum = () => {
         <FileInput
           icon="file"
           name="files"
-          accept='.png,.jpg,.jpeg'
+          accept=".png,.jpg,.jpeg"
           multiple={false}
           title="Upload cover image"
           onChange={onChange}
@@ -61,7 +47,7 @@ const CreateAlbum = () => {
       </fieldset>
       <PrimaryButton
         onClick={broadcast}
-        disabled={status !== ValidationStatus.valid}
+        disabled={status !== ValidationStatus.valid || feedback.error}
         type="button"
       >
         Create
