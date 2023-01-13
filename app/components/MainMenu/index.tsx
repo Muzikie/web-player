@@ -19,7 +19,7 @@ const MainMenu = () => {
         icon={isActive ? 'cross' : 'menuCut'}
         onClick={onClick}
       />
-      <section className={`container ${isActive ? 'active' : ''}`}>
+      <section className={`menuContainer ${isActive ? 'active' : ''}`}>
         <div className="list">
           <IconLink
             title="Home"

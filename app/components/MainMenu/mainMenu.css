@@ -25,7 +25,7 @@
     }
   }
 
-  & .container {
+  & .menuContainer {
     display: none;
     height: auto;
     width: var(--menu-width);
