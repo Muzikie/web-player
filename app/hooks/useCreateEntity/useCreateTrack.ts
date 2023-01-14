@@ -12,7 +12,7 @@ import {
   AUDIO_CREATE_SCHEMA,
 } from '../../constants/blockchain';
 import { waitFor } from '~/helpers/helpers';
-import { CHAIN_ID } from '~/constants/app';
+import { CHAIN_ID, TX_STATUS } from '~/constants/app';
 import {
   AudioAccountResponse,
   AudioResponse,
@@ -24,6 +24,7 @@ import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
 import { postTrack } from '~/models/entity.client';
+import { getTransactionExecutionStatus } from '~/helpers/helpers';
 
 export const useCreateTrack = () => {
   const { updateAccount } = useAccount();
@@ -119,7 +120,8 @@ export const useCreateTrack = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    if (!dryRunResponse.error && dryRunResponse.data.result > -1) {
+    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse.data.events);
+    if (txStatus === TX_STATUS.SUCCESS) {
       const response = <PostTxResponse> await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },

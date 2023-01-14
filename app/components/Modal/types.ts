@@ -5,6 +5,6 @@ export interface ModalProps {
   onDiscard?: () => void;
   className?: string;
   children: ReactNode;
-  theme: 'dark' | 'light';
+  theme?: 'dark' | 'light';
   notStickyInMobile?: boolean;
 }
