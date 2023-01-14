@@ -14,9 +14,13 @@ const Feedback = ({ data }: FeedbackProps) => {
       )}
 
       {data.error ? (
-        <div className="component feedback progressContainer">
-          <h4>{data.message}</h4>
-          <progress className="progress" max="100"></progress>
+        <div className="component feedback">
+          <div>
+            <h4>{data.message}</h4>
+          </div>
+          <div className="progressContainer">
+            <progress className="progress" max="100"></progress>
+          </div>
         </div>
       ) : (
         ''

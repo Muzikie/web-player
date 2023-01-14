@@ -1,4 +1,4 @@
-.component.createAudio {
+.component.createAlbum {
   background-color: var(--color-primary-light);
   padding: var(--padding-s) var(--padding-s) 0;
   border-radius: var(--border-radius-m);
@@ -10,46 +10,26 @@
       margin-bottom: var(--padding-s);
     }
   }
+}
 
-  & .collectionRow {
-    display: flex;
-    flex-flow: row nowrap;
+@keyframes progress-animation {
+  from {
+    width: 0%;
+    background-color: #99e2fb;
+  }
+  to {
     width: 100%;
-    gap: var(--padding-s);
-
-    & .select {
-      flex-grow: 1;
-      flex-shrink: 1;
-    }
-
-    & .addCollection {
-      flex-grow: 0;
-      flex-shrink: 1;
-      width: var(--box-size-s);
-      height: var(--box-size-s);
-      background-color: var(--white-see-through);
-      color: var(--color-secondary);
-      border-radius: var(--border-radius-s);
-      border: solid 1px var(--brightOutline);
-      box-sizing: border-box;
-
-      & i {
-        display: block;
-        font-size: var(--size-h3);
-        width: var(--box-size-s);
-        height: var(--box-size-s);
-        line-height: var(--box-size-s);
-        text-align: center;
-        transform: rotate(45deg);
-      }
-    }
+    background-color: #99e2fb;
   }
 }
 
 .component.feedback {
-  height: 40px;
-  padding: 10px 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1rem;
+  align-items: center;
 
   & h4 {
     padding: 10px;
@@ -64,41 +44,45 @@
     }
   }
 
-  &.progressContainer {
-    margin: 10px 0;
-    position: relative;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    height: 15px;
-    border-radius: var(--border-radius-xs);
-    overflow: hidden;
-    width: 100%;
+  & div {
+    height: 100%;
+    position: inherit;
+    &.progressContainer {
+      position: relative;
+      height: 10px;
+      border-radius: var(--border-radius-xs);
+      overflow: hidden;
+      width: 75vw;
 
-    & h4 {
-      position: inherit;
-      text-align: center;
-      color: var(--color-primary-opaque);
-      height: 100%;
-      width: 100%;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 0;
+        height: 100%;
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        animation: progress-animation 12s ease-in;
+      }
     }
 
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      background: #5297ff;
-      width: 0;
-      box-shadow: inset 0 1px 1px 0px #5297ff, inset 0 -1px 1px 0px rgba(255, 255, 255, 0.25),
-        1px 1px 3px 0 rgba(0, 0, 0, 0.33);
-      animation: progress-animation 12s ease-in forwards;
+    & h4 {
+      background-color: #e3f7fe;
+      position: inherit;
+      text-align: center;
+      font-weight: 400;
+      color: var(--color-secondary);
     }
 
     & progress {
       position: relative;
       display: none;
+      width: 100%;
+      height: 10px;
+      background: #f1f1f1;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
     }
   }
 }
