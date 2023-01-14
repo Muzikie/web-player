@@ -18,3 +18,9 @@ export const getYear = (num: number): string => {
   const year = new Date(num * 1000).getFullYear();
   return year.toString();
 };
+
+export const fromBaseToken = (num: string, token: string|undefined): string =>
+  `${(BigInt(num) / BigInt(1E8)).toString()}${token ? ` ${token}` : ''}`;
+
+export const toBaseToken = (num: string): string =>
+  (BigInt(num) * BigInt(1E8)).toString();
