@@ -63,7 +63,7 @@ export const useStream = () => {
       { transaction: txBytes },
     );
     console.log('dryRunResponse', dryRunResponse);
-    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse);
+    const txStatus = getTransactionExecutionStatus(MODULES.AUDIO, txId, dryRunResponse);
     console.log('txStatus', txStatus);
 
     if (txStatus === TX_STATUS.SUCCESS) {

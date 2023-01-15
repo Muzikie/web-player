@@ -113,6 +113,7 @@ export const useCreateTrack = () => {
       Buffer.from(data.privateKey, 'hex'),
       AUDIO_CREATE_SCHEMA
     );
+    const txId = signedTx.id.toString('hex');
     const txBytes = transactions.getBytes(signedTx, AUDIO_CREATE_SCHEMA);
     // dry-run transaction to get the errors
     const dryRunResponse = <DryRunTxResponse> await request(
@@ -120,7 +121,7 @@ export const useCreateTrack = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse.data.events);
+    const txStatus = getTransactionExecutionStatus(MODULES.AUDIO, txId, dryRunResponse);
     if (txStatus === TX_STATUS.SUCCESS) {
       const response = <PostTxResponse> await request(
         Method.txpool_postTransaction,
@@ -157,7 +158,6 @@ export const useCreateTrack = () => {
       }
     } else {
       setFeedback({ message: FEEDBACK_MESSAGES.INVALID_PARAMS, error: true });
-      // Set errors and display to user
     }
   };
 

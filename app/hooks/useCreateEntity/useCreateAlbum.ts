@@ -112,7 +112,7 @@ export const useCreateAlbum = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse.data.events);
+    const txStatus = getTransactionExecutionStatus(MODULES.COLLECTION, txId, dryRunResponse);
     if (txStatus === TX_STATUS.SUCCESS) {
       const response = await request(
         Method.txpool_postTransaction,
