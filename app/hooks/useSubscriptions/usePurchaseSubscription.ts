@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { cryptography, transactions } from '@liskhq/lisk-client';
+import BigNumber from 'bignumber.js';
 
 import { useWS } from '../useWS/useWS';
 import {
@@ -47,7 +48,7 @@ export const usePurchaseSubscription = () => {
     const tx = {
       module: MODULES.SUBSCRIPTION,
       command: COMMANDS.PURCHASE,
-      nonce: BigInt(data.nonce),
+      nonce: BigNumber(data.nonce),
       senderPublicKey: Buffer.from(data.publicKey, 'hex'),
       params: {
         subscriptionID: Buffer.from(ids[0], 'hex'),

@@ -2,6 +2,7 @@
 import { useState, ChangeEvent, useEffect } from 'react';
 import { transactions, cryptography } from '@liskhq/lisk-client';
 import md5 from 'md5';
+import BigNumber from 'bignumber.js';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
@@ -89,7 +90,7 @@ export const useCreateTrack = () => {
     const tx = {
       module: MODULES.AUDIO,
       command: COMMANDS.CREATE,
-      nonce: BigInt(data.nonce),
+      nonce: BigNumber(data.nonce),
       senderPublicKey: Buffer.from(data.publicKey, 'hex'),
       params: {
         name,
