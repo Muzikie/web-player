@@ -18,7 +18,7 @@ export const useActiveSubscription = () => {
   const { info } = useAccount();
   const [subscription, setSubscription] = useState<SubscriptionData|null>();
   const [subscriptionStatus, setStatus] = useState<SubscriptionStatus>(SubscriptionStatus.loading);
-  const { request } = useWS();
+  const { request, isConnected } = useWS();
 
   const updateSubscription = async () => {
     if (!info.address) {
@@ -50,10 +50,10 @@ export const useActiveSubscription = () => {
   };
 
   useEffect(() => {
-    if (info.address) {
+    if (isConnected && info.address) {
       updateSubscription();
     }
-  }, [info.address]);
+  }, [isConnected]);
 
   return {
     subscriptionStatus,
