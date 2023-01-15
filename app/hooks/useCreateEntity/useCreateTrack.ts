@@ -2,7 +2,6 @@
 import { useState, ChangeEvent, useEffect } from 'react';
 import { transactions, cryptography } from '@liskhq/lisk-client';
 import md5 from 'md5';
-import BigNumber from 'bignumber.js';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
@@ -25,7 +24,7 @@ import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
 import { postTrack } from '~/models/entity.client';
-import { getTransactionExecutionStatus } from '~/helpers/helpers';
+import { getTransactionExecutionStatus } from '~/helpers/transaction';
 
 export const useCreateTrack = () => {
   const { updateAccount } = useAccount();
@@ -90,7 +89,7 @@ export const useCreateTrack = () => {
     const tx = {
       module: MODULES.AUDIO,
       command: COMMANDS.CREATE,
-      nonce: BigNumber(data.nonce),
+      nonce: BigInt(data.nonce),
       senderPublicKey: Buffer.from(data.publicKey, 'hex'),
       params: {
         name,

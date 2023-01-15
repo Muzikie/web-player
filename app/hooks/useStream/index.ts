@@ -10,7 +10,7 @@ import { AUDIO_STREAM_SCHEMA, MODULES, COMMANDS } from '~/constants/blockchain';
 import { CHAIN_ID, TX_STATUS } from '~/constants/app';
 import { ProfileInfoType } from '~/context/profileContext/types';
 import { useWS } from '../useWS/useWS';
-import { getTransactionExecutionStatus } from '~/helpers/helpers';
+import { getTransactionExecutionStatus } from '~/helpers/transaction';
 
 interface CreateTxResponse {
   txBytes: string;

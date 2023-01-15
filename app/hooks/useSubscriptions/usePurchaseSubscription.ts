@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { cryptography, transactions } from '@liskhq/lisk-client';
-import BigNumber from 'bignumber.js';
 
 import { useWS } from '../useWS/useWS';
 import {
@@ -17,7 +16,7 @@ import {
 import { CHAIN_ID, DEV_ACCOUNT, TX_STATUS } from '~/constants/app';
 import { useAccount } from '../useAccount/useAccount';
 import { FetchStatus } from './types';
-import { getTransactionExecutionStatus } from '~/helpers/helpers';
+import { getTransactionExecutionStatus } from '~/helpers/transaction';
 
 export const usePurchaseSubscription = () => {
   const [ids, setIDs] = useState<string[]>([]);
@@ -42,22 +41,18 @@ export const usePurchaseSubscription = () => {
     if (!ids.length) return FEEDBACK_MESSAGES.BROADCAST_ERROR;
 
     const data = await updateAccount();
-    console.log('#0', ids[0]);
-    console.log('#1', data);
     // Create blockchain transaction and broadcast it
     const tx = {
       module: MODULES.SUBSCRIPTION,
       command: COMMANDS.PURCHASE,
-      nonce: BigNumber(data.nonce),
+      nonce: BigInt(data.nonce),
       senderPublicKey: Buffer.from(data.publicKey, 'hex'),
       params: {
         subscriptionID: Buffer.from(ids[0], 'hex'),
         members: [cryptography.address.getAddressFromLisk32Address(data.address)]
       },
     };
-    console.log('#2', tx);
     const fee = transactions.computeMinFee(tx, SUBSCRIPTION_PURCHASE_SCHEMA);
-    console.log('#3', fee);
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
       { ...tx, fee },
@@ -65,7 +60,6 @@ export const usePurchaseSubscription = () => {
       Buffer.from(info.privateKey, 'hex'),
       SUBSCRIPTION_PURCHASE_SCHEMA
     );
-    console.log('#4', signedTx);
     const txId = signedTx.id.toString('hex');
     const txBytes = transactions.getBytes(signedTx, SUBSCRIPTION_PURCHASE_SCHEMA);
     // dry-run transaction to get the errors
@@ -73,9 +67,8 @@ export const usePurchaseSubscription = () => {
       Method.txpool_dryRunTransaction,
       { transaction: txBytes.toString('hex') },
     );
-    console.log('#5', dryRunResponse);
     // broadcast transaction
-    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse.data.events);
+    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse);
     if (txStatus === TX_STATUS.SUCCESS) {
       const response = await request(
         Method.txpool_postTransaction,
@@ -95,8 +88,6 @@ export const usePurchaseSubscription = () => {
     }
   }, [isConnected]);
   
-  console.log(fetchStatus);
-
   return {
     purchase,
     fetchStatus,
