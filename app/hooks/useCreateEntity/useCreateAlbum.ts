@@ -2,23 +2,29 @@
 import { useState, ChangeEvent, useEffect } from 'react';
 import { transactions, cryptography } from '@liskhq/lisk-client';
 import md5 from 'md5';
+import BigNumber from 'bignumber.js';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
+import {
+  MODULES,
+  COMMANDS,
+  FEEDBACK_MESSAGES,
+  COLLECTION_CREATE_SCHEMA
+} from '~/constants/blockchain';
 import { waitFor } from '~/helpers/helpers';
-import { CHAIN_ID } from '~/constants/app';
+import { CHAIN_ID, TX_STATUS } from '~/constants/app';
 import {
   CollectionAccountResponse,
   CollectionResponse,
   DryRunTxResponse,
   Method,
 } from '~/context/socketContext/types';
-import { COLLECTION_CREATE_SCHEMA } from './schemas';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
 import { postAlbum } from '~/models/entity.client';
+import { getTransactionExecutionStatus } from '~/helpers/helpers';
 
 export const useCreateAlbum = () => {
   const { updateAccount } = useAccount();
@@ -79,7 +85,7 @@ export const useCreateAlbum = () => {
     const tx = {
       module: MODULES.COLLECTION,
       command: COMMANDS.CREATE,
-      nonce: BigInt(data.nonce),
+      nonce: BigNumber(data.nonce),
       senderPublicKey: Buffer.from(data.publicKey, 'hex'),
       params: {
         name,
@@ -99,6 +105,7 @@ export const useCreateAlbum = () => {
       Buffer.from(data.privateKey, 'hex'),
       COLLECTION_CREATE_SCHEMA
     );
+    const txId = signedTx.id.toString('hex');
     const txBytes = transactions.getBytes(signedTx, COLLECTION_CREATE_SCHEMA);
     // dry-run transaction to get the errors
     const dryRunResponse = <DryRunTxResponse> await request(
@@ -106,7 +113,8 @@ export const useCreateAlbum = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    if (!dryRunResponse.error && dryRunResponse.data.result > -1) {
+    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse.data.events);
+    if (txStatus === TX_STATUS.SUCCESS) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },

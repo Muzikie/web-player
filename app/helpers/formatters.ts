@@ -1,3 +1,5 @@
+import BigNumber from 'bignumber.js';
+
 export const formatThousands = (num: number): string => {
   const si = [
     { value: 1E18, sign: 'E' },
@@ -18,3 +20,11 @@ export const getYear = (num: number): string => {
   const year = new Date(num * 1000).getFullYear();
   return year.toString();
 };
+
+export const fromBaseToken = (num: string, token?: string|undefined): string => {
+  const formatted = BigNumber(num).dividedBy(BigNumber(1E8)).toFixed(4);
+  return token ? `${formatted} ${token}` : formatted;
+};
+
+export const toBaseToken = (num: string): string =>
+  (BigNumber(num).multipliedBy(BigNumber(1E8))).toFixed(0);

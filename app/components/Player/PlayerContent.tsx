@@ -17,6 +17,7 @@ const PlayerContent = () => {
     playPause,
     onTimeUpdate,
     progress,
+    duration,
     setProgress,
   } = useAudio(audioRef);
   const {
@@ -27,7 +28,7 @@ const PlayerContent = () => {
   return (
     <>
       <section className="primaryInfo">
-        <Link to={`/album/${current?.id ?? ''}`}>
+        <Link to={`/album/${current?.audioID ?? ''}`}>
           { current
             ? <EntityThumbnail data={current} />
             : <PlaceHolderImage />
@@ -39,12 +40,12 @@ const PlayerContent = () => {
         </header>
       </section>
       <audio
-        src={current?.id ? `${API_URLS.STREAMER}/${current?.id}` : ''}
+        src={current?.audioID ? `${API_URLS.STREAMER}/api/v1/audios/stream/${current?.audioID}` : ''}
         ref={audioRef}
         onTimeUpdate={onTimeUpdate}
       />
       <ProgressBar
-        duration={!current || isNaN(Number(current.duration)) ? 0 : Number(current.duration)}
+        duration={duration}
         progress={progress}
         setProgress={setProgress}
       />

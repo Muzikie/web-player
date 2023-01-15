@@ -2,7 +2,9 @@ import { cryptography } from '@liskhq/lisk-client';
 
 export const ABORT_DELAY = 5000;
 export const DERIVATION_PATH = "m/44'/134'/0'";
-export const CHAIN_ID = '00100000';
+export const CHAIN_ID = '00000000';
+export const DEV_SHARE = '0.8';
+export const TOKEN = 'MZK';
 export const VALID_GENRES = [
   { value: 0, label: 'Pop' },
   { value: 1, label: 'Soul' },
@@ -48,3 +50,9 @@ export const TREASURY_ACCOUNT = {
 };
 
 export const METHOD_NOT_READY = 'Method not ready';
+export const SUCCESS_CODE = '0801';
+export const TX_STATUS = {
+  SUCCESS: 'success',
+  FAIL: 'fail',
+};
+export const UNDETERMINED_EVENT_ERROR = 'Event unavailable to determine execution status for transaction';

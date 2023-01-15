@@ -2,12 +2,18 @@
 import { useState, ChangeEvent, useEffect } from 'react';
 import { transactions, cryptography } from '@liskhq/lisk-client';
 import md5 from 'md5';
+import BigNumber from 'bignumber.js';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { MODULES, COMMANDS, FEEDBACK_MESSAGES } from './constants';
+import {
+  MODULES,
+  COMMANDS,
+  FEEDBACK_MESSAGES,
+  AUDIO_CREATE_SCHEMA,
+} from '../../constants/blockchain';
 import { waitFor } from '~/helpers/helpers';
-import { CHAIN_ID } from '~/constants/app';
+import { CHAIN_ID, TX_STATUS } from '~/constants/app';
 import {
   AudioAccountResponse,
   AudioResponse,
@@ -15,11 +21,11 @@ import {
   PostTxResponse,
   Method,
 } from '~/context/socketContext/types';
-import { AUDIO_CREATE_SCHEMA } from './schemas';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
 import { postTrack } from '~/models/entity.client';
+import { getTransactionExecutionStatus } from '~/helpers/helpers';
 
 export const useCreateTrack = () => {
   const { updateAccount } = useAccount();
@@ -84,7 +90,7 @@ export const useCreateTrack = () => {
     const tx = {
       module: MODULES.AUDIO,
       command: COMMANDS.CREATE,
-      nonce: BigInt(data.nonce),
+      nonce: BigNumber(data.nonce),
       senderPublicKey: Buffer.from(data.publicKey, 'hex'),
       params: {
         name,
@@ -115,7 +121,8 @@ export const useCreateTrack = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    if (!dryRunResponse.error && dryRunResponse.data.result > -1) {
+    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse.data.events);
+    if (txStatus === TX_STATUS.SUCCESS) {
       const response = <PostTxResponse> await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },

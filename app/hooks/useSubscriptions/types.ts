@@ -5,3 +5,9 @@ export enum SubscriptionStatus {
   notSubscribed = 'NOT_SUBSCRIBED',
   notLoggedIn = 'NOT_LOGGED_IN',
 }
+
+export enum FetchStatus {
+  loading = 'LOADING',
+  error = 'ERROR',
+  success = 'SUCCESS',
+}
