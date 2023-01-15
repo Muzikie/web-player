@@ -37,6 +37,7 @@ jest.mock('../useWS/useWS', () => ({
       };
 
     }),
+    isConnected: true,
   }),
 }));
 
