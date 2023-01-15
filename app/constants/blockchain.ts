@@ -7,6 +7,7 @@ export const MODULES = {
 };
 
 export const COMMANDS = {
+  STREAM: 'stream',
   CREATE: 'create',
   PURCHASE: 'purchase',
   TRANSFORM: 'transform',
@@ -89,6 +90,19 @@ export const AUDIO_CREATE_SCHEMA = {
     meta: {
       dataType: 'bytes',
       fieldNumber: 8,
+    },
+  },
+};
+
+export const AUDIO_STREAM_SCHEMA = {
+  $id: 'audio/stream',
+  title: 'StreamAsset transaction asset for audio module',
+  type: 'object',
+  required: ['audioID'],
+  properties: {
+    audioID: {
+      dataType: 'bytes',
+      fieldNumber: 1,
     },
   },
 };
