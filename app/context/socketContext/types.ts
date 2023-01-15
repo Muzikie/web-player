@@ -43,8 +43,15 @@ interface PostTxData {
   transactionID: string;
 }
 
-interface DryRunTxData {
-  events: string[];
+interface BlockEvent {
+  module: string;
+  name: string;
+  topics: string[];
+  data: string;
+}
+
+export interface DryRunTxData {
+  events: BlockEvent[];
   success: boolean;
   result: number;
 }
@@ -107,7 +114,7 @@ export interface RequestParams {
   [key: string]: string;
 }
 
-interface ErrorResponse {
+export interface ErrorResponse {
   message: string;
   error: true;
 }

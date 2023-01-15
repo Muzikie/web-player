@@ -2,7 +2,6 @@
 import { useState, ChangeEvent, useEffect } from 'react';
 import { transactions, cryptography } from '@liskhq/lisk-client';
 import md5 from 'md5';
-import BigNumber from 'bignumber.js';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
@@ -24,7 +23,7 @@ import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
 import { postAlbum } from '~/models/entity.client';
-import { getTransactionExecutionStatus } from '~/helpers/helpers';
+import { getTransactionExecutionStatus } from '~/helpers/transaction';
 
 export const useCreateAlbum = () => {
   const { updateAccount } = useAccount();
@@ -85,7 +84,7 @@ export const useCreateAlbum = () => {
     const tx = {
       module: MODULES.COLLECTION,
       command: COMMANDS.CREATE,
-      nonce: BigNumber(data.nonce),
+      nonce: BigInt(data.nonce),
       senderPublicKey: Buffer.from(data.publicKey, 'hex'),
       params: {
         name,
@@ -105,6 +104,12 @@ export const useCreateAlbum = () => {
       Buffer.from(data.privateKey, 'hex'),
       COLLECTION_CREATE_SCHEMA
     );
+    if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
+      return {
+        txBytes: '',
+        txId: '',
+      }
+    }
     const txId = signedTx.id.toString('hex');
     const txBytes = transactions.getBytes(signedTx, COLLECTION_CREATE_SCHEMA);
     // dry-run transaction to get the errors
@@ -113,7 +118,7 @@ export const useCreateAlbum = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse.data.events);
+    const txStatus = getTransactionExecutionStatus(MODULES.COLLECTION, txId, dryRunResponse);
     if (txStatus === TX_STATUS.SUCCESS) {
       const response = await request(
         Method.txpool_postTransaction,
@@ -150,7 +155,6 @@ export const useCreateAlbum = () => {
       }
     } else {
       setFeedback({ message: FEEDBACK_MESSAGES.INVALID_PARAMS, error: true });
-      // Set errors and display to user
     }
   };
 

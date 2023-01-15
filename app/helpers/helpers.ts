@@ -1,9 +1,3 @@
-const {
-  SUCCESS_CODE,
-  TX_STATUS,
-  UNDETERMINED_EVENT_ERROR,
-} = require('~/constants/app');
-
 export const greet = (timestamp = 0) => {
   const date = timestamp ? new Date(timestamp) : new Date();
   const hour = date.getHours();
@@ -58,11 +52,3 @@ export const waitFor = (seconds: number): Promise<void> =>
       resolve();
     }, seconds * 1000);
   });
-
-export const getTransactionExecutionStatus = (module: string, id: string, events: any[]) => {
-  const expectedEventName = `${module}:commandExecutionResult`;
-  const commandExecResultEvents = events.filter(e => `${e.module}:${e.name}` === expectedEventName);
-  const txExecResultEvent = commandExecResultEvents.find(e => e.topics.includes(id));
-  if (!txExecResultEvent) throw Error(`${UNDETERMINED_EVENT_ERROR}: ${id}.`);
-  return txExecResultEvent.data === SUCCESS_CODE ? TX_STATUS.SUCCESS : TX_STATUS.FAIL;
-};
