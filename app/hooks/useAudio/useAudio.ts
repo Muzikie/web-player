@@ -4,13 +4,16 @@ import {
   MutableRefObject,
   useContext,
 } from 'react';
+
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
+import { useStream } from '../useStream';
 
 export const useAudio = (audioRef: MutableRefObject<HTMLAudioElement>) => {
   const {
     isPlaying,
     setIsPlaying,
   } = useContext(PlayerContext);
+  const { registerStream } = useStream();
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const onAudioEnd = () => {
@@ -35,6 +38,10 @@ export const useAudio = (audioRef: MutableRefObject<HTMLAudioElement>) => {
     setDuration(Math.floor(e.target?.duration ?? 0));
     audioRef.current.play();
     setIsPlaying(true);
+    const audioID = audioRef.current.getAttribute('data-audio-id');
+    if (audioID) {
+      registerStream(audioID);
+    }
   };
 
   // Implements seek functionality

@@ -42,6 +42,7 @@ const PlayerContent = () => {
       <audio
         src={current?.audioID ? `${API_URLS.STREAMER}/api/v1/audios/stream/${current?.audioID}` : ''}
         ref={audioRef}
+        data-audio-id={current?.audioID}
         onTimeUpdate={onTimeUpdate}
       />
       <ProgressBar
