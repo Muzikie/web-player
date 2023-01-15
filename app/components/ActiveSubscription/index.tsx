@@ -1,17 +1,28 @@
 import React from 'react';
+import BigNumber from 'bignumber.js';
+
+import { fromBaseToken } from '~/helpers/formatters';
 import { useActiveSubscription } from '~/hooks/useSubscriptions';
 import Modal from '../Modal';
 import { PrimaryButton } from '../common/Button';
 import { SubscriptionInfoProps } from './types';
 import NoSubscription from './NoSubscription';
+import { TOKEN, DEV_SHARE } from '~/constants/app';
 
-// @todo convert the numeric values to MZK
+const getConsumed = (price: string, consumable: string): string => {
+  const factor = new BigNumber(DEV_SHARE);
+  const priceBN = new BigNumber(price);
+  const consumableBN = new BigNumber(consumable);
+  const consumedBN = priceBN.multipliedBy(factor).minus(consumableBN);
+  return consumedBN.toString();
+}
+
 const SubscriptionInfo = ({ data }: SubscriptionInfoProps) => {
   const list = [
-    { title: 'Price', content: data.price },
-    { title: 'Value to spend', content: data.consumable },
-    { title: 'Consumed', content: (data.price * 0.8) - data.consumable },
-    { title: 'Members', content: `${data.maxMembers} user` }
+    { title: 'Price', content: fromBaseToken(data.price, TOKEN) },
+    { title: 'Value to spend', content: fromBaseToken(data.consumable, TOKEN) },
+    { title: 'Consumed', content: fromBaseToken(getConsumed(data.price, data.consumable), TOKEN) },
+    { title: 'Members', content: `${data.maxMembers} user ${data.maxMembers === 1 ? '' : 's'}` }
   ];
 
   return (
