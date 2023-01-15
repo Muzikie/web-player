@@ -104,6 +104,12 @@ export const useCreateAlbum = () => {
       Buffer.from(data.privateKey, 'hex'),
       COLLECTION_CREATE_SCHEMA
     );
+    if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
+      return {
+        txBytes: '',
+        txId: '',
+      }
+    }
     const txId = signedTx.id.toString('hex');
     const txBytes = transactions.getBytes(signedTx, COLLECTION_CREATE_SCHEMA);
     // dry-run transaction to get the errors

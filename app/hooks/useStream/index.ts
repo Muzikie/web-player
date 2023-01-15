@@ -35,6 +35,12 @@ const createTx = (audioID: string, account: ProfileInfoType): CreateTxResponse =
     Buffer.from(account.privateKey, 'hex'),
     AUDIO_STREAM_SCHEMA
   );
+  if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
+    return {
+      txBytes: '',
+      txId: '',
+    }
+  }
   const txId = signedTx.id.toString('hex');
   const txBytes = transactions.getBytes(signedTx, AUDIO_STREAM_SCHEMA);
   return {
@@ -53,28 +59,21 @@ export const useStream = () => {
   };
 
   const registerOne = async (audioID: string) => {
-    console.log('registerOne', audioID);
     const account = await updateAccount();
-    console.log('account', account);
     const { txBytes, txId } = createTx(audioID, account);
-    console.log('CREATE TX', txBytes, txId);
     const dryRunResponse = <DryRunTxResponse> await request(
       Method.txpool_dryRunTransaction,
       { transaction: txBytes },
     );
-    console.log('dryRunResponse', dryRunResponse);
     const txStatus = getTransactionExecutionStatus(MODULES.AUDIO, txId, dryRunResponse);
-    console.log('txStatus', txStatus);
 
     if (txStatus === TX_STATUS.SUCCESS) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes },
       );
-      console.log('response', response);
 
       if (!response.error) {
-        console.log('Remove from queue');
         setQueue((prevQueue) => prevQueue.filter(item => item !== audioID));
       }
     }
