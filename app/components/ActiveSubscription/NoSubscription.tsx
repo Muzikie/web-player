@@ -16,7 +16,7 @@ const NoSubscription = ({
       </figure>
       <header>
         <h3>{title}</h3>
-        <p>{content}</p>
+        <div className='content'>{content}</div>
       </header>
     </div>
   </section>

@@ -68,7 +68,6 @@
 
 .component.noSubscription {
    & .wrapper {
-      height: 30vh;
       display: flex;
       flex-flow: column nowrap;
       justify-content: center;
@@ -88,8 +87,9 @@
          flex-flow: column nowrap;
 
          & h3,
-         & p {
+         & .content {
             color: var(--color-secondary);
+            text-align: center;
          }
       }
    }

@@ -1,6 +1,8 @@
+import { ReactNode } from 'react';
+
 export interface NoSubscriptionProps {
   title: string;
-  content: string;
+  content: ReactNode;
 }
 
 // @todo Replace any with Subscription when it's ready
