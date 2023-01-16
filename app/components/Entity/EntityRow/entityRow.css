@@ -37,6 +37,11 @@
       padding-left: var(--padding-s);
     }
 
+    & .detail {
+      display: flex;
+      flex-direction: column;
+    }
+
     & h4 {
       color: var(--color-secondary);
     }

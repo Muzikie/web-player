@@ -44,6 +44,7 @@ export interface TrackType extends BaseEntity {
   releaseYear: string;
   artistName: string;
   audioID: string;
+  duration: number;
 }
 
 export interface PlaylistType extends BaseEntity {
