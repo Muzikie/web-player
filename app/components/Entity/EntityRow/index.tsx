@@ -50,7 +50,7 @@ const CoArtists = ({ data }: EntityRowProps<Entity>) => {
 };
 
 const ReleaseYear = ({ data }: EntityRowProps<Entity>) => {
-  if (!('releaseYear' in data)) return null;
+  if (!('collectionType' in data)) return null;
 
   return (
     <span className="releaseYear">
