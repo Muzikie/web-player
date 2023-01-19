@@ -13,7 +13,7 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
   } else if ('audioID' in data) {
     subtitle = data.artistName;
   } else {
-    subtitle = data.artistName;
+    subtitle = data.name;
   }
 
   return (
@@ -22,31 +22,38 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
 };
 
 const NumberOfAudios = ({ data }: EntityRowProps<Entity>) => {
-  console.log('data', data);
-  let count = '';
-  if (data.collectionType === 1) {
-    if (data.audios.length > 1) {
-      count = `${data.audios.length} songs`;
-    } else {
-      count = 'single';
-    }
-  } else if (data.collectionType === 2) {
-    count = 'episodes'
-  } else {
-    count = '';
-  }
+  if (!('audios' in data)) return null;
+
+  const count = data.collectionType === 1 ? `${data.audios.length} songs` : `${data.audios.length} episodes`;
+
   return (
-    <span> ․ {count}</span>
+    <span className="audioCount">
+      <strong>.</strong>
+      <span>{count}</span>
+    </span>
   )
 }
 
 const CoArtists = ({ data }: EntityRowProps<Entity>) => {
-  if (data.coArtists) {
-    data.coArtists.map((items, index) => <span key={index}>,{item}</span>)
-  }
+  if (!('coArtists' in data)) return null;
+  return (
+    <>
+      {
+        data.coArtists.map((item, index) => <span key={index}>,{item}</span>)
+      }
+    </>
+  );
+};
 
-}
+const ReleaseYear = ({ data }: EntityRowProps<Entity>) => {
+  if (!('releaseYear' in data)) return null;
 
+  return (
+    <span className="releaseYear">
+      {data.releaseYear}
+    </span>
+  )
+};
 
 const EntityRow = ({
   data, className = '', theme = entityThemes.normal, mode = entityMode.view,
@@ -77,7 +84,7 @@ const EntityRow = ({
             <h4 className="albumName">{data.name}</h4>
             <div className='detail'>
               <span><Subtitle data={data} /> <CoArtists data={data} /></span>
-              <span>{data.releaseYear} <NumberOfAudios data={data} /></span>
+              <span><ReleaseYear data={data}/> <NumberOfAudios data={data} /></span>
             </div>
           </div>
         </div>
