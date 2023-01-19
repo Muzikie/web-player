@@ -5,6 +5,7 @@
   &.iconButton {
     color: var(--white);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &.primaryButton,

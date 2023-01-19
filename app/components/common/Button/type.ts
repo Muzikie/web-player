@@ -6,6 +6,7 @@ export interface ButtonType {
   theme?: string;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit' | 'reset';
+  children?: string|ReactElement;
 }
 
 export interface IconButtonProps extends ButtonType {
