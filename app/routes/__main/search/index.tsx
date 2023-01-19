@@ -8,7 +8,7 @@ import { SearchLoaderData } from '../../types';
 import {
   search,
 } from '~/models/entity.server';
-import Collection from '~/components/Collection';
+import List from '~/components/List';
 import { Input } from '~/components/common/Input';
 import { Entity, entityThemes } from '~/components/Entity/types';
 import styles from '~/css/routes/__main/search.css';
@@ -23,7 +23,7 @@ export const loader = async () => {
   });
 };
 
-const Search = () => {
+const SearchScreen = () => {
   const [query, setQuery] = useState('');
 
   // @todo implement debounce
@@ -43,7 +43,7 @@ const Search = () => {
       <section className="results">
         {
           result ? Object.entries(result).map(([key, items]) => (
-            <Collection
+            <List
               title={key}
               key={key}
               itemTheme={entityThemes.minimal}
@@ -56,4 +56,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchScreen;

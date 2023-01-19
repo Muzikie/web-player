@@ -1,15 +1,15 @@
 import { Entity } from '../Entity/types';
 import { entityTheme } from '../Entity/types';
 
-export enum collectionThemes {
+export enum liskThemes {
   smallRow = 'smallRow',
   normal = 'normal',
   wide = 'wide',
 }
 
-export type collectionTheme = collectionThemes | undefined;
+export type collectionTheme = liskThemes | undefined;
 
-export interface CollectionProps {
+export interface LiskProps {
   className?: string;
   direction?: string;
   title?: string;

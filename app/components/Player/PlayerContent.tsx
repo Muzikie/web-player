@@ -28,7 +28,7 @@ const PlayerContent = () => {
   return (
     <>
       <section className="primaryInfo">
-        <Link to={`/album/${current?.audioID ?? ''}`}>
+        <Link to={`/collection/${current?.audioID ?? ''}`}>
           { current
             ? <EntityThumbnail data={current} />
             : <PlaceHolderImage />

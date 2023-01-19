@@ -37,7 +37,9 @@
     }
   }
 
-  &.album {
+  &.collection {
+    padding-bottom: 0;
+
     & figure {
       border-radius: var(--border-radius-s);
     }
@@ -50,7 +52,7 @@
     }
   }
 
-  &.track {
+  &.audio {
     width: var(--size-xs);
     height: var(--size-xs);
 

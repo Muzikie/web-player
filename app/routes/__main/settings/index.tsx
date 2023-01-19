@@ -5,10 +5,10 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-const Settings = () => (
+const SettingsScreen = () => (
   <section className="screen settings">
     <h2>Settings</h2>
   </section>
 );
 
-export default Settings;
+export default SettingsScreen;

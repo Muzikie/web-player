@@ -7,10 +7,10 @@ import { useLoaderData } from '@remix-run/react';
 import {
   getRecentlyPlayed,
   getArtists,
-  getAlbums,
+  getCollections,
 } from '~/models/entity.server';
 import { HomeLoaderData } from '../../types';
-import Collection from '~/components/Collection';
+import List from '~/components/List';
 import { entityThemes } from '~/components/Entity/types';
 import styles from '~/css/routes/__main/index.css';
 
@@ -22,39 +22,39 @@ export const loader = async () => {
   return json<HomeLoaderData>({
     recentlyPlayed: await getRecentlyPlayed(),
     artists: await getArtists(),
-    albums: await getAlbums(),
+    collections: await getCollections(),
   });
 };
 
-const Home = () => {
+const HomeScreen = () => {
   const {
     recentlyPlayed,
     // artists,
-    albums,
+    collections,
   } = useLoaderData() as HomeLoaderData;
 
   return (
     <section className="screen home">
-      <Collection
+      <List
         className="recent"
         title="Recent"
         itemTheme={entityThemes.minimal}
         items={!recentlyPlayed?.length ? [] : recentlyPlayed}
       />
-      {/* <Collection
+      {/* <List
         className="favorite"
         title="Favorite"
         itemTheme={entityThemes.minimal}
         items={!artists?.length ? [] : artists}
       /> */}
-      <Collection
+      <List
         className="favorite"
         title="Favorite"
         itemTheme={entityThemes.minimal}
-        items={!albums?.length ? [] : albums}
+        items={!collections?.length ? [] : collections}
       />
     </section>
   );
 };
 
-export default Home;
+export default HomeScreen;

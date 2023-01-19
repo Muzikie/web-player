@@ -27,7 +27,7 @@
     }
   }
 
-  &.track {
+  &.audio {
     & .duration,
     & .streamCount {
       text-align: right;
@@ -54,7 +54,7 @@
 
 @media (min-width: 680px) {
   .component.entity.action {
-    &.track {
+    &.audio {
       & .streamCount {
         display: block;
       }

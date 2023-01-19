@@ -4,7 +4,7 @@ import { PlaylistType, EntityRowProps } from '../types';
 
 const PlaylistActions = ({ data }: EntityRowProps<PlaylistType>) => (
   <footer className="component entity action playlist">
-    <span>{`${data.description} tracks`}</span>
+    <span>{`${data.description} audios`}</span>
     {/* <IconButton
       icon="heart"
       className="likeButton"

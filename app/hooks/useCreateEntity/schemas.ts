@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { VALID_GENRES } from '~/constants/app';
 
-export const trackSchema = yup
+export const audioSchema = yup
   .object()
   .shape({
     name: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),

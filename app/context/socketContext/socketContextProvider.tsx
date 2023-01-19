@@ -35,7 +35,6 @@ const SocketProvider = ({ children }: SocketProviderProps) => {
     new Promise<RequestResult<Method>>((resolve, reject) => {
       if (ws) {
         ws.addEventListener(EVENTS.MESSAGE, (event) => {
-          console.log('event', event);
           const parsedData = JSON.parse(event.data);
           if (id === parsedData.id) {
             resolve({

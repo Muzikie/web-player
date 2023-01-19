@@ -6,7 +6,7 @@ import { getSession } from '~/hooks/useSession';
 
 /* Internal dependencies */
 import { DiscographyLoaderData, LoaderBaseProps } from '~/routes/types';
-import { getUserAlbums, getUserTracks } from '~/models/entity.server';
+import { getUserCollections, getUserAudios } from '~/models/entity.server';
 import UserDiscography from '~/components/UserDiscography';
 
 export const loader = async ({ request }: LoaderBaseProps) => {
@@ -16,18 +16,18 @@ export const loader = async ({ request }: LoaderBaseProps) => {
 
   const address = session.get('address');
   return json<DiscographyLoaderData>({
-    albums: await getUserAlbums(address),
-    tracks: await getUserTracks(address),
+    collections: await getUserCollections(address),
+    audios: await getUserAudios(address),
   });
 };
 
 const Discography = () => {
   const {
-    tracks,
-    albums,
+    audios,
+    collections,
   } = useLoaderData() as DiscographyLoaderData;
 
-  return (<UserDiscography tracks={tracks} albums={albums} />);
+  return (<UserDiscography audios={audios} collections={collections} />);
 };
 
 export default Discography;

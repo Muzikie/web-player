@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { ValidationStatus, useCreateAlbum } from '~/hooks/useCreateEntity';
+import { ValidationStatus, useCreateCollection } from '~/hooks/useCreateEntity';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
 import { VALID_COLLECTION_TYPES } from '~/constants/app';
 import Feedback from './Feedback';
 
-const CreateAlbum = () => {
+const CreateCollection = () => {
   const {
     name,
     releaseYear,
@@ -17,10 +17,10 @@ const CreateAlbum = () => {
     broadcast,
     feedback,
     status,
-  } = useCreateAlbum();
+  } = useCreateCollection();
 
   return (
-    <form className="component createAlbum">
+    <form className="component createCollection">
       <fieldset>
         <Input
           value={name}
@@ -71,4 +71,4 @@ const CreateAlbum = () => {
   );
 };
 
-export default CreateAlbum;
+export default CreateCollection;

@@ -3,12 +3,12 @@ import React, { useMemo } from 'react';
 
 /* Internal dependencies */
 import EntityRow from '~/components/Entity/EntityRow';
-import { TrackType, entityMode } from '~/components/Entity/types';
+import { AudioType, entityMode } from '~/components/Entity/types';
 import { UserDiscographyProps } from './types';
 
-const UserDiscography = ({ tracks, albums }: UserDiscographyProps) => {
+const UserDiscography = ({ audios, collections }: UserDiscographyProps) => {
   const discography = useMemo(() => {
-    return tracks.reduce((acc: {[key: string]: TrackType[]}, item: TrackType) => {
+    return audios.reduce((acc: {[key: string]: AudioType[]}, item: AudioType) => {
       if (!acc[item.collectionID]) {
         acc[item.collectionID] = [];
       }
@@ -16,25 +16,25 @@ const UserDiscography = ({ tracks, albums }: UserDiscographyProps) => {
       acc[item.collectionID].push(item);
       return acc;
     }, {});
-  }, [albums]);
+  }, [collections]);
 
   return (
     <section className="component userDiscography tabContainer">
       <div>
         {
-          albums.map((album, index) => (
-            <section key={`album-${album.collectionID}-${index}`}>
+          collections.map((collection, index) => (
+            <section key={`collection-${collection.collectionID}-${index}`}>
               <EntityRow
-                data={albums[index]}
+                data={collections[index]}
                 mode={entityMode.edit}
               />
-              <section className='albumTracks'>
+              <section className='collectionAudios'>
                 {
-                  discography[album.collectionID]
-                    ? discography[album.collectionID].map((track, index) => (
+                  discography[collection.collectionID]
+                    ? discography[collection.collectionID].map((audio, index) => (
                       <EntityRow
-                        key={`track-${track.audioID}-${index}`}
-                        data={track}
+                        key={`audio-${audio.audioID}-${index}`}
+                        data={audio}
                         mode={entityMode.edit}
                       />
                     ))

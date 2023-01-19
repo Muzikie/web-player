@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { SearchResultType } from '~/models/entity.server';
-import { AlbumType, TrackType, ArtistType, PlaylistType, Entity } from '~/components/Entity/types';
+import { CollectionType, AudioType, ArtistType, PlaylistType, Entity } from '~/components/Entity/types';
 import { ProfileInfoType } from '~/context/profileContext/types';
 
 export interface AgreementFormProps {
@@ -19,13 +19,13 @@ export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
 }
 
-export interface AlbumLoaderData {
-  album: Awaited<AlbumType>;
-  tracks: Awaited<TrackType[]>;
+export interface CollectionLoaderData {
+  collection: Awaited<CollectionType>;
+  audios: Awaited<AudioType[]>;
   id: number;
 }
 
-export interface albumLoaderProps {
+export interface collectionLoaderProps {
   params: {
     id: number;
   };
@@ -35,7 +35,7 @@ export interface albumLoaderProps {
 export interface HomeLoaderData {
   recentlyPlayed: Awaited<Entity[]>;
   artists: Awaited<ArtistType[]>;
-  albums: Awaited<AlbumType[]>;
+  collections: Awaited<CollectionType[]>;
 }
 
 export interface LoaderBaseProps {
@@ -44,7 +44,7 @@ export interface LoaderBaseProps {
 
 export interface PlaylistLoaderData {
   playlist: Awaited<PlaylistType>;
-  tracks: Awaited<TrackType[]>;
+  audios: Awaited<AudioType[]>;
   id: number;
 }
 
@@ -57,8 +57,8 @@ export interface playlistLoaderParams {
 
 export interface ArtistLoaderData {
   artist: Awaited<ArtistType>;
-  albums: Awaited<AlbumType[]>;
-  tracks: Awaited<TrackType[]>;
+  collections: Awaited<CollectionType[]>;
+  audios: Awaited<AudioType[]>;
   id: number;
 }
 
@@ -74,11 +74,11 @@ export interface ProfileLoaderData {
 }
 
 export interface DiscographyLoaderData {
-  albums: Awaited<AlbumType[]>;
-  tracks: Awaited<TrackType[]>;
+  collections: Awaited<CollectionType[]>;
+  audios: Awaited<AudioType[]>;
 }
 
 export interface DiscographyProps {
-  tracks: TrackType[];
-  albums: AlbumType[];
+  audios: AudioType[];
+  collections: CollectionType[];
 }

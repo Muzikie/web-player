@@ -2,13 +2,13 @@ import { Entity } from './types';
 
 export const getEntity = (data: Entity) => {
   if ('audioID' in data) {
-    return 'track';
+    return 'audio';
   }
   if ('playlistID' in data) {
     return 'playlist';
   }
   if ('collectionID' in data) {
-    return 'album';
+    return 'collection';
   }
   return 'artist';
 };

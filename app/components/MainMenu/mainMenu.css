@@ -62,6 +62,7 @@
           padding-left: 10px;
           box-sizing: border-box;
           font-family: var(--body-font);
+          font-size: var(--size-h4);
         }
 
         &:after {

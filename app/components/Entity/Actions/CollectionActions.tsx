@@ -1,9 +1,9 @@
 import React from 'react';
 // import { IconButton } from '~/components/common/Button';
-import { AlbumType, EntityRowProps } from '../types';
+import { CollectionType, EntityRowProps } from '../types';
 
-const AlbumActions = ({ data }: EntityRowProps<AlbumType>) => (
-  <footer className="component entity action album">
+const CollectionActions = ({ data }: EntityRowProps<CollectionType>) => (
+  <footer className="component entity action collection">
     <span>{data.releaseYear}</span>
     {/* <IconButton
       icon="heart"
@@ -18,4 +18,4 @@ const AlbumActions = ({ data }: EntityRowProps<AlbumType>) => (
   </footer>
 );
 
-export default AlbumActions;
+export default CollectionActions;

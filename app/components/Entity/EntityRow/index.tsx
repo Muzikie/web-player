@@ -22,13 +22,12 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
 };
 
 const NumberOfAudios = ({ data }: EntityRowProps<Entity>) => {
-  if (!('audios' in data)) return null;
+  if (!('collectionType' in data)) return null;
 
   let count = 'Single';
   if (data.audios.length > 1) {
     count = data.collectionType === 1 ? `${data.audios.length} songs` : `${data.audios.length} episodes`;
   }
-
 
   return (
     <span className="audioCount">
@@ -85,7 +84,7 @@ const EntityRow = ({
               )
           }
           <div className="text">
-            <h4 className="albumName">{data.name}</h4>
+            <h4 className="collectionName">{data.name}</h4>
             <div className='detail'>
               <span><Subtitle data={data} /> <CoArtists data={data} /></span>
               <span><ReleaseYear data={data}/> <NumberOfAudios data={data} /></span>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* Internal dependencies */
-import { useCreateTrack, ValidationStatus } from '~/hooks/useCreateEntity';
+import { useCreateAudio, ValidationStatus } from '~/hooks/useCreateEntity';
 import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
@@ -21,8 +21,8 @@ const CreateAudio = () => {
     onChange,
     broadcast,
     feedback,
-  } = useCreateTrack();
-  const { albums } = useUserDiscography();
+  } = useCreateAudio();
+  const { collections } = useUserDiscography();
 
   return (
     <form className="component createAudio">
@@ -50,14 +50,14 @@ const CreateAudio = () => {
         />
         <div className='collectionRow'>
           <Select
-            placeholder="Select a collection (Album)"
+            placeholder="Select a collection (Collection)"
             name="collectionID"
-            options={albums}
+            options={collections}
             value={collectionID}
             onChange={onChange}
           />
           <Link
-            to="/profile/createAlbum"
+            to="/profile/createCollection"
             icon="cross"
             className='addCollection'
           />
