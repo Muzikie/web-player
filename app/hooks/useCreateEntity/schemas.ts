@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { VALID_GENRES } from '~/constants/app';
+import { VALID_GENRES } from '~/configs/app';
 
 export const audioSchema = yup
   .object()

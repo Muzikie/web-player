@@ -1,31 +1,16 @@
 /* External dependencies */
-import React, { useState, useEffect } from 'react';
-import { cryptography } from '@liskhq/lisk-client';
-import { useFetcher, useLoaderData } from '@remix-run/react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { json, redirect } from '@remix-run/node';
 
 /* Internal dependencies */
-import { PrimaryButton } from '~/components/common/Button';
+import { validateCredentials } from '~/helpers/cryptography';
+import LoginForm from '~/components/LoginForm';
+import RegisterSuggestion from '~/components/RegisterSuggestion';
 import { getSession, commitSession } from '~/hooks/useSession';
 import { PartialView } from '~/components/PartialView';
-import SecretKeyInput from '~/components/SecretKeyInput';
-import { DERIVATION_PATH } from '~/constants/app';
 import { LoaderBaseProps } from '../../types';
 import styles from '~/css/routes/__main/login.css';
-import { useAccount } from '~/hooks/useAccount/useAccount';
 
-export const validateCredentials = async (secret: string) => {
-  const privateKey = await cryptography.ed.getPrivateKeyFromPhraseAndPath(secret, DERIVATION_PATH);
-  const publicKey = cryptography.ed.getPublicKeyFromPrivateKey(privateKey);
-  const address = cryptography.address.getLisk32AddressFromPublicKey(publicKey);
-
-  return {
-    address,
-    publicKey,
-    privateKey,
-  }
-}
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -98,73 +83,12 @@ export async function action({ request }: LoaderBaseProps) {
   });
 }
 
-const LoginForm = () => {
-  const profileInfo = useLoaderData();
-  const fetcher = useFetcher();
-  const [secret, setSecret] = useState({ value: '', isValid: false });
-  const { setProfileInfo, info } = useAccount();
-
-  useEffect(() => {
-    if (profileInfo.address !== info.address) {
-      setProfileInfo(profileInfo);
-    }
-  }, [profileInfo]);
-
-  return (
-    <fetcher.Form method="post">
-      <SecretKeyInput onChange={setSecret} />
-      <PrimaryButton
-        type="submit"
-        disabled={!secret.isValid}
-        className="loginButton"
-      >
-        Login
-      </PrimaryButton>
-    </fetcher.Form>
-  );
-};
-
-const ActionAndInfo = () => {
-  const navigate = useNavigate();
-
-  const goToRegister = () => {
-    navigate('/register');
-  };
-
-  return (
-    <>
-      <h3>Not a member yet?</h3>
-      <ul>
-        <li>
-          <span>⚡️</span>
-          <span>You get 2 month free trial.</span>
-        </li>
-        <li>
-          <span>😇</span>
-          <span>You support music since Muzikie pays a whopping 80% share to artists.</span>
-        </li>
-        <li>
-          <span>💰</span>
-          <span>You receive 10% share of ad-supported profit.</span>
-        </li>
-      </ul>
-      <PrimaryButton
-        className='registerButton'
-        theme="white"
-        onClick={goToRegister}
-      >
-        Register
-      </PrimaryButton>
-    </>
-  );
-};
-
 const LoginScreen = () => (
   <PartialView
     title="Login"
     className="login"
     form={<LoginForm />}
-    actionAndInfo={<ActionAndInfo />}
+    actionAndInfo={<RegisterSuggestion />}
   />
 );
 

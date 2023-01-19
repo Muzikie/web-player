@@ -2,9 +2,10 @@ import React from 'react';
 // import { formatThousands } from '~/helpers/formatters';
 import { secondToMinutes } from '~/helpers/convertors';
 import { IconButton } from '~/components/common/Button';
-import { AudioType, EntityRowProps } from '../types';
+import { Audio } from '~/configs/types';
+import { EntityRowProps } from '../types';
 
-const AudioActions = ({ data }: EntityRowProps<AudioType>) => (
+const AudioActions = ({ data }: EntityRowProps<Audio>) => (
   <footer className="component entity action audio">
     <IconButton
       icon="heart"

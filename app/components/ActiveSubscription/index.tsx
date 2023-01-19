@@ -7,7 +7,7 @@ import Modal from '../Modal';
 import { PrimaryButton } from '../common/Button';
 import { SubscriptionInfoProps } from './types';
 import NoSubscription from './NoSubscription';
-import { TOKEN, DEV_SHARE } from '~/constants/app';
+import { TOKEN, DEV_SHARE } from '~/configs/app';
 
 const getConsumed = (price: string, consumable: string): string => {
   const factor = new BigNumber(DEV_SHARE);

@@ -3,12 +3,13 @@ import React, { useMemo } from 'react';
 
 /* Internal dependencies */
 import EntityRow from '~/components/Entity/EntityRow';
-import { AudioType, entityMode } from '~/components/Entity/types';
+import { Audio } from '~/configs/types';
+import { entityMode } from '~/components/Entity/types';
 import { UserDiscographyProps } from './types';
 
 const UserDiscography = ({ audios, collections }: UserDiscographyProps) => {
   const discography = useMemo(() => {
-    return audios.reduce((acc: {[key: string]: AudioType[]}, item: AudioType) => {
+    return audios.reduce((acc: {[key: string]: Audio[]}, item: Audio) => {
       if (!acc[item.collectionID]) {
         acc[item.collectionID] = [];
       }

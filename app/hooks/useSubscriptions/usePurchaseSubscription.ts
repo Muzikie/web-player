@@ -11,9 +11,9 @@ import {
   MODULES,
   COMMANDS,
   FEEDBACK_MESSAGES,
-  SUBSCRIPTION_PURCHASE_SCHEMA,
-} from '~/constants/blockchain';
-import { CHAIN_ID, DEV_ACCOUNT, TX_STATUS } from '~/constants/app';
+} from '~/configs/blockchain';
+import { SUBSCRIPTION_PURCHASE_SCHEMA } from '~/configs/schemas';
+import { CHAIN_ID, DEV_ACCOUNT, TX_STATUS } from '~/configs/app';
 import { useAccount } from '../useAccount/useAccount';
 import { FetchStatus } from './types';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';

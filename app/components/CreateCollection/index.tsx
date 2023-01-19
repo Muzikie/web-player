@@ -4,7 +4,7 @@ import { ValidationStatus, useCreateCollection } from '~/hooks/useCreateEntity';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
-import { VALID_COLLECTION_TYPES } from '~/constants/app';
+import { VALID_COLLECTION_TYPES } from '~/configs/app';
 import Feedback from './Feedback';
 
 const CreateCollection = () => {

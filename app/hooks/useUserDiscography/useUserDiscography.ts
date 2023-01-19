@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
 /* Internal dependencies */
+import { Method, AudioAccountResponse, CollectionAccountResponse } from '~/context/socketContext/types';
 import  { useAccount } from '../useAccount/useAccount';
 import { useWS } from '../useWS/useWS';
-import { Method, AudioAccountResponse, CollectionAccountResponse } from '~/context/socketContext/types';
 import { FEEDBACK_MESSAGES } from './constants';
 
 export const useUserDiscography = () => {

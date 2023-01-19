@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 
-import { METHOD_NOT_READY } from '~/constants/app';
+import { METHOD_NOT_READY } from '~/configs/app';
 import { ProfileInfoType, ProfileContextType, ProfileProviderProps } from './types';
 
 const defaultValue = {

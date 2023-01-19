@@ -1,8 +1,9 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { EntityRowProps, PlaylistType } from '~/components/Entity/types';
+import { Playlist } from '~/configs/types';
+import { EntityRowProps } from '~/components/Entity/types';
 
-const PlaylistSummary = ({ data }: EntityRowProps<PlaylistType>) => (
+const PlaylistSummary = ({ data }: EntityRowProps<Playlist>) => (
   <section className="component playlistSummary">
     <header>
       <h1>{ data.name }</h1>

@@ -9,10 +9,10 @@ import {
   MODULES,
   COMMANDS,
   FEEDBACK_MESSAGES,
-  COLLECTION_CREATE_SCHEMA
-} from '~/constants/blockchain';
+} from '~/configs/blockchain';
+import { COLLECTION_CREATE_SCHEMA } from '~/configs/schemas';
 import { waitFor } from '~/helpers/helpers';
-import { CHAIN_ID, TX_STATUS } from '~/constants/app';
+import { CHAIN_ID, TX_STATUS } from '~/configs/app';
 import {
   CollectionAccountResponse,
   CollectionResponse,

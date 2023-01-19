@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { useWS } from '../useWS/useWS';
 import { Method, SubsAccountResponse } from '~/context/socketContext/types';
-import { DEV_ACCOUNT } from '~/constants/app';
+import { DEV_ACCOUNT } from '~/configs/app';
+import { useWS } from '../useWS/useWS';
 import { useAccount } from '../useAccount/useAccount';
 
 

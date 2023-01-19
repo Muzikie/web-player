@@ -1,9 +1,9 @@
-interface BaseEntity {
-  creatorAddress: string;
-  name: string;
-  hash: string;
-  meta: string;
-}
+import {
+  Collection,
+  Artist,
+  Audio,
+  Playlist,
+} from '~/configs/types';
 
 export enum entityThemes {
   minimal = 'minimal',
@@ -18,44 +18,7 @@ export enum entityMode {
 
 export type entityTheme = entityThemes | undefined;
 
-export interface CollectionType extends BaseEntity {
-  coArtists: string[];
-  collectionType: number;
-  audios: string[];
-  releaseYear: string;
-  artistName: string;
-  collectionID: string;
-}
-
-export interface ArtistType extends BaseEntity {
-  description?: string;
-}
-
-interface LoyaltyOwnerJSON {
-  address: string;
-  shares: number;
-  income: string;
-}
-
-export interface AudioType extends BaseEntity {
-  genre: number[];
-  collectionID: string;
-  owners: LoyaltyOwnerJSON[];
-  releaseYear: string;
-  artistName: string;
-  audioID: string;
-  duration: number;
-}
-
-export interface PlaylistType extends BaseEntity {
-  playlistID: string;
-  owners: LoyaltyOwnerJSON[];
-  releaseYear: string;
-  audios: AudioType[];
-  description: string;
-}
-
-export type Entity = CollectionType | ArtistType | AudioType | PlaylistType;
+export type Entity = Collection | Artist | Audio | Playlist;
 
 export interface EntityRowProps<Entity> {
   data: Entity;

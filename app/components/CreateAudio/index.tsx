@@ -7,7 +7,7 @@ import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
 import { Link } from '~/components/common/Link';
-import { VALID_GENRES } from '~/constants/app';
+import { VALID_GENRES } from '~/configs/app';
 import Feedback from './Feedback';
 
 const CreateAudio = () => {

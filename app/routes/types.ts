@@ -1,6 +1,8 @@
 import { ChangeEvent } from 'react';
 import { SearchResultType } from '~/models/entity.server';
-import { CollectionType, AudioType, ArtistType, PlaylistType, Entity } from '~/components/Entity/types';
+
+import { Collection, Audio, Artist, Playlist } from '~/configs/types';
+import { Entity } from '~/components/Entity/types';
 import { ProfileInfoType } from '~/context/profileContext/types';
 
 export interface AgreementFormProps {
@@ -20,8 +22,8 @@ export interface SearchLoaderData {
 }
 
 export interface CollectionLoaderData {
-  collection: Awaited<CollectionType>;
-  audios: Awaited<AudioType[]>;
+  collection: Awaited<Collection>;
+  audios: Awaited<Audio[]>;
   id: number;
 }
 
@@ -34,8 +36,8 @@ export interface collectionLoaderProps {
 
 export interface HomeLoaderData {
   recentlyPlayed: Awaited<Entity[]>;
-  artists: Awaited<ArtistType[]>;
-  collections: Awaited<CollectionType[]>;
+  artists: Awaited<Artist[]>;
+  collections: Awaited<Collection[]>;
 }
 
 export interface LoaderBaseProps {
@@ -43,8 +45,8 @@ export interface LoaderBaseProps {
 }
 
 export interface PlaylistLoaderData {
-  playlist: Awaited<PlaylistType>;
-  audios: Awaited<AudioType[]>;
+  playlist: Awaited<Playlist>;
+  audios: Awaited<Audio[]>;
   id: number;
 }
 
@@ -56,9 +58,9 @@ export interface playlistLoaderParams {
 }
 
 export interface ArtistLoaderData {
-  artist: Awaited<ArtistType>;
-  collections: Awaited<CollectionType[]>;
-  audios: Awaited<AudioType[]>;
+  artist: Awaited<Artist>;
+  collections: Awaited<Collection[]>;
+  audios: Awaited<Audio[]>;
   id: number;
 }
 
@@ -74,11 +76,11 @@ export interface ProfileLoaderData {
 }
 
 export interface DiscographyLoaderData {
-  collections: Awaited<CollectionType[]>;
-  audios: Awaited<AudioType[]>;
+  collections: Awaited<Collection[]>;
+  audios: Awaited<Audio[]>;
 }
 
 export interface DiscographyProps {
-  audios: AudioType[];
-  collections: CollectionType[];
+  audios: Audio[];
+  collections: Collection[];
 }

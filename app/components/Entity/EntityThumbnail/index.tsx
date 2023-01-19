@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { EntityRowProps, Entity, entityThemes } from '../types';
-import { API_URLS } from '~/constants/api';
+import { API_URLS } from '~/configs/api';
 import { getEntity, getCollectionID } from '../utils';
 
 const EntityThumbnail = ({

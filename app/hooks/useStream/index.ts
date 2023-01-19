@@ -6,8 +6,9 @@ import {
   DryRunTxResponse,
 } from '~/context/socketContext/types';
 import { useAccount } from '../useAccount/useAccount';
-import { AUDIO_STREAM_SCHEMA, MODULES, COMMANDS } from '~/constants/blockchain';
-import { CHAIN_ID, TX_STATUS } from '~/constants/app';
+import { MODULES, COMMANDS } from '~/configs/blockchain';
+import { AUDIO_STREAM_SCHEMA } from '~/configs/schemas';
+import { CHAIN_ID, TX_STATUS } from '~/configs/app';
 import { ProfileInfoType } from '~/context/profileContext/types';
 import { useWS } from '../useWS/useWS';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';

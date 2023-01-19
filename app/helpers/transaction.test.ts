@@ -1,4 +1,4 @@
-import { TX_STATUS } from '~/constants/app';
+import { TX_STATUS } from '~/configs/app';
 import { DryRunTxResponse, ErrorResponse } from '~/context/socketContext/types';
 import {
   getTransactionExecutionStatus,
