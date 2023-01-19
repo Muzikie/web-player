@@ -4,13 +4,13 @@ import React from 'react';
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
 import { API_URLS } from '~/constants/api';
-import { EntityRowProps, AlbumType } from '~/components/Entity/types';
+import { EntityRowProps, CollectionType } from '~/components/Entity/types';
 import { getID } from '~/components/Entity/utils';
 
-const AlbumSummary = ({ data }: EntityRowProps<AlbumType>) => {
+const CollectionSummary = ({ data }: EntityRowProps<CollectionType>) => {
   const id = getID(data);
   return (
-    <section className="component albumSummary">
+    <section className="component collectionSummary">
       <header>
         <h1>{ data.name }</h1>
         <Link to={`/artist/${data.creatorAddress}`} className="artist">
@@ -19,7 +19,7 @@ const AlbumSummary = ({ data }: EntityRowProps<AlbumType>) => {
           </figure>
           <h4>{data.artistName}</h4>
         </Link>
-        <span className="releaseDate">{`${data.releaseYear} Album`}</span>
+        <span className="releaseDate">{`${data.releaseYear} Collection`}</span>
 
         <div className="actionButtons">
           <IconButton
@@ -43,4 +43,4 @@ const AlbumSummary = ({ data }: EntityRowProps<AlbumType>) => {
   );
 };
 
-export default AlbumSummary;
+export default CollectionSummary;

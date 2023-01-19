@@ -23,10 +23,10 @@ import {
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
-import { postTrack } from '~/models/entity.client';
+import { postAudio } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
 
-export const useCreateTrack = () => {
+export const useCreateAudio = () => {
   const { updateAccount } = useAccount();
   const { request } = useWS();
 
@@ -149,7 +149,7 @@ export const useCreateTrack = () => {
           );
           // Call Streamer
           if (!createdAudio.error) {
-            const postResponse = await postTrack({
+            const postResponse = await postAudio({
               ...createdAudio.data,
               creatorAddress: cryptography.address.getLisk32AddressFromAddress(Buffer.from(createdAudio.data.creatorAddress, 'hex')),
               audioID,
@@ -168,7 +168,7 @@ export const useCreateTrack = () => {
   };
 
   useEffect(() => {
-    validate('track', {
+    validate('audio', {
       name,
       releaseYear,
       artistName,

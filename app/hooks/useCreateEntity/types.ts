@@ -5,7 +5,7 @@ export enum ValidationStatus {
   valid = 'VALID',
 }
 
-export interface TrackNFTData {
+export interface AudioNFTData {
   name: string;
   releaseYear: string;
   artistName: string;
@@ -14,7 +14,7 @@ export interface TrackNFTData {
   files: FileList | null;
 }
 
-export interface AlbumNFTData {
+export interface CollectionNFTData {
   name: string;
   releaseYear: string;
   artistName: string;
@@ -22,6 +22,6 @@ export interface AlbumNFTData {
   files: FileList | null;
 }
 
-export type validateProps = TrackNFTData | AlbumNFTData;
+export type validateProps = AudioNFTData | CollectionNFTData;
 
-export type EntityName = 'track' | 'album';
+export type EntityName = 'audio' | 'collection';

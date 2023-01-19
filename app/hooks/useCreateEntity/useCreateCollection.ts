@@ -22,10 +22,10 @@ import {
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
-import { postAlbum } from '~/models/entity.client';
+import { postCollection } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
 
-export const useCreateAlbum = () => {
+export const useCreateCollection = () => {
   const { updateAccount } = useAccount();
   const { request } = useWS();
 
@@ -72,7 +72,7 @@ export const useCreateAlbum = () => {
       { address: data.address },
     );
 
-    const albumsCount = !curr.error ? curr.data.collection?.collections.length : 0;
+    const collectionsCount = !curr.error ? curr.data.collection?.collections.length : 0;
 
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
@@ -132,17 +132,17 @@ export const useCreateAlbum = () => {
           Method.collection_getAccount,
           { address: data.address },
         );
-        if (!nextState.error && nextState.data.collection.collections.length > albumsCount) {
+        if (!nextState.error && nextState.data.collection.collections.length > collectionsCount) {
           const collectionID = nextState.data.collection.collections[nextState.data.collection.collections.length - 1];
-          const createdAlbum = <CollectionResponse> await request(
+          const createdCollection = <CollectionResponse> await request(
             Method.collection_getCollection,
             { collectionID },
           );
           // Call Streamer
-          if (!createdAlbum.error) {
-            const postResponse = await postAlbum({
-              ...createdAlbum.data,
-              creatorAddress: cryptography.address.getLisk32AddressFromAddress(Buffer.from(createdAlbum.data.creatorAddress, 'hex')),
+          if (!createdCollection.error) {
+            const postResponse = await postCollection({
+              ...createdCollection.data,
+              creatorAddress: cryptography.address.getLisk32AddressFromAddress(Buffer.from(createdCollection.data.creatorAddress, 'hex')),
               collectionID,
             }, files[0]);
             if (postResponse?.collectionID === collectionID) {
@@ -159,7 +159,7 @@ export const useCreateAlbum = () => {
   };
 
   useEffect(() => {
-    validate('album', {
+    validate('collection', {
       name,
       releaseYear,
       artistName,

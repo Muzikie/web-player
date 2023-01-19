@@ -1,19 +1,19 @@
 import React from 'react';
 import EntityRow from '~/components/Entity/EntityRow';
-import { CollectionProps, collectionThemes } from './types';
+import { LiskProps, liskThemes } from './types';
 import { entityThemes } from '~/components/Entity/types';
 import { getID } from '~/components/Entity/utils';
 
-const Collection = ({
+const List = ({
   className = '',
   direction = 'vertical',
-  theme = collectionThemes.normal,
+  theme = liskThemes.normal,
   itemTheme = entityThemes.normal,
   title,
   items = [],
-}: CollectionProps) => {
+}: LiskProps) => {
   return (
-    <section className={`component collection ${direction} ${className}`}>
+    <section className={`component list ${direction} ${className}`}>
       {
         title ? (
           <header>
@@ -38,4 +38,4 @@ const Collection = ({
   );
 }
 
-export default Collection;
+export default List;

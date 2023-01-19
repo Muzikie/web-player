@@ -10,7 +10,7 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-const Main = () => {
+const SubscriptionScreen = () => {
   return (
     <section className="screen subscription">
       <header className="tabsHeader">
@@ -26,4 +26,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default SubscriptionScreen;

@@ -74,7 +74,7 @@ const ActionAndInfo = ({ disabled }: AgreementInfoProps) => {
   );
 };
 
-const Agreement = () => {
+const AgreementScreen = () => {
   const [terms, setTerms] = useState({ value: [false, false, false], isValid: false });
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = terms.value.map((v, i) => i === Number(e.target.value) ? e.target.checked : v);
@@ -94,4 +94,4 @@ const Agreement = () => {
   );
 };
 
-export default Agreement;
+export default AgreementScreen;

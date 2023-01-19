@@ -34,7 +34,7 @@ export const VALID_GENRES = [
 ];
 
 export const VALID_COLLECTION_TYPES = [
-  { value: 1, label: 'Album' },
+  { value: 1, label: 'Music album' },
   { value: 2, label: 'Podcast series' },
 ];
 

@@ -2,10 +2,10 @@ import React from 'react';
 // import { formatThousands } from '~/helpers/formatters';
 import { secondToMinutes } from '~/helpers/convertors';
 import { IconButton } from '~/components/common/Button';
-import { TrackType, EntityRowProps } from '../types';
+import { AudioType, EntityRowProps } from '../types';
 
-const TrackActions = ({ data }: EntityRowProps<TrackType>) => (
-  <footer className="component entity action track">
+const AudioActions = ({ data }: EntityRowProps<AudioType>) => (
+  <footer className="component entity action audio">
     <IconButton
       icon="heart"
       className="likeButton"
@@ -21,4 +21,4 @@ const TrackActions = ({ data }: EntityRowProps<TrackType>) => (
   </footer>
 );
 
-export default TrackActions;
+export default AudioActions;

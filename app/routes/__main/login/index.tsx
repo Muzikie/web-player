@@ -159,7 +159,7 @@ const ActionAndInfo = () => {
   );
 };
 
-const Login = () => (
+const LoginScreen = () => (
   <PartialView
     title="Login"
     className="login"
@@ -168,4 +168,4 @@ const Login = () => (
   />
 );
 
-export default Login;
+export default LoginScreen;

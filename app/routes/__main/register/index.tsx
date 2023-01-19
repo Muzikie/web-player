@@ -39,7 +39,7 @@ const ActionAndInfo = () => {
   );
 };
 
-const Register = () => (
+const RegisterScreen = () => (
   <PartialView
     title="Register"
     className="register"
@@ -48,4 +48,4 @@ const Register = () => (
   />
 );
 
-export default Register;
+export default RegisterScreen;

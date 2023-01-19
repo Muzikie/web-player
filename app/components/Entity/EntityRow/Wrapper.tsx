@@ -4,7 +4,7 @@ import { memo, ReactNode, MouseEvent, useContext } from 'react';
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
-import { Entity, entityMode, TrackType } from '../types';
+import { Entity, entityMode, AudioType } from '../types';
 import { getID } from '../utils';
 
 interface WrapperProps {
@@ -26,11 +26,11 @@ const Wrapper = ({
     );
   }
 
-  if (entity === 'track') {
+  if (entity === 'audio') {
     const play = (e: MouseEvent) => {
       e.preventDefault();
       if (setCurrent) {
-        setCurrent(data as TrackType);
+        setCurrent(data as AudioType);
       }
     };
 

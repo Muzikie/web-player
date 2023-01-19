@@ -10,14 +10,14 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-const Main = () => (
+const ProfileScreen = () => (
   <section className="screen profile">
     <header className='tabsHeader'>
       <Tabs
         items={[
           { title: 'Discography', to: '/profile/discography' },
-          { title: 'Add a audio', to: '/profile/createAudio' },
-          { title: 'Add an album', to: '/profile/createAlbum' },
+          { title: 'Add an audio', to: '/profile/createAudio' },
+          { title: 'Add a collection', to: '/profile/createCollection' },
         ]}
       />
     </header>
@@ -25,4 +25,4 @@ const Main = () => (
   </section>
 );
 
-export default Main;
+export default ProfileScreen;

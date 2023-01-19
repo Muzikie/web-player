@@ -18,7 +18,7 @@ export enum entityMode {
 
 export type entityTheme = entityThemes | undefined;
 
-export interface AlbumType extends BaseEntity {
+export interface CollectionType extends BaseEntity {
   coArtists: string[];
   collectionType: number;
   audios: string[];
@@ -37,7 +37,7 @@ interface LoyaltyOwnerJSON {
   income: string;
 }
 
-export interface TrackType extends BaseEntity {
+export interface AudioType extends BaseEntity {
   genre: number[];
   collectionID: string;
   owners: LoyaltyOwnerJSON[];
@@ -51,11 +51,11 @@ export interface PlaylistType extends BaseEntity {
   playlistID: string;
   owners: LoyaltyOwnerJSON[];
   releaseYear: string;
-  tracks: TrackType[];
+  audios: AudioType[];
   description: string;
 }
 
-export type Entity = AlbumType | ArtistType | TrackType | PlaylistType;
+export type Entity = CollectionType | ArtistType | AudioType | PlaylistType;
 
 export interface EntityRowProps<Entity> {
   data: Entity;

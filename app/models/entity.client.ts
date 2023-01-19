@@ -1,6 +1,6 @@
 import type {
-  AlbumType,
-  TrackType,
+  CollectionType,
+  AudioType,
   Entity,
 } from '~/components/Entity/types';
 import { API_URLS } from '~/constants/api';
@@ -17,14 +17,14 @@ const post = (url: string, body: any) => fetch(
   }
 ).then((res) => res.json()).then(res => res.data).catch(console.log);
 
-export async function postAlbum(json: Entity, file: File): Promise<AlbumType> {
+export async function postCollection(json: Entity, file: File): Promise<CollectionType> {
   const data = new FormData();
   data.append('file', file);
   data.append('data', JSON.stringify(json));
   return post(`${API_URLS.STREAMER}/api/v1/collections`, data);
 }
 
-export async function postTrack(json: Entity, file: File): Promise<TrackType> {
+export async function postAudio(json: Entity, file: File): Promise<AudioType> {
   const data = new FormData();
   data.append('file', file);
   data.append('data', JSON.stringify(json));
