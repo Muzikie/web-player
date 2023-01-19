@@ -144,5 +144,5 @@ export interface SocketProviderProps {
 export interface SocketContextType {
   ws: WebSocket | null;
   isConnected: boolean;
-  request: (method: Method, params: RequestParams) => Promise<RequestResult<Method>>;
+  request: (method: Method, params: RequestParams, id?: string) => Promise<RequestResult<Method>>;
 }
