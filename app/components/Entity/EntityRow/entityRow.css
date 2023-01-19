@@ -37,6 +37,21 @@
       padding-left: var(--padding-s);
     }
 
+    & .detail {
+      display: flex;
+      flex-direction: column;
+
+      & .audioCount {
+        & strong {
+          color: var(--gray);
+          font-weight: var(--font-weight-bold);
+          font-size: var(--size-h3);
+          padding-right: 4px;
+          line-height: 0;
+        }
+      }
+    }
+
     & h4 {
       color: var(--color-secondary);
     }
