@@ -10,7 +10,7 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
   let subtitle = '-';
   if ('playlistID' in data) {
     subtitle = data.description;
-  } else if ('audioID' in data) {
+  } else if ('collectionID' in data) {
     subtitle = data.artistName;
   } else {
     subtitle = data.name;
@@ -24,7 +24,11 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
 const NumberOfAudios = ({ data }: EntityRowProps<Entity>) => {
   if (!('audios' in data)) return null;
 
-  const count = data.collectionType === 1 ? `${data.audios.length} songs` : `${data.audios.length} episodes`;
+  let count = 'Single';
+  if (data.audios.length > 1) {
+    count = data.collectionType === 1 ? `${data.audios.length} songs` : `${data.audios.length} episodes`;
+  }
+
 
   return (
     <span className="audioCount">
