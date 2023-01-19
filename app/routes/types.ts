@@ -1,7 +1,12 @@
 import { ChangeEvent } from 'react';
 import { SearchResultType } from '~/models/entity.server';
 
-import { Collection, Audio, Artist, Playlist } from '~/configs/types';
+import {
+  Collection,
+  Audio,
+  Artist,
+  Playlist
+} from '~/configs';
 import { Entity } from '~/components/Entity/types';
 import { ProfileInfoType } from '~/context/profileContext/types';
 

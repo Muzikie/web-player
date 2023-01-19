@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { Playlist } from '~/configs/types';
+import { Playlist } from '~/configs';
 import { EntityRowProps } from '~/components/Entity/types';
 
 const PlaylistSummary = ({ data }: EntityRowProps<Playlist>) => (

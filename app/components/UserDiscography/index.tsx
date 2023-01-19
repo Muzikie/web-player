@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 /* Internal dependencies */
 import EntityRow from '~/components/Entity/EntityRow';
-import { Audio } from '~/configs/types';
+import { Audio } from '~/configs';
 import { entityMode } from '~/components/Entity/types';
 import { UserDiscographyProps } from './types';
 

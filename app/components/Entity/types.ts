@@ -3,7 +3,7 @@ import {
   Artist,
   Audio,
   Playlist,
-} from '~/configs/types';
+} from '~/configs';
 
 export enum entityThemes {
   minimal = 'minimal',

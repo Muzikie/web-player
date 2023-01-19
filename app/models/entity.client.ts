@@ -1,6 +1,9 @@
-import type { Entity } from '~/components/Entity/types';
-import type { Collection, Audio } from '~/configs/types';
-import { API_URLS } from '~/configs/api';
+import { Entity } from '~/components/Entity/types';
+import {
+  Collection,
+  Audio,
+  API_URLS
+} from '~/configs';
 
 export type SearchResultType = {
   [key: string]: Entity[];

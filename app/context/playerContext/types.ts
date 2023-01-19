@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
-import { Audio } from '~/configs/types';
+
+import { Audio } from '~/configs';
 
 export type Current = Audio|null;
 

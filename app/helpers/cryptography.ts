@@ -1,6 +1,6 @@
 import { cryptography } from '@liskhq/lisk-client';
 
-import { DERIVATION_PATH } from '~/configs/app';
+import { DERIVATION_PATH } from '~/configs';
 
 export const validateCredentials = async (secret: string) => {
   const privateKey = await cryptography.ed.getPrivateKeyFromPhraseAndPath(secret, DERIVATION_PATH);

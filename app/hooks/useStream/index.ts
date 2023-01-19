@@ -5,11 +5,15 @@ import {
   Method,
   DryRunTxResponse,
 } from '~/context/socketContext/types';
-import { useAccount } from '../useAccount/useAccount';
-import { MODULES, COMMANDS } from '~/configs/blockchain';
-import { AUDIO_STREAM_SCHEMA } from '~/configs/schemas';
-import { CHAIN_ID, TX_STATUS } from '~/configs/app';
+import {
+  MODULES,
+  COMMANDS,
+  AUDIO_STREAM_SCHEMA,
+  CHAIN_ID,
+  TX_STATUS,
+} from '~/configs';
 import { ProfileInfoType } from '~/context/profileContext/types';
+import { useAccount } from '../useAccount/useAccount';
 import { useWS } from '../useWS/useWS';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
 

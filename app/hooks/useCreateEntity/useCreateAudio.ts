@@ -9,10 +9,11 @@ import {
   MODULES,
   COMMANDS,
   FEEDBACK_MESSAGES,
-} from '~/configs/blockchain';
-import { AUDIO_CREATE_SCHEMA } from '~/configs/schemas';
+  AUDIO_CREATE_SCHEMA,
+  TX_STATUS,
+  CHAIN_ID,
+} from '~/configs';
 import { waitFor } from '~/helpers/helpers';
-import { CHAIN_ID, TX_STATUS } from '~/configs/app';
 import {
   AudioAccountResponse,
   AudioResponse,

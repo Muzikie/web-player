@@ -1,6 +1,6 @@
 import React from 'react';
 // import { IconButton } from '~/components/common/Button';
-import { Collection } from '~/configs/types';
+import { Collection } from '~/configs';
 import { EntityRowProps } from '../types';
 
 const CollectionActions = ({ data }: EntityRowProps<Collection>) => (

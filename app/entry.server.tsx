@@ -4,7 +4,7 @@ import type { EntryContext } from '@remix-run/node';
 import { Response } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { renderToPipeableStream } from 'react-dom/server';
-import { ABORT_DELAY } from '~/configs/app';
+import { ABORT_DELAY } from '~/configs';
 
 export default function handleRequest(
   request: Request,

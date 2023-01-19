@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { Artist } from '~/configs/types';
+import { Artist } from '~/configs';
 import { EntityRowProps } from '~/components/Entity/types';
 
 const ArtistSummary = ({ data }: EntityRowProps<Artist>) => (

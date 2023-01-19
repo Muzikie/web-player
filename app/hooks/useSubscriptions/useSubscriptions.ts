@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Method, SubsAccountResponse } from '~/context/socketContext/types';
-import { DEV_ACCOUNT } from '~/configs/app';
+import { DEV_ACCOUNT } from '~/configs';
 import { useWS } from '../useWS/useWS';
 import { useAccount } from '../useAccount/useAccount';
 

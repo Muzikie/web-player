@@ -2,7 +2,7 @@ import React from 'react';
 // import { formatThousands } from '~/helpers/formatters';
 import { secondToMinutes } from '~/helpers/convertors';
 import { IconButton } from '~/components/common/Button';
-import { Audio } from '~/configs/types';
+import { Audio } from '~/configs';
 import { EntityRowProps } from '../types';
 
 const AudioActions = ({ data }: EntityRowProps<Audio>) => (

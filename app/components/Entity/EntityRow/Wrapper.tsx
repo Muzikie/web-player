@@ -4,7 +4,7 @@ import { memo, ReactNode, MouseEvent, useContext } from 'react';
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
-import { Audio } from '~/configs/types';
+import { Audio } from '~/configs';
 import { Entity, entityMode } from '../types';
 import { getID } from '../utils';
 

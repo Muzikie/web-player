@@ -3,8 +3,7 @@ import React from 'react';
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
-import { API_URLS } from '~/configs/api';
-import { Collection } from '~/configs/types';
+import { API_URLS, Collection } from '~/configs';
 import { EntityRowProps } from '~/components/Entity/types';
 import { getID } from '~/components/Entity/utils';
 

@@ -1,7 +1,8 @@
 import React, { useState, createContext, useEffect } from 'react';
-import { PlayerContextType, PlayerProviderProps, PlayerState, Current } from './types';
+
 import { useStorage, STORAGE_KEYS } from '~/hooks/useStorage';
-import { Audio } from '~/configs/types';
+import { Audio } from '~/configs';
+import { PlayerContextType, PlayerProviderProps, PlayerState, Current } from './types';
 
 export const PlayerContext = createContext<PlayerContextType>({
   current: null,

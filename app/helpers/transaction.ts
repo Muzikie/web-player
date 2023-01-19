@@ -1,5 +1,5 @@
 import { DryRunTxResponse } from '~/context/socketContext/types';
-import { SUCCESS_CODE, TX_STATUS } from '~/configs/app';
+import { SUCCESS_CODE, TX_STATUS } from '~/configs';
 
 export const getTransactionExecutionStatus = (module: string, id: string, response: DryRunTxResponse) => {
   if (response.error || !response.data.events.length) {

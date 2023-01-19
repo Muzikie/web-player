@@ -1,11 +1,11 @@
-import type {
+import {
   Collection,
   Artist,
   Audio,
   Playlist,
-} from '~/configs/types';
-import type { Entity } from '~/components/Entity/types';
-import { API_URLS } from '~/configs/api';
+  API_URLS,
+} from '~/configs';
+import { Entity } from '~/components/Entity/types';
 
 export type SearchResultType = {
   [key: string]: Entity[];
