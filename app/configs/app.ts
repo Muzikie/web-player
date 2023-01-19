@@ -56,3 +56,5 @@ export const TX_STATUS = {
   FAIL: 'fail',
 };
 export const UNDETERMINED_EVENT_ERROR = 'Event unavailable to determine execution status for transaction';
+export const JSON_RPC_VERSION = '2.0';
+export const KEYS = {};

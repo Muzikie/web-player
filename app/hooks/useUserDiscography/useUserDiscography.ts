@@ -19,7 +19,7 @@ export const useUserDiscography = () => {
         setCollections(response.data.collection.collections);
       }
     } catch (e) {
-      console.log(FEEDBACK_MESSAGES.ERROR_LOADING_ALBUMS, e);
+      console.log(FEEDBACK_MESSAGES.ERROR_LOADING_COLLECTIONS, e);
     }
   };
 
@@ -30,7 +30,7 @@ export const useUserDiscography = () => {
         setAudios(response.data.audio.audios);
       }
     } catch (e) {
-      console.log(FEEDBACK_MESSAGES.ERROR_LOADING_TRACKS, e);
+      console.log(FEEDBACK_MESSAGES.ERROR_LOADING_AUDIOS, e);
     }
   };
 

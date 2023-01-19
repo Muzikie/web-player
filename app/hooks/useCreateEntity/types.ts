@@ -1,3 +1,5 @@
+import { Audio, Collection } from '~/configs';
+
 export enum ValidationStatus {
   pending = 'PENDING',
   clean = 'CLEAN',
@@ -5,23 +7,14 @@ export enum ValidationStatus {
   valid = 'VALID',
 }
 
-export interface AudioNFTData {
-  name: string;
-  releaseYear: string;
-  artistName: string;
-  collectionID: string;
-  genre: number[];
+export interface AudioTxProps extends Omit<Audio, 'owners' | 'audioID' | 'duration' | 'creatorAddress' | 'hash' | 'meta'> {
   files: FileList | null;
 }
 
-export interface CollectionNFTData {
-  name: string;
-  releaseYear: string;
-  artistName: string;
-  collectionType: number;
+export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | 'collectionID' | 'coArtists' | 'audios' | 'hash' | 'meta'> {
   files: FileList | null;
 }
 
-export type validateProps = AudioNFTData | CollectionNFTData;
+export type validateProps = AudioTxProps | CollectionTxProps;
 
 export type EntityName = 'audio' | 'collection';
