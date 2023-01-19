@@ -1,6 +1,8 @@
 /* External dependencies */
 import React from 'react';
-import { Link } from '@remix-run/react';
+
+/* Internal dependencies */
+import { Link } from '~/components/common/Link';
 
 const ExtendedLogo = () => (
   <div className="component logo extended">

@@ -1,1 +1,1 @@
-export { default as CompoundLink } from './CompoundLink';
+export { default as Link } from './CompoundLink';

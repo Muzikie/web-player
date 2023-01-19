@@ -8,7 +8,7 @@ import { SettingsContext } from '~/context/settingsContext/settingsContextProvid
 import { PrimaryButton } from '~/components/common/Button';
 import { Checkbox } from '~/components/common/Checkbox';
 import { PartialView } from '~/components/PartialView';
-import { TextLink } from '~/components/common/Link';
+import { Link } from '~/components/common/Link';
 import styles from '~/css/routes/__main/agreements.css';
 
 export function links() {
@@ -57,10 +57,9 @@ const ActionAndInfo = ({ disabled }: AgreementInfoProps) => {
     <footer>
       <h4>
         <span>By using Muzikie you declare that you have read and agreed to our </span>
-        <TextLink
-          title="full user agreement"
-          to="/agreements"
-        />
+        <Link to="/agreements">
+          full user agreement
+        </Link>
         <span>.</span>
       </h4>
       <PrimaryButton
