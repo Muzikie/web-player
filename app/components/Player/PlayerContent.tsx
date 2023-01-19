@@ -1,8 +1,8 @@
 /* External dependencies */
 import React, { useContext, useRef, MutableRefObject } from 'react';
-import { Link } from '@remix-run/react';
 
 /* Internal dependencies */
+import { Link } from '~/components/common/Link';
 import { useAudio } from '~/hooks/useAudio/useAudio';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { IconButton } from '~/components/common/Button';

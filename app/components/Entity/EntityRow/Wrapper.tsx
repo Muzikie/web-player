@@ -1,7 +1,9 @@
 import React from 'react';
 import { memo, ReactNode, MouseEvent, useContext } from 'react';
+
+/* Internal dependencies */
+import { Link } from '~/components/common/Link';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
-import { Link } from '@remix-run/react';
 import { Entity, entityMode, TrackType } from '../types';
 import { getID } from '../utils';
 
@@ -49,6 +51,6 @@ const Wrapper = ({
   );
 };
 
-const areEqual = (prev: WrapperProps, next: WrapperProps) => (prev.data.id === next.data.id);
+const areEqual = (prev: WrapperProps, next: WrapperProps) => (prev.data.name === next.data.name);
 
 export default memo(Wrapper, areEqual);

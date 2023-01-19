@@ -1,24 +1,22 @@
 
 
 import React from 'react';
+
 import { IconButtonProps } from './type';
+import BaseButton from './BaseButton';
 import Icon from '~/components/common/Icon';
 
 const IconButton = ({
-  onClick,
-  className,
   icon,
-  theme = '',
-  disabled = false,
+  className,
+  ...restProps
 }: IconButtonProps) => (
-  <button
-    className={`component iconButton ${theme} ${className}`}
-    onClick={onClick}
-    disabled={disabled}
-    type="button"
+  <BaseButton
+    {...restProps}
+    className={`iconButton ${className}`}
   >
     <Icon name={icon}/>
-  </button>
+  </BaseButton>
 );
 
 export default IconButton;

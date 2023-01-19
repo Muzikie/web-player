@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabsProps, TabItem } from './types';
-import { TextLink } from '~/components/common/Link';
+import { Link } from '~/components/common/Link';
 
 export const Tabs = ({
   items,
@@ -8,18 +8,17 @@ export const Tabs = ({
   <div className='component tabs'>
     {
       items.map((item: TabItem) => (
-        <TextLink
+        <Link
           className='tab'
           key={item.to}
-          title={
-            <div className='item'>
-              <h4>
-                {item.title}
-              </h4>
-            </div>
-          }
           to={item.to}
-        />
+        >
+          <div className='item'>
+            <h4>
+              {item.title}
+            </h4>
+          </div>
+        </Link>
       ))
     }
   </div>

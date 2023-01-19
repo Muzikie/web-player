@@ -1,11 +1,12 @@
 import React from 'react';
 
+/* Internal dependencies */
 import { useCreateTrack, ValidationStatus } from '~/hooks/useCreateEntity';
 import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
-import { IconLink } from '~/components/common/Link';
+import { Link } from '~/components/common/Link';
 import { VALID_GENRES } from '~/constants/app';
 import Feedback from './Feedback';
 
@@ -55,7 +56,7 @@ const CreateAudio = () => {
             value={collectionID}
             onChange={onChange}
           />
-          <IconLink
+          <Link
             to="/profile/createAlbum"
             icon="cross"
             className='addCollection'

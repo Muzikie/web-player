@@ -1,17 +1,17 @@
-.component {
-  &.text {
-    font-size: var(--size-span);
+.component.link {
+  font-size: var(--size-span);
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 
-    & .dark {
-      color: var(--color-secondary);
-    }
+  a:focus,a:visited,a:active{
+    outline: none;
   }
 
-  &.icon {
-    position: initial;
+  & .dark {
+    color: var(--color-secondary);
   }
 
-  &.compound {
-    position: initial;
+  & .light {
+    color: var(--color-primary);
   }
 }

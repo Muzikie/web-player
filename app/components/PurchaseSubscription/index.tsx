@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+
+/* Internal dependencies */
 import Modal from '~/components/Modal';
 import Icon from '~/components/common/Icon';
 import { PrimaryButton } from '~/components/common/Button';
-import { TextLink } from '~/components/common/Link';
+import { Link } from '~/components/common/Link';
 import { usePurchaseSubscription } from '~/hooks/useSubscriptions';
-import './purchase.css'
 
 const PurchaseSubscription = () => {
   const [status, setStatus] = useState('READY');
@@ -57,30 +58,33 @@ const PurchaseSubscription = () => {
             <ul>
               <li>
                 <img src="/images/checkmark.svg" alt="checkmark icon" />
-                <TextLink
+                <Link
                   className="checked"
                   theme="dark"
-                  title="Follow Muzikie on Twitter"
                   to="/twitter"
-                />
+                >
+                  Follow Muzikie on Twitter
+                </Link>
               </li>
               <li>
                 <Icon name='twitter1' />
-                <TextLink
+                <Link
                   className="notChecked"
                   theme="dark"
-                  title="Share a tweet about Muzikie"
                   to="/twitter"
-                />
+                >
+                  Share a tweet about Muzikie
+                </Link>
               </li>
               <li>
                 <Icon name='telegram' />
-                <TextLink
+                <Link
                   className="notChecked"
                   theme="dark"
-                  title="Join the Telegram channel"
                   to="/telegram"
-                />
+                >
+                  Join the Telegram channel
+                </Link>
               </li>
             </ul>
           </div>

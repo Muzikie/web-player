@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from '@remix-run/react';
 
+/* Internal dependencies */
+import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
 import { API_URLS } from '~/constants/api';
 import { EntityRowProps, AlbumType } from '~/components/Entity/types';
