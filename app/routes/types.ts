@@ -66,12 +66,12 @@ export interface ArtistLoaderData {
   artist: Awaited<Artist>;
   collections: Awaited<Collection[]>;
   audios: Awaited<Audio[]>;
-  id: number;
+  id: string;
 }
 
 export interface artistLoaderProps {
   params: {
-    id: number;
+    id: string;
   };
   request: Request;
 }

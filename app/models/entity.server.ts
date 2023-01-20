@@ -30,19 +30,19 @@ export async function getAudios(): Promise<Array<Audio>> {
 }
 
 export async function getArtists(): Promise<Array<Artist>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users`);
+  return get(`${API_URLS.STREAMER}/api/v1/profiles`);
 }
 
-export async function getArtist(id: number): Promise<Artist> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${id}`).then(res => res[0]);
+export async function getArtist(id: string): Promise<Artist> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}`).then(res => res[0]);
 }
 
-export async function getArtistCollections(id: number): Promise<Array<Collection>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${id}/collections`);
+export async function getArtistCollections(id: string): Promise<Array<Collection>> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/collections`);
 }
 
-export async function getArtistAudios(id: number): Promise<Array<Audio>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${id}/audios`);
+export async function getArtistAudios(id: string): Promise<Array<Audio>> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/audios`);
 }
 
 export async function getRecentlyPlayed(): Promise<Array<Entity>> {
@@ -66,9 +66,9 @@ export async function search(query: string): Promise<Array<SearchResultType>> {
 }
 
 export async function getUserCollections(address: string): Promise<Array<Collection>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${address}/collections`);
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${address}/collections`);
 }
 
 export async function getUserAudios(address: string): Promise<Array<Audio>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${address}/audios`);
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${address}/audios`);
 }

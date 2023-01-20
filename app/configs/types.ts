@@ -1,8 +1,6 @@
 interface BaseEntity {
   creatorAddress: string;
   name: string;
-  hash: string;
-  meta: string;
 }
 
 interface LoyaltyOwner {
@@ -18,10 +16,30 @@ export interface Collection extends BaseEntity {
   releaseYear: string;
   artistName: string;
   collectionID: string;
+  hash: string;
+  meta: string;
+}
+
+export enum SocialAccountPlatform {
+  Instagram = 0,
+  Twitter = 1,
+  Youtube = 2,
+}
+
+interface SocialAccount {
+  username: string;
+  platform: SocialAccountPlatform;
 }
 
 export interface Artist extends BaseEntity {
-  description?: string;
+  nickName: string;
+  description: string;
+  avatarHash: string;
+  avatarSignature: string;
+  bannerHash: string;
+  bannerSignature: string;
+  socialAccounts: SocialAccount[];
+  profileID: string;
 }
 
 export interface Audio extends BaseEntity {
@@ -32,6 +50,8 @@ export interface Audio extends BaseEntity {
   artistName: string;
   audioID: string;
   duration: number;
+  hash: string;
+  meta: string;
 }
 
 export interface Playlist extends BaseEntity {
@@ -40,4 +60,6 @@ export interface Playlist extends BaseEntity {
   releaseYear: string;
   audios: Audio[];
   description: string;
+  hash: string;
+  meta: string;
 }
