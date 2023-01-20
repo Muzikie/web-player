@@ -10,7 +10,7 @@ import {
   COMMANDS,
   AUDIO_STREAM_SCHEMA,
   CHAIN_ID,
-  TX_STATUS,
+  HTTP_STATUS,
 } from '~/configs';
 import { ProfileInfoType } from '~/context/profileContext/types';
 import { useAccount } from '../useAccount/useAccount';
@@ -72,7 +72,7 @@ export const useStream = () => {
     );
     const txStatus = getTransactionExecutionStatus(MODULES.AUDIO, txId, dryRunResponse);
 
-    if (txStatus === TX_STATUS.SUCCESS) {
+    if (txStatus === HTTP_STATUS.OK.CODE) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes },

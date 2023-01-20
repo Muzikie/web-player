@@ -8,10 +8,9 @@ import { useAccount } from '~/hooks/useAccount/useAccount';
 import {
   MODULES,
   COMMANDS,
-  FEEDBACK_MESSAGES,
   COLLECTION_CREATE_SCHEMA,
   CHAIN_ID,
-  TX_STATUS,
+  HTTP_STATUS,
 } from '~/configs';
 import { waitFor } from '~/helpers/helpers';
 import {
@@ -120,14 +119,14 @@ export const useCreateCollection = () => {
     );
     // broadcast transaction
     const txStatus = getTransactionExecutionStatus(MODULES.COLLECTION, txId, dryRunResponse);
-    if (txStatus === TX_STATUS.SUCCESS) {
+    if (txStatus === HTTP_STATUS.OK.CODE) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
       );
       // Check if the NFT is created correctly
       if (!response.error) {
-        setFeedback({ message: FEEDBACK_MESSAGES.PENDING, error: true });
+        setFeedback({ message: HTTP_STATUS.PENDING.MESSAGE, error: true });
         await waitFor(12);
         const nextState = <CollectionAccountResponse> await request(
           Method.collection_getAccount,
@@ -147,15 +146,15 @@ export const useCreateCollection = () => {
               collectionID,
             }, files[0]);
             if (postResponse?.collectionID === collectionID) {
-              setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
+              setFeedback({ message: HTTP_STATUS.OK.MESSAGE, error: false });
             }
           }
         }
       } else {
-        setFeedback({ message: FEEDBACK_MESSAGES.BROADCAST_ERROR, error: true });
+        setFeedback({ message: HTTP_STATUS.BAD_REQUEST.MESSAGE, error: true });
       }
     } else {
-      setFeedback({ message: FEEDBACK_MESSAGES.INVALID_PARAMS, error: true });
+      setFeedback({ message: HTTP_STATUS.NOT_SIGNED.MESSAGE, error: true });
     }
   };
 

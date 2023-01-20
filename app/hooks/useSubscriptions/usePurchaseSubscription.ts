@@ -10,11 +10,10 @@ import {
 import {
   MODULES,
   COMMANDS,
-  FEEDBACK_MESSAGES,
   SUBSCRIPTION_PURCHASE_SCHEMA,
   CHAIN_ID,
   DEV_ACCOUNT,
-  TX_STATUS,
+  HTTP_STATUS,
 } from '~/configs';
 import { useAccount } from '../useAccount/useAccount';
 import { FetchStatus } from './types';
@@ -40,7 +39,7 @@ export const usePurchaseSubscription = () => {
   };
 
   const purchase = async () => {
-    if (!ids.length) return FEEDBACK_MESSAGES.BROADCAST_ERROR;
+    if (!ids.length) return HTTP_STATUS.BAD_REQUEST.MESSAGE;
 
     const data = await updateAccount();
     // Create blockchain transaction and broadcast it
@@ -77,17 +76,17 @@ export const usePurchaseSubscription = () => {
     );
     // broadcast transaction
     const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse);
-    if (txStatus === TX_STATUS.SUCCESS) {
+    if (txStatus === HTTP_STATUS.OK.CODE) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
       );
 
       if (!response.error) {
-        return FEEDBACK_MESSAGES.SUCCESS;
+        return HTTP_STATUS.OK.MESSAGE;
       }
     }
-    return FEEDBACK_MESSAGES.BROADCAST_ERROR;
+    return HTTP_STATUS.BAD_REQUEST.MESSAGE;
   };
 
   useEffect(() => {

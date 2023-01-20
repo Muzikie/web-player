@@ -8,10 +8,9 @@ import { useAccount } from '~/hooks/useAccount/useAccount';
 import {
   MODULES,
   COMMANDS,
-  FEEDBACK_MESSAGES,
   AUDIO_CREATE_SCHEMA,
-  TX_STATUS,
   CHAIN_ID,
+  HTTP_STATUS,
 } from '~/configs';
 import { waitFor } from '~/helpers/helpers';
 import {
@@ -85,6 +84,8 @@ export const useCreateAudio = () => {
     const { signature } = cryptography.ed.signMessageWithPrivateKey(
       md5Hash, Buffer.from(data.privateKey, 'hex'),
     ); // Takes around 350 ms
+    console.log('md5Hash', md5Hash);
+    console.log('signature', signature);
 
     // Create blockchain transaction and broadcast it
     const tx = {
@@ -106,7 +107,9 @@ export const useCreateAudio = () => {
         }]
       },
     };
+    console.log('tx', tx);
     const fee = transactions.computeMinFee(tx, AUDIO_CREATE_SCHEMA);
+    console.log('fee', fee);
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
       { ...tx, fee },
@@ -114,6 +117,7 @@ export const useCreateAudio = () => {
       Buffer.from(data.privateKey, 'hex'),
       AUDIO_CREATE_SCHEMA
     );
+    console.log('signedTx', signedTx);
     if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
       return {
         txBytes: '',
@@ -121,6 +125,7 @@ export const useCreateAudio = () => {
       }
     }
     const txId = signedTx.id.toString('hex');
+    console.log('txId', txId);
     const txBytes = transactions.getBytes(signedTx, AUDIO_CREATE_SCHEMA);
     // dry-run transaction to get the errors
     const dryRunResponse = <DryRunTxResponse> await request(
@@ -128,15 +133,18 @@ export const useCreateAudio = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
+    console.log('dryRunResponse', dryRunResponse);
     const txStatus = getTransactionExecutionStatus(MODULES.AUDIO, txId, dryRunResponse);
-    if (txStatus === TX_STATUS.SUCCESS) {
+    console.log('txStatus', txStatus);
+    if (txStatus === HTTP_STATUS.OK.CODE) {
       const response = <PostTxResponse> await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
       );
+      console.log('response', response);
       // Check if the NFT is created correctly
       if (!response.error) {
-        setFeedback({ message: FEEDBACK_MESSAGES.PENDING, error: true });
+        setFeedback({ message: HTTP_STATUS.PENDING.MESSAGE, error: true });
         await waitFor(12);
         const nextState = <AudioAccountResponse> await request(
           Method.audio_getAccount,
@@ -156,15 +164,15 @@ export const useCreateAudio = () => {
               audioID,
             }, files[0]);
             if (postResponse?.audioID === audioID) {
-              setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
+              setFeedback({ message: HTTP_STATUS.OK.MESSAGE, error: false });
             }
           }
         }
       } else {
-        setFeedback({ message: FEEDBACK_MESSAGES.BROADCAST_ERROR, error: true });
+        setFeedback({ message: HTTP_STATUS.BAD_REQUEST.MESSAGE, error: true });
       }
     } else {
-      setFeedback({ message: FEEDBACK_MESSAGES.INVALID_PARAMS, error: true });
+      setFeedback({ message: HTTP_STATUS.NOT_SIGNED.MESSAGE, error: true });
     }
   };
 

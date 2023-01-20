@@ -9,6 +9,8 @@ export const AUDIO_CREATE_SCHEMA = {
     'genre',
     'collectionID',
     'owners',
+    'hash',
+    'meta',
   ],
   properties: {
     name: {
@@ -48,7 +50,6 @@ export const AUDIO_CREATE_SCHEMA = {
         properties: {
           address: {
             dataType: 'bytes',
-            format: 'lisk32',
             fieldNumber: 1,
           },
           shares: {
@@ -86,7 +87,7 @@ export const COLLECTION_CREATE_SCHEMA = {
   $id: 'collection/create',
   title: 'CreateAsset transaction asset for collection module',
   type: 'object',
-  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType'],
+  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType', 'hash', 'meta'],
   properties: {
     name: {
       dataType: 'string',

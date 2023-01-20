@@ -51,10 +51,6 @@ export const TREASURY_ACCOUNT = {
 
 export const METHOD_NOT_READY = 'Method not ready';
 export const SUCCESS_CODE = '0801';
-export const TX_STATUS = {
-  SUCCESS: 'success',
-  FAIL: 'fail',
-};
 export const UNDETERMINED_EVENT_ERROR = 'Event unavailable to determine execution status for transaction';
 export const JSON_RPC_VERSION = '2.0';
 export const KEYS = {};
