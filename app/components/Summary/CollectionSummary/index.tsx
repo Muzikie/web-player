@@ -3,11 +3,11 @@ import React from 'react';
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
-import { API_URLS } from '~/constants/api';
-import { EntityRowProps, CollectionType } from '~/components/Entity/types';
+import { API_URLS, Collection } from '~/configs';
+import { EntityRowProps } from '~/components/Entity/types';
 import { getID } from '~/components/Entity/utils';
 
-const CollectionSummary = ({ data }: EntityRowProps<CollectionType>) => {
+const CollectionSummary = ({ data }: EntityRowProps<Collection>) => {
   const id = getID(data);
   return (
     <section className="component collectionSummary">

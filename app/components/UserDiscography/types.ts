@@ -1,6 +1,6 @@
-import { CollectionType, AudioType } from '../Entity/types';
+import { Collection, Audio } from '~/configs';
 
 export interface UserDiscographyProps {
-  audios: AudioType[];
-  collections: CollectionType[];
+  audios: Audio[];
+  collections: Collection[];
 }

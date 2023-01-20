@@ -6,7 +6,7 @@ import { Link } from '~/components/common/Link';
 import { useAudio } from '~/hooks/useAudio/useAudio';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { IconButton } from '~/components/common/Button';
-import { API_URLS } from '~/constants/api';
+import { API_URLS } from '~/configs';
 import EntityThumbnail from '~/components/Entity/EntityThumbnail';
 import PlaceHolderImage from './PlaceHolderImage';
 import ProgressBar from './ProgressBar';

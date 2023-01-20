@@ -1,4 +1,4 @@
-import { TX_STATUS } from '~/constants/app';
+import { HTTP_STATUS } from '~/configs';
 import { DryRunTxResponse, ErrorResponse } from '~/context/socketContext/types';
 import {
   getTransactionExecutionStatus,
@@ -31,17 +31,17 @@ describe('Transaction', () => {
   describe('getTransactionExecutionStatus', () => {
     it('should return FAIL if response has error', () => {
       const result = getTransactionExecutionStatus(module, id, dryRunCallError);
-      expect(result).toBe(TX_STATUS.FAIL);
+      expect(result).toBe(HTTP_STATUS.BAD_REQUEST.CODE);
     });
 
     it('should return FAIL if response has an event with data 0800', () => {
       const result = getTransactionExecutionStatus(module, id, DryRunExecutionError);
-      expect(result).toBe(TX_STATUS.FAIL);
+      expect(result).toBe(HTTP_STATUS.BAD_REQUEST.CODE);
     });
 
     it('should return SUCCESS if response has an event with data 0801', () => {
       const result = getTransactionExecutionStatus(module, id, DryRunExecutionSuccess);
-      expect(result).toBe(TX_STATUS.SUCCESS);
+      expect(result).toBe(HTTP_STATUS.OK.CODE);
     });
   });
 });

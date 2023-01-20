@@ -1,8 +1,9 @@
 import React from 'react';
 // import { IconButton } from '~/components/common/Button';
-import { PlaylistType, EntityRowProps } from '../types';
+import { Playlist } from '~/configs';
+import { EntityRowProps } from '../types';
 
-const PlaylistActions = ({ data }: EntityRowProps<PlaylistType>) => (
+const PlaylistActions = ({ data }: EntityRowProps<Playlist>) => (
   <footer className="component entity action playlist">
     <span>{`${data.description} audios`}</span>
     {/* <IconButton

@@ -1,8 +1,9 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { ArtistType, EntityRowProps } from '../types';
+import { Artist } from '~/configs';
+import { EntityRowProps } from '../types';
 
-const ArtistActions = ({ data }: EntityRowProps<ArtistType>) => (
+const ArtistActions = ({ data }: EntityRowProps<Artist>) => (
   <footer className="component entity action artist">
     <IconButton
       icon="heart"

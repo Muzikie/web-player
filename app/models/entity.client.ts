@@ -1,9 +1,9 @@
-import type {
-  CollectionType,
-  AudioType,
-  Entity,
-} from '~/components/Entity/types';
-import { API_URLS } from '~/constants/api';
+import { Entity } from '~/components/Entity/types';
+import {
+  Collection,
+  Audio,
+  API_URLS
+} from '~/configs';
 
 export type SearchResultType = {
   [key: string]: Entity[];
@@ -17,14 +17,14 @@ const post = (url: string, body: any) => fetch(
   }
 ).then((res) => res.json()).then(res => res.data).catch(console.log);
 
-export async function postCollection(json: Entity, file: File): Promise<CollectionType> {
+export async function postCollection(json: Entity, file: File): Promise<Collection> {
   const data = new FormData();
   data.append('file', file);
   data.append('data', JSON.stringify(json));
   return post(`${API_URLS.STREAMER}/api/v1/collections`, data);
 }
 
-export async function postAudio(json: Entity, file: File): Promise<AudioType> {
+export async function postAudio(json: Entity, file: File): Promise<Audio> {
   const data = new FormData();
   data.append('file', file);
   data.append('data', JSON.stringify(json));

@@ -5,12 +5,18 @@ import {
   Method,
   DryRunTxResponse,
 } from '~/context/socketContext/types';
-import { useAccount } from '../useAccount/useAccount';
-import { AUDIO_STREAM_SCHEMA, MODULES, COMMANDS } from '~/constants/blockchain';
-import { CHAIN_ID, TX_STATUS } from '~/constants/app';
+import {
+  MODULES,
+  COMMANDS,
+  AUDIO_STREAM_SCHEMA,
+  CHAIN_ID,
+  HTTP_STATUS,
+} from '~/configs';
 import { ProfileInfoType } from '~/context/profileContext/types';
+import { useAccount } from '../useAccount/useAccount';
 import { useWS } from '../useWS/useWS';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
+import { bufferize } from '~/helpers/convertors';
 
 interface CreateTxResponse {
   txBytes: string;
@@ -22,17 +28,17 @@ const createTx = (audioID: string, account: ProfileInfoType): CreateTxResponse =
     module: MODULES.AUDIO,
     command: COMMANDS.STREAM,
     nonce: BigInt(account.nonce),
-    senderPublicKey: Buffer.from(account.publicKey, 'hex'),
+    senderPublicKey: bufferize(account.publicKey),
     params: {
-      audioID: Buffer.from(audioID, 'hex'),
+      audioID: bufferize(audioID),
     },
   };
   const fee = transactions.computeMinFee(tx, AUDIO_STREAM_SCHEMA);
   // Sign the transaction
   const signedTx = transactions.signTransactionWithPrivateKey(
     { ...tx, fee },
-    Buffer.from(CHAIN_ID, 'hex'),
-    Buffer.from(account.privateKey, 'hex'),
+    bufferize(CHAIN_ID),
+    bufferize(account.privateKey),
     AUDIO_STREAM_SCHEMA
   );
   if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
@@ -67,7 +73,7 @@ export const useStream = () => {
     );
     const txStatus = getTransactionExecutionStatus(MODULES.AUDIO, txId, dryRunResponse);
 
-    if (txStatus === TX_STATUS.SUCCESS) {
+    if (txStatus === HTTP_STATUS.OK.CODE) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes },

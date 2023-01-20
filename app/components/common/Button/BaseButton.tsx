@@ -12,7 +12,6 @@ const BaseButton = ({
 }: ButtonType) => {
   const clickFn = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    e.preventDefault();
     if (typeof onClick === 'function') {
       onClick(e);
     }

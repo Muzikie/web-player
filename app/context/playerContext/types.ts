@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
-import { AudioType } from '../../components/Entity/types';
 
-export type Current = AudioType|null;
+import { Audio } from '~/configs';
+
+export type Current = Audio|null;
 
 export interface PlayerContextType {
   current:Current;

@@ -1,28 +1,3 @@
-export const MODULES = {
-  TOKEN: 'token',
-  AUTH: 'auth',
-  COLLECTION: 'collection',
-  AUDIO: 'audio',
-  SUBSCRIPTION: 'subscription',
-};
-
-export const COMMANDS = {
-  STREAM: 'stream',
-  CREATE: 'create',
-  PURCHASE: 'purchase',
-  TRANSFORM: 'transform',
-  DESTROY: 'destroy',
-  SET_ATTRIBUTES: 'setAttributes',
-  UPDATE_MEMBERS: 'updateMembers',
-};
-
-export const FEEDBACK_MESSAGES = {
-  INVALID_PARAMS: 'Audio parameters were invalid. Please review the data.',
-  BROADCAST_ERROR: 'Error creating audio. Try again.',
-  SUCCESS: 'Audio created successfully',
-  PENDING: 'Wait while audio is being create. (~10 seconds)',
-};
-
 export const AUDIO_CREATE_SCHEMA = {
   $id: 'audio/create',
   title: 'CreateAsset transaction asset for audio module',
@@ -34,6 +9,8 @@ export const AUDIO_CREATE_SCHEMA = {
     'genre',
     'collectionID',
     'owners',
+    'hash',
+    'meta',
   ],
   properties: {
     name: {
@@ -73,7 +50,6 @@ export const AUDIO_CREATE_SCHEMA = {
         properties: {
           address: {
             dataType: 'bytes',
-            format: 'lisk32',
             fieldNumber: 1,
           },
           shares: {
@@ -111,7 +87,7 @@ export const COLLECTION_CREATE_SCHEMA = {
   $id: 'collection/create',
   title: 'CreateAsset transaction asset for collection module',
   type: 'object',
-  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType'],
+  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType', 'hash', 'meta'],
   properties: {
     name: {
       dataType: 'string',
@@ -171,4 +147,3 @@ export const SUBSCRIPTION_PURCHASE_SCHEMA = {
     },
   },
 };
-

@@ -2,7 +2,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 /* Internal dependencies */
-import { API_URLS, JSON_RPC_VERSION } from '~/constants/api';
+import { API_URLS, JSON_RPC_VERSION } from '~/configs';
 import { DEFAULT_VALUES, EVENTS, MESSAGES } from './constants';
 import {
   SocketContextType,

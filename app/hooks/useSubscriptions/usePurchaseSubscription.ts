@@ -10,13 +10,15 @@ import {
 import {
   MODULES,
   COMMANDS,
-  FEEDBACK_MESSAGES,
   SUBSCRIPTION_PURCHASE_SCHEMA,
-} from '~/constants/blockchain';
-import { CHAIN_ID, DEV_ACCOUNT, TX_STATUS } from '~/constants/app';
+  CHAIN_ID,
+  DEV_ACCOUNT,
+  HTTP_STATUS,
+} from '~/configs';
 import { useAccount } from '../useAccount/useAccount';
 import { FetchStatus } from './types';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
+import { bufferize } from '~/helpers/convertors';
 
 export const usePurchaseSubscription = () => {
   const [ids, setIDs] = useState<string[]>([]);
@@ -38,7 +40,7 @@ export const usePurchaseSubscription = () => {
   };
 
   const purchase = async () => {
-    if (!ids.length) return FEEDBACK_MESSAGES.BROADCAST_ERROR;
+    if (!ids.length) return HTTP_STATUS.BAD_REQUEST.MESSAGE;
 
     const data = await updateAccount();
     // Create blockchain transaction and broadcast it
@@ -46,9 +48,9 @@ export const usePurchaseSubscription = () => {
       module: MODULES.SUBSCRIPTION,
       command: COMMANDS.PURCHASE,
       nonce: BigInt(data.nonce),
-      senderPublicKey: Buffer.from(data.publicKey, 'hex'),
+      senderPublicKey: bufferize(data.publicKey),
       params: {
-        subscriptionID: Buffer.from(ids[0], 'hex'),
+        subscriptionID: bufferize(ids[0]),
         members: [cryptography.address.getAddressFromLisk32Address(data.address)]
       },
     };
@@ -56,8 +58,8 @@ export const usePurchaseSubscription = () => {
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
       { ...tx, fee },
-      Buffer.from(CHAIN_ID, 'hex'),
-      Buffer.from(info.privateKey, 'hex'),
+      bufferize(CHAIN_ID),
+      bufferize(info.privateKey),
       SUBSCRIPTION_PURCHASE_SCHEMA
     );
     if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
@@ -75,17 +77,17 @@ export const usePurchaseSubscription = () => {
     );
     // broadcast transaction
     const txStatus = getTransactionExecutionStatus(MODULES.SUBSCRIPTION, txId, dryRunResponse);
-    if (txStatus === TX_STATUS.SUCCESS) {
+    if (txStatus === HTTP_STATUS.OK.CODE) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
       );
 
       if (!response.error) {
-        return FEEDBACK_MESSAGES.SUCCESS;
+        return HTTP_STATUS.OK.MESSAGE;
       }
     }
-    return FEEDBACK_MESSAGES.BROADCAST_ERROR;
+    return HTTP_STATUS.BAD_REQUEST.MESSAGE;
   };
 
   useEffect(() => {

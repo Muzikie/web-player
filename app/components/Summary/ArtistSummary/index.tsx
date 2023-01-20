@@ -1,8 +1,9 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { EntityRowProps, ArtistType } from '~/components/Entity/types';
+import { Artist } from '~/configs';
+import { EntityRowProps } from '~/components/Entity/types';
 
-const ArtistSummary = ({ data }: EntityRowProps<ArtistType>) => (
+const ArtistSummary = ({ data }: EntityRowProps<Artist>) => (
   <section className="component artistSummary">
     <header>
       <h1>{ data.name }</h1>

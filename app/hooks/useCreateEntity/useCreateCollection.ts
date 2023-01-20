@@ -8,11 +8,11 @@ import { useAccount } from '~/hooks/useAccount/useAccount';
 import {
   MODULES,
   COMMANDS,
-  FEEDBACK_MESSAGES,
-  COLLECTION_CREATE_SCHEMA
-} from '~/constants/blockchain';
+  COLLECTION_CREATE_SCHEMA,
+  CHAIN_ID,
+  HTTP_STATUS,
+} from '~/configs';
 import { waitFor } from '~/helpers/helpers';
-import { CHAIN_ID, TX_STATUS } from '~/constants/app';
 import {
   CollectionAccountResponse,
   CollectionResponse,
@@ -24,6 +24,7 @@ import { ValidationStatus } from './types';
 import { validate } from './validator';
 import { postCollection } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
+import { bufferize } from '~/helpers/convertors';
 
 export const useCreateCollection = () => {
   const { updateAccount } = useAccount();
@@ -77,7 +78,7 @@ export const useCreateCollection = () => {
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
     const { signature } = cryptography.ed.signMessageWithPrivateKey(
-      md5Hash, Buffer.from(data.privateKey, 'hex'),
+      md5Hash, bufferize(data.privateKey),
     ); // Takes around 350 ms
 
     // Create blockchain transaction and broadcast it
@@ -85,13 +86,13 @@ export const useCreateCollection = () => {
       module: MODULES.COLLECTION,
       command: COMMANDS.CREATE,
       nonce: BigInt(data.nonce),
-      senderPublicKey: Buffer.from(data.publicKey, 'hex'),
+      senderPublicKey: bufferize(data.publicKey),
       params: {
         name,
         releaseYear,
         artistName,
         hash: signature,
-        meta: Buffer.from(md5Hash, 'hex'),
+        meta: bufferize(md5Hash),
         coArtists: [],
         collectionType,
       },
@@ -100,8 +101,8 @@ export const useCreateCollection = () => {
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
       { ...tx, fee },
-      Buffer.from(CHAIN_ID, 'hex'),
-      Buffer.from(data.privateKey, 'hex'),
+      bufferize(CHAIN_ID),
+      bufferize(data.privateKey),
       COLLECTION_CREATE_SCHEMA
     );
     if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
@@ -119,14 +120,14 @@ export const useCreateCollection = () => {
     );
     // broadcast transaction
     const txStatus = getTransactionExecutionStatus(MODULES.COLLECTION, txId, dryRunResponse);
-    if (txStatus === TX_STATUS.SUCCESS) {
+    if (txStatus === HTTP_STATUS.OK.CODE) {
       const response = await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
       );
       // Check if the NFT is created correctly
       if (!response.error) {
-        setFeedback({ message: FEEDBACK_MESSAGES.PENDING, error: true });
+        setFeedback({ message: HTTP_STATUS.PENDING.MESSAGE, error: true });
         await waitFor(12);
         const nextState = <CollectionAccountResponse> await request(
           Method.collection_getAccount,
@@ -142,19 +143,19 @@ export const useCreateCollection = () => {
           if (!createdCollection.error) {
             const postResponse = await postCollection({
               ...createdCollection.data,
-              creatorAddress: cryptography.address.getLisk32AddressFromAddress(Buffer.from(createdCollection.data.creatorAddress, 'hex')),
+              creatorAddress: cryptography.address.getLisk32AddressFromAddress(bufferize(createdCollection.data.creatorAddress)),
               collectionID,
             }, files[0]);
             if (postResponse?.collectionID === collectionID) {
-              setFeedback({ message: FEEDBACK_MESSAGES.SUCCESS, error: false });
+              setFeedback({ message: HTTP_STATUS.OK.MESSAGE, error: false });
             }
           }
         }
       } else {
-        setFeedback({ message: FEEDBACK_MESSAGES.BROADCAST_ERROR, error: true });
+        setFeedback({ message: HTTP_STATUS.BAD_REQUEST.MESSAGE, error: true });
       }
     } else {
-      setFeedback({ message: FEEDBACK_MESSAGES.INVALID_PARAMS, error: true });
+      setFeedback({ message: HTTP_STATUS.NOT_SIGNED.MESSAGE, error: true });
     }
   };
 

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
 /* Internal dependencies */
+import { Method, AudioAccountResponse, CollectionAccountResponse } from '~/context/socketContext/types';
 import  { useAccount } from '../useAccount/useAccount';
 import { useWS } from '../useWS/useWS';
-import { Method, AudioAccountResponse, CollectionAccountResponse } from '~/context/socketContext/types';
-import { FEEDBACK_MESSAGES } from './constants';
+import { HTTP_STATUS } from '~/configs';
 
 export const useUserDiscography = () => {
   const { info: { address } } = useAccount();
@@ -19,7 +19,7 @@ export const useUserDiscography = () => {
         setCollections(response.data.collection.collections);
       }
     } catch (e) {
-      console.log(FEEDBACK_MESSAGES.ERROR_LOADING_ALBUMS, e);
+      console.log(HTTP_STATUS.NOT_FOUND, e);
     }
   };
 
@@ -30,7 +30,7 @@ export const useUserDiscography = () => {
         setAudios(response.data.audio.audios);
       }
     } catch (e) {
-      console.log(FEEDBACK_MESSAGES.ERROR_LOADING_TRACKS, e);
+      console.log(HTTP_STATUS.NOT_FOUND, e);
     }
   };
 
