@@ -85,8 +85,6 @@ export const useCreateAudio = () => {
     const { signature } = cryptography.ed.signMessageWithPrivateKey(
       md5Hash, bufferize(data.privateKey),
     ); // Takes around 350 ms
-    console.log('md5Hash', md5Hash);
-    console.log('signature', signature);
 
     // Create blockchain transaction and broadcast it
     const tx = {
@@ -108,9 +106,7 @@ export const useCreateAudio = () => {
         }]
       },
     };
-    console.log('tx', tx);
     const fee = transactions.computeMinFee(tx, AUDIO_CREATE_SCHEMA);
-    console.log('fee', fee);
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
       { ...tx, fee },
@@ -118,7 +114,6 @@ export const useCreateAudio = () => {
       bufferize(data.privateKey),
       AUDIO_CREATE_SCHEMA
     );
-    console.log('signedTx', signedTx);
     if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
       return {
         txBytes: '',
@@ -126,7 +121,6 @@ export const useCreateAudio = () => {
       }
     }
     const txId = signedTx.id.toString('hex');
-    console.log('txId', txId);
     const txBytes = transactions.getBytes(signedTx, AUDIO_CREATE_SCHEMA);
     // dry-run transaction to get the errors
     const dryRunResponse = <DryRunTxResponse> await request(
@@ -134,15 +128,12 @@ export const useCreateAudio = () => {
       { transaction: txBytes.toString('hex') },
     );
     // broadcast transaction
-    console.log('dryRunResponse', dryRunResponse);
     const txStatus = getTransactionExecutionStatus(MODULES.AUDIO, txId, dryRunResponse);
-    console.log('txStatus', txStatus);
     if (txStatus === HTTP_STATUS.OK.CODE) {
       const response = <PostTxResponse> await request(
         Method.txpool_postTransaction,
         { transaction: txBytes.toString('hex') },
       );
-      console.log('response', response);
       // Check if the NFT is created correctly
       if (!response.error) {
         setFeedback({ message: HTTP_STATUS.PENDING.MESSAGE, error: true });
