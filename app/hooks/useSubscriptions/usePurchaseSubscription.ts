@@ -18,6 +18,7 @@ import {
 import { useAccount } from '../useAccount/useAccount';
 import { FetchStatus } from './types';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
+import { bufferize } from '~/helpers/convertors';
 
 export const usePurchaseSubscription = () => {
   const [ids, setIDs] = useState<string[]>([]);
@@ -47,9 +48,9 @@ export const usePurchaseSubscription = () => {
       module: MODULES.SUBSCRIPTION,
       command: COMMANDS.PURCHASE,
       nonce: BigInt(data.nonce),
-      senderPublicKey: Buffer.from(data.publicKey, 'hex'),
+      senderPublicKey: bufferize(data.publicKey),
       params: {
-        subscriptionID: Buffer.from(ids[0], 'hex'),
+        subscriptionID: bufferize(ids[0]),
         members: [cryptography.address.getAddressFromLisk32Address(data.address)]
       },
     };
@@ -57,8 +58,8 @@ export const usePurchaseSubscription = () => {
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
       { ...tx, fee },
-      Buffer.from(CHAIN_ID, 'hex'),
-      Buffer.from(info.privateKey, 'hex'),
+      bufferize(CHAIN_ID),
+      bufferize(info.privateKey),
       SUBSCRIPTION_PURCHASE_SCHEMA
     );
     if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {

@@ -24,6 +24,7 @@ import { ValidationStatus } from './types';
 import { validate } from './validator';
 import { postCollection } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
+import { bufferize } from '~/helpers/convertors';
 
 export const useCreateCollection = () => {
   const { updateAccount } = useAccount();
@@ -77,7 +78,7 @@ export const useCreateCollection = () => {
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
     const { signature } = cryptography.ed.signMessageWithPrivateKey(
-      md5Hash, Buffer.from(data.privateKey, 'hex'),
+      md5Hash, bufferize(data.privateKey),
     ); // Takes around 350 ms
 
     // Create blockchain transaction and broadcast it
@@ -85,13 +86,13 @@ export const useCreateCollection = () => {
       module: MODULES.COLLECTION,
       command: COMMANDS.CREATE,
       nonce: BigInt(data.nonce),
-      senderPublicKey: Buffer.from(data.publicKey, 'hex'),
+      senderPublicKey: bufferize(data.publicKey),
       params: {
         name,
         releaseYear,
         artistName,
         hash: signature,
-        meta: Buffer.from(md5Hash, 'hex'),
+        meta: bufferize(md5Hash),
         coArtists: [],
         collectionType,
       },
@@ -100,8 +101,8 @@ export const useCreateCollection = () => {
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
       { ...tx, fee },
-      Buffer.from(CHAIN_ID, 'hex'),
-      Buffer.from(data.privateKey, 'hex'),
+      bufferize(CHAIN_ID),
+      bufferize(data.privateKey),
       COLLECTION_CREATE_SCHEMA
     );
     if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
@@ -142,7 +143,7 @@ export const useCreateCollection = () => {
           if (!createdCollection.error) {
             const postResponse = await postCollection({
               ...createdCollection.data,
-              creatorAddress: cryptography.address.getLisk32AddressFromAddress(Buffer.from(createdCollection.data.creatorAddress, 'hex')),
+              creatorAddress: cryptography.address.getLisk32AddressFromAddress(bufferize(createdCollection.data.creatorAddress)),
               collectionID,
             }, files[0]);
             if (postResponse?.collectionID === collectionID) {

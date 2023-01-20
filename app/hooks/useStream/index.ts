@@ -16,6 +16,7 @@ import { ProfileInfoType } from '~/context/profileContext/types';
 import { useAccount } from '../useAccount/useAccount';
 import { useWS } from '../useWS/useWS';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
+import { bufferize } from '~/helpers/convertors';
 
 interface CreateTxResponse {
   txBytes: string;
@@ -27,17 +28,17 @@ const createTx = (audioID: string, account: ProfileInfoType): CreateTxResponse =
     module: MODULES.AUDIO,
     command: COMMANDS.STREAM,
     nonce: BigInt(account.nonce),
-    senderPublicKey: Buffer.from(account.publicKey, 'hex'),
+    senderPublicKey: bufferize(account.publicKey),
     params: {
-      audioID: Buffer.from(audioID, 'hex'),
+      audioID: bufferize(audioID),
     },
   };
   const fee = transactions.computeMinFee(tx, AUDIO_STREAM_SCHEMA);
   // Sign the transaction
   const signedTx = transactions.signTransactionWithPrivateKey(
     { ...tx, fee },
-    Buffer.from(CHAIN_ID, 'hex'),
-    Buffer.from(account.privateKey, 'hex'),
+    bufferize(CHAIN_ID),
+    bufferize(account.privateKey),
     AUDIO_STREAM_SCHEMA
   );
   if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {

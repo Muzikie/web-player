@@ -9,6 +9,7 @@ import RegisterSuggestion from '~/components/RegisterSuggestion';
 import { getSession, commitSession } from '~/hooks/useSession';
 import { PartialView } from '~/components/PartialView';
 import { LoaderBaseProps } from '../../types';
+import { bufferize } from '~/helpers/convertors';
 import styles from '~/css/routes/__main/login.css';
 
 
@@ -40,8 +41,8 @@ export async function loader({ request }: LoaderBaseProps) {
 
   return json({
     address: address ?? '',
-    publicKey: publicKey ? Buffer.from(publicKey).toString('hex') : '',
-    privateKey: privateKey ? Buffer.from(privateKey).toString('hex') : '',
+    publicKey: publicKey ? bufferize(publicKey).toString('hex') : '',
+    privateKey: privateKey ? bufferize(privateKey).toString('hex') : '',
   }, {
     headers: {
       'Set-Cookie': await commitSession(session),

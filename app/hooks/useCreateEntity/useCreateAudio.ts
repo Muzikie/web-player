@@ -25,6 +25,7 @@ import { ValidationStatus } from './types';
 import { validate } from './validator';
 import { postAudio } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
+import { bufferize } from '~/helpers/convertors';
 
 export const useCreateAudio = () => {
   const { updateAccount } = useAccount();
@@ -82,7 +83,7 @@ export const useCreateAudio = () => {
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
     const { signature } = cryptography.ed.signMessageWithPrivateKey(
-      md5Hash, Buffer.from(data.privateKey, 'hex'),
+      md5Hash, bufferize(data.privateKey),
     ); // Takes around 350 ms
     console.log('md5Hash', md5Hash);
     console.log('signature', signature);
@@ -92,15 +93,15 @@ export const useCreateAudio = () => {
       module: MODULES.AUDIO,
       command: COMMANDS.CREATE,
       nonce: BigInt(data.nonce),
-      senderPublicKey: Buffer.from(data.publicKey, 'hex'),
+      senderPublicKey: bufferize(data.publicKey),
       params: {
         name,
         releaseYear,
         artistName,
         hash: signature,
-        meta: Buffer.from(md5Hash, 'hex'),
+        meta: bufferize(md5Hash),
         genre: [genre],
-        collectionID: Buffer.from(collectionID, 'hex'),
+        collectionID: bufferize(collectionID),
         owners: [{
           address: cryptography.address.getAddressFromLisk32Address(data.address),
           shares: 100
@@ -113,8 +114,8 @@ export const useCreateAudio = () => {
     // Sign the transaction
     const signedTx = transactions.signTransactionWithPrivateKey(
       { ...tx, fee },
-      Buffer.from(CHAIN_ID, 'hex'),
-      Buffer.from(data.privateKey, 'hex'),
+      bufferize(CHAIN_ID),
+      bufferize(data.privateKey),
       AUDIO_CREATE_SCHEMA
     );
     console.log('signedTx', signedTx);
@@ -160,7 +161,7 @@ export const useCreateAudio = () => {
           if (!createdAudio.error) {
             const postResponse = await postAudio({
               ...createdAudio.data,
-              creatorAddress: cryptography.address.getLisk32AddressFromAddress(Buffer.from(createdAudio.data.creatorAddress, 'hex')),
+              creatorAddress: cryptography.address.getLisk32AddressFromAddress(bufferize(createdAudio.data.creatorAddress)),
               audioID,
             }, files[0]);
             if (postResponse?.audioID === audioID) {
