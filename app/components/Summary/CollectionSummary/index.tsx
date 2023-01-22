@@ -3,7 +3,7 @@ import React from 'react';
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
-import { API_URLS, Collection } from '~/configs';
+import { API_URLS, Collection, FILES } from '~/configs';
 import { EntityRowProps } from '~/components/Entity/types';
 import { getID } from '~/components/Entity/utils';
 
@@ -15,7 +15,7 @@ const CollectionSummary = ({ data }: EntityRowProps<Collection>) => {
         <h1>{ data.name }</h1>
         <Link to={`/artist/${data.creatorAddress}`} className="artist">
           <figure>
-            <img src={`${API_URLS.STREAMER}/${id}.jpg`} alt={data.artistName} />
+            <img src={`${API_URLS.STREAMER}/${id}-.jpg`} alt={data.artistName} />
           </figure>
           <h4>{data.artistName}</h4>
         </Link>
@@ -37,7 +37,7 @@ const CollectionSummary = ({ data }: EntityRowProps<Collection>) => {
         </div>
       </header>
       <figure className="photo">
-        <img src={`${API_URLS.STREAMER}/${id}.jpg`} alt={ data.name } />
+        <img src={`${API_URLS.STREAMER}/${id}-${FILES.collection}.jpg`} alt={ data.name } />
       </figure>
     </section>
   );

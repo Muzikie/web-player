@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { Artist, API_URLS } from '~/configs';
+import { Artist, API_URLS, FILES } from '~/configs';
 import { EntityRowProps } from '~/components/Entity/types';
 
 const ArtistSummary = ({ data }: EntityRowProps<Artist>) => (
@@ -24,7 +24,7 @@ const ArtistSummary = ({ data }: EntityRowProps<Artist>) => (
       </div>
     </header>
     <figure className="photo">
-      <img src={`${API_URLS.STREAMER}/${data.profileID}avatar.jpg`} alt={ data.name } />
+      <img src={`${API_URLS.STREAMER}/${data.profileID}-${FILES.artist}.jpg`} alt={ data.name } />
     </figure>
   </section>
 );
