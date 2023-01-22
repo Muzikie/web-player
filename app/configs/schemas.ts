@@ -9,8 +9,8 @@ export const AUDIO_CREATE_SCHEMA = {
     'genre',
     'collectionID',
     'owners',
-    'hash',
-    'meta',
+    'audioSignature',
+    'audioHash',
   ],
   properties: {
     name: {
@@ -59,11 +59,11 @@ export const AUDIO_CREATE_SCHEMA = {
         },
       },
     },
-    hash: {
+    audioSignature: {
       dataType: 'bytes',
       fieldNumber: 7,
     },
-    meta: {
+    audioHash: {
       dataType: 'bytes',
       fieldNumber: 8,
     },
@@ -87,7 +87,7 @@ export const COLLECTION_CREATE_SCHEMA = {
   $id: 'collection/create',
   title: 'CreateAsset transaction asset for collection module',
   type: 'object',
-  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType', 'hash', 'meta'],
+  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType', 'coverSignature', 'coverHash'],
   properties: {
     name: {
       dataType: 'string',
@@ -116,11 +116,11 @@ export const COLLECTION_CREATE_SCHEMA = {
       dataType: 'uint32',
       fieldNumber: 5,
     },
-    hash: {
+    coverSignature: {
       dataType: 'bytes',
       fieldNumber: 6,
     },
-    meta: {
+    coverHash: {
       dataType: 'bytes',
       fieldNumber: 7,
     },
