@@ -12,17 +12,14 @@ import {
   CHAIN_ID,
   HTTP_STATUS,
 } from '~/configs';
-import { waitFor } from '~/helpers/helpers';
 import {
-  CollectionAccountResponse,
-  CollectionResponse,
   DryRunTxResponse,
   Method,
 } from '~/context/socketContext/types';
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
-import { postCollection } from '~/models/entity.client';
+import { postTransaction } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
 import { bufferize } from '~/helpers/convertors';
 
@@ -68,13 +65,6 @@ export const useCreateCollection = () => {
     // update account state
     const data = await updateAccount();
 
-    const curr = <CollectionAccountResponse> await request(
-      Method.collection_getAccount,
-      { address: data.address },
-    );
-
-    const collectionsCount = !curr.error ? curr.data.collection?.collections.length : 0;
-
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
     const { signature } = cryptography.ed.signMessageWithPrivateKey(
@@ -91,8 +81,8 @@ export const useCreateCollection = () => {
         name,
         releaseYear,
         artistName,
-        hash: signature,
-        meta: bufferize(md5Hash),
+        coverSignature: signature,
+        coverHash: bufferize(md5Hash),
         coArtists: [],
         collectionType,
       },
@@ -118,41 +108,32 @@ export const useCreateCollection = () => {
       Method.txpool_dryRunTransaction,
       { transaction: txBytes.toString('hex') },
     );
+
     // broadcast transaction
     const txStatus = getTransactionExecutionStatus(MODULES.COLLECTION, txId, dryRunResponse);
     if (txStatus === HTTP_STATUS.OK.CODE) {
-      const response = await request(
-        Method.txpool_postTransaction,
-        { transaction: txBytes.toString('hex') },
-      );
-      // Check if the NFT is created correctly
-      if (!response.error) {
-        setFeedback({ message: HTTP_STATUS.PENDING.MESSAGE, error: true });
-        await waitFor(12);
-        const nextState = <CollectionAccountResponse> await request(
-          Method.collection_getAccount,
-          { address: data.address },
+      const postResponse = await postTransaction({
+        transactionID: txId,
+        creatorAddress: data.address,
+        module: MODULES.COLLECTION,
+        command: COMMANDS.CREATE,
+        coverHash: md5Hash,
+        coverSignature: signature,
+      }, files[0], 'cover');
+
+      // Tell Streamer about it
+      if (postResponse?._id) {
+        const response = await request(
+          Method.txpool_postTransaction,
+          { transaction: txBytes.toString('hex') },
         );
-        if (!nextState.error && nextState.data.collection.collections.length > collectionsCount) {
-          const collectionID = nextState.data.collection.collections[nextState.data.collection.collections.length - 1];
-          const createdCollection = <CollectionResponse> await request(
-            Method.collection_getCollection,
-            { collectionID },
-          );
-          // Call Streamer
-          if (!createdCollection.error) {
-            const postResponse = await postCollection({
-              ...createdCollection.data,
-              creatorAddress: cryptography.address.getLisk32AddressFromAddress(bufferize(createdCollection.data.creatorAddress)),
-              collectionID,
-            }, files[0]);
-            if (postResponse?.collectionID === collectionID) {
-              setFeedback({ message: HTTP_STATUS.OK.MESSAGE, error: false });
-            }
-          }
+
+        // Check if the NFT is created correctly
+        if (!response.error) {
+          setFeedback({ message: HTTP_STATUS.OK.MESSAGE, error: false });
+        } else {
+          setFeedback({ message: HTTP_STATUS.BAD_REQUEST.MESSAGE, error: true });
         }
-      } else {
-        setFeedback({ message: HTTP_STATUS.BAD_REQUEST.MESSAGE, error: true });
       }
     } else {
       setFeedback({ message: HTTP_STATUS.NOT_SIGNED.MESSAGE, error: true });
