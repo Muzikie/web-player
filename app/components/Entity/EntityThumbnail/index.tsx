@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { EntityRowProps, Entity, entityThemes } from '../types';
-import { API_URLS } from '~/configs';
+import { API_URLS, FILES } from '~/configs';
 import { getEntity, getCollectionID } from '../utils';
 
 const EntityThumbnail = ({
@@ -15,7 +15,7 @@ const EntityThumbnail = ({
   return (
     <section className={wrapper}>
       <figure>
-        <img src={`${API_URLS.STREAMER}/${id}.jpg`} alt={data.name} />
+        <img src={`${API_URLS.STREAMER}/${id}-${FILES[entity]}.jpg`} alt={data.name} />
       </figure>
     </section>
   );

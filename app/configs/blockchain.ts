@@ -4,6 +4,7 @@ export const MODULES = {
   COLLECTION: 'collection',
   AUDIO: 'audio',
   SUBSCRIPTION: 'subscription',
+  PLAYLIST: 'playlist',
 };
 
 export const COMMANDS = {
@@ -14,5 +15,12 @@ export const COMMANDS = {
   DESTROY: 'destroy',
   SET_ATTRIBUTES: 'setAttributes',
   UPDATE_MEMBERS: 'updateMembers',
+};
+
+export const FILES = {
+  [MODULES.AUDIO]: 'audio',
+  [MODULES.COLLECTION]: 'cover',
+  artist: 'avatar',
+  [MODULES.PLAYLIST]: 'cover',
 };
 

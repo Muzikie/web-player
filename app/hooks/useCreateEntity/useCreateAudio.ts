@@ -12,10 +12,7 @@ import {
   CHAIN_ID,
   HTTP_STATUS,
 } from '~/configs';
-import { waitFor } from '~/helpers/helpers';
 import {
-  AudioAccountResponse,
-  AudioResponse,
   DryRunTxResponse,
   PostTxResponse,
   Method,
@@ -23,7 +20,7 @@ import {
 import { useWS } from '../useWS/useWS';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
-import { postAudio } from '~/models/entity.client';
+import { postTransaction } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
 import { bufferize } from '~/helpers/convertors';
 
@@ -72,13 +69,6 @@ export const useCreateAudio = () => {
     // update account state
     const data = await updateAccount();
 
-    const curr = <AudioAccountResponse> await request(
-      Method.audio_getAccount,
-      { address: data.address },
-    );
-
-    const audiosCount = !curr.error ? curr.data.audio?.audios.length : 0;
-
     // Get file hash
     const fileContent = await files[0].arrayBuffer();
     const md5Hash = md5(new Uint8Array(fileContent)); // Takes around 0.001 ms
@@ -96,8 +86,8 @@ export const useCreateAudio = () => {
         name,
         releaseYear,
         artistName,
-        hash: signature,
-        meta: bufferize(md5Hash),
+        audioSignature: signature,
+        audioHash: bufferize(md5Hash),
         genre: [genre],
         collectionID: bufferize(collectionID),
         owners: [{
@@ -130,38 +120,28 @@ export const useCreateAudio = () => {
     // broadcast transaction
     const txStatus = getTransactionExecutionStatus(MODULES.AUDIO, txId, dryRunResponse);
     if (txStatus === HTTP_STATUS.OK.CODE) {
-      const response = <PostTxResponse> await request(
-        Method.txpool_postTransaction,
-        { transaction: txBytes.toString('hex') },
-      );
-      // Check if the NFT is created correctly
-      if (!response.error) {
-        setFeedback({ message: HTTP_STATUS.PENDING.MESSAGE, error: true });
-        await waitFor(12);
-        const nextState = <AudioAccountResponse> await request(
-          Method.audio_getAccount,
-          { address: data.address },
+      const postResponse = await postTransaction({
+        transactionID: txId,
+        creatorAddress: data.address,
+        module: MODULES.AUDIO,
+        command: COMMANDS.CREATE,
+        audioHash: md5Hash,
+        audioSignature: signature,
+      }, files[0], 'audio');
+
+      // Tell Streamer about it
+      if (postResponse?._id) {
+        const response = <PostTxResponse> await request(
+          Method.txpool_postTransaction,
+          { transaction: txBytes.toString('hex') },
         );
-        if (!nextState.error && nextState.data.audio.audios.length > audiosCount) {
-          const audioID = nextState.data.audio.audios[nextState.data.audio.audios.length - 1];
-          const createdAudio = <AudioResponse> await request(
-            Method.audio_getAudio,
-            { audioID },
-          );
-          // Call Streamer
-          if (!createdAudio.error) {
-            const postResponse = await postAudio({
-              ...createdAudio.data,
-              creatorAddress: cryptography.address.getLisk32AddressFromAddress(bufferize(createdAudio.data.creatorAddress)),
-              audioID,
-            }, files[0]);
-            if (postResponse?.audioID === audioID) {
-              setFeedback({ message: HTTP_STATUS.OK.MESSAGE, error: false });
-            }
-          }
+
+        // Check if the NFT is created correctly
+        if (!response.error) {
+          setFeedback({ message: HTTP_STATUS.OK.MESSAGE, error: false });
+        } else {
+          setFeedback({ message: HTTP_STATUS.BAD_REQUEST.MESSAGE, error: true });
         }
-      } else {
-        setFeedback({ message: HTTP_STATUS.BAD_REQUEST.MESSAGE, error: true });
       }
     } else {
       setFeedback({ message: HTTP_STATUS.NOT_SIGNED.MESSAGE, error: true });
