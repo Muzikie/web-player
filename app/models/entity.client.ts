@@ -17,7 +17,7 @@ const post = (url: string, body: any) => fetch(
   }
 ).then((res) => res.json()).then(res => res.data).catch(console.log);
 
-export async function postCollection(json: Entity, file: File): Promise<Collection> {
+export async function postCollection(json: any, file: File): Promise<Collection> {
   const data = new FormData();
   data.append('file', file);
   data.append('data', JSON.stringify(json));
@@ -29,4 +29,11 @@ export async function postAudio(json: Entity, file: File): Promise<Audio> {
   data.append('file', file);
   data.append('data', JSON.stringify(json));
   return post(`${API_URLS.STREAMER}/api/v1/audios`, data);
+}
+
+export async function postTransaction(json: any, file: File, fileName: string): Promise<Entity> {
+  const data = new FormData();
+  data.append(fileName, file);
+  data.append('data', JSON.stringify(json));
+  return post(`${API_URLS.STREAMER}/api/v1/transactions`, data);
 }
