@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 /* Internal dependencies */
 import Modal from '~/components/Modal';
 import Icon from '~/components/common/Icon';
 import { PrimaryButton } from '~/components/common/Button';
 import { Link } from '~/components/common/Link';
-import { usePurchaseSubscription } from '~/hooks/useSubscriptions';
+import { useActiveSubscription, usePurchaseSubscription, useSubscriptions } from '~/hooks/useSubscriptions';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 
 const PurchaseSubscription = () => {
   const [status, setStatus] = useState('READY');
   const { purchase } = usePurchaseSubscription();
+  const { subscriptionStatus } = useActiveSubscription();
+  const { subscription } = useActiveSubscription();
+
+  const { info, updateAccount } = useAccount();
+  const fn = async () => {
+    // const value = await updateAccount()
+    // console.log({ value })
+  }
+
+
+  // useEffect(() => {
+  //   console.log(info)
+  // }, [info])
+  // info.balances[0].availableBalance
+  useEffect(() => {
+    if (info.address.length > 0) {
+      fn()
+    }
+  }, [info.address])
+  console.log(info)
 
   const onSubmit = async () => {
     setStatus('PENDING');
@@ -33,6 +53,14 @@ const PurchaseSubscription = () => {
             Muzikie has embarked on an exciting mission to bring transparency and fairness to the music distribution industry.
             We are excited to build it, and we need your support and feedback on this mission.
           </p>
+          {(subscription && info.balances.length > 0) &&
+            BigInt(subscription.price) <= BigInt(info.balances[0].availableBalance) + BigInt('2000000')
+            ? <div className="alert">
+              you don't have enough token to purchase a subscription plan.
+              Please add more token to your account to be able to purchase
+              a subscription plan.
+            </div> :
+            <div className="alert">haha</div>}
         </div>
       </section>
       <Modal className='component offer' theme="light" notStickyInMobile>
@@ -40,13 +68,13 @@ const PurchaseSubscription = () => {
           <span>Free 6K</span>
           <span>6000 audio streams</span>
           <span>To our new users</span>
-          <PrimaryButton
+          {subscriptionStatus !== 'LOADING' && <PrimaryButton
             className="subscribeButton"
-            disabled={status !== 'READY'}
+            disabled={status !== 'READY' || subscriptionStatus === 'SUBSCRIBED'}
             onClick={onSubmit}
           >
-            Subscribe now
-          </PrimaryButton>
+            {subscriptionStatus === 'SUBSCRIBED' ? 'Subscribed' : 'Subscribe now'}
+          </PrimaryButton>}
         </aside>
         <main className="mainOffer">
           <div className="description">
