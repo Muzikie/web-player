@@ -1,4 +1,4 @@
 {
-  "STREAMER": "http://164.90.185.53:8080/streamer",
-  "WS": "ws://164.90.185.53:8080/blockchain"
+  "STREAMER": "http://localhost:4002",
+  "WS": "ws://localhost:7887"
 }

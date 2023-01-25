@@ -1,7 +1,6 @@
-export const API_URLS = {
-  STREAMER: 'http://localhost:4002',
-  WS: 'ws://localhost:7887',
-};
+import config from '../../api.config.json';
+
+export const API_URLS = config;
 export const HTTP_STATUS = {
   OK: { CODE: 200, MESSAGE: 'OK' },
   CREATED: { CODE: 201, MESSAGE: 'Created' },

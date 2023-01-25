@@ -31,7 +31,6 @@ export const useCreateAudio = () => {
   const [status, setStatus] = useState<ValidationStatus>(ValidationStatus.clean);
   const [name, setName] = useState<string>('');
   const [releaseYear, setReleaseYear] = useState<string>('');
-  const [artistName, setArtistName] = useState<string>('');
   const [collectionID, setCollectionID] = useState<string>('');
   const [genre, setGenre] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
@@ -44,9 +43,6 @@ export const useCreateAudio = () => {
       break;
     case 'releaseYear':
       setReleaseYear(e.target.value);
-      break;
-    case 'artistName':
-      setArtistName(e.target.value);
       break;
     case 'collectionID':
       setCollectionID(e.target.value);
@@ -85,7 +81,7 @@ export const useCreateAudio = () => {
       params: {
         name,
         releaseYear,
-        artistName,
+        fit: [],
         audioSignature: signature,
         audioHash: bufferize(md5Hash),
         genre: [genre],
@@ -152,7 +148,7 @@ export const useCreateAudio = () => {
     validate('audio', {
       name,
       releaseYear,
-      artistName,
+      fit: [],
       files,
       genre: [genre],
       collectionID,
@@ -162,7 +158,6 @@ export const useCreateAudio = () => {
   }, [
     name,
     releaseYear,
-    artistName,
     files,
     genre,
     collectionID,
@@ -171,7 +166,6 @@ export const useCreateAudio = () => {
   return {
     name,
     releaseYear,
-    artistName,
     files,
     genre,
     collectionID,

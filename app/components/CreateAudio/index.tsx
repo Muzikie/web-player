@@ -14,7 +14,6 @@ const CreateAudio = () => {
   const {
     name,
     releaseYear,
-    artistName,
     genre,
     collectionID,
     status,
@@ -39,13 +38,6 @@ const CreateAudio = () => {
           onChange={onChange}
           name="releaseYear"
           placeholder="Release year"
-          type="text"
-        />
-        <Input
-          value={artistName}
-          onChange={onChange}
-          name="artistName"
-          placeholder="Enter artist name"
           type="text"
         />
         <div className='collectionRow'>

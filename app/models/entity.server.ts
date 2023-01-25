@@ -3,9 +3,9 @@ import {
   Artist,
   Audio,
   Playlist,
+  API_URLS,
 } from '~/configs';
 import { Entity } from '~/components/Entity/types';
-import API_URLS from '../../api.config.json';
 
 export type SearchResultType = {
   [key: string]: Entity[];

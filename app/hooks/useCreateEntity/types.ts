@@ -7,11 +7,11 @@ export enum ValidationStatus {
   valid = 'VALID',
 }
 
-export interface AudioTxProps extends Omit<Audio, 'owners' | 'audioID' | 'duration' | 'creatorAddress' | 'hash' | 'meta'> {
+export interface AudioTxProps extends Omit<Audio, 'owners' | 'audioID' | 'duration' | 'creatorAddress' | 'audioSignature' | 'audioHash'> {
   files: FileList | null;
 }
 
-export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | 'collectionID' | 'coArtists' | 'audios' | 'hash' | 'meta'> {
+export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | 'collectionID' | 'audios' | 'coverSignature' | 'coverHash'> {
   files: FileList | null;
 }
 
