@@ -30,7 +30,6 @@ export const useCreateCollection = () => {
   const [status, setStatus] = useState<ValidationStatus>(ValidationStatus.clean);
   const [name, setName] = useState<string>('');
   const [releaseYear, setReleaseYear] = useState<string>('');
-  const [artistName, setArtistName] = useState<string>('');
   const [collectionType, setCollectionType] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
   const [feedback, setFeedback] = useState<{ message: string; error: boolean }>({ message: '', error: false });
@@ -42,9 +41,6 @@ export const useCreateCollection = () => {
       break;
     case 'releaseYear':
       setReleaseYear(e.target.value);
-      break;
-    case 'artistName':
-      setArtistName(e.target.value);
       break;
     case 'collectionType':
       setCollectionType(Number(e.target.value));
@@ -80,10 +76,8 @@ export const useCreateCollection = () => {
       params: {
         name,
         releaseYear,
-        artistName,
         coverSignature: signature,
         coverHash: bufferize(md5Hash),
-        coArtists: [],
         collectionType,
       },
     };
@@ -144,7 +138,6 @@ export const useCreateCollection = () => {
     validate('collection', {
       name,
       releaseYear,
-      artistName,
       collectionType,
       files,
     }).then((result: ValidationStatus) => {
@@ -153,7 +146,6 @@ export const useCreateCollection = () => {
   }, [
     name,
     releaseYear,
-    artistName,
     collectionType,
     files,
   ]);
@@ -161,7 +153,6 @@ export const useCreateCollection = () => {
   return {
     name,
     releaseYear,
-    artistName,
     collectionType,
     onChange,
     broadcast,

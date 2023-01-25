@@ -11,7 +11,6 @@ const CreateCollection = () => {
   const {
     name,
     releaseYear,
-    artistName,
     collectionType,
     onChange,
     broadcast,
@@ -34,13 +33,6 @@ const CreateCollection = () => {
           onChange={onChange}
           name="releaseYear"
           placeholder="Release year"
-          type="text"
-        />
-        <Input
-          value={artistName}
-          onChange={onChange}
-          name="artistName"
-          placeholder="Enter artist name"
           type="text"
         />
         <Select

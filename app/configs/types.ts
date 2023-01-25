@@ -9,15 +9,18 @@ interface LoyaltyOwner {
   income: string;
 }
 
+export enum CollectionType {
+  Album = 1,
+  PodcastSeries = 2,
+}
+
 export interface Collection extends BaseEntity {
-  coArtists: string[];
-  collectionType: number;
+  collectionType: CollectionType;
   audios: string[];
   releaseYear: string;
-  artistName: string;
   collectionID: string;
-  hash: string;
-  meta: string;
+  coverSignature: string;
+  coverHash: string;
 }
 
 export enum SocialAccountPlatform {
@@ -47,11 +50,11 @@ export interface Audio extends BaseEntity {
   collectionID: string;
   owners: LoyaltyOwner[];
   releaseYear: string;
-  artistName: string;
   audioID: string;
   duration: number;
-  hash: string;
-  meta: string;
+  audioSignature: string;
+  audioHash: string;
+  fit: string[];
 }
 
 export interface Playlist extends BaseEntity {

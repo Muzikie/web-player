@@ -5,12 +5,12 @@ export const AUDIO_CREATE_SCHEMA = {
   required: [
     'name',
     'releaseYear',
-    'artistName',
     'genre',
     'collectionID',
     'owners',
     'audioSignature',
     'audioHash',
+    'fit',
   ],
   properties: {
     name: {
@@ -23,26 +23,20 @@ export const AUDIO_CREATE_SCHEMA = {
       dataType: 'string',
       fieldNumber: 2,
     },
-    artistName: {
-      dataType: 'string',
-      fieldNumber: 3,
-      minLength: 3,
-      maxLength: 40,
-    },
     genre: {
       type: 'array',
-      fieldNumber: 4,
+      fieldNumber: 3,
       items: {
         dataType: 'uint32',
       },
     },
     collectionID: {
       dataType: 'bytes',
-      fieldNumber: 5,
+      fieldNumber: 4,
     },
     owners: {
       type: 'array',
-      fieldNumber: 6,
+      fieldNumber: 5,
       items: {
         $id: 'audio/create/owners',
         type: 'object',
@@ -61,11 +55,19 @@ export const AUDIO_CREATE_SCHEMA = {
     },
     audioSignature: {
       dataType: 'bytes',
-      fieldNumber: 7,
+      fieldNumber: 6,
     },
     audioHash: {
       dataType: 'bytes',
+      fieldNumber: 7,
+    },
+    fit: {
+      type: 'array',
       fieldNumber: 8,
+      items: {
+        dataType: 'bytes',
+        format: 'lisk32',
+      },
     },
   },
 };
@@ -87,7 +89,7 @@ export const COLLECTION_CREATE_SCHEMA = {
   $id: 'collection/create',
   title: 'CreateAsset transaction asset for collection module',
   type: 'object',
-  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType', 'coverSignature', 'coverHash'],
+  required: ['name', 'releaseYear', 'collectionType', 'coverSignature', 'coverHash'],
   properties: {
     name: {
       dataType: 'string',
@@ -99,30 +101,17 @@ export const COLLECTION_CREATE_SCHEMA = {
       dataType: 'string',
       fieldNumber: 2,
     },
-    artistName: {
-      dataType: 'string',
-      fieldNumber: 3,
-      minLength: 3,
-      maxLength: 40,
-    },
-    coArtists: {
-      type: 'array',
-      fieldNumber: 4,
-      items: {
-        dataType: 'string',
-      },
-    },
     collectionType: {
       dataType: 'uint32',
-      fieldNumber: 5,
+      fieldNumber: 3,
     },
     coverSignature: {
       dataType: 'bytes',
-      fieldNumber: 6,
+      fieldNumber: 4,
     },
     coverHash: {
       dataType: 'bytes',
-      fieldNumber: 7,
+      fieldNumber: 5,
     },
   },
 };
