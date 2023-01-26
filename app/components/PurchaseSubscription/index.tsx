@@ -29,7 +29,7 @@ const PurchaseSubscription = () => {
       fn()
     }
   }, [info.address])
-  console.log(info)
+
 
   const onSubmit = async () => {
     setStatus('PENDING');
@@ -55,12 +55,12 @@ const PurchaseSubscription = () => {
           </p>
           {(subscription && info.balances.length > 0) &&
             BigInt(subscription.price) <= BigInt(info.balances[0].availableBalance) + BigInt('2000000')
-            ? <div className="alert">
+            ? <div className="message error">
               you don't have enough token to purchase a subscription plan.
               Please add more token to your account to be able to purchase
               a subscription plan.
             </div> :
-            <div className="alert">haha</div>}
+            <div className="message successful">Subscription has done successfully.</div>}
         </div>
       </section>
       <Modal className='component offer' theme="light" notStickyInMobile>

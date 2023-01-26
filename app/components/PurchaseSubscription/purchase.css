@@ -1,6 +1,21 @@
 .component.purchase {
   color: var(--color-secondary);
 
+  & .message {
+    background-color: var(--color-primary-light);
+    padding: 20px 5px 20px 10px;
+    border-radius: 15px;
+    font-size: 15px;
+
+    &.successful {
+      color: var(--green);
+    }
+
+    &.error {
+      color: var(--color-error);
+    }
+  }
+
   & .description {
     display: flex;
     flex-direction: column;
