@@ -65,32 +65,3 @@
       }
    }
 }
-
-.component.noSubscription {
-   & .wrapper {
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: center;
-
-      & figure,
-      & header {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-      }
-
-      & figure {
-         flex-flow: row nowrap;
-      }
-
-      & header {
-         flex-flow: column nowrap;
-
-         & h3,
-         & .content {
-            color: var(--color-secondary);
-            text-align: center;
-         }
-      }
-   }
-}
