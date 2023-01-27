@@ -1,0 +1,28 @@
+.component.emptyState {
+   & .wrapper {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+
+      & figure,
+      & header {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+      & figure {
+         flex-flow: row nowrap;
+      }
+
+      & header {
+         flex-flow: column nowrap;
+         color: var(--color-secondary);
+
+         & h3,
+         & .content {
+            text-align: center;
+         }
+      }
+   }
+}

@@ -4,9 +4,9 @@ import BigNumber from 'bignumber.js';
 import { fromBaseToken } from '~/helpers/formatters';
 import { useActiveSubscription } from '~/hooks/useSubscriptions';
 import Modal from '../Modal';
-import { PrimaryButton } from '../common/Button';
+import { PrimaryButton } from '~/components/common/Button';
+import EmptyState from '~/components/common/EmptyState';
 import { SubscriptionInfoProps } from './types';
-import NoSubscription from './NoSubscription';
 import { TOKEN, DEV_SHARE } from '~/configs';
 
 const getConsumed = (price: string, consumable: string): string => {
@@ -45,10 +45,12 @@ const ActiveSubscription = () => {
   const { subscription } = useActiveSubscription();
 
   if (!subscription) {
-    return <NoSubscription
-      title="You don't have an active subscription"
-      content="You can subscribe to a plan to enjoy free music"
-    />;
+    return (
+      <EmptyState
+        title="You don't have an active subscription"
+        subtitle="You can subscribe to a plan to enjoy free music"
+      />
+    );
   }
   return (
     <section className="component activeSubscription">
