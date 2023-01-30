@@ -24,10 +24,9 @@ export const isNil = (value: any) => value === null || value === undefined;
  * @param {any} value
  * @returns {boolean}
  */
-export const isEmpty = (value: any, isItem = false) => {
+export const isEmpty = (value: any) => {
   if (isNil(value)) return true;
   if (typeof value === 'string') return value === '';
-  if (isItem === true) return Object.values(value).every((val: any) => val.length == 0);
   if (typeof value === 'object') return Object.keys(value).length === 0;
   return false;
 };

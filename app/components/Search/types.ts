@@ -6,5 +6,6 @@ export interface SearchInputProps {
 }
 
 export interface SearchResultProps {
+  query: string;
   results: SearchResultType;
 }

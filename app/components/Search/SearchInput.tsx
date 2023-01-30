@@ -1,5 +1,7 @@
+/* External dependencies */
 import React, { ChangeEvent } from 'react';
 
+/* Internal dependencies */
 import { Input } from '../common/Input';
 import { SearchInputProps } from './types';
 
