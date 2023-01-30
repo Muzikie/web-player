@@ -1,4 +1,7 @@
 .component.emptyState {
+   padding-top: var(--padding-l);
+   padding-bottom: var(--padding-l);
+
    & .wrapper {
       display: flex;
       flex-flow: column nowrap;

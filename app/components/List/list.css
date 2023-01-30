@@ -26,9 +26,12 @@
   & .itemsFrame {
     width: 100%;
   }
-  
+
   & header + .itemsFrame {
     width: calc(100% - var(--title-width));
+    & section:only-child {
+      margin-top: 1.4rem;
+    }
   }
 
   &.vertical {
@@ -72,12 +75,12 @@
   .component.list {
     &.vertical {
       & .itemsContainer {
-        &.wide{
+        &.wide {
           & > * {
             width: 100%;
           }
         }
-        
+
         &.normal {
           & > * {
             width: 50%;
@@ -98,12 +101,12 @@
   .component.list {
     &.vertical {
       & .itemsContainer {
-        &.wide{
+        &.wide {
           & > * {
             width: 100%;
           }
         }
-        
+
         &.normal {
           & > * {
             width: 33.333%;

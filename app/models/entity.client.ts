@@ -1,10 +1,13 @@
 import type { Entity } from '~/components/Entity/types';
-import { Collection, Audio, API_URLS } from '~/configs';
+import { Collection, Audio, Artist, API_URLS } from '~/configs';
 
 export type SearchResultType = {
-  [key: string]: Entity[];
+  audio: Audio[];
+  artist: Artist[];
+  collection: Collection[];
 }
 
+const get = (url: string) => fetch(url).then((res) => res.json()).then(res => res.data);
 const post = (url: string, body: any) => fetch(
   url,
   {
@@ -32,4 +35,19 @@ export async function postTransaction(json: any, file: File, fileName: string): 
   data.append(fileName, file);
   data.append('data', JSON.stringify(json));
   return post(`${API_URLS.STREAMER}/api/v1/transactions`, data);
+}
+
+export async function search(query: string): Promise<SearchResultType> {
+  const promise1 = <Promise<Artist[]>> get(`${API_URLS.STREAMER}/api/v1/profiles?name=${query}`);
+  const promise2 = <Promise<Artist[]>> get(`${API_URLS.STREAMER}/api/v1/profiles?nickName=${query}`);
+  const promise3 = <Promise<Audio[]>> get(`${API_URLS.STREAMER}/api/v1/audios?name=${query}`);
+  const promise4 = <Promise<Collection[]>> get(`${API_URLS.STREAMER}/api/v1/collections?name=${query}`);
+
+  const [names, nickNames, audio, collection] = await Promise.all([promise1, promise2, promise3, promise4]);
+
+  return {
+    artist: [...names, ...nickNames],
+    audio,
+    collection,
+  };
 }

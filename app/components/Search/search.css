@@ -1,0 +1,4 @@
+.component.searchRoot {
+  max-width: var(--centered-box-max-size);
+  margin: 0 auto;
+}
