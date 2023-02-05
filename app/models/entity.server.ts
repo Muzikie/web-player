@@ -34,7 +34,7 @@ export async function getArtists(): Promise<Array<Artist>> {
 }
 
 export async function getArtist(address: string): Promise<Artist> {
-  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}`).then((res) => {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${address}`).then((res) => {
     if (res[0]) {
       return res[0];
     }
