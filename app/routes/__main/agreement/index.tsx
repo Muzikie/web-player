@@ -20,7 +20,7 @@ export async function action({ request }: any) {
   
   return redirect('/', {
     headers: {
-    'Set-Cookie': await commitSession(session),
+      'Set-Cookie': await commitSession(session),
     },
   });
 }

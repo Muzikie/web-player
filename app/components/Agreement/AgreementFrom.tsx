@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 /* Internal dependencies */
-import { AgreementFormProps } from "~/routes/types"
-import { Checkbox } from "../common/Checkbox"
+import { AgreementFormProps } from '~/routes/types'
+import { Checkbox } from '../common/Checkbox'
 
 
 const AgreementForm = ({

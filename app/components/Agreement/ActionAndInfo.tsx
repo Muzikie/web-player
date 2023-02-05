@@ -1,10 +1,10 @@
-import Reacr from "react";
-import { Link } from "react-router-dom"
-import { Form } from "@remix-run/react"
+import React from 'react';
+import { Link } from 'react-router-dom'
+import { Form } from '@remix-run/react'
 
 /* Internal dependencies */
-import { AgreementInfoProps } from "~/routes/types"
-import { PrimaryButton } from "../common/Button"
+import { AgreementInfoProps } from '~/routes/types'
+import { PrimaryButton } from '../common/Button'
 
 
 const ActionAndInfo = ({ disabled }: AgreementInfoProps) => {
