@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Form } from '@remix-run/react'
 
 /* Internal dependencies */
-import { AgreementInfoProps } from '~/routes/types'
+import { AgreementInfoProps } from './types'
 import { PrimaryButton } from '../common/Button'
 
 
@@ -17,8 +17,8 @@ const ActionAndInfo = ({ disabled }: AgreementInfoProps) => {
         </Link>
         <span>.</span>
       </h4>
-      <Form method='post'>
-        <PrimaryButton type='submit' disabled={disabled} className='loginButton' theme='white'>
+      <Form method="post">
+        <PrimaryButton type="submit" disabled={disabled} className="loginButton" theme="white">
           Continue
         </PrimaryButton>
       </Form>
