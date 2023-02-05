@@ -10,9 +10,24 @@ import { Checkbox } from '~/components/common/Checkbox';
 import { PartialView } from '~/components/PartialView';
 import { Link } from '~/components/common/Link';
 import styles from '~/css/routes/__main/agreements.css';
+import { Form } from '@remix-run/react'
+import { commitSession, getSession } from '~/hooks/useSession'
+import { redirect } from '@remix-run/node'
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
+}
+
+export async function action({ request }: any) {
+  const session = await getSession(request.headers.get('Cookie'));
+  
+  session.set('agreement', true);
+  
+  return redirect('/', {
+    headers: {
+    'Set-Cookie': await commitSession(session),
+    },
+  });
 }
 
 const AgreementForm = ({
@@ -62,14 +77,11 @@ const ActionAndInfo = ({ disabled }: AgreementInfoProps) => {
         </Link>
         <span>.</span>
       </h4>
-      <PrimaryButton
-        onClick={submit}
-        disabled={disabled}
-        className="loginButton"
-        theme="white"
-      >
-        Continue
-      </PrimaryButton>
+      <Form method='post'>
+        <PrimaryButton type='submit' disabled={disabled} className='loginButton' theme='white'>
+          Continue
+        </PrimaryButton>
+      </Form>
     </footer>
   );
 };
