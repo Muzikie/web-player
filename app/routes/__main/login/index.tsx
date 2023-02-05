@@ -76,6 +76,16 @@ export async function action({ request }: LoaderBaseProps) {
   session.set('publicKey', publicKey);
   session.set('privateKey', privateKey);
 
+  const agreement = session.get('agreement')
+  if (agreement == null) {
+    // Redirect back to the agreement page.
+    return redirect('/agreement', {
+      headers: {
+        'Set-Cookie': await commitSession(session),
+      },
+    });
+  }
+
   // Login succeeded, send them to the home page.
   return redirect('/', {
     headers: {

@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import { SearchResultType } from '~/models/entity.server';
 
 import {
@@ -9,18 +8,6 @@ import {
 } from '~/configs';
 import { Entity } from '~/components/Entity/types';
 import { ProfileInfoType } from '~/context/profileContext/types';
-
-export interface AgreementFormProps {
-  terms: {
-    value: boolean[];
-    isValid: boolean;
-  };
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}
-
-export interface AgreementInfoProps {
-  disabled: boolean;
-}
 
 export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;

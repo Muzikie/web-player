@@ -1,78 +1,29 @@
 /* External dependencies */
-import React, { useState, ChangeEvent, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, ChangeEvent } from 'react';
 
 /* Internal dependencies */
-import { AgreementFormProps, AgreementInfoProps } from '../../types';
-import { SettingsContext } from '~/context/settingsContext/settingsContextProvider';
-import { PrimaryButton } from '~/components/common/Button';
-import { Checkbox } from '~/components/common/Checkbox';
 import { PartialView } from '~/components/PartialView';
-import { Link } from '~/components/common/Link';
 import styles from '~/css/routes/__main/agreements.css';
+import { commitSession, getSession } from '~/hooks/useSession'
+import { redirect } from '@remix-run/node'
+import AgreementForm from '~/components/Agreement/AgreementFrom'
+import ActionAndInfo from '~/components/Agreement/ActionAndInfo'
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-const AgreementForm = ({
-  terms, handleChange,
-}: AgreementFormProps) => (
-  <>
-    <h4>TLDR;</h4>
-    <Checkbox
-      value="0"
-      checked={terms.value[0]}
-      onChange={handleChange}
-      title="Only upload your own original work."
-    />
-    <Checkbox
-      value="1"
-      checked={terms.value[1]}
-      onChange={handleChange}
-      title="Muzikie can&nbsp;t review every song, the responsibility of copyright infringement is on you."
-    />
-    <Checkbox
-      value="2"
-      checked={terms.value[2]}
-      onChange={handleChange}
-      title="If you upload a song that you don&nbsp;t fully own, and the community reports it, we&nbsp;ll suspend it."
-    />
-  </>
-);
-
-const ActionAndInfo = ({ disabled }: AgreementInfoProps) => {
-  const navigate = useNavigate();
-  const { settings, updateSettings } = useContext(SettingsContext);
-
-  const submit = () => {
-    updateSettings({
-      ...settings,
-      agreement: true,
-    });
-    navigate('/');
-  };
-
-  return (
-    <footer>
-      <h4>
-        <span>By using Muzikie you declare that you have read and agreed to our </span>
-        <Link to="/agreements">
-          full user agreement
-        </Link>
-        <span>.</span>
-      </h4>
-      <PrimaryButton
-        onClick={submit}
-        disabled={disabled}
-        className="loginButton"
-        theme="white"
-      >
-        Continue
-      </PrimaryButton>
-    </footer>
-  );
-};
+export async function action({ request }: any) {
+  const session = await getSession(request.headers.get('Cookie'));
+  
+  session.set('agreement', true);
+  
+  return redirect('/', {
+    headers: {
+      'Set-Cookie': await commitSession(session),
+    },
+  });
+}
 
 const AgreementScreen = () => {
   const [terms, setTerms] = useState({ value: [false, false, false], isValid: false });
