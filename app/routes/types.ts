@@ -28,6 +28,7 @@ export interface SearchLoaderData {
 
 export interface CollectionLoaderData {
   collection: Awaited<Collection>;
+  artist: Awaited<Artist>;
   audios: Awaited<Audio[]>;
   id: number;
 }
