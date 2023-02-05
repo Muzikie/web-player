@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { API_URLS } from '~/configs';
+import { truncateAddress } from '~/helpers/formatters';
 import { ArtistLinkProps } from './types';
 
 const ArtistLink = ({ artist }: ArtistLinkProps) => {
@@ -30,7 +31,7 @@ const ArtistLink = ({ artist }: ArtistLinkProps) => {
           alt={artist.creatorAddress}
         />
       </figure>
-      <h4>{artist.name}</h4>
+      <h4>{artist.name || truncateAddress(artist.creatorAddress)}</h4>
     </Link>
   );
 };

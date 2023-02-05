@@ -33,8 +33,15 @@ export async function getArtists(): Promise<Array<Artist>> {
   return get(`${API_URLS.STREAMER}/api/v1/profiles`);
 }
 
-export async function getArtist(id: string): Promise<Artist> {
-  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}`).then(res => res[0]);
+export async function getArtist(address: string): Promise<Artist> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${address}`).then((res) => {
+    if (res[0]) {
+      return res[0];
+    }
+    return {
+      creatorAddress: address,
+    };
+  });
 }
 
 export async function getArtistCollections(id: string): Promise<Array<Collection>> {

@@ -28,3 +28,7 @@ export const fromBaseToken = (num: string, token?: string|undefined): string => 
 
 export const toBaseToken = (num: string): string =>
   (BigNumber(num).multipliedBy(BigNumber(1E8))).toFixed(0);
+
+export const truncateAddress = (address: string): string => {
+  return address.replace(/^(.{6})(.+)?(.{5})$/, '$1...$3');
+};
