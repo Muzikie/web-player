@@ -31,7 +31,7 @@ const ArtistLink = ({ artist }: ArtistLinkProps) => {
           alt={artist.creatorAddress}
         />
       </figure>
-      <h4>{artist?.name ?? truncateAddress(artist.creatorAddress)}</h4>
+      <h4>{artist.name || truncateAddress(artist.creatorAddress)}</h4>
     </Link>
   );
 };
