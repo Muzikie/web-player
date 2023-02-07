@@ -9,6 +9,7 @@ export enum entityThemes {
   minimal = 'minimal',
   normal = 'normal',
   large = 'large',
+  withCover = 'withCover'
 }
 
 export enum entityMode {

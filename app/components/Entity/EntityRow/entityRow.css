@@ -12,6 +12,10 @@
     cursor: pointer;
   }
 
+  &.withCover {
+    width: 100%;
+  }
+
   &.large {
     & .container {
       padding: 10px;

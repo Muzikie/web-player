@@ -72,17 +72,11 @@ const EntityRow = ({
     >
       <div className="container">
         <div className="primaryInfo">
-          {
-            ('audioID' in data)
-              ? (<Icon name="play" />)
-              : (
-                <EntityThumbnail
-                  data={data}
-                  theme={theme}
-                  className="thumbnail"
-                />
-              )
-          }
+        {entity == 'audio' && theme !== 'withCover' ? (
+            <Icon name='play' />
+          ) : (
+            <EntityThumbnail data={data} theme={theme} className='thumbnail' />
+          )}
           <div className="text">
             <h4 className="collectionName">{data.name}</h4>
             <div className='detail'>
