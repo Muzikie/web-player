@@ -1,10 +1,18 @@
 import React from 'react';
+import { API_URLS, FILES } from '~/configs'
+import { ProfileAddress } from './types'
 
-const ProfileBanner = () => {
+const ProfileBanner = ({data} : ProfileAddress) => {
+  const {creatorAddress} = data
   return (
-    <div>
-      <h1>ProfileBanner</h1>
-    </div>
+    <section className="component profileSummary">
+    <figure className="photo">
+      <img src={`${API_URLS.STREAMER}/${creatorAddress}-${FILES.profile}.jpg`} alt={creatorAddress}/>
+    </figure>
+    <header>
+      <h1>{ creatorAddress }</h1>
+    </header>
+  </section>
   );
 };
 
