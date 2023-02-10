@@ -3,11 +3,10 @@ import { SearchResultType } from '~/models/entity.server';
 import {
   Collection,
   Audio,
-  Artist,
+  Profile,
   Playlist
 } from '~/configs';
 import { Entity } from '~/components/Entity/types';
-import { ProfileInfoType } from '~/context/profileContext/types';
 
 export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
@@ -15,7 +14,7 @@ export interface SearchLoaderData {
 
 export interface CollectionLoaderData {
   collection: Awaited<Collection>;
-  artist: Awaited<Artist>;
+  profile: Awaited<Profile>;
   audios: Awaited<Audio[]>;
   id: number;
 }
@@ -29,7 +28,7 @@ export interface collectionLoaderProps {
 
 export interface HomeLoaderData {
   recentlyPlayed: Awaited<Entity[]>;
-  artists: Awaited<Artist[]>;
+  profiles: Awaited<Profile[]>;
   collections: Awaited<Collection[]>;
 }
 
@@ -50,23 +49,20 @@ export interface playlistLoaderParams {
   request: Request;
 }
 
-export interface ArtistLoaderData {
-  artist: Awaited<Artist>;
+export interface ProfileLoaderData {
+  profile: Awaited<Profile>;
   collections: Awaited<Collection[]>;
   audios: Awaited<Audio[]>;
   id: string;
 }
 
-export interface artistLoaderProps {
+export interface profileLoaderProps {
   params: {
     id: string;
   };
   request: Request;
 }
 
-export interface ProfileLoaderData {
-  profileInfo: Partial<ProfileInfoType>;
-}
 
 export interface DiscographyLoaderData {
   collections: Awaited<Collection[]>;

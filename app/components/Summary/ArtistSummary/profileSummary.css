@@ -1,4 +1,4 @@
-.component.artistSummary {
+.component.profileSummary {
   --max-collection-art-size: 380px;
 
   display: flex;
@@ -26,7 +26,7 @@
       font-weight: 300;
     }
 
-    & .artist {
+    & .profile {
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-start;
@@ -74,7 +74,7 @@
 }
 
 @media (min-width: 680px) {
-  .component.artistSummary {
+  .component.profileSummary {
     display: flex;
     /* flex-flow: row nowrap; */
     flex-direction: row-reverse;

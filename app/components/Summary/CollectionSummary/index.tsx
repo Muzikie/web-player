@@ -3,14 +3,14 @@ import React from 'react';
 /* Internal dependencies */
 import { IconButton } from '~/components/common/Button';
 import { API_URLS } from '~/configs';
-import ArtistLink from './ArtistLink';
+import ProfileLink from './ProfileLink';
 import { CollectionSummaryProps } from './types';
 
-const CollectionSummary = ({ collection, artist }: CollectionSummaryProps) => (
+const CollectionSummary = ({ collection, profile }: CollectionSummaryProps) => (
   <section className="component collectionSummary">
     <header>
       <h1>{ collection.name }</h1>
-      <ArtistLink artist={artist} />
+      <ProfileLink profile={profile} />
       <span className="releaseDate">{`${collection.releaseYear} Collection`}</span>
 
       <div className="actionButtons">

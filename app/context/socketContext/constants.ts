@@ -27,8 +27,8 @@ export const DEFAULT_VALUES: DefaultValues = {
   [Method.collection_getCollection]: {
     name: '',
     releaseYear: '',
-    artistName: '',
-    coArtists: [],
+    profileName: '',
+    coProfiles: [],
     collectionType: 1,
     audios: [],
     hash: '',
@@ -43,7 +43,7 @@ export const DEFAULT_VALUES: DefaultValues = {
   [Method.audio_getAudio]: {
     name: '',
     releaseYear: '',
-    artistName: '',
+    profileName: '',
     collectionID: '',
     genre: [],
     owners: [],

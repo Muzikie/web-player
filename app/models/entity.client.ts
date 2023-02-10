@@ -1,9 +1,9 @@
 import type { Entity } from '~/components/Entity/types';
-import { Collection, Audio, Artist, API_URLS } from '~/configs';
+import { Collection, Audio, Profile, API_URLS } from '~/configs';
 
 export type SearchResultType = {
   audio: Audio[];
-  artist: Artist[];
+  profile: Profile[];
   collection: Collection[];
 }
 
@@ -38,15 +38,15 @@ export async function postTransaction(json: any, file: File, fileName: string): 
 }
 
 export async function search(query: string): Promise<SearchResultType> {
-  const promise1 = <Promise<Artist[]>> get(`${API_URLS.STREAMER}/api/v1/profiles?name=${query}`);
-  const promise2 = <Promise<Artist[]>> get(`${API_URLS.STREAMER}/api/v1/profiles?nickName=${query}`);
+  const promise1 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/v1/profiles?name=${query}`);
+  const promise2 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/v1/profiles?nickName=${query}`);
   const promise3 = <Promise<Audio[]>> get(`${API_URLS.STREAMER}/api/v1/audios?name=${query}`);
   const promise4 = <Promise<Collection[]>> get(`${API_URLS.STREAMER}/api/v1/collections?name=${query}`);
 
   const [names, nickNames, audio, collection] = await Promise.all([promise1, promise2, promise3, promise4]);
 
   return {
-    artist: [...names, ...nickNames],
+    profile: [...names, ...nickNames],
     audio,
     collection,
   };

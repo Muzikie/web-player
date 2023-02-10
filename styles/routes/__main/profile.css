@@ -1,14 +1,11 @@
-.screen.profile {
-   position: relative;
-   width: 100%;
+.screen.artist {
+  height: 100%;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+  overflow-y: scroll;
 
-   & > .tabContainer {
-      padding: 40px 20px 0;
-   }
-
-   & .tabsHeader {
-      width: 100%;
-      position: relative;
-      padding-top: var(--padding-x);
-   }
+  & .popularTracks,
+  & .discography {
+    margin-bottom: var(--padding-m);
+  }
 }

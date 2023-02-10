@@ -1,10 +1,10 @@
-import { Collection, Artist } from '~/configs/types';
+import { Collection, Profile } from '~/configs/types';
 
 export interface CollectionSummaryProps {
   collection: Collection;
-  artist: Artist;
+  profile: Profile;
 }
 
-export interface ArtistLinkProps {
-  artist: Artist;
+export interface ProfileLinkProps {
+  profile: Profile;
 }

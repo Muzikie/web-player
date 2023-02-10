@@ -11,13 +11,14 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
   if ('playlistID' in data) {
     subtitle = data.description;
   } else if ('collectionID' in data) {
-    subtitle = data.artistName;
+    // @todo add profile name
+    subtitle = data.creatorAddress;
   } else {
     subtitle = data.name;
   }
 
   return (
-    <span className="artistName">{subtitle}</span>
+    <span className="profileName">{subtitle}</span>
   )
 };
 
@@ -37,12 +38,12 @@ const NumberOfAudios = ({ data }: EntityRowProps<Entity>) => {
   )
 }
 
-const CoArtists = ({ data }: EntityRowProps<Entity>) => {
-  if (!('coArtists' in data)) return null;
+const Fit = ({ data }: EntityRowProps<Entity>) => {
+  if (!('fit' in data)) return null;
   return (
     <>
       {
-        data.coArtists.map((item, index) => <span key={index}>,{item}</span>)
+        data.fit.map((item, index) => <span key={index}>,{item}</span>)
       }
     </>
   );
@@ -86,7 +87,7 @@ const EntityRow = ({
           <div className="text">
             <h4 className="collectionName">{data.name}</h4>
             <div className='detail'>
-              <span><Subtitle data={data} /> <CoArtists data={data} /></span>
+              <span><Subtitle data={data} /> <Fit data={data} /></span>
               <span><ReleaseYear data={data}/> <NumberOfAudios data={data} /></span>
             </div>
           </div>

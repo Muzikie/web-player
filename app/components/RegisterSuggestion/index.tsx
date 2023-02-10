@@ -22,7 +22,7 @@ const RegisterSuggestion = () => {
         </li>
         <li>
           <span>😇</span>
-          <span>You support music since Muzikie pays a whopping 80% share to artists.</span>
+          <span>You support music since Muzikie pays a whopping 80% share to profiles.</span>
         </li>
         <li>
           <span>💰</span>

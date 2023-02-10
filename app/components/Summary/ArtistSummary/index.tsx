@@ -1,10 +1,10 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { Artist, API_URLS, FILES } from '~/configs';
+import { Profile, API_URLS, FILES } from '~/configs';
 import { EntityRowProps } from '~/components/Entity/types';
 
-const ArtistSummary = ({ data }: EntityRowProps<Artist>) => (
-  <section className="component artistSummary">
+const ProfileSummary = ({ data }: EntityRowProps<Profile>) => (
+  <section className="component profileSummary">
     <header>
       <h1>{ data.nickName } . { data.name }</h1>
       <h4 className="releaseDate">{ data.description }</h4>
@@ -24,9 +24,9 @@ const ArtistSummary = ({ data }: EntityRowProps<Artist>) => (
       </div>
     </header>
     <figure className="photo">
-      <img src={`${API_URLS.STREAMER}/${data.profileID}-${FILES.artist}.jpg`} alt={ data.name } />
+      <img src={`${API_URLS.STREAMER}/${data.profileID}-${FILES.profile}.jpg`} alt={ data.name } />
     </figure>
   </section>
 );
 
-export default ArtistSummary;
+export default ProfileSummary;

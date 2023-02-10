@@ -23,7 +23,7 @@
       color: var(--color-secondary);
     }
 
-    & .artist {
+    & .profile {
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-start;

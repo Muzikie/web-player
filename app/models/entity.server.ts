@@ -1,6 +1,6 @@
 import {
   Collection,
-  Artist,
+  Profile,
   Audio,
   Playlist,
   API_URLS,
@@ -29,11 +29,11 @@ export async function getAudios(): Promise<Array<Audio>> {
   return get(`${API_URLS.STREAMER}/api/v1/audios`);
 }
 
-export async function getArtists(): Promise<Array<Artist>> {
+export async function getProfiles(): Promise<Array<Profile>> {
   return get(`${API_URLS.STREAMER}/api/v1/profiles`);
 }
 
-export async function getArtist(address: string): Promise<Artist> {
+export async function getProfile(address: string): Promise<Profile> {
   return get(`${API_URLS.STREAMER}/api/v1/profiles/${address}`).then((res) => {
     if (res[0]) {
       return res[0];
@@ -44,11 +44,11 @@ export async function getArtist(address: string): Promise<Artist> {
   });
 }
 
-export async function getArtistCollections(id: string): Promise<Array<Collection>> {
+export async function getProfileCollections(id: string): Promise<Array<Collection>> {
   return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/collections`);
 }
 
-export async function getArtistAudios(id: string): Promise<Array<Audio>> {
+export async function getProfileAudios(id: string): Promise<Array<Audio>> {
   return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/audios`);
 }
 

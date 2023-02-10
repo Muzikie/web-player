@@ -1,6 +1,6 @@
 import {
   Collection,
-  Artist,
+  Profile,
   Audio,
   Playlist,
 } from '~/configs';
@@ -18,7 +18,7 @@ export enum entityMode {
 
 export type entityTheme = entityThemes | undefined;
 
-export type Entity = Collection | Artist | Audio | Playlist;
+export type Entity = Collection | Profile | Audio | Playlist;
 
 export interface EntityRowProps<Entity> {
   data: Entity;
