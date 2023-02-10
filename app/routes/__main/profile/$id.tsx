@@ -28,7 +28,6 @@ export const loader = async ({ params }: profileLoaderProps) => {
   const profile = await getProfile(params.id);
   const collections = await getProfileCollections(params.id);
   const audios = await getProfileAudios(params.id);
-  console.log(profile)
 
   if (!profile) {
     throw new Response('Not Found', { status: 404 });
