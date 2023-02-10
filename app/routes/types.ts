@@ -7,7 +7,6 @@ import {
   Playlist
 } from '~/configs';
 import { Entity } from '~/components/Entity/types';
-import { ProfileInfoType } from '~/context/profileContext/types';
 
 export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
@@ -64,9 +63,6 @@ export interface profileLoaderProps {
   request: Request;
 }
 
-// export interface ProfileLoaderData {
-//   profileInfo: Partial<ProfileInfoType>;
-// }
 
 export interface DiscographyLoaderData {
   collections: Awaited<Collection[]>;
