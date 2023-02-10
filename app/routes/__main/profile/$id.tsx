@@ -10,10 +10,13 @@ import {
   getArtistCollections,
   getArtistAudios,
 } from '~/models/entity.server';
-import List from '~/components/List';
-import ArtistSummary from '~/components/Summary/ArtistSummary';
+import ProfileBanner from '~/components/ProfileBanner';
+import ProfileDetails from '~/components/ProfileDetails';
+import PopularAudios from '~/components/PopularAudios';
+import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/artist.css';
 import { artistLoaderProps, ArtistLoaderData } from '../../types';
+import Discography from '../upload/__main/discography';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -43,21 +46,16 @@ const ArtistScreen = () => {
     artist,
     collections,
     audios,
+    id,
   } = useLoaderData() as ArtistLoaderData;
 
   return (
     <section className="screen artist">
-      <ArtistSummary data={artist} />
-      <List
-        title="Popular"
-        items={!audios?.length ? [] : audios}
-        className="popularAudios"
-      />
-      <List
-        title="Discography"
-        items={!collections.length ? [] : collections}
-        className="discography"
-      />
+      <ProfileBanner data={artist} />
+      <PopularAudios audios={audios}  />
+      <Discography collections={collections} />
+      <ProfileDetails data={artist} />
+      <WalletDetails address={id} />
     </section>
   );
 };
