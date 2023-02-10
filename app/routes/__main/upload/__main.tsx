@@ -15,7 +15,6 @@ const ProfileScreen = () => (
     <header className='tabsHeader'>
       <Tabs
         items={[
-          { title: 'Discography', to: '/profile/discography' },
           { title: 'Add an audio', to: '/profile/createAudio' },
           { title: 'Add a collection', to: '/profile/createCollection' },
         ]}
