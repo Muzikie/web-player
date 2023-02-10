@@ -6,58 +6,58 @@ import invariant from 'tiny-invariant';
 
 /* Internal dependencies */
 import {
-  getArtist,
-  getArtistCollections,
-  getArtistAudios,
+  getProfile,
+  getProfileCollections,
+  getProfileAudios,
 } from '~/models/entity.server';
 import ProfileBanner from '~/components/ProfileBanner';
 import ProfileDetails from '~/components/ProfileDetails';
 import PopularAudios from '~/components/PopularAudios';
 import WalletDetails from '~/components/WalletDetails';
-import styles from '~/css/routes/__main/artist.css';
-import { artistLoaderProps, ArtistLoaderData } from '../../types';
+import styles from '~/css/routes/__main/profile.css';
+import { profileLoaderProps, ProfileLoaderData } from '../../types';
 import Discography from '../upload/__main/discography';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ params }: artistLoaderProps) => {
+export const loader = async ({ params }: profileLoaderProps) => {
   invariant(params.id, 'Expected params.id');
 
-  const artist = await getArtist(params.id);
-  const collections = await getArtistCollections(params.id);
-  const audios = await getArtistAudios(params.id);
+  const profile = await getProfile(params.id);
+  const collections = await getProfileCollections(params.id);
+  const audios = await getProfileAudios(params.id);
 
-  if (!artist) {
+  if (!profile) {
     throw new Response('Not Found', { status: 404 });
   }
 
-  return json<ArtistLoaderData>({
-    artist,
+  return json<ProfileLoaderData>({
+    profile,
     collections,
     audios,
     id: params.id,
   });
 };
 
-const ArtistScreen = () => {
+const ProfileScreen = () => {
   const {
-    artist,
+    profile,
     collections,
     audios,
     id,
-  } = useLoaderData() as ArtistLoaderData;
+  } = useLoaderData() as ProfileLoaderData;
 
   return (
-    <section className="screen artist">
-      <ProfileBanner data={artist} />
+    <section className="screen profile">
+      <ProfileBanner data={profile} />
       <PopularAudios audios={audios}  />
       <Discography collections={collections} />
-      <ProfileDetails data={artist} />
+      <ProfileDetails data={profile} />
       <WalletDetails address={id} />
     </section>
   );
 };
 
-export default ArtistScreen;
+export default ProfileScreen;

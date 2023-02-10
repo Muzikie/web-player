@@ -46,7 +46,7 @@
   }
 
   &.empty,
-  &.artist {
+  &.profile {
     & figure {
       border-radius: var(--border-radius-xs);
     }

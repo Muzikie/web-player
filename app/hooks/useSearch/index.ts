@@ -5,7 +5,7 @@ import { search, SearchResultType } from '~/models/entity.client';
 export const useSearch = () => {
   const [query, setQuery] = useState('');
   const [results, setResult] = useState<SearchResultType>({
-    artist: [],
+    profile: [],
     audio: [],
     collection: [],
   });

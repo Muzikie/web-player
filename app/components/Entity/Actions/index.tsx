@@ -1,6 +1,6 @@
 import React from 'react';
 import { Entity, entityMode, EntityRowProps } from '../types';
-import ArtistActions from './ArtistActions';
+import ProfileActions from './ProfileActions';
 import CollectionActions from './CollectionActions';
 import PlaylistActions from './PlaylistActions';
 import AudioActions from './AudioActions';
@@ -19,7 +19,7 @@ const Actions = ({ data, mode }: EntityRowProps<Entity>) => {
   if ('playlistID' in data) {
     return <PlaylistActions data={data} />;
   }
-  return <ArtistActions data={data} />;
+  return <ProfileActions data={data} />;
 };
 
 export default Actions;

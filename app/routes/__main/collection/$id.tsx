@@ -6,7 +6,7 @@ import invariant from 'tiny-invariant';
 
 /* Internal dependencies */
 import {
-  getArtist,
+  getProfile,
   getCollection,
   getCollectionAudios,
 } from '~/models/entity.server';
@@ -25,11 +25,11 @@ export const loader = async ({ params }: collectionLoaderProps) => {
 
   const collection = await getCollection(params.id);
   const audios = await getCollectionAudios(params.id);
-  const artist = await getArtist(collection.creatorAddress);
+  const profile = await getProfile(collection.creatorAddress);
 
   return json<CollectionLoaderData>({
     collection,
-    artist,
+    profile,
     audios,
     id: params.id,
   });
@@ -38,7 +38,7 @@ export const loader = async ({ params }: collectionLoaderProps) => {
 const CollectionScreen = () => {
   const {
     collection,
-    artist,
+    profile,
     audios,
   } = useLoaderData() as CollectionLoaderData;
 
@@ -46,7 +46,7 @@ const CollectionScreen = () => {
     <section className="screen collection">
       <CollectionSummary
         collection={collection}
-        artist={artist}
+        profile={profile}
       />
       <List
         items={!audios?.length ? [] : audios}

@@ -20,7 +20,7 @@ export const COMMANDS = {
 export const FILES = {
   [MODULES.AUDIO]: 'audio',
   [MODULES.COLLECTION]: 'cover',
-  artist: 'avatar',
+  profile: 'avatar',
   [MODULES.PLAYLIST]: 'cover',
 };
 

@@ -1,0 +1,14 @@
+.screen.profile {
+   position: relative;
+   width: 100%;
+
+   & > .tabContainer {
+      padding: 40px 20px 0;
+   }
+
+   & .tabsHeader {
+      width: 100%;
+      position: relative;
+      padding-top: var(--padding-x);
+   }
+}

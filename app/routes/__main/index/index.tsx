@@ -6,7 +6,7 @@ import { useLoaderData } from '@remix-run/react';
 /* Internal dependencies */
 import {
   getRecentlyPlayed,
-  getArtists,
+  getProfiles,
   getCollections,
 } from '~/models/entity.server';
 import { HomeLoaderData } from '../../types';
@@ -21,7 +21,7 @@ export function links() {
 export const loader = async () => {
   return json<HomeLoaderData>({
     recentlyPlayed: await getRecentlyPlayed(),
-    artists: await getArtists(),
+    profiles: await getProfiles(),
     collections: await getCollections(),
   });
 };
@@ -29,7 +29,7 @@ export const loader = async () => {
 const HomeScreen = () => {
   const {
     recentlyPlayed,
-    // artists,
+    // profiles,
     collections,
   } = useLoaderData() as HomeLoaderData;
 
@@ -45,7 +45,7 @@ const HomeScreen = () => {
         className="favorite"
         title="Favorite"
         itemTheme={entityThemes.minimal}
-        items={!artists?.length ? [] : artists}
+        items={!profiles?.length ? [] : profiles}
       /> */}
       <List
         className="favorite"

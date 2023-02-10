@@ -1,10 +1,10 @@
 import React from 'react';
 import { IconButton } from '~/components/common/Button';
-import { Artist } from '~/configs';
+import { Profile } from '~/configs';
 import { EntityRowProps } from '../types';
 
-const ArtistActions = ({ data }: EntityRowProps<Artist>) => (
-  <footer className="component entity action artist">
+const ProfileActions = ({ data }: EntityRowProps<Profile>) => (
+  <footer className="component entity action profile">
     <IconButton
       icon="heart"
       className="likeButton"
@@ -18,4 +18,4 @@ const ArtistActions = ({ data }: EntityRowProps<Artist>) => (
   </footer>
 );
 
-export default ArtistActions;
+export default ProfileActions;

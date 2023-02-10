@@ -4,14 +4,14 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from '~/components/common/Link';
 import { API_URLS } from '~/configs';
 import { truncateAddress } from '~/helpers/formatters';
-import { ArtistLinkProps } from './types';
+import { ProfileLinkProps } from './types';
 
-const ArtistLink = ({ artist }: ArtistLinkProps) => {
+const ProfileLink = ({ profile }: ProfileLinkProps) => {
   const image = useRef<HTMLImageElement>(null);
 
   const imageNotFound = () => {
     if (image.current) {
-      image.current.src = '/images/artist.jpg';
+      image.current.src = '/images/profile.jpg';
       image.current.removeEventListener('error', imageNotFound);
     }
   };
@@ -20,20 +20,20 @@ const ArtistLink = ({ artist }: ArtistLinkProps) => {
     if (image.current?.naturalWidth === 0) {
       imageNotFound();
     }
-  }, [artist.creatorAddress]);
+  }, [profile.creatorAddress]);
 
   return (
-    <Link to={`/artist/${artist.creatorAddress}`} className="artist">
+    <Link to={`/profile/${profile.creatorAddress}`} className="profile">
       <figure>
         <img
           ref={image}
-          src={`${API_URLS.STREAMER}/${artist.creatorAddress}-avatar.jpg`}
-          alt={artist.creatorAddress}
+          src={`${API_URLS.STREAMER}/${profile.creatorAddress}-avatar.jpg`}
+          alt={profile.creatorAddress}
         />
       </figure>
-      <h4>{artist.name || truncateAddress(artist.creatorAddress)}</h4>
+      <h4>{profile.name || truncateAddress(profile.creatorAddress)}</h4>
     </Link>
   );
 };
 
-export default ArtistLink;
+export default ProfileLink;

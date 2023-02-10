@@ -34,7 +34,7 @@ interface SocialAccount {
   platform: SocialAccountPlatform;
 }
 
-export interface Artist extends BaseEntity {
+export interface Profile extends BaseEntity {
   nickName: string;
   description: string;
   avatarHash: string;

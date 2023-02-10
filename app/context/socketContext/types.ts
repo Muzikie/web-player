@@ -18,7 +18,7 @@ interface TokenData {
 interface AudioData {
   name: string;
   releaseYear: string;
-  artistName: string;
+  profileName: string;
   collectionID: string;
   hash: string;
   meta: string;
@@ -30,8 +30,8 @@ interface AudioData {
 interface CollectionData {
   name: string;
   releaseYear: string;
-  artistName: string;
-  coArtists: string[];
+  profileName: string;
+  coProfiles: string[];
   collectionType: number;
   audios: string[];
   hash: string;

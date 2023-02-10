@@ -10,7 +10,7 @@ export const getEntity = (data: Entity) => {
   if ('collectionID' in data) {
     return 'collection';
   }
-  return 'artist';
+  return 'profile';
 };
 
 export const getID = (data: Entity) => {
@@ -26,6 +26,7 @@ export const getID = (data: Entity) => {
   return data.creatorAddress;
 };
 
+// @todo remove this in favor of getID 
 export const getCollectionID = (data: Entity) => {
   if ('audioID' in data) {
     return data.collectionID;
