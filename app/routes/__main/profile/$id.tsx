@@ -16,7 +16,7 @@ import PopularAudios from '~/components/PopularAudios';
 import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/profile.css';
 import { profileLoaderProps, ProfileLoaderData } from '../../types';
-import Discography from '../upload/__main/discography';
+import UserDiscography from '~/components/UserDiscography'
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -28,6 +28,7 @@ export const loader = async ({ params }: profileLoaderProps) => {
   const profile = await getProfile(params.id);
   const collections = await getProfileCollections(params.id);
   const audios = await getProfileAudios(params.id);
+  console.log(profile)
 
   if (!profile) {
     throw new Response('Not Found', { status: 404 });
@@ -53,7 +54,7 @@ const ProfileScreen = () => {
     <section className="screen profile">
       <ProfileBanner data={profile} />
       <PopularAudios audios={audios}  />
-      <Discography collections={collections} />
+      <UserDiscography collections={collections} audios={audios} />
       <ProfileDetails data={profile} />
       <WalletDetails address={id} />
     </section>

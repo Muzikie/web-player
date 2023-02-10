@@ -64,9 +64,9 @@ export interface profileLoaderProps {
   request: Request;
 }
 
-export interface ProfileLoaderData {
-  profileInfo: Partial<ProfileInfoType>;
-}
+// export interface ProfileLoaderData {
+//   profileInfo: Partial<ProfileInfoType>;
+// }
 
 export interface DiscographyLoaderData {
   collections: Awaited<Collection[]>;
