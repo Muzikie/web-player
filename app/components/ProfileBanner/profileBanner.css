@@ -1,0 +1,62 @@
+.component.profileBanner {
+
+    --max-collection-art-size: 380px;
+  
+    display: flex;
+    flex-flow: column nowrap;
+    position: relative;
+    height: auto;
+    overflow: visible;
+    padding: var(--padding-m);
+    box-sizing: border-box;
+    margin-bottom: var(--padding-m);
+  
+    & header {
+      width: 100%;
+      color: var(--color-secondary);
+  
+      & h1 {
+        margin-bottom: var(--padding-xs);
+        text-transform: uppercase;
+        margin-top: 0;
+      }
+  
+      & h4 {
+        color: var(--gray);
+        max-width: 380px;
+        font-weight: 300;
+      }
+    }
+  
+    & .photo {
+      width: 100vw;
+      height: calc(100vw - calc(2 * var(--padding-m)));
+      max-height: var(--max-collection-art-size);
+      border-radius: var(--border-radius-l);
+      box-shadow: 0 25px 25px 0 rgba(0, 0, 0, 0.25);
+      
+  
+      & img {
+        width: 100%;
+      }
+    }
+  }
+  
+  @media (min-width: 680px) {
+    .component.profileSummary {
+      display: flex;
+      flex-flow: row nowrap;
+      flex-direction: row-reverse;
+      & .photo {
+        width: var(--max-collection-art-size);
+        height: var(--max-collection-art-size);
+        flex-shrink: 0;
+      }
+  
+      & header {
+        padding: var(--padding-m) 0 0 var(--padding-m);
+      }
+    }
+  }
+  
+  
