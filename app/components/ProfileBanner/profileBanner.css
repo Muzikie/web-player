@@ -1,62 +1,71 @@
 .component.profileBanner {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  height: auto;
+  padding: var(--padding-x);
+  box-sizing: border-box;
+  margin-bottom: var(--padding-l);
 
-    --max-collection-art-size: 380px;
-  
+  & header {
+    width: 100%;
     display: flex;
-    flex-flow: column nowrap;
-    position: relative;
-    height: auto;
-    overflow: visible;
-    padding: var(--padding-m);
-    box-sizing: border-box;
-    margin-bottom: var(--padding-m);
-  
-    & header {
-      width: 100%;
-      color: var(--color-secondary);
-  
-      & h1 {
-        margin-bottom: var(--padding-xs);
+    flex-wrap: nowrap;
+    gap: 2.4rem;
+    flex-direction: column;
+    color: var(--color-secondary);
+
+    & div {
+      box-sizing: border-box;
+      flex: 1;
+
+      & h3 {
+        display: inline-block;
+        max-width: 100%;
+        line-height: 1.4em;
+        word-break: break-all;
+        overflow-wrap: break-word;
         text-transform: uppercase;
         margin-top: 0;
       }
-  
-      & h4 {
-        color: var(--gray);
-        max-width: 380px;
-        font-weight: 300;
-      }
-    }
-  
-    & .photo {
-      width: 100vw;
-      height: calc(100vw - calc(2 * var(--padding-m)));
-      max-height: var(--max-collection-art-size);
-      border-radius: var(--border-radius-l);
-      box-shadow: 0 25px 25px 0 rgba(0, 0, 0, 0.25);
-      
-  
-      & img {
-        width: 100%;
-      }
     }
   }
-  
-  @media (min-width: 680px) {
-    .component.profileSummary {
-      display: flex;
-      flex-flow: row nowrap;
-      flex-direction: row-reverse;
-      & .photo {
-        width: var(--max-collection-art-size);
-        height: var(--max-collection-art-size);
-        flex-shrink: 0;
-      }
-  
-      & header {
-        padding: var(--padding-m) 0 0 var(--padding-m);
-      }
+
+  & figure {
+    flex: 1.5;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding: 40% 0;
+    overflow: hidden;
+    border-radius: var(--border-radius-x);
+  }
+
+  & .photo {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (min-width: 680px) {
+  .component.profileBanner {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    padding-inline:  var(--padding-m);
+    & figure {
+      padding: 15% 0;
+    }
+
+    & header {
+      padding: var(--padding-m) 0 0 var(--padding-m);
+      flex-direction: row;
     }
   }
-  
-  
+}
