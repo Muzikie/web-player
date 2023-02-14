@@ -5,8 +5,8 @@ import { API_URLS, FILES } from '~/configs'
 import Image from '../common/Image'
 import { ProfileAddress } from './types'
 
-const ProfileBanner = ({data} : ProfileAddress) => {
-  const {creatorAddress} = data
+const ProfileBanner = ({ data } : ProfileAddress) => {
+  const { creatorAddress } = data
 
   return (
     <section className="component profileBanner">
