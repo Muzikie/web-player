@@ -25,13 +25,13 @@
 
   /****  Typography  ****/
   --body-font: 'Poppins', sans-serif;
-  --size-h1: 4em; /* 64 */
-  --size-h2: 2.4em; /* 38 */
-  --size-h3: 1.75em; /* 28 */
-  --size-h4: 1.25em;  /* 20 */
-  --size-h5: 1em; /* 16 -> 15 */
-  --size-span: 0.875em; /* 14 */
-  --size-small: 0.75em; /* 12 */
+  --size-h1: 4rem; /* 64 */
+  --size-h2: 2.4rem; /* 38 */
+  --size-h3: 1.75rem; /* 28 */
+  --size-h4: 1.25rem;  /* 20 */
+  --size-h5: 1rem; /* 16 -> 15 */
+  --size-span: 0.875rem; /* 14 */
+  --size-small: 0.75rem; /* 12 */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-bold: 500;
@@ -48,17 +48,17 @@
   --box-size-m: 54px;
   --box-size-l: 100px;
   --box-size-xl: 146px;
-  --padding-xs: 8px;
-  --padding-s: 12px;
-  --padding-m: 28px;
-  --padding-l: 36px;
-  --padding-x: 50px;
+  --padding-xs: 0.66rem;
+  --padding-s: 1rem;
+  --padding-m: 2.33rem;
+  --padding-l: 3rem;
+  --padding-x: 5rem;
 
-  --border-radius-xs: 6px;
-  --border-radius-s: 10px;
-  --border-radius-m: 15px;
-  --border-radius-l: 40px;
-  --border-radius-x: 45px;
+  --border-radius-xs: 0.5rem;
+  --border-radius-s: 0.83rem;
+  --border-radius-m: 1.25rem;
+  --border-radius-l: 3.33rem;
+  --border-radius-x: 3.75rem;
   --border-radius-r: 50%;
 
   /****  Composition  ****/

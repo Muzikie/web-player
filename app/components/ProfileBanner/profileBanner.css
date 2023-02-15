@@ -1,0 +1,87 @@
+.component.profileBanner {
+  width: 100%;
+  height: auto;
+  padding: var(--padding-m);
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  
+  & figure {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 18em;
+    overflow: hidden;
+    border-radius: var(--border-radius-x);
+    margin-bottom: var(--padding-x);
+    box-shadow: 0 25px 25px 0 var(--color-primary-shadow);
+
+    & img {
+      min-width: 100%;
+      object-fit: cover;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  & header {
+    width: 100%;
+    padding-bottom: var(--padding-l);
+
+    & h2 {
+      display: inline-block;
+      max-width: 100%;
+      line-height: 1.4em;
+      word-wrap: break-word;
+      text-transform: uppercase;
+      margin: 0;
+      color: var(--color-secondary);
+      font-weight: var(--font-weight-black);
+    }
+  }
+
+  & .topSongs {
+    width: 100%;
+  }
+}
+
+@media (min-width: 680px) {
+  .component.profileBanner {
+    flex-wrap: wrap;
+    height: 22.66em;
+
+    & header,
+    & figure {
+      flex: 1 1 0;
+    }
+
+    & header {
+      max-width: 100%;
+      width: 50%;
+      padding-bottom: 0;
+      padding-left: var(--padding-m);
+      box-sizing: border-box;
+
+      & h2 {
+        word-wrap: normal;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    & figure {
+      width: 50%;
+      margin-bottom: 0;
+    }
+
+    & .topSongs {
+      flex: 3 0 0;
+      width: 50%;
+      height: 100%;
+      padding-left: var(--padding-m);
+      box-sizing: border-box;
+    }
+  }
+}
