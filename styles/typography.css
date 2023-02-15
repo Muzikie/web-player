@@ -1,7 +1,11 @@
+html {
+  font-size: 12px;
+}
+
 body {
   font-family: var(--body-font);
   color: var(--color-text-primary);
-  font-size: 12px;
+  font-size: clamp(1rem, 0.7724rem + 0.8535vw, 1.5rem);
 }
 
 h1 {
