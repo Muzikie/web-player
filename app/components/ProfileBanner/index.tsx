@@ -10,18 +10,17 @@ const ProfileBanner = ({ data } : ProfileAddress) => {
 
   return (
     <section className="component profileBanner">
+      <figure className="bannerWrapper">
+        <Image 
+          className="photo"
+          src={`${API_URLS.STREAMER}/${creatorAddress}-${FILES.profile}.jpg`}
+          placeHolder="/images/artist.jpg"
+          alt={creatorAddress}/> 
+      </figure>
       <header>
-        <figure className="bannerWrapper">
-          <Image 
-            className="photo"
-            src={`${API_URLS.STREAMER}/${creatorAddress}-${FILES.profile}.jpg`}
-            placeHolder="/images/selena-gomez 1.png"
-            alt={creatorAddress}/> 
-        </figure>
-        <div>
-          <h3>{ creatorAddress }</h3>
-        </div>
+        <h2>{ creatorAddress }</h2>
       </header>
+      <div className="topSongs"></div>
     </section>
   );
 };
