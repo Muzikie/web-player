@@ -14,13 +14,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 5px;
 
     & i {
       font-size: 24px;
       color: var(--color-secondary);
 
       &.menuCut {
-        font-size: 7px;
+        font-size: 10px;
       }
     }
   }
