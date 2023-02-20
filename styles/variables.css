@@ -38,16 +38,16 @@
   --font-weight-black: 700;
 
   /****  Sizes  ****/
-  --left-sidebar: 140px;
-  --right-sidebar: 350px;
-  --player-height-s: 70px;
-  --player-height-m: 84px;
-  --box-size-xxs: 32px;
-  --box-size-xs: 40px;
-  --box-size-s: 46px;
-  --box-size-m: 54px;
-  --box-size-l: 100px;
-  --box-size-xl: 146px;
+  --left-sidebar: 8.75rem;
+  --right-sidebar: 21.875rem;
+  --player-height-s: 4.375rem;
+  --player-height-m: 5.25rem;
+  --box-size-xxs: 2rem;
+  --box-size-xs: 2.5rem;
+  --box-size-s: 2.875rem;
+  --box-size-m: 3.375rem;
+  --box-size-l: 6.25rem;
+  --box-size-xl: 9.125rem;
   --padding-xs: 0.66rem;
   --padding-s: 1rem;
   --padding-m: 2.33rem;
