@@ -11,7 +11,6 @@ const ExtendedLogo = () => (
         <img src="/images/logo.svg" alt="Muzikie" />
       </figure>
       <h1>Muzikie</h1>
-      <sub>Decentralized Music streaming</sub>
     </Link>
   </div>
 );

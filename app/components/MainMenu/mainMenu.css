@@ -20,7 +20,7 @@
       color: var(--color-secondary);
 
       &.menuCut {
-        font-size: 7px;
+        font-size: 10px;
       }
     }
   }
