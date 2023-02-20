@@ -1,4 +1,7 @@
-.component.searchRoot {
-  max-width: var(--centered-box-max-size);
-  margin: 0 auto;
+
+@media (min-width: 1024px) {
+  .component.searchRoot {
+    width: var(--centered-box-max-size);
+    margin: 0 auto;
+  }
 }

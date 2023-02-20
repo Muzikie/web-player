@@ -10,40 +10,40 @@ body {
 
 h1 {
   font-size: var(--size-h1);
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
   font-weight: var(--font-weight-black);
   letter-spacing: 1px;
 }
 
 h2 {
   font-size: var(--size-h2);
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   letter-spacing: 0.5px;
   font-weight: var(--font-weight-bold);
 }
 
 h3 {
   font-size: var(--size-h3);
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   font-weight: var(--font-weight-normal);
 }
 
 h4 {
   font-size: var(--size-h4);
-  line-height: 1.5em;
+  line-height: 1.5rem;
   font-weight: var(--font-weight-normal);
-  margin-top: 0.1em;
-  margin-bottom: 0.1em;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
   letter-spacing: 0.3px;
   word-spacing: 0.3px;
 }
 
 h5 {
   font-size: var(--size-h5);
-  line-height: 1.2em;
+  line-height: 1.2rem;
   font-weight: var(--font-weight-normal);
   margin-top: 0;
   margin-bottom: 0;
@@ -63,27 +63,27 @@ small {
 
 @media (min-width: 1000px) {
   h1 {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   h2 {
-    margin-top: 0.35em;
-    margin-bottom: 0.35em;
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
   }
 
   h3 {
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
   }
 
   h4 {
-    margin-top: 0.15em;
-    margin-bottom: 0.15em;
+    margin-top: 0.15rem;
+    margin-bottom: 0.15rem;
   }
 
   h5 {
-    margin-top: 0.15em;
-    margin-bottom: 0.25em;
+    margin-top: 0.15rem;
+    margin-bottom: 0.25rem;
   }
 }
