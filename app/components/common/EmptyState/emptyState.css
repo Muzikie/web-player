@@ -21,11 +21,7 @@
       & header {
          flex-flow: column nowrap;
          color: var(--color-secondary);
-
-         & h3,
-         & .content {
-            text-align: center;
-         }
+         text-align: center;
       }
    }
 }
