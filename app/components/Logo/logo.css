@@ -35,19 +35,17 @@
   &.extended {
     & a {
       height: 45px;
-      width: 240px;
+      width: 130px;
       display: flex;
-      flex-flow: column wrap;
-      align-content: flex-start;
-      justify-content: center;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: center;
       gap: 1.4rem;
     }
 
     & figure {
-      height: 0px;
-      padding: 5px 0px;
-      flex-grow: 2;
-      flex-shrink: 0;
+      height: 35px;
+      padding: 5px 0;
 
       & img {
         width: auto;
@@ -55,25 +53,10 @@
       }
     }
 
-    & h1,
-    & sub {
-      box-sizing: border-box;
-      flex-grow: 0;
-      flex-shrink: 1;
-      color: var(--color-secondary);
-    }
-
     & h1 {
+      color: var(--color-secondary);
       font-size: var(--size-h3);
-      margin: 0;
-      letter-spacing: 0.02em;
-      margin: 0;
-      height: 70%;
-    }
-
-    & sub {
-      font-size: var(--size-h5);
-      height: 30%;
+      letter-spacing: 0;
     }
   }
 }
