@@ -5,16 +5,16 @@
 
   & > .icon {
     z-index: 2;
-    font-size: 26px;
+    font-size: var(--size-h3);
     position: absolute;
-    bottom: 22px;
-    left: 15px;
+    bottom: 1.9rem;
+    left: 1.25rem;
     color: var(--gray);
   }
 
   & > input {
     width: 100%;
-    height: var(--box-size-s);
+    height: var(--box-size-m);
     padding: 0 var(--padding-s);
     background-color: var(--white-see-through);
     color: var(--color-secondary);
@@ -28,14 +28,14 @@
   }
 
   & .icon + input {
-    padding: 0 50px;
+    padding: 0 var(--box-size-l);
   }
 
   & .visibilityButton {
     position: absolute;
     right: 5px;
     color: var(--color-secondary);
-    font-size: 20px;
+    font-size: var(--size-h4);
     width: 30px;
     height: 30px;
     bottom: 20px;
@@ -51,9 +51,9 @@
     position: absolute;
     width: 100%;
     left: 0;
-    bottom: 0px;
+    bottom: 0;
     transform: translateY(100%);
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 var(--border-radius-xs) var(--border-radius-xs);
     padding: 0px 5px;
     box-sizing: border-box;
     color: var(--color-error);
