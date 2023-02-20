@@ -55,14 +55,14 @@
     padding-top: var(--padding-s);
 
     & span:first-child {
-      font-weight: 700;
+      font-weight: var(--font-weight-black);
       margin-bottom: var(--padding-xs);
-      font-size: 22px;
+      font-size: var(--size-h3);
     }
 
     & span:nth-child(2) {
-      font-weight: 500;
-      font-size: 14px;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--size-h4);
     }
 
     & span:nth-child(3) {
@@ -91,6 +91,7 @@
       text-align: center;
       line-height: 26px;
       padding-top: var(--padding-s);
+      font-size: var(--size-h5);
     }
   }
   & .social {
@@ -101,7 +102,7 @@
       align-items: center;
       line-height: 45px;
       font-size: var(--size-h4);
-      font-weight: 400;
+      font-weight: var(--font-weight-normal);
     }
 
     & .notChecked {
