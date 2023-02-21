@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { useEffect } from 'react';
+import { ROUTES } from '~/routes/routes';
+
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
@@ -31,14 +32,14 @@ const MainMenu = () => {
         <div className="list">
           <Link
             icon="home"
-            to="/"
+            to={ROUTES.HOME}
             className="menuItem"
           >
             Home
           </Link>
           <Link
             icon="search"
-            to="/search"
+            to={ROUTES.SEARCH}
             className="menuItem"
           >
             Search
@@ -49,14 +50,21 @@ const MainMenu = () => {
               {' '}
               <Link
                 icon="user"
-                to="/profile/discography"
+                to={ROUTES.MY_PROFILE}
                 className="menuItem"
               >
                 Profile
               </Link>
               <Link
+                icon="user"
+                to={ROUTES.UPLOAD_COLLECTION}
+                className="menuItem"
+              >
+                Upload
+              </Link>
+              <Link
                 icon="file"
-                to="/subscription/active"
+                to={ROUTES.SUBSCRIPTION_ACTIVE}
                 className="menuItem"
               >
                 Subscription
@@ -66,7 +74,7 @@ const MainMenu = () => {
 
           <Link
             icon="key"
-            to={`/login?action=${info.address ? 'logout' : 'login'}`}
+            to={`${ROUTES.LOGIN}?action=${info.address ? 'logout' : 'login'}`}
             className="menuItem"
           >{info.address ? 'Logout' : 'Login'}</Link>
         </div>

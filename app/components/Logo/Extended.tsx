@@ -3,10 +3,11 @@ import React from 'react';
 
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
+import { ROUTES } from '~/routes/routes';
 
 const ExtendedLogo = () => (
   <div className="component logo extended">
-    <Link to="/">
+    <Link to={ROUTES.HOME}>
       <figure>
         <img src="/images/logo.svg" alt="Muzikie" />
       </figure>

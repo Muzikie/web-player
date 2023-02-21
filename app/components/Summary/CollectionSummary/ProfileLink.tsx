@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from '~/components/common/Link';
 import { API_URLS } from '~/configs';
 import { truncateAddress } from '~/helpers/formatters';
+import { ROUTES } from '~/routes/routes';
 import { ProfileLinkProps } from './types';
 
 const ProfileLink = ({ profile }: ProfileLinkProps) => {
@@ -23,7 +24,7 @@ const ProfileLink = ({ profile }: ProfileLinkProps) => {
   }, [profile.creatorAddress]);
 
   return (
-    <Link to={`/profile/${profile.creatorAddress}`} className="profile">
+    <Link to={ROUTES.PROFILE.replace(':id', profile.creatorAddress)} className="profile">
       <figure>
         <img
           ref={image}
