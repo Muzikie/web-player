@@ -7,6 +7,7 @@ import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import styles from '~/css/routes/__main/subscription.css';
 import { Tabs } from '~/components/common/Tabs';
 import { useActiveSubscription } from '~/hooks/useSubscriptions';
+import { ROUTES } from '~/routes/routes';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -27,8 +28,8 @@ const SubscriptionScreen = () => {
       <header className="tabsHeader">
         <Tabs
           items={[
-            { title: 'Active Subscription', to: '/subscription/active' },
-            { title: 'Purchase', to: '/subscription/purchase' }
+            { title: 'Active Subscription', to: ROUTES.SUBSCRIPTION_ACTIVE },
+            { title: 'Purchase', to: ROUTES.SUBSCRIPTION_PURCHASE }
           ]}
         />
       </header>

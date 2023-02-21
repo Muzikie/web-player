@@ -25,17 +25,3 @@ export const getID = (data: Entity) => {
   }
   return data.creatorAddress;
 };
-
-// @todo remove this in favor of getID 
-export const getCollectionID = (data: Entity) => {
-  if ('audioID' in data) {
-    return data.collectionID;
-  }
-  if ('playlistID' in data) {
-    return data.playlistID;
-  }
-  if ('collectionID' in data) {
-    return data.collectionID;
-  }
-  return data.creatorAddress;
-};

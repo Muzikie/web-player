@@ -7,6 +7,7 @@ import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
 import { Link } from '~/components/common/Link';
+import { ROUTES } from '~/routes/routes';
 import { VALID_GENRES } from '~/configs';
 import Feedback from './Feedback';
 
@@ -49,7 +50,7 @@ const CreateAudio = () => {
             onChange={onChange}
           />
           <Link
-            to="/profile/createCollection"
+            to={ROUTES.UPLOAD_COLLECTION}
             icon="cross"
             className='addCollection'
           />

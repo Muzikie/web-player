@@ -2,10 +2,10 @@ import React from 'react';
 
 import CreateCollection from '~/components/CreateCollection';
 
-const CreateCollectionScreen = () => (
+const UploadCollectionScreen = () => (
   <section className="screen create tabContainer">
     <CreateCollection />
   </section>
 );
 
-export default CreateCollectionScreen;
+export default UploadCollectionScreen;

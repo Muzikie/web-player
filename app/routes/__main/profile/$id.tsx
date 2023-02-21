@@ -10,24 +10,29 @@ import {
   getProfileCollections,
   getProfileAudios,
 } from '~/models/entity.server';
+import { getSession } from '~/hooks/useSession';
 import ProfileBanner from '~/components/ProfileBanner';
 import ProfileDetails from '~/components/ProfileDetails';
 import PopularAudios from '~/components/PopularAudios';
 import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/profile.css';
-import { profileLoaderProps, ProfileLoaderData } from '../../types';
 import UserDiscography from '~/components/UserDiscography'
+import { profileLoaderProps, ProfileLoaderData } from '../../types';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ params }: profileLoaderProps) => {
+export const loader = async ({ params, request }: profileLoaderProps) => {
   invariant(params.id, 'Expected params.id');
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
 
-  const profile = await getProfile(params.id);
-  const collections = await getProfileCollections(params.id);
-  const audios = await getProfileAudios(params.id);
+  const address = params.id === 'me' ? session.get('address') : params.id;
+  const profile = await getProfile(address);
+  const collections = await getProfileCollections(address);
+  const audios = await getProfileAudios(address);
 
   if (!profile) {
     throw new Response('Not Found', { status: 404 });
@@ -37,7 +42,7 @@ export const loader = async ({ params }: profileLoaderProps) => {
     profile,
     collections,
     audios,
-    id: params.id,
+    id: address,
   });
 };
 
