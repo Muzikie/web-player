@@ -1,0 +1,36 @@
+.component.walletDetails {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background:  linear-gradient(269.4deg, #B8ABDB 0.66%, rgba(184, 171, 219, 0.43) 12.86%, rgba(140, 130, 192, 0.65) 34.09%, #8A80BF 99.63%);
+  border-radius: 38px;
+  height: 200px;
+  padding: var(--padding-m);
+  box-sizing: border-box;
+
+  & .walletHeader {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: var(--padding-m);
+    justify-content: space-between;
+    align-items: center;
+
+    & .walletAddress {
+      font-size: var(--size-h4);
+      font-weight: var(--font-weight-bold);
+      width: 70%;
+      line-break: anywhere;
+    }
+  }
+
+  & .balance {
+    display: flex;
+    flex-direction: column;
+
+    & .balanceValue {
+      font-size: var(--size-h3);
+      font-weight: var(--font-weight-black);
+    }
+  }
+}
