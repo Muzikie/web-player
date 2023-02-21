@@ -1,0 +1,11 @@
+.component.popularAudios {
+  position: relative;
+
+  & .content {
+    & .newCollectionButton {
+      width: 195px;
+      margin-top: 30px;
+    }
+  }
+  
+}
