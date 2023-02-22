@@ -8,6 +8,7 @@ import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { IconButton } from '~/components/common/Button';
 import { API_URLS } from '~/configs';
 import EntityThumbnail from '~/components/Entity/EntityThumbnail';
+import { ROUTES } from '~/routes/routes';
 import PlaceHolderImage from './PlaceHolderImage';
 import ProgressBar from './ProgressBar';
 
@@ -28,7 +29,7 @@ const PlayerContent = () => {
   return (
     <>
       <section className="primaryInfo">
-        <Link to={`/collection/${current?.audioID ?? ''}`}>
+        <Link to={ROUTES.COLLECTION.replace(':id', current?.audioID ?? '')}>
           { current
             ? <EntityThumbnail data={current} />
             : <PlaceHolderImage />

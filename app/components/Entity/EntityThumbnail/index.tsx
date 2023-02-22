@@ -2,7 +2,7 @@ import React from 'react';
 
 import { EntityRowProps, Entity, entityThemes } from '../types';
 import { API_URLS, FILES } from '~/configs';
-import { getEntity, getCollectionID } from '../utils';
+import { getEntity, getID } from '../utils';
 
 const EntityThumbnail = ({
   data, className = '', theme = entityThemes.normal,
@@ -10,7 +10,7 @@ const EntityThumbnail = ({
 
   const entity = getEntity(data);
   const wrapper = `component entity thumbnail ${entity} ${theme} ${className}`;
-  const id = getCollectionID(data);
+  const id = getID(data);
 
   return (
     <section className={wrapper}>

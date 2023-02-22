@@ -7,6 +7,7 @@ import { Audio } from '~/configs';
 import { entityMode } from '~/components/Entity/types';
 import { Link } from '~/components/common/Link';
 import EmptyState from '~/components/common/EmptyState';
+import { ROUTES } from '~/routes/routes';
 import { PrimaryButton } from '../common/Button';
 import { UserDiscographyProps } from './types';
 
@@ -31,7 +32,7 @@ const UserDiscography = ({ audios, collections }: UserDiscographyProps) => {
               title="You don’t have audios or collection yet."
               subtitle="Start by creating your first collection, then add audios to it."
               content={
-                <Link to="/profile/createCollection">
+                <Link to={ROUTES.UPLOAD_COLLECTION}>
                   <PrimaryButton
                     className="newCollectionButton">
                       New collection
