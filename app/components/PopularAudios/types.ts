@@ -1,4 +1,4 @@
-import { Audio } from "~/configs"
+import { Audio } from '~/configs'
 
 
 export interface PopularAdiosProps {
