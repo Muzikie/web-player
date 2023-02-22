@@ -32,7 +32,7 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
   const address = params.id === 'me' ? session.get('address') : params.id;
   const profile = await getProfile(address);
   const collections = await getProfileCollections(address);
-  const audios = await getProfileAudios(address);
+  const audios = await getProfileAudios(address, { limit: 4 });
 
   if (!profile) {
     throw new Response('Not Found', { status: 404 });

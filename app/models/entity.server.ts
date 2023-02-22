@@ -48,8 +48,8 @@ export async function getProfileCollections(id: string): Promise<Array<Collectio
   return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/collections`);
 }
 
-export async function getProfileAudios(id: string): Promise<Array<Audio>> {
-  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/audios`);
+export async function getProfileAudios(id: string, options: any): Promise<Array<Audio>> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/audios`).then(res => res.splice(options.offset ?? 0, options.limit ?? 10));
 }
 
 export async function getRecentlyPlayed(): Promise<Array<Entity>> {
