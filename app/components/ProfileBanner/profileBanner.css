@@ -1,7 +1,6 @@
 .component.profileBanner {
   width: 100%;
   height: auto;
-  padding: var(--padding-m);
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;

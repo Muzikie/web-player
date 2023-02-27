@@ -1,10 +1,21 @@
 import React from 'react';
+import { WalletAddressProps } from './types';
+import CopyButton from '../common/CopyButton';
 
-const WalletDetails = () => {
+const WalletDetails = ({ address }: WalletAddressProps) => {
+  // {info.balances && info.balances.length === 0 ? 0 : info.balances[0].availableBalance}
+
   return (
-    <div>
-      <h1>WalletDetails</h1>
-    </div>
+    <section className="component walletDetails">
+      <header className="walletHeader">
+        <h3 className="walletAddress">{address}</h3>
+        <CopyButton text={address} />
+      </header>
+      <div className="balance">
+        <span className="balanceTitle">Balance:</span>
+        <h2 className="balanceValue">0 MZK</h2>
+      </div>
+    </section>
   );
 };
 

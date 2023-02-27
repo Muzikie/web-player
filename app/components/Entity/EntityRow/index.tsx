@@ -6,14 +6,14 @@ import { Entity, EntityRowProps, entityThemes, entityMode } from '../types';
 import { getEntity } from '../utils';
 
 const Subtitle = ({ data }: EntityRowProps<Entity>) => {
-  let subtitle = '-';
+  let subtitle;
   if ('playlistID' in data) {
     subtitle = data.description;
   } else if ('collectionID' in data) {
     // @todo add profile name
     subtitle = data.creatorAddress;
   } else {
-    subtitle = data.name;
+    subtitle = data.name ?? '-';
   }
 
   return (
