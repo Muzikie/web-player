@@ -1,6 +1,7 @@
 .component.entity.row {
   width: 100%;
-  padding: 10px;
+  padding-top: var(--padding-xs);
+  padding-bottom: var(--padding-s);
   box-sizing: border-box;
 
   & .container {
@@ -14,7 +15,8 @@
 
   &.large {
     & .container {
-      padding: 10px;
+      padding-top: var(--padding-xs);
+      padding-bottom: var(--padding-s);
       background-color: #ffffff20;
       border: solid 1px #ffffff40;
       border-radius: var(--border-radius-m);

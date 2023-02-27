@@ -4,11 +4,11 @@
   box-sizing: border-box;
   overflow-y: scroll;
 
-  & .trackList,
+  & .audioList,
   & .similarArtists,
   & .discography {
     width: 100%;
-    padding: 40px 20px 0;
+    padding: 0 var(--padding-m);
     box-sizing: border-box;
   }
 }

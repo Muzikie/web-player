@@ -17,7 +17,7 @@ export interface LiskProps {
   itemTheme?: entityTheme;
   theme?: collectionTheme;
   items: Entity[];
-  emptyState: {
+  emptyState?: {
     title: string;
     subtitle?: string;
     content?: ReactNode;

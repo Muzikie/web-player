@@ -5,7 +5,7 @@
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
-  
+
   & figure {
     position: relative;
     width: 100%;
@@ -49,7 +49,7 @@
 @media (min-width: 680px) {
   .component.profileBanner {
     flex-wrap: wrap;
-    height: 22.66rem;
+    height: 29.66rem;
 
     & header,
     & figure {
@@ -73,6 +73,7 @@
     & figure {
       width: 50%;
       margin-bottom: 0;
+      padding-bottom: 21rem;
     }
 
     & .component.popularAudios {
@@ -89,8 +90,10 @@
   .component.profileBanner {
     height: 29.66rem;
 
-    & figure {
-      padding-bottom: 21rem;
+    & header {
+      & h2 {
+        padding-left: var(--padding-xs);
+      }
     }
   }
 }

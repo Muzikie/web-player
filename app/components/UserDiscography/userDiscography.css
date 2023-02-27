@@ -1,5 +1,6 @@
 .component.userDiscography {
   position: relative;
+  padding: var(--padding-m);
 
   & .content {
     & .newCollectionButton {
@@ -7,5 +8,4 @@
       margin-top: 30px;
     }
   }
-  
 }

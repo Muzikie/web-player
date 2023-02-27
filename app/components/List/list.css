@@ -38,6 +38,7 @@
     & .itemsContainer {
       display: flex;
       flex-flow: row wrap;
+      padding-left: var(--padding-xs);
 
       &.wide,
       &.normal,
