@@ -11,7 +11,8 @@ const PopularAudios = ({ audios }: PopularAdiosProps) => {
   return (
     <section className='component popularAudios'>
       <List
-        theme={liskThemes.normal}
+        theme={liskThemes.wide}
+        className="audiosLists"
         itemTheme={entityThemes.normal}
         items={audios}
         emptyState={{

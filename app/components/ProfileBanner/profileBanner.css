@@ -75,12 +75,22 @@
       margin-bottom: 0;
     }
 
-    & .topSongs {
+    & .component.popularAudios {
       flex: 3 0 0;
       width: 50%;
       height: 100%;
       padding-left: var(--padding-m);
       box-sizing: border-box;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .component.profileBanner {
+    height: 29.66rem;
+
+    & figure {
+      padding-bottom: 21rem;
     }
   }
 }
