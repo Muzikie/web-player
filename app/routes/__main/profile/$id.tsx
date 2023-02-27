@@ -13,7 +13,6 @@ import {
 import { getSession } from '~/hooks/useSession';
 import ProfileBanner from '~/components/ProfileBanner';
 import ProfileDetails from '~/components/ProfileDetails';
-import PopularAudios from '~/components/PopularAudios';
 import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/profile.css';
 import UserDiscography from '~/components/UserDiscography'
