@@ -3,9 +3,10 @@ import React from 'react';
 // internal import
 import { API_URLS, FILES } from '~/configs'
 import Image from '../common/Image'
+import PopularAudios from '../PopularAudios'
 import { ProfileAddress } from './types'
 
-const ProfileBanner = ({ data } : ProfileAddress) => {
+const ProfileBanner = ({ data, audios } : ProfileAddress) => {
   const { creatorAddress } = data
 
   return (
@@ -20,7 +21,7 @@ const ProfileBanner = ({ data } : ProfileAddress) => {
       <header>
         <h2>{ creatorAddress }</h2>
       </header>
-      <div className="topSongs"></div>
+      <PopularAudios audios={audios} />
     </section>
   );
 };

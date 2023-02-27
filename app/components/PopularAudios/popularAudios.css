@@ -1,0 +1,15 @@
+.component.popularAudios {
+  position: relative;
+
+
+  & .audiosLists {
+    padding: 0;
+  }
+
+  & .content {
+    & .newCollectionButton {
+      width: 195px;
+      margin-top: var(--padding-s);
+    }
+  }
+}

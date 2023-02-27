@@ -2,7 +2,6 @@ import React from 'react';
 import Wrapper from './Wrapper';
 import EntityThumbnail from '../EntityThumbnail';
 import Actions from '../Actions';
-import Icon from '~/components/common/Icon';
 import { Entity, EntityRowProps, entityThemes, entityMode } from '../types';
 import { getEntity } from '../utils';
 
@@ -75,7 +74,7 @@ const EntityRow = ({
         <div className="primaryInfo">
           {
             ('audioID' in data)
-              ? (<Icon name="play" />)
+              ? null
               : (
                 <EntityThumbnail
                   data={data}

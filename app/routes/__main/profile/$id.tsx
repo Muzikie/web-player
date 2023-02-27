@@ -13,7 +13,6 @@ import {
 import { getSession } from '~/hooks/useSession';
 import ProfileBanner from '~/components/ProfileBanner';
 import ProfileDetails from '~/components/ProfileDetails';
-import PopularAudios from '~/components/PopularAudios';
 import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/profile.css';
 import UserDiscography from '~/components/UserDiscography'
@@ -32,7 +31,7 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
   const address = params.id === 'me' ? session.get('address') : params.id;
   const profile = await getProfile(address);
   const collections = await getProfileCollections(address);
-  const audios = await getProfileAudios(address);
+  const audios = await getProfileAudios(address, { limit: 4 });
 
   if (!profile) {
     throw new Response('Not Found', { status: 404 });
@@ -56,8 +55,7 @@ const ProfileScreen = () => {
 
   return (
     <section className="screen profile">
-      <ProfileBanner data={profile} />
-      <PopularAudios audios={audios}  />
+      <ProfileBanner data={profile} audios={audios} />
       <UserDiscography collections={collections} audios={audios} />
       <ProfileDetails data={profile} />
       <WalletDetails address={id} />

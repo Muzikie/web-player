@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Entity } from '../Entity/types';
 import { entityTheme } from '../Entity/types';
 
@@ -16,4 +17,9 @@ export interface LiskProps {
   itemTheme?: entityTheme;
   theme?: collectionTheme;
   items: Entity[];
+  emptyState?: {
+    title: string;
+    subtitle?: string;
+    content?: ReactNode;
+  };
 }
