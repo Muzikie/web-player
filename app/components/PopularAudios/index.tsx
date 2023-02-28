@@ -10,6 +10,9 @@ import { PopularAdiosProps } from './types';
 const PopularAudios = ({ audios }: PopularAdiosProps) => {
   return (
     <section className='component popularAudios'>
+      <header className='popularHeader'>
+        <h3>Most popular</h3>
+      </header>
       <List
         theme={liskThemes.wide}
         className="audiosLists"

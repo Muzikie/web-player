@@ -50,11 +50,6 @@
     flex-wrap: wrap;
     height: 29.66rem;
 
-    & header,
-    & figure {
-      flex: 1 1 0;
-    }
-
     & header {
       max-width: 100%;
       width: 50%;
@@ -72,7 +67,7 @@
     & figure {
       width: 50%;
       margin-bottom: 0;
-      padding-bottom: 21rem;
+      padding-bottom: 26rem;
     }
 
     & .component.popularAudios {
