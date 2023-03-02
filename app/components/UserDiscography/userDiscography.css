@@ -1,7 +1,17 @@
 .component.userDiscography {
   position: relative;
-  padding: var(--padding-m);
+  margin-top: var(--padding-l);
 
+  & header {
+    padding-left: var(--padding-xs);
+    padding-bottom: var(--padding-s);
+
+    & h3 {
+      color: var(--white-disabled);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+ 
   & .content {
     & .newCollectionButton {
       width: 195px;
