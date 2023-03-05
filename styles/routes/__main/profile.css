@@ -14,3 +14,15 @@
     margin-bottom: var(--padding-m);
   }
 }
+
+@media (min-width: 768px) {
+  .screen.profile {
+    & .component.profileDetails {
+      flex-basis: 50%;
+    }
+
+    & .component.walletDetails {
+      flex-basis: 50%;
+    }
+  }
+}
