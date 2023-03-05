@@ -35,6 +35,7 @@ interface SocialAccount {
 }
 
 export interface Profile extends BaseEntity {
+  name: string;
   nickName: string;
   description: string;
   avatarHash: string;
