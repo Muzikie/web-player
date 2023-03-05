@@ -26,6 +26,12 @@
 }
 
 .component.icon {
+  &.instagram:before {
+    content: "\e747";
+  }
+  &.youtube:before {
+    content: "\e748";
+  }
   &.menuCut:before {
     content: "\e900";
   }
@@ -158,7 +164,7 @@
   &.telegram:before {
     content: "\ea95";
   }
-  &.twitter1:before {
+  &.twitter:before {
     content: "\ea96";
   }
 }
