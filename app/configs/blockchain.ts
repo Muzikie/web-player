@@ -18,7 +18,7 @@ export const COMMANDS = {
 };
 
 export const FILES = {
-  [MODULES.AUDIO]: 'audio',
+  [MODULES.AUDIO]: 'cover',
   [MODULES.COLLECTION]: 'cover',
   profile: 'avatar',
   [MODULES.PLAYLIST]: 'cover',
