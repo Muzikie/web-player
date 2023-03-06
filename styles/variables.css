@@ -38,6 +38,7 @@
   --font-weight-black: 700;
 
   /****  Sizes  ****/
+  --thumbnail:5.5rem;
   --left-sidebar: 8.75rem;
   --right-sidebar: 21.875rem;
   --player-height-s: 4.375rem;
