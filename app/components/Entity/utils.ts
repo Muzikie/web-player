@@ -15,7 +15,7 @@ export const getEntity = (data: Entity) => {
 
 export const getID = (data: Entity) => {
   if ('audioID' in data) {
-    return data.audioID;
+    return data.collectionID;
   }
   if ('playlistID' in data) {
     return data.playlistID;
