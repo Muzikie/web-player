@@ -69,7 +69,7 @@
           display: flex;
           flex-direction: column;
 
-          &[href=""] {
+          &[href=''] {
             pointer-events: none;
           }
 
@@ -82,7 +82,6 @@
         & .iconBox {
           position: relative;
           background-color: var(--color-primary);
-          color: red;
           text-align: center;
           width: 67px;
           height: 65px;
@@ -91,6 +90,27 @@
           align-items: center;
           border-radius: var(--border-radius-m);
           margin-bottom: var(--padding-s);
+
+          & .icon.twitter {
+            color: #00acee;
+          }
+
+          & .icon.youtube {
+            color: red;
+          }
+
+          & .icon.instagram {
+            background-image: radial-gradient(
+              circle at 30% 107%,
+              #fdf497 0%,
+              #fdf497 5%,
+              #fd5949 45%,
+              #d6249f 60%,
+              #285aeb 90%
+            );
+            background-clip: text;
+            color: transparent;
+          }
 
           & i {
             font-size: 33px;
@@ -142,6 +162,13 @@
 
 @media (min-width: 1200px) {
   .component.profileDetails {
+    justify-content: center;
+
+    & .profileAvatar {
+      width: 15.5rem;
+      height: 15.5rem;
+    }
+
     & .profileName {
       padding-top: var(--padding-x);
     }
