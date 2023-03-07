@@ -3,12 +3,14 @@
   height: auto;
   display: flex;
   align-items: center;
-  flex-flow: column nowrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   position: relative;
   background-color: var(--color-primary-light);
   border-radius: var(--border-radius-m);
   margin-bottom: var(--padding-l);
   box-shadow: var(--primary-shadow);
+  box-sizing: border-box;
 
   & .profileAvatar {
     position: relative;
@@ -28,7 +30,6 @@
 
   & .profileName {
     width: 100%;
-    padding-bottom: var(--padding-m);
     text-align: center;
 
     & h2 {
@@ -41,6 +42,7 @@
   }
 
   & .bioContainer {
+    padding-top: var(--padding-m);
     padding-inline: var(--padding-m);
 
     & h4,
@@ -117,8 +119,38 @@
 
 @media (min-width: 480px) {
   .component.profileDetails {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    & .profileAvatar {
+      margin-left: var(--padding-m);
+    }
+
+    & .profileName {
+      width: 54%;
+    }
+
+    & .bioContainer {
+      width: 100%;
+    }
+
     & .social {
       align-self: center;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .component.profileDetails {
+    & .profileName {
+      padding-top: var(--padding-x);
+    }
+
+    & .bioContainer {
+      width: 44%;
+      order: 4;
+      align-self: flex-start;
+      padding-top: 0;
     }
   }
 }

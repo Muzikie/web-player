@@ -17,12 +17,21 @@
 
 @media (min-width: 768px) {
   .screen.profile {
+    flex-direction: row;
+    flex-wrap: wrap; 
+    align-items: stretch;
+    justify-content: space-between;
+
     & .component.profileDetails {
-      flex-basis: 50%;
+      flex-basis: 58%;
+      margin-bottom: 0px;
+      justify-content: space-around;
     }
 
     & .component.walletDetails {
-      flex-basis: 50%;
+      flex-basis: 40%;
     }
   }
 }
+
+
