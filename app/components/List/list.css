@@ -51,7 +51,7 @@
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 680px) {
   .component.list {
     &.vertical {
       & .itemsContainer {
