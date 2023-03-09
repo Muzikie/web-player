@@ -1,4 +1,11 @@
-import { Audio, Collection, CreateCommandParams } from '~/configs';
+import {
+  Audio,
+  Collection,
+  CreateCommandParams,
+  MODULES,
+  COMMANDS,
+} from '~/configs';
+import { ProfileInfoType } from '~/context/profileContext/types';
 
 export enum ValidationStatus {
   pending = 'PENDING',
@@ -22,3 +29,11 @@ export interface ProfileTxProps extends Omit<CreateCommandParams, 'nickName' | '
 export type validateProps = AudioTxProps | CollectionTxProps | ProfileTxProps;
 
 export type EntityName = 'audio' | 'collection' | 'profile';
+
+export interface signTransactionProps {
+  command: COMMANDS,
+  module: MODULES,
+  params: any,
+  files: { value: File, key: string }[],
+  account: ProfileInfoType,
+}
