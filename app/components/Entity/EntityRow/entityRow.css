@@ -65,7 +65,6 @@
 
   &:hover {
     & footer {
-      & > span,
       & > button {
         opacity: 1 !important;
       }

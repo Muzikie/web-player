@@ -5,7 +5,6 @@ import { EntityRowProps } from '../types';
 
 const CollectionActions = ({ data }: EntityRowProps<Collection>) => (
   <footer className="component entity action collection">
-    <span>{data.releaseYear}</span>
     {/* <IconButton
       icon="heart"
       className="likeButton"
