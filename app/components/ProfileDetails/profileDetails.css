@@ -7,7 +7,7 @@
   flex-wrap: nowrap;
   position: relative;
   background-color: var(--color-primary-light);
-  border-radius: var(--border-radius-m);
+  border-radius: var(--border-radius-l);
   margin-bottom: var(--padding-l);
   box-shadow: var(--primary-shadow);
   box-sizing: border-box;
@@ -124,7 +124,7 @@
   & .bubblesPattern {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 3rem;
     width: 292px;
     height: 43px;
     z-index: 0;
@@ -160,7 +160,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .component.profileDetails {
     justify-content: center;
 

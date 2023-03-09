@@ -7,7 +7,7 @@
     padding-bottom: var(--padding-s);
 
     & h3 {
-      color: var(--white-disabled);
+      color: var(--gray);
       font-weight: var(--font-weight-bold);
     }
   }
