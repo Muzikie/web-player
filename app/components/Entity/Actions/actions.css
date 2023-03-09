@@ -9,7 +9,6 @@
   & > span {
     display: block;
     width: var(--item-size) !important;
-    opacity: 0;
     flex-grow: 1;
     color: var(--gray);
   }
@@ -28,12 +27,12 @@
   }
 
   &.audio {
-    & .duration,
-    & .streamCount {
-      text-align: right;
+    & .duration  {
+      text-align: center;
     }
 
     & .streamCount {
+      text-align: right;
       display: none;
     }
 
