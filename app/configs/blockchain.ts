@@ -5,6 +5,7 @@ export const MODULES = {
   AUDIO: 'audio',
   SUBSCRIPTION: 'subscription',
   PLAYLIST: 'playlist',
+  PROFILE: 'profile'
 };
 
 export const COMMANDS = {
@@ -20,7 +21,7 @@ export const COMMANDS = {
 export const FILES = {
   [MODULES.AUDIO]: 'cover',
   [MODULES.COLLECTION]: 'cover',
-  profile: 'avatar',
+  [MODULES.PROFILE]: 'avatar',
   [MODULES.PLAYLIST]: 'cover',
 };
 

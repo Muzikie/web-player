@@ -1,4 +1,4 @@
-import { Audio, Collection } from '~/configs';
+import { Audio, Collection, CreateCommandParams } from '~/configs';
 
 export enum ValidationStatus {
   pending = 'PENDING',
@@ -15,6 +15,10 @@ export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | '
   files: FileList | null;
 }
 
-export type validateProps = AudioTxProps | CollectionTxProps;
+export interface ProfileTxProps extends Omit<CreateCommandParams, 'nickName' | 'description' | 'duration' | 'socialAccounts' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'> {
+  files: FileList | null;
+}
 
-export type EntityName = 'audio' | 'collection';
+export type validateProps = AudioTxProps | CollectionTxProps | ProfileTxProps;
+
+export type EntityName = 'audio' | 'collection' | 'profile';
