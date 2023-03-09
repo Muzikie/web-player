@@ -29,7 +29,7 @@ export enum SocialAccountPlatform {
   Youtube = 2,
 }
 
-interface SocialAccount {
+export interface SocialAccount {
   username: string;
   platform: SocialAccountPlatform;
 }
@@ -65,4 +65,14 @@ export interface Playlist extends BaseEntity {
   description: string;
   hash: string;
   meta: string;
+}
+
+export interface CreateCommandParams extends BaseEntity {
+  nickName: string;
+  description: string;
+  socialAccounts: SocialAccount[];
+  avatarHash: Buffer;
+  avatarSignature: Buffer;
+  bannerHash: Buffer;
+  bannerSignature: Buffer;
 }
