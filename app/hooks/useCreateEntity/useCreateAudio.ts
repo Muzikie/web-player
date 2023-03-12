@@ -24,7 +24,6 @@ export const useCreateAudio = () => {
   const [collectionID, setCollectionID] = useState<string>('');
   const [genre, setGenre] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
-  const [feedback, setFeedback] = useState<{ message: string; error: boolean }>({ message: '', error: false });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -47,6 +46,10 @@ export const useCreateAudio = () => {
       break;
     }
   };
+
+  if(!files) {
+    return false
+  }
 
   const signAndBroadcast = async () => {
     const data = await updateAccount();
@@ -97,6 +100,5 @@ export const useCreateAudio = () => {
     status,
     onChange,
     signAndBroadcast,
-    feedback,
   };
 };

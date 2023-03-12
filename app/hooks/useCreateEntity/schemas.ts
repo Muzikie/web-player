@@ -29,19 +29,19 @@ export const collectionSchema = yup
     }),
   });
 
-
 export const profileSchema = yup
   .object()
   .shape({
     nickName: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
-    description: yup.string().trim().matches(/([\w.\-\s]+)/),
+    description: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
     socialAccounts: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
-    avatarSignature: yup.mixed().test({
+    uploadAvatar: yup.mixed().test({
       name: 'files',
       test: item => !!item?.[0]?.name,
     }),
-    bannerSignature: yup.mixed().test({
+    uploadBanner: yup.mixed().test({
       name: 'files',
       test: item => !!item?.[0]?.name,
     }),
-  })
+  });
+  
