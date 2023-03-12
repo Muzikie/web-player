@@ -22,8 +22,9 @@ export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | '
   files: FileList | null;
 }
 
-export interface ProfileTxProps extends Omit<CreateCommandParams, 'nickName' | 'description' | 'duration' | 'socialAccounts' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'> {
-  files: FileList | null;
+export interface ProfileTxProps extends Omit<CreateCommandParams, 'name' |'creatorAddress' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'> {
+  uploadAvatar: FileList | null;
+  uploadBanner: FileList | null;
 }
 
 export type validateProps = AudioTxProps | CollectionTxProps | ProfileTxProps;

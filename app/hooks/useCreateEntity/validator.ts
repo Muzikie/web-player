@@ -1,9 +1,10 @@
-import { audioSchema, collectionSchema } from './schemas';
+import { audioSchema, collectionSchema, profileSchema } from './schemas';
 import { ValidationStatus, validateProps, EntityName } from './types';
 
 const schemas = {
   audio: audioSchema,
   collection: collectionSchema,
+  profile: profileSchema
 };
 
 export const validate = async (entityName: EntityName, props: validateProps): Promise<ValidationStatus> => {
