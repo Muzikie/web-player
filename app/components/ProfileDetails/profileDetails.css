@@ -30,7 +30,7 @@
 
   & .profileName {
     width: 100%;
-    text-align: left;
+    text-align: center;
     padding: var(--padding-xs);
 
     & h2 {
@@ -148,7 +148,7 @@
     }
 
     & .profileName {
-      width: 44%;
+      width: 45%;
     }
 
     & .bioContainer {
@@ -161,16 +161,27 @@
   }
 }
 
+@media (min-width: 900px) {
+  .component.profileDetails {
+    & .profileName {
+      width: 39%;
+    }
+  }
+}
+
 @media (min-width: 1280px) {
   .component.profileDetails {
+    justify-content: space-around;
+
     & .profileAvatar {
       width: 15.5rem;
       height: 15.5rem;
     }
 
     & .profileName {
-      padding-top: var(--padding-x);
-      text-align: right;
+      align-self: self-start;
+      padding-top: var(--box-size-xl);
+      text-align: left;
     }
 
     & .bioContainer {
@@ -178,6 +189,7 @@
       order: 4;
       align-self: flex-start;
       padding-top: 0;
+      margin-top: calc(var(--box-size-xxl) * -1);
     }
   }
 }
