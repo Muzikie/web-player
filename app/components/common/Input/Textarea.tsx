@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 /* Internal dependencies */
 import Icon from '../Icon';
@@ -15,7 +15,7 @@ const Textarea = ({
 }: TextareaProps) => {
 
   return (
-    <div className={`component textarea ${message ? 'invalid' : ''}`}>
+    <div className="component textarea">
       {
         icon
           ? (
