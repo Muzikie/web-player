@@ -1,7 +1,6 @@
 /* External dependencies */
 import { useState, ChangeEvent, useEffect } from 'react';
-import { transactions, cryptography } from '@liskhq/lisk-client';
-import md5 from 'md5';
+import { cryptography } from '@liskhq/lisk-client';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';

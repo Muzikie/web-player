@@ -4,7 +4,7 @@ import { cryptography } from '@liskhq/lisk-client';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { MODULES, COMMANDS} from '~/configs';
+import { MODULES, COMMANDS } from '~/configs';
 import { ValidationStatus } from './types';
 import { validate } from './validator';
 
