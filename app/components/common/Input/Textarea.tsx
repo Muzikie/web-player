@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 /* Internal dependencies */
-import { IconButton } from '../Button';
 import Icon from '../Icon';
 import { TextareaProps } from './types';
 
@@ -14,11 +13,6 @@ const Textarea = ({
   message = '',
   name = '',
 }: TextareaProps) => {
-  const [visibility, setVisibility] = useState(false);
-
-  const toggleVisibility = () => {
-    setVisibility(!visibility);
-  };
 
   return (
     <div className={`component textarea ${message ? 'invalid' : ''}`}>
