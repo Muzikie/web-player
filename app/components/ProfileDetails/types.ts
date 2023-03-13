@@ -4,6 +4,3 @@ export type Placeholder = Omit<Profile, 'nickName' | 'profileID' | 'avatarHash' 
 export type ProfileDetailsProps = {
   data: Profile;
 };
-export type ProfileEditProps = {
-  setShowForm: (value: boolean) => void;
-}

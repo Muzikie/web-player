@@ -1,65 +1,67 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input, FileInput, Textarea } from '~/components/common/Input';
+import Image from '../common/Image';
 import { PrimaryButton } from '~/components/common/Button';
+import { useCreateProfile } from '~/hooks/useCreateEntity/useCreateProfile.ts';
 import './profileEdit.css';
-import {
-  SocialAccountPlatform,
-  SocialAccount,
-} from '~/configs';
-import { ProfileEditProps } from '../ProfileDetails/types';
+import { API_URLS, FILES } from '~/configs';
+import { ProfileEditProps } from './types';
 
-const ProfileEdit = ({ setShowForm, onSubmit }: ProfileEditProps) => {
-  const platforms = Object.keys(SocialAccountPlatform);
-  const initialValue = [
-    { platform: SocialAccountPlatform.Twitter, username: '' },
-    { platform: SocialAccountPlatform.Instagram, username: '' },
-    { platform: SocialAccountPlatform.Youtube, username: '' },
-  ];
-  const [nickName, setNickName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [socialAccounts, setSocialAccounts] = useState<SocialAccount[]>(initialValue);
-  const [uploadBanner, setUploadBanner] = useState<FileList | null>();
-  const [uploadAvatar, setUploadAvatar] = useState<FileList | null>(null);
+const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
+  const { nickName, description, socialAccounts, onChange, broadcast, feedback, status } = useCreateProfile();
 
   return (
     <form className="component profileEdit">
       <fieldset>
         <div>
-          {/* <figure className="profileAvatar">
+          <figure className="profileEditBanner">
             <Image
               src={`${API_URLS.STREAMER}/${profile.creatorAddress}-${FILES.profile}.jpg`}
-              alt={profile.name}
+              alt={profile.creatorAddress}
               placeHolder="/images/artist.jpg"
             />
-          </figure> */}
+          </figure>
           <FileInput
             icon="file"
             name="uploadBanner"
             accept='.png,.jpg,.jpeg'
             multiple={false}
-            title="Upload banner image"
+            title="Click to update banner"
             className="fileInput"
+            onChange={onChange}
           />
         </div>
-        <FileInput
-          icon="file"
-          name="uploadAvatar"
-          accept='.png,.jpg,.jpeg'
-          multiple={false}
-          title="Upload avatar image"
-          className="fileInput"
-        />
+        <div>
+          <figure className="profileEditAvatar">
+            <Image
+              src={`${API_URLS.STREAMER}/${profile.creatorAddress}-${FILES.profile}.jpg`}
+              alt={profile.creatorAddress}
+              placeHolder="/images/artist.jpg"
+            />
+          </figure>
+          <FileInput
+            icon="file"
+            name="uploadAvatar"
+            accept='.png,.jpg,.jpeg'
+            multiple={false}
+            title="Click to update Avatar"
+            className="fileInput"
+            onChange={onChange}
+          />
+        </div>
         <Input
           value={nickName}
           name="nickName"
           placeholder="Enter name"
           type="text"
+          onChange={onChange}
         />
         <Textarea
           value={description}
           name="description"
           placeholder="Describe yourself"
           className="descriptionInput"
+          onChange={onChange}
         />
         <Input
           value={socialAccounts[2].username}
@@ -72,16 +74,18 @@ const ProfileEdit = ({ setShowForm, onSubmit }: ProfileEditProps) => {
           name="twitter"
           placeholder="Twitter username"
           type="text"
+          onChange={onChange}
         />
         <Input
           value={socialAccounts[1].username}
           name="instagram"
           placeholder="Instagram username"
           type="text"
+          onChange={onChange}
         />
       </fieldset>
       <PrimaryButton
-        onClick={() => onSubmit({ socialAccounts, description })}
+        onClick={broadcast}
         disabled={true}
         type="button"
       >
