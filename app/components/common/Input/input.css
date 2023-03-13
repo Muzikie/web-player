@@ -98,3 +98,23 @@
     z-index: 1;
   }
 }
+
+.component.textarea {
+  width: 100%;
+  padding: 0;
+  position: relative;
+
+  & textarea {
+    padding: var(--padding-s);
+    background-color: var(--white-see-through);
+    color: var(--color-secondary);
+    font-size: var(--size-h4);
+    box-sizing: border-box;
+    letter-spacing: 0.3px;
+    font-weight: 300;
+    margin-bottom: var(--padding-s);
+    border-radius: var(--border-radius-s);
+    border: solid 1px var(--brightOutline);
+    outline: none;
+  }
+}

@@ -15,7 +15,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .screen.profile {
     flex-direction: row;
     flex-wrap: wrap; 
@@ -25,7 +25,6 @@
     & .component.profileDetails {
       flex-basis: 58%;
       margin-bottom: 0px;
-      justify-content: space-around;
     }
 
     & .component.walletDetails {

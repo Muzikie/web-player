@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from 'react';
+import { number } from 'yup';
 
 type InputTheme = 'text'|'number'|'password'|'email';
 
@@ -21,4 +22,14 @@ export interface FileInputProps {
   name?: string;
   accept?: string;
   multiple?: boolean;
+}
+
+export interface TextareaProps {
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  placeholder?: string;
+  className?: string;
+  icon?: string;
+  message?: string;
+  name?: string;
 }
