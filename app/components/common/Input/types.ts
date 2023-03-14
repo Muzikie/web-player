@@ -1,5 +1,4 @@
 import { ChangeEventHandler } from 'react';
-import { number } from 'yup';
 
 type InputTheme = 'text'|'number'|'password'|'email';
 
