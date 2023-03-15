@@ -33,6 +33,7 @@ export const useCreateProfile = () => {
   const [socialAccounts, setSocialAccounts] = useState<SocialAccount[]>(initialValue);
   const [uploadBanner, setUploadBanner] = useState<FileList | null>(null);
   const [uploadAvatar, setUploadAvatar] = useState<FileList | null>(null);
+  const [feedback, setFeedback] = useState({ error: false, message: '' });
 
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +87,7 @@ export const useCreateProfile = () => {
   }
   const signAndBroadcast = async () => {
     const data = await updateAccount();
-    broadcast({
+    const result = await broadcast({
       module: MODULES.PROFILE,
       command: COMMANDS.CREATE,
       params: {
@@ -99,8 +100,14 @@ export const useCreateProfile = () => {
         }]
       },
       account: data,
-      files: [{ key: 'avatar', value: uploadAvatar[0] }, { key: 'banner', value: uploadBanner[0] }],
-    });  };
+      files: [
+        { key: 'avatar', value: uploadAvatar[0] },
+        { key: 'banner', value: uploadBanner[0] },
+      ],
+    });
+
+    setFeedback(result);
+  };
 
   useEffect(() => {
     validate('profile', {
@@ -121,5 +128,6 @@ export const useCreateProfile = () => {
     onChange,
     signAndBroadcast,
     status,
+    feedback,
   };
 };

@@ -19,6 +19,7 @@ export const useCreateCollection = () => {
   const [releaseYear, setReleaseYear] = useState<string>('');
   const [collectionType, setCollectionType] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
+  const [feedback, setFeedback] = useState({ error: false, message: '' });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -39,13 +40,9 @@ export const useCreateCollection = () => {
     }
   };
 
-  if(!files) {
-    return false;
-  }
-
   const signAndBroadcast = async () => {
     const data = await updateAccount();
-    broadcast({
+    const result = await broadcast({
       module: MODULES.COLLECTION,
       command: COMMANDS.CREATE,
       params: {
@@ -58,9 +55,11 @@ export const useCreateCollection = () => {
         }]
       },
       account: data,
-      files: [{ key: 'collection', value: files[0] }],
+      files: [{ key: 'cover', value: files[0] }],
     });
+    setFeedback(result);
   };
+
   useEffect(() => {
     validate('collection', {
       name,
@@ -84,5 +83,6 @@ export const useCreateCollection = () => {
     onChange,
     signAndBroadcast,
     status,
+    feedback,
   };
 };

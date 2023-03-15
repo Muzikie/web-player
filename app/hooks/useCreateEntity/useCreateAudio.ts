@@ -23,6 +23,7 @@ export const useCreateAudio = () => {
   const [collectionID, setCollectionID] = useState<string>('');
   const [genre, setGenre] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
+  const [feedback, setFeedback] = useState({ error: false, message: '' });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -52,7 +53,7 @@ export const useCreateAudio = () => {
 
   const signAndBroadcast = async () => {
     const data = await updateAccount();
-    broadcast({
+    const result = await broadcast({
       module: MODULES.AUDIO,
       command: COMMANDS.CREATE,
       params: {
@@ -69,6 +70,7 @@ export const useCreateAudio = () => {
       account: data,
       files: [{ key: 'audio', value: files[0] }],
     });
+    setFeedback(result);
   };
 
   useEffect(() => {
@@ -99,5 +101,6 @@ export const useCreateAudio = () => {
     status,
     onChange,
     signAndBroadcast,
+    feedback,
   };
 };
