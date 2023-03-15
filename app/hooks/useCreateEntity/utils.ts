@@ -50,7 +50,7 @@ export const signTransaction = async ({
   const txBytes = transactions.getBytes(signedTx, schema);
 
   return {
-    transaction: { ...tx, fee },
+    transaction: signedTx,
     txId,
     txBytes
   };

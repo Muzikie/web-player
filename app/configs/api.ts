@@ -10,5 +10,6 @@ export const HTTP_STATUS = {
   FORBIDDEN: { CODE: 403, MESSAGE: 'Forbidden' },
   NOT_FOUND: { CODE: 404, MESSAGE: 'Not Found' },
   NOT_SIGNED: { CODE: 405, MESSAGE: 'Not Signed' },
+  INTERNAL_ERROR: { CODE: 500, MESSAGE: 'Internal Error' },
   PENDING: { CODE: 600, MESSAGE: 'Pending' },
 };
