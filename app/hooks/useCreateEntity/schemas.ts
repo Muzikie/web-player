@@ -28,3 +28,20 @@ export const collectionSchema = yup
       test: item => !!item?.[0]?.name,
     }),
   });
+
+export const profileSchema = yup
+  .object()
+  .shape({
+    nickName: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
+    description: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
+    socialAccounts: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
+    uploadAvatar: yup.mixed().test({
+      name: 'files',
+      test: item => !!item?.[0]?.name,
+    }),
+    uploadBanner: yup.mixed().test({
+      name: 'files',
+      test: item => !!item?.[0]?.name,
+    }),
+  });
+  

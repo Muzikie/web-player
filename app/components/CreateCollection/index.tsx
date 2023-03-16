@@ -13,9 +13,9 @@ const CreateCollection = () => {
     releaseYear,
     collectionType,
     onChange,
-    broadcast,
-    feedback,
-    status,
+    signAndBroadcast,
+    formValidity,
+    broadcastStatus,
   } = useCreateCollection();
 
   return (
@@ -52,13 +52,13 @@ const CreateCollection = () => {
         />
       </fieldset>
       <PrimaryButton
-        onClick={broadcast}
-        disabled={status !== ValidationStatus.valid}
+        onClick={signAndBroadcast}
+        disabled={formValidity !== ValidationStatus.valid}
         type="button"
       >
         Create
       </PrimaryButton>
-      <Feedback data={feedback} />
+      <Feedback data={broadcastStatus} />
     </form>
   );
 };

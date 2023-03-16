@@ -1,10 +1,23 @@
-import type { Entity } from '~/components/Entity/types';
 import { Collection, Audio, Profile, API_URLS } from '~/configs';
 
 export type SearchResultType = {
   audio: Audio[];
   profile: Profile[];
   collection: Collection[];
+}
+
+type JSON = { [key: string]: any };
+type Asset = {
+  key: string;
+  value: File;
+};
+
+type TransactionSuccess = {
+  _id: string;
+}
+
+type TransactionFailure = {
+  error: string;
 }
 
 const get = (url: string) => fetch(url).then((res) => res.json()).then(res => res.data);
@@ -16,23 +29,9 @@ const post = (url: string, body: any) => fetch(
   }
 ).then((res) => res.json()).then(res => res.data).catch(console.log);
 
-export async function postCollection(json: any, file: File): Promise<Collection> {
+export async function postTransaction(json: JSON, files: Asset[]): Promise<TransactionSuccess|TransactionFailure> {
   const data = new FormData();
-  data.append('file', file);
-  data.append('data', JSON.stringify(json));
-  return post(`${API_URLS.STREAMER}/api/v1/collections`, data);
-}
-
-export async function postAudio(json: Entity, file: File): Promise<Audio> {
-  const data = new FormData();
-  data.append('file', file);
-  data.append('data', JSON.stringify(json));
-  return post(`${API_URLS.STREAMER}/api/v1/audios`, data);
-}
-
-export async function postTransaction(json: any, file: File, fileName: string): Promise<Entity> {
-  const data = new FormData();
-  data.append(fileName, file);
+  files.forEach((file) => data.append(file.key, file.value));
   data.append('data', JSON.stringify(json));
   return post(`${API_URLS.STREAMER}/api/v1/transactions`, data);
 }
