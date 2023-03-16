@@ -1,4 +1,3 @@
-import type { Entity } from '~/components/Entity/types';
 import { Collection, Audio, Profile, API_URLS } from '~/configs';
 
 export type SearchResultType = {
