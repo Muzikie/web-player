@@ -17,10 +17,10 @@ const CreateAudio = () => {
     releaseYear,
     genre,
     collectionID,
-    status,
+    formValidity,
     onChange,
-    broadcast,
-    feedback,
+    signAndBroadcast,
+    broadcastStatus,
   } = useCreateAudio();
   const { collections } = useUserDiscography();
 
@@ -72,13 +72,13 @@ const CreateAudio = () => {
         />
       </fieldset>
       <PrimaryButton
-        onClick={broadcast}
-        disabled={status !== ValidationStatus.valid}
+        onClick={signAndBroadcast}
+        disabled={formValidity !== ValidationStatus.valid}
         type="button"
       >
         Create
       </PrimaryButton>
-      <Feedback data={feedback} />
+      <Feedback data={broadcastStatus} />
     </form>
   );
 };

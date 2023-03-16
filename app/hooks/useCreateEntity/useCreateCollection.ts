@@ -14,12 +14,12 @@ export const useCreateCollection = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
 
-  const [status, setStatus] = useState<ValidationStatus>(ValidationStatus.clean);
+  const [formValidity, setFormValidity] = useState<ValidationStatus>(ValidationStatus.clean);
   const [name, setName] = useState<string>('');
   const [releaseYear, setReleaseYear] = useState<string>('');
   const [collectionType, setCollectionType] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
-  const [feedback, setFeedback] = useState({ error: false, message: '' });
+  const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -57,7 +57,7 @@ export const useCreateCollection = () => {
       account: data,
       files: [{ key: 'cover', value: files[0] }],
     });
-    setFeedback(result);
+    setBroadcastStatus(result);
   };
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export const useCreateCollection = () => {
       collectionType,
       files,
     }).then((result: ValidationStatus) => {
-      setStatus(result);
+      setFormValidity(result);
     });
   }, [
     name,
@@ -82,7 +82,7 @@ export const useCreateCollection = () => {
     collectionType,
     onChange,
     signAndBroadcast,
-    status,
-    feedback,
+    formValidity,
+    broadcastStatus,
   };
 };

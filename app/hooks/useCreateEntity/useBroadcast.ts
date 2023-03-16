@@ -2,7 +2,7 @@
 import { HTTP_STATUS } from '~/configs';
 import { DryRunTxResponse, PostTxResponse, Method } from '~/context/socketContext/types';
 import { useWS } from '../useWS/useWS';
-import { signTransactionProps } from './types';
+import { SignTransactionProps } from './types';
 import { postTransaction } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
 import { signTransaction } from './utils';
@@ -10,7 +10,7 @@ import { signTransaction } from './utils';
 export const useBroadcast = () => {
   const { request } = useWS();
 
-  const broadcast = async ({ module, command, params, account, files }: signTransactionProps) => {
+  const broadcast = async ({ module, command, params, account, files }: SignTransactionProps) => {
     const result = await signTransaction({ module, command, params, account, files });
     if (result instanceof Error) {
       return {
@@ -28,24 +28,26 @@ export const useBroadcast = () => {
     const txStatus = getTransactionExecutionStatus(module, txId, dryRunResponse);
     if (txStatus === HTTP_STATUS.OK.CODE) {
       // Post transaction to the Streamer
+      const streamerData = {
+        transactionID: txId,
+        creatorAddress: account.address,
+        module,
+        command,
+        ...Object.keys(transaction.params)
+          .filter(key => key.match(/Hash|Signature/))
+          .reduce((hashes: { [key: string]: string }, key) => {
+            hashes[key] = transaction.params[key].toString('hex');
+            return hashes;
+          }, {})
+      };
+
       const postResponse = await postTransaction(
-        {
-          transactionID: txId,
-          creatorAddress: account.address,
-          module,
-          command,
-          ...Object.keys(transaction?.params ?? {})
-            .filter(key => key.match(/Hash|Signature/))
-            .reduce((hashes: { [key: string]: string }, key) => {
-              hashes[key] = params[key] as string;
-              return hashes;
-            }, {})
-        },
+        streamerData,
         files,
       );
 
       // Broadcast on the Blockchain
-      if ('id' in postResponse) {
+      if ('_id' in postResponse) {
         const response = <PostTxResponse>(
           await request(Method.txpool_postTransaction, { transaction: txBytes.toString('hex') })
         );

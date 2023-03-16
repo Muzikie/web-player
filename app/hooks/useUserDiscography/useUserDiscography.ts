@@ -26,7 +26,7 @@ export const useUserDiscography = () => {
   const getAudios = async () => {
     try {
       const response = <AudioAccountResponse> await request(Method.audio_getAccount, { address });
-      if (!response.error && response.data.audio.audios.length) {
+      if (!response.error && response.data?.audio?.audios.length) {
         setAudios(response.data.audio.audios);
       }
     } catch (e) {

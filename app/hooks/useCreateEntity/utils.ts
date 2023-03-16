@@ -6,11 +6,11 @@ import {
   SCHEMAS,
   CHAIN_ID,
 } from '~/configs';
-import { signTransactionProps } from './types';
+import { SignTransactionProps, SignTransactionResult } from './types';
 
 export const signTransaction = async ({
   command, module, params, files, account,
-}: signTransactionProps) => {
+}: SignTransactionProps): Promise<SignTransactionResult|Error> => {
   const schema = SCHEMAS[`${module}/${command}`];
   const fileSignatures: { [key: string]: Buffer } = {};
   for await (const file of files) {

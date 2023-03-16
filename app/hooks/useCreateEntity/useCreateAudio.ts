@@ -17,13 +17,13 @@ export const useCreateAudio = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
 
-  const [status, setStatus] = useState<ValidationStatus>(ValidationStatus.clean);
+  const [formValidity, setFormValidity] = useState<ValidationStatus>(ValidationStatus.clean);
   const [name, setName] = useState<string>('');
   const [releaseYear, setReleaseYear] = useState<string>('');
   const [collectionID, setCollectionID] = useState<string>('');
   const [genre, setGenre] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
-  const [feedback, setFeedback] = useState({ error: false, message: '' });
+  const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
@@ -47,10 +47,6 @@ export const useCreateAudio = () => {
     }
   };
 
-  if(!files) {
-    return false
-  }
-
   const signAndBroadcast = async () => {
     const data = await updateAccount();
     const result = await broadcast({
@@ -70,7 +66,7 @@ export const useCreateAudio = () => {
       account: data,
       files: [{ key: 'audio', value: files[0] }],
     });
-    setFeedback(result);
+    setBroadcastStatus(result);
   };
 
   useEffect(() => {
@@ -82,7 +78,7 @@ export const useCreateAudio = () => {
       genre: [genre],
       collectionID,
     }).then((result: ValidationStatus) => {
-      setStatus(result);
+      setFormValidity(result);
     });
   }, [
     name,
@@ -98,9 +94,9 @@ export const useCreateAudio = () => {
     files,
     genre,
     collectionID,
-    status,
     onChange,
     signAndBroadcast,
-    feedback,
+    formValidity,
+    broadcastStatus,
   };
 };
