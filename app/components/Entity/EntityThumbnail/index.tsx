@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { EntityRowProps, Entity, entityThemes } from '../types';
+import { EntityRowProps, Entity } from '../types';
 import { API_URLS, FILES } from '~/configs';
 import { getEntity, getID } from '../utils';
 
 const EntityThumbnail = ({
-  data, className = '', theme = entityThemes.normal,
+  data, className = ''
 }: EntityRowProps<Entity>) => {
 
   const entity = getEntity(data);
-  const wrapper = `component entity thumbnail ${entity} ${theme} ${className}`;
+  const wrapper = `component entity thumbnail ${entity} ${className}`;
   const id = getID(data);
 
   return (

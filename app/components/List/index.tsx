@@ -9,9 +9,10 @@ const List = ({
   className = '',
   direction = 'vertical',
   theme = liskThemes.normal,
-  itemTheme = entityThemes.normal,
+  itemTheme = entityThemes.ProfilePage,
   title,
   items = [],
+  showRowNumber,
   emptyState,
 }: LiskProps) => {
   if (items.length === 0) {
@@ -31,7 +32,7 @@ const List = ({
           <header>
             <h4>{title}</h4>
           </header>
-        ): null
+        ) : null
       }
       <div className="itemsFrame">
         <div className={`itemsContainer ${theme}`}>
@@ -41,6 +42,8 @@ const List = ({
                 key={`item-${getID(item)}-${index}`}
                 data={item}
                 theme={itemTheme}
+                rowNumber={index + 1}
+                showRowNumber={showRowNumber}
               />
             ))
           }

@@ -14,31 +14,30 @@ const SearchResult = ({ results, query }: SearchResultProps) => {
     <section className="results">
       {
         !isResultEmpty &&
-          Object.entries(results)
-            .filter(([, items]) => items.length)
-            .map(([key, items]) => (
-              <List
-                title={key}
-                key={key}
-                theme={liskThemes.wide}
-                itemTheme={entityThemes.minimal}
-                items={items as Entity[]}
-              />
-            ))
+        Object.entries(results)
+          .filter(([, items]) => items.length)
+          .map(([key, items]) => (
+            <List
+              title={key}
+              key={key}
+              theme={liskThemes.wide}
+              items={items as Entity[]}
+            />
+          ))
       }
       {
         (isResultEmpty && !query) &&
-          <EmptyState
-            title="Discover new music, podcasts, and audio books"
-            subtitle="Search for artists, songs, podcasts, albums or audio books."
-          />
+        <EmptyState
+          title="Discover new music, podcasts, and audio books"
+          subtitle="Search for artists, songs, podcasts, albums or audio books."
+        />
       }
       {
         (isResultEmpty && query) &&
-          <EmptyState
-            title="No results found"
-            subtitle="Try searching for something else."
-          />
+        <EmptyState
+          title="No results found"
+          subtitle="Try searching for something else."
+        />
       }
     </section>
   );

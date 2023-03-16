@@ -15,6 +15,7 @@ import List from '~/components/List';
 import CollectionSummary from '~/components/Summary/CollectionSummary';
 import { liskThemes } from '~/components/List/types';
 import styles from '~/css/routes/__main/collection.css';
+import { entityThemes } from '~/components/Entity/types';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -52,6 +53,7 @@ const CollectionScreen = () => {
         items={!audios?.length ? [] : audios}
         className="audioList"
         theme={liskThemes.wide}
+        itemTheme={entityThemes.CollectionPage}
       />
     </section>
   );

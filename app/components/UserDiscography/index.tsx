@@ -16,7 +16,6 @@ const UserDiscography = ({ collections }: UserDiscographyProps) => {
         <h3>Albums</h3>
       </header>
       <List
-        itemTheme={entityThemes.minimal}
         items={!collections?.length ? [] : collections}
         emptyState={{
           title: 'You don’t have audios or collection yet.',

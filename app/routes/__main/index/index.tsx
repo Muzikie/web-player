@@ -38,19 +38,18 @@ const HomeScreen = () => {
       <List
         className="recent"
         title="Recent"
-        itemTheme={entityThemes.minimal}
+        itemTheme={entityThemes.CollectionPage}
         items={!recentlyPlayed?.length ? [] : recentlyPlayed}
       />
       {/* <List
         className="favorite"
         title="Favorite"
-        itemTheme={entityThemes.minimal}
         items={!profiles?.length ? [] : profiles}
       /> */}
       <List
         className="favorite"
         title="Favorite"
-        itemTheme={entityThemes.minimal}
+        itemTheme={entityThemes.CollectionPage}
         items={!collections?.length ? [] : collections}
       />
     </section>

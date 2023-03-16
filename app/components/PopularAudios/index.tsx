@@ -16,8 +16,9 @@ const PopularAudios = ({ audios }: PopularAdiosProps) => {
       <List
         theme={liskThemes.wide}
         className="audiosLists"
-        itemTheme={entityThemes.normal}
+        itemTheme={entityThemes.ProfilePage}
         items={audios}
+        showRowNumber
         emptyState={{
           title: 'You don’t have audios or collection yet.',
           subtitle: 'Start by creating your first collection, then add audios to it.',
