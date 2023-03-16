@@ -2,7 +2,6 @@
 import React from 'react';
 
 /* Internal dependencies */
-import { entityThemes } from '~/components/Entity/types';
 import { Link } from '~/components/common/Link';
 import { ROUTES } from '~/routes/routes';
 import { PrimaryButton } from '../common/Button';

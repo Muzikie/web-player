@@ -2,7 +2,7 @@
 import React from 'react';
 
 /* Internal dependencies */
-import { entityThemes, Entity } from '~/components/Entity/types';
+import { Entity } from '~/components/Entity/types';
 import List from '../List';
 import { liskThemes } from '../List/types';
 import { SearchResultProps } from './types';
