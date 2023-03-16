@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import { Entity } from '../Entity/types';
-import { entityTheme } from '../Entity/types';
+import { Entity, entityTheme } from '../Entity/types';
 
 export enum liskThemes {
   smallRow = 'smallRow',
@@ -17,6 +16,7 @@ export interface LiskProps {
   itemTheme?: entityTheme;
   theme?: collectionTheme;
   items: Entity[];
+  showRowNumber?: boolean;
   emptyState?: {
     title: string;
     subtitle?: string;
