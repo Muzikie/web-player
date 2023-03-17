@@ -38,7 +38,7 @@ const HomeScreen = () => {
       <List
         className="recent"
         title="Recent"
-        itemTheme={entityThemes.CollectionPage}
+        itemTheme={entityThemes.HomePage}
         items={!recentlyPlayed?.length ? [] : recentlyPlayed}
       />
       {/* <List

@@ -8,6 +8,7 @@ import {
 export enum entityThemes {
   ProfilePage = 'ProfilePage',
   CollectionPage = 'CollectionPage',
+  HomePage= 'HomePage',
 }
 
 export enum entityMode {
