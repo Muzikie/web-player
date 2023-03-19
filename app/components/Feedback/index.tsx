@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FeedbackProps } from './types';
+import { FeedbackProps } from '../CreateCollection/types';
 
 const Feedback = ({ data }: FeedbackProps) => {
   let className = 'empty';
