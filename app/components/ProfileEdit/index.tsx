@@ -1,14 +1,27 @@
 import React from 'react';
+
 import { Input, FileInput, Textarea } from '~/components/common/Input';
+import { ValidationStatus, useCreateProfile } from '~/hooks/useCreateEntity';
 import Image from '../common/Image';
 import { PrimaryButton } from '~/components/common/Button';
-import { useCreateProfile } from '~/hooks/useCreateEntity/useCreateProfile.ts';
+import Feedback from '~/components/Feedback';
 import './profileEdit.css';
 import { API_URLS, FILES } from '~/configs';
 import { ProfileEditProps } from './types';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 
 const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
-  const { nickName, description, socialAccounts, onChange, broadcast, feedback, status } = useCreateProfile();
+  const {
+    name,
+    nickName,
+    description,
+    socialAccounts,
+    onChange,
+    signAndBroadcast,
+    formValidity,
+    broadcastStatus,
+  } = useCreateProfile();
+  const { info } = useAccount();
 
   return (
     <form className="component profileEdit">
@@ -16,14 +29,14 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
         <div>
           <figure className="profileEditBanner">
             <Image
-              src={`${API_URLS.STREAMER}/${profile.creatorAddress}-${FILES.profile}.jpg`}
-              alt={profile.creatorAddress}
+              src={`${API_URLS.STREAMER}/${info.address}-${FILES.profile}.jpg`}
+              alt={info.address}
               placeHolder="/images/artist.jpg"
             />
           </figure>
           <FileInput
             icon="file"
-            name="uploadBanner"
+            name="banner"
             accept='.png,.jpg,.jpeg'
             multiple={false}
             title="Click to update banner"
@@ -34,14 +47,14 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
         <div>
           <figure className="profileEditAvatar">
             <Image
-              src={`${API_URLS.STREAMER}/${profile.creatorAddress}-${FILES.profile}.jpg`}
-              alt={profile.creatorAddress}
+              src={`${API_URLS.STREAMER}/${info.address}-${FILES.profile}.jpg`}
+              alt={info.address}
               placeHolder="/images/artist.jpg"
             />
           </figure>
           <FileInput
             icon="file"
-            name="uploadAvatar"
+            name="avatar"
             accept='.png,.jpg,.jpeg'
             multiple={false}
             title="Click to update Avatar"
@@ -50,9 +63,16 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
           />
         </div>
         <Input
+          value={name}
+          name="name"
+          placeholder="Enter name"
+          type="text"
+          onChange={onChange}
+        />
+        <Input
           value={nickName}
           name="nickName"
-          placeholder="Enter name"
+          placeholder="Enter nickname"
           type="text"
           onChange={onChange}
         />
@@ -62,12 +82,6 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
           placeholder="Describe yourself"
           className="descriptionInput"
           onChange={onChange}
-        />
-        <Input
-          value={socialAccounts[2].username}
-          name="youtube"
-          placeholder="Youtube channel"
-          type="text"
         />
         <Input
           value={socialAccounts[0].username}
@@ -83,18 +97,25 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
           type="text"
           onChange={onChange}
         />
+        <Input
+          value={socialAccounts[2].username}
+          name="youtube"
+          placeholder="Youtube channel"
+          type="text"
+          onChange={onChange}
+        />
       </fieldset>
       <PrimaryButton
-        onClick={broadcast}
-        disabled={true}
+        onClick={signAndBroadcast}
         type="button"
+        disabled={formValidity !== ValidationStatus.valid}
       >
         Save
-        <span className='showFee'>(Fee: 0.00012 MZK)</span>
       </PrimaryButton>
       <PrimaryButton onClick={() => setShowForm(false)} className="white" disabled={false} type="button">
         Cancel
       </PrimaryButton>
+      <Feedback data={broadcastStatus} />
     </form>
   )
 }

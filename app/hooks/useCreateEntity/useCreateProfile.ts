@@ -114,8 +114,6 @@ export const useCreateProfile = () => {
   };
 
   useEffect(() => {
-    console.log('avatar', avatar);
-    console.log('banner', banner);
     validate('profile', {
       nickName,
       description,
