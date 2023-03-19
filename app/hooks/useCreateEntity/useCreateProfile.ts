@@ -8,6 +8,7 @@ import {
   MODULES,
   COMMANDS,
   SocialAccountPlatform,
+  socialPlatformNames,
   SocialAccount,
 } from '~/configs';
 
@@ -20,41 +21,44 @@ export const useCreateProfile = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
 
-  const platforms = Object.keys(SocialAccountPlatform);
   const initialValue = [
-    { platform: SocialAccountPlatform.Twitter, username: '' },
-    { platform: SocialAccountPlatform.Instagram, username: '' },
-    { platform: SocialAccountPlatform.Youtube, username: '' },
+    { platform: SocialAccountPlatform.Twitter, username: 'reyraa' },
+    { platform: SocialAccountPlatform.Instagram, username: 'reyraa' },
+    { platform: SocialAccountPlatform.Youtube, username: 'reyraa' },
   ];
 
-  const [status, setStatus] = useState<ValidationStatus>(ValidationStatus.clean);
-  const [nickName, setNickName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+  const [formValidity, setFormValidity] = useState<ValidationStatus>(ValidationStatus.clean);
+  const [nickName, setNickName] = useState<string>('Reyraa');
+  const [name, setName] = useState<string>('Ali');
+  const [description, setDescription] = useState<string>('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
   const [socialAccounts, setSocialAccounts] = useState<SocialAccount[]>(initialValue);
-  const [uploadBanner, setUploadBanner] = useState<FileList | null>(null);
-  const [uploadAvatar, setUploadAvatar] = useState<FileList | null>(null);
-  const [feedback, setFeedback] = useState({ error: false, message: '' });
-
+  const [banner, setBanner] = useState<FileList | null>(null);
+  const [avatar, setAvatar] = useState<FileList | null>(null);
+  const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     switch (e.target.name) {
+    case 'name':
+      setName(e.target.value);
+      break;
     case 'nickName':
       setNickName(e.target.value);
       break;
     case 'description':
       setDescription(e.target.value);
       break;
-    case 'uploadBanner':
-      setUploadBanner(e.target.files ?? null);
+    case 'banner':
+      setBanner(e.target.files ?? null);
       break;
-    case 'uploadAvatar':
-      setUploadAvatar(e.target.files ?? null);
+    case 'avatar':
+      setAvatar(e.target.files ?? null);
       break;
     case 'youtube':
       setSocialAccounts(
         socialAccounts.map(({ platform, username }) => {
-          if (platforms[platform] === e.target.name)
+          if (socialPlatformNames[platform] === e.target.name) {
             return { platform, username: e.target.value };
+          }
           return { platform, username };
         }),
       );
@@ -62,8 +66,9 @@ export const useCreateProfile = () => {
     case 'instagram':
       setSocialAccounts(
         socialAccounts.map(({ platform, username }) => {
-          if (platforms[platform] === e.target.name)
+          if (socialPlatformNames[platform] === e.target.name) {
             return { platform, username: e.target.value };
+          }
           return { platform, username };
         }),
       );
@@ -71,8 +76,9 @@ export const useCreateProfile = () => {
     case 'twitter':
       setSocialAccounts(
         socialAccounts.map(({ platform, username }) => {
-          if (platforms[platform] === e.target.name)
+          if (socialPlatformNames[platform] === e.target.name) {
             return { platform, username: e.target.value };
+          }
           return { platform, username };
         }),
       );
@@ -82,15 +88,13 @@ export const useCreateProfile = () => {
     }
   };
 
-  if(!uploadAvatar || !uploadBanner) {
-    return false
-  }
   const signAndBroadcast = async () => {
     const data = await updateAccount();
     const result = await broadcast({
       module: MODULES.PROFILE,
       command: COMMANDS.CREATE,
       params: {
+        name,
         nickName,
         description,
         socialAccounts,
@@ -101,33 +105,36 @@ export const useCreateProfile = () => {
       },
       account: data,
       files: [
-        { key: 'avatar', value: uploadAvatar[0] },
-        { key: 'banner', value: uploadBanner[0] },
+        { key: 'avatar', value: avatar[0] },
+        { key: 'banner', value: banner[0] },
       ],
     });
 
-    setFeedback(result);
+    setBroadcastStatus(result);
   };
 
   useEffect(() => {
+    console.log('avatar', avatar);
+    console.log('banner', banner);
     validate('profile', {
       nickName,
       description,
       socialAccounts,
-      uploadAvatar,
-      uploadBanner
+      avatar,
+      banner
     }).then((result: ValidationStatus) => {
-      setStatus(result);
+      setFormValidity(result);
     });
-  }, [nickName, description, socialAccounts, uploadAvatar]);
+  }, [nickName, description, socialAccounts, avatar, banner]);
 
   return {
+    name,
     nickName,
     description,
     socialAccounts,
     onChange,
     signAndBroadcast,
-    status,
-    feedback,
+    formValidity,
+    broadcastStatus,
   };
 };
