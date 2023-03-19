@@ -33,13 +33,16 @@ export const profileSchema = yup
   .object()
   .shape({
     nickName: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
-    description: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
-    socialAccounts: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
-    uploadAvatar: yup.mixed().test({
+    description: yup.string().trim().matches(/([\w.\-\s]+){20,1400}/),
+    socialAccounts: yup.array().of(yup.object().shape({
+      platform: yup.number().min(0).max(2),
+      username: yup.string().trim().matches(/([\w.\-\s]+){3,20}/),
+    })),
+    avatar: yup.mixed().test({
       name: 'files',
       test: item => !!item?.[0]?.name,
     }),
-    uploadBanner: yup.mixed().test({
+    banner: yup.mixed().test({
       name: 'files',
       test: item => !!item?.[0]?.name,
     }),
