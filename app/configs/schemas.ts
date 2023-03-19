@@ -142,6 +142,7 @@ export const PROFILE_CREATE_SCHEMA = {
   title: 'CreateAsset transaction asset for profile module',
   type: 'object',
   required: [
+    'name',
     'nickName',
     'description',
     'socialAccounts',
@@ -151,6 +152,10 @@ export const PROFILE_CREATE_SCHEMA = {
     'bannerSignature',
   ],
   properties: {
+    name: {
+      dataType: 'string',
+      fieldNumber: 1,
+    },
     nickName: {
       dataType: 'string',
       fieldNumber: 2,
