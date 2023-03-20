@@ -6,7 +6,7 @@ import Image from '../common/Image';
 import { PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
 import './profileEdit.css';
-import { API_URLS, FILES } from '~/configs';
+import { API_URLS, FILES, socialPlatformNames } from '~/configs';
 import { ProfileEditProps } from './types';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 
@@ -83,27 +83,24 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
           className="descriptionInput"
           onChange={onChange}
         />
-        <Input
-          value={socialAccounts[0].username}
-          name="twitter"
-          placeholder="Twitter username"
-          type="text"
-          onChange={onChange}
-        />
-        <Input
-          value={socialAccounts[1].username}
-          name="instagram"
-          placeholder="Instagram username"
-          type="text"
-          onChange={onChange}
-        />
-        <Input
-          value={socialAccounts[2].username}
-          name="youtube"
-          placeholder="Youtube channel"
-          type="text"
-          onChange={onChange}
-        />
+        {socialAccounts && socialAccounts.length > 0 ? (
+          <>
+            {
+              socialAccounts.map(({ platform, username }) => (
+                <Input
+                  key={socialPlatformNames[platform]}
+                  value={username}
+                  name={socialPlatformNames[platform]}
+                  placeholder={`${socialPlatformNames[platform]} channel`}
+                  type="text"
+                  onChange={onChange}
+                />
+              ))
+            }
+
+          </>
+        ) : null}
+
       </fieldset>
       <PrimaryButton
         onClick={signAndBroadcast}

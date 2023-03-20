@@ -48,7 +48,7 @@ const ProfileDetails = ({ data }: ProfileDetailsProps) => {
   return (
     <section className='component profileDetails'>
       {showForm ?
-        <ProfileEdit setShowForm={setShowForm} />
+        <ProfileEdit setShowForm={setShowForm} profile={profile} />
         :
         (
           <>
