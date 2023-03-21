@@ -12,7 +12,7 @@ import {
   SocialAccount,
 } from '~/configs';
 
-import { ValidationStatus } from './types';
+import { ValidationResult, ValidationStatus } from './types';
 import { validate } from './validator';
 
 import { useBroadcast } from './useBroadcast'
@@ -22,21 +22,25 @@ export const useCreateProfile = () => {
   const { broadcast } = useBroadcast();
 
   const initialValue = [
-    { platform: SocialAccountPlatform.Twitter, username: 'reyraa' },
-    { platform: SocialAccountPlatform.Instagram, username: 'reyraa' },
-    { platform: SocialAccountPlatform.Youtube, username: 'reyraa' },
+    { platform: SocialAccountPlatform.Twitter, username: '' },
+    { platform: SocialAccountPlatform.Instagram, username: '' },
+    { platform: SocialAccountPlatform.Youtube, username: '' },
   ];
 
-  const [formValidity, setFormValidity] = useState<ValidationStatus>(ValidationStatus.clean);
-  const [nickName, setNickName] = useState<string>('Reyraa');
-  const [name, setName] = useState<string>('Ali');
-  const [description, setDescription] = useState<string>('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+  const [formValidity, setFormValidity] = useState<ValidationResult>({
+    status: ValidationStatus.clean
+  });
+  const [nickName, setNickName] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
   const [socialAccounts, setSocialAccounts] = useState<SocialAccount[]>(initialValue);
   const [banner, setBanner] = useState<FileList | null>(null);
   const [avatar, setAvatar] = useState<FileList | null>(null);
   const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
+  const [formIsChanged, setFormIsChanged] = useState(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if(!formIsChanged) setFormIsChanged(true);
     switch (e.target.name) {
     case 'name':
       setName(e.target.value);
@@ -120,8 +124,10 @@ export const useCreateProfile = () => {
       socialAccounts,
       avatar,
       banner
-    }).then((result: ValidationStatus) => {
-      setFormValidity(result);
+    }).then((result: ValidationResult) => {
+      if(formIsChanged){
+        setFormValidity(result);
+      }
     });
   }, [nickName, description, socialAccounts, avatar, banner]);
 

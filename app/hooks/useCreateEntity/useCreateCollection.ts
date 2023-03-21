@@ -5,7 +5,7 @@ import { cryptography } from '@liskhq/lisk-client';
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS } from '~/configs';
-import { ValidationStatus } from './types';
+import { ValidationStatus, ValidationResult } from './types';
 import { validate } from './validator';
 
 import { useBroadcast } from './useBroadcast'
@@ -14,14 +14,18 @@ export const useCreateCollection = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
 
-  const [formValidity, setFormValidity] = useState<ValidationStatus>(ValidationStatus.clean);
+  const [formValidity, setFormValidity] = useState<ValidationResult>({
+    status: ValidationStatus.clean
+  });
   const [name, setName] = useState<string>('');
   const [releaseYear, setReleaseYear] = useState<string>('');
   const [collectionType, setCollectionType] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
   const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
+  const [formIsChanged, setFormIsChanged] = useState(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if(!formIsChanged) setFormIsChanged(true);
     switch (e.target.name) {
     case 'name':
       setName(e.target.value);
@@ -66,8 +70,10 @@ export const useCreateCollection = () => {
       releaseYear,
       collectionType,
       files,
-    }).then((result: ValidationStatus) => {
-      setFormValidity(result);
+    }).then((result: ValidationResult) => {
+      if(formIsChanged){
+        setFormValidity(result);
+      }
     });
   }, [
     name,
