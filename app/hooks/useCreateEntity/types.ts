@@ -46,3 +46,8 @@ export interface SignTransactionResult {
   txId: string,
   txBytes: Buffer;
 }
+
+export interface ValidationResult {
+  status: ValidationStatus;
+  message?: string;
+}
