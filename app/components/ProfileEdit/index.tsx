@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { Input, FileInput, Textarea } from '~/components/common/Input';
-import { ValidationStatus, useCreateProfile } from '~/hooks/useCreateEntity';
+import { useCreateProfile, ValidationStatus } from '~/hooks/useCreateEntity';
 import Image from '../common/Image';
 import { PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
-import './profileEdit.css';
 import { API_URLS, FILES, socialPlatformNames } from '~/configs';
 import { ProfileEditProps } from './types';
 import { useAccount } from '~/hooks/useAccount/useAccount';
+import './profileEdit.css';
 
 const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
   const {
@@ -105,15 +105,19 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
       <PrimaryButton
         onClick={signAndBroadcast}
         type="button"
-        disabled={formValidity !== ValidationStatus.valid}
+        disabled={formValidity.status !== ValidationStatus.valid}
       >
         Save
       </PrimaryButton>
       <PrimaryButton onClick={() => setShowForm(false)} className="white" disabled={false} type="button">
         Cancel
       </PrimaryButton>
-      <Feedback data={broadcastStatus} />
-    </form>
+      {
+        ((formValidity.status === ValidationStatus.invalid) && formValidity.message)
+          ? <Feedback data={{ message: formValidity.message, error: true }} />
+          : <Feedback data={broadcastStatus} />
+      }
+    </form >
   )
 }
 

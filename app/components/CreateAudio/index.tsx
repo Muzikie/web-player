@@ -73,12 +73,16 @@ const CreateAudio = () => {
       </fieldset>
       <PrimaryButton
         onClick={signAndBroadcast}
-        disabled={formValidity !== ValidationStatus.valid}
+        disabled={formValidity.status !== ValidationStatus.valid}
         type="button"
       >
         Create
       </PrimaryButton>
-      <Feedback data={broadcastStatus} />
+      {
+        ((formValidity.status === ValidationStatus.invalid) && formValidity.message)
+          ? <Feedback data={{ message: formValidity.message, error: true }} />
+          : <Feedback data={broadcastStatus} />
+      }
     </form>
   );
 };
