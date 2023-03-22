@@ -23,8 +23,8 @@ export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | '
 }
 
 export interface ProfileTxProps extends Omit<CreateCommandParams, 'name' |'creatorAddress' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'> {
-  uploadAvatar: FileList | null;
-  uploadBanner: FileList | null;
+  avatar: FileList | null;
+  banner: FileList | null;
 }
 
 export type validateProps = AudioTxProps | CollectionTxProps | ProfileTxProps;
@@ -45,4 +45,9 @@ export interface SignTransactionResult {
   transaction: Record<TransactionProp, any>,
   txId: string,
   txBytes: Buffer;
+}
+
+export interface ValidationResult {
+  status: ValidationStatus;
+  message?: string;
 }

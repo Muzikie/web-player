@@ -29,6 +29,8 @@ export enum SocialAccountPlatform {
   Youtube = 2,
 }
 
+export const socialPlatformNames = ['instagram', 'twitter', 'youtube'];
+
 export interface SocialAccount {
   username: string;
   platform: SocialAccountPlatform;

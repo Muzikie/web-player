@@ -8,7 +8,7 @@ import {
   MODULES,
   COMMANDS,
 } from '~/configs';
-import { ValidationStatus } from './types';
+import { ValidationStatus, ValidationResult } from './types';
 import { validate } from './validator';
 import { bufferize } from '~/helpers/convertors';
 import { useBroadcast } from './useBroadcast';
@@ -17,15 +17,19 @@ export const useCreateAudio = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
 
-  const [formValidity, setFormValidity] = useState<ValidationStatus>(ValidationStatus.clean);
+  const [formValidity, setFormValidity] = useState<ValidationResult>({
+    status: ValidationStatus.clean
+  });
   const [name, setName] = useState<string>('');
   const [releaseYear, setReleaseYear] = useState<string>('');
   const [collectionID, setCollectionID] = useState<string>('');
   const [genre, setGenre] = useState<number>(-1);
   const [files, setFiles] = useState<FileList | null>(null);
   const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
+  const [formIsChanged, setFormIsChanged] = useState(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if(!formIsChanged) setFormIsChanged(true);
     switch (e.target.name) {
     case 'name':
       setName(e.target.value);
@@ -77,8 +81,10 @@ export const useCreateAudio = () => {
       files,
       genre: [genre],
       collectionID,
-    }).then((result: ValidationStatus) => {
-      setFormValidity(result);
+    }).then((result: ValidationResult) => {
+      if(formIsChanged){
+        setFormValidity(result);
+      }
     });
   }, [
     name,

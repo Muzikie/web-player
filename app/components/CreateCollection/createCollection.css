@@ -11,29 +11,3 @@
     }
   }
 }
-
-.component.feedback {
-  height: 40px;
-  padding: 10px 0;
-  text-align: center;
-
-  & h5 {
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: 300;
-  }
-
-  &.success {
-    & h5 {
-      background-color: var(--color-success-see-through);
-      color: var(--color-success);
-    }
-  }
-
-  &.error {
-    & h5 {
-      background-color: var(--color-error-see-through);
-      color: var(--color-error);
-    }
-  }
-}

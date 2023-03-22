@@ -31,6 +31,7 @@
   & .profileName {
     width: 100%;
     text-align: center;
+    padding: var(--padding-xs);
 
     & h2 {
       display: inline-block;
@@ -54,7 +55,7 @@
   & .socialMediaAccounts {
     align-self: baseline;
     padding: var(--padding-l) var(--padding-m);
-    margin: 0 auto;
+    margin: 0 auto var(--padding-l);
 
     & ul {
       display: flex;
@@ -147,7 +148,7 @@
     }
 
     & .profileName {
-      width: 54%;
+      width: 45%;
     }
 
     & .bioContainer {
@@ -160,9 +161,17 @@
   }
 }
 
+@media (min-width: 900px) {
+  .component.profileDetails {
+    & .profileName {
+      width: 39%;
+    }
+  }
+}
+
 @media (min-width: 1280px) {
   .component.profileDetails {
-    justify-content: center;
+    justify-content: space-around;
 
     & .profileAvatar {
       width: 15.5rem;
@@ -170,7 +179,9 @@
     }
 
     & .profileName {
-      padding-top: var(--padding-x);
+      align-self: self-start;
+      padding-top: var(--box-size-xl);
+      text-align: left;
     }
 
     & .bioContainer {
@@ -178,6 +189,7 @@
       order: 4;
       align-self: flex-start;
       padding-top: 0;
+      margin-top: calc(var(--box-size-xxl) * -1);
     }
   }
 }

@@ -8,10 +8,11 @@ import {
   MODULES,
   COMMANDS,
   SocialAccountPlatform,
+  socialPlatformNames,
   SocialAccount,
 } from '~/configs';
 
-import { ValidationStatus } from './types';
+import { ValidationResult, ValidationStatus } from './types';
 import { validate } from './validator';
 
 import { useBroadcast } from './useBroadcast'
@@ -20,41 +21,48 @@ export const useCreateProfile = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
 
-  const platforms = Object.keys(SocialAccountPlatform);
   const initialValue = [
     { platform: SocialAccountPlatform.Twitter, username: '' },
     { platform: SocialAccountPlatform.Instagram, username: '' },
     { platform: SocialAccountPlatform.Youtube, username: '' },
   ];
 
-  const [status, setStatus] = useState<ValidationStatus>(ValidationStatus.clean);
+  const [formValidity, setFormValidity] = useState<ValidationResult>({
+    status: ValidationStatus.clean
+  });
   const [nickName, setNickName] = useState<string>('');
+  const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [socialAccounts, setSocialAccounts] = useState<SocialAccount[]>(initialValue);
-  const [uploadBanner, setUploadBanner] = useState<FileList | null>(null);
-  const [uploadAvatar, setUploadAvatar] = useState<FileList | null>(null);
-  const [feedback, setFeedback] = useState({ error: false, message: '' });
-
+  const [banner, setBanner] = useState<FileList | null>(null);
+  const [avatar, setAvatar] = useState<FileList | null>(null);
+  const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
+  const [formIsChanged, setFormIsChanged] = useState(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if(!formIsChanged) setFormIsChanged(true);
     switch (e.target.name) {
+    case 'name':
+      setName(e.target.value);
+      break;
     case 'nickName':
       setNickName(e.target.value);
       break;
     case 'description':
       setDescription(e.target.value);
       break;
-    case 'uploadBanner':
-      setUploadBanner(e.target.files ?? null);
+    case 'banner':
+      setBanner(e.target.files ?? null);
       break;
-    case 'uploadAvatar':
-      setUploadAvatar(e.target.files ?? null);
+    case 'avatar':
+      setAvatar(e.target.files ?? null);
       break;
     case 'youtube':
       setSocialAccounts(
         socialAccounts.map(({ platform, username }) => {
-          if (platforms[platform] === e.target.name)
+          if (socialPlatformNames[platform] === e.target.name) {
             return { platform, username: e.target.value };
+          }
           return { platform, username };
         }),
       );
@@ -62,8 +70,9 @@ export const useCreateProfile = () => {
     case 'instagram':
       setSocialAccounts(
         socialAccounts.map(({ platform, username }) => {
-          if (platforms[platform] === e.target.name)
+          if (socialPlatformNames[platform] === e.target.name) {
             return { platform, username: e.target.value };
+          }
           return { platform, username };
         }),
       );
@@ -71,8 +80,9 @@ export const useCreateProfile = () => {
     case 'twitter':
       setSocialAccounts(
         socialAccounts.map(({ platform, username }) => {
-          if (platforms[platform] === e.target.name)
+          if (socialPlatformNames[platform] === e.target.name) {
             return { platform, username: e.target.value };
+          }
           return { platform, username };
         }),
       );
@@ -82,15 +92,13 @@ export const useCreateProfile = () => {
     }
   };
 
-  if(!uploadAvatar || !uploadBanner) {
-    return false
-  }
   const signAndBroadcast = async () => {
     const data = await updateAccount();
     const result = await broadcast({
       module: MODULES.PROFILE,
       command: COMMANDS.CREATE,
       params: {
+        name,
         nickName,
         description,
         socialAccounts,
@@ -101,12 +109,12 @@ export const useCreateProfile = () => {
       },
       account: data,
       files: [
-        { key: 'avatar', value: uploadAvatar[0] },
-        { key: 'banner', value: uploadBanner[0] },
+        { key: 'avatar', value: avatar[0] },
+        { key: 'banner', value: banner[0] },
       ],
     });
 
-    setFeedback(result);
+    setBroadcastStatus(result);
   };
 
   useEffect(() => {
@@ -114,20 +122,23 @@ export const useCreateProfile = () => {
       nickName,
       description,
       socialAccounts,
-      uploadAvatar,
-      uploadBanner
-    }).then((result: ValidationStatus) => {
-      setStatus(result);
+      avatar,
+      banner
+    }).then((result: ValidationResult) => {
+      if(formIsChanged){
+        setFormValidity(result);
+      }
     });
-  }, [nickName, description, socialAccounts, uploadAvatar]);
+  }, [nickName, description, socialAccounts, avatar, banner]);
 
   return {
+    name,
     nickName,
     description,
     socialAccounts,
     onChange,
     signAndBroadcast,
-    status,
-    feedback,
+    formValidity,
+    broadcastStatus,
   };
 };
