@@ -4,8 +4,8 @@ import { VALID_GENRES } from '~/configs';
 export const audioSchema = yup
   .object()
   .shape({
-    name: yup.string().trim().matches(/([\w.\-\s]+){3,20}/, 'Please enter your name and it should be more than 3 characters'),
-    releaseYear: yup.string().trim().matches(/(\d+){4}/, 'Please enter the release Year'),
+    name: yup.string().trim().min(3, 'Name is too short').max(20, 'Name is too long'),
+    releaseYear: yup.string().trim().matches(/(\d+){4}/, 'Please enter the release year in YYYY format'),
     profileName: yup.string().trim().matches(/([\w.\-\s]+){3,20}/, 'Please enter your profileName and it should be more than 3 characters'),
     files: yup.mixed().test({
       name: 'files',
@@ -19,8 +19,8 @@ export const audioSchema = yup
 export const collectionSchema = yup
   .object()
   .shape({
-    name: yup.string().trim().matches(/([\w.\-\s]+){3,20}/, 'Please enter your name and it should be more than 3 characters'),
-    releaseYear: yup.string().trim().matches(/(\d+){4}/, 'Please enter the release Year'),
+    name: yup.string().trim().min(3, 'Name is too short').max(20, 'Name is too long'),
+    releaseYear: yup.string().trim().matches(/(\d+){4}/, 'Please enter the release year in YYYY format'),
     profileName: yup.string().trim().matches(/([\w.\-\s]+){3,20}/, 'Please enter your profileName and it should be more than 3 characters'),
     collectionType: yup.number().min(1, 'Please select a collection type').max(2),
     files: yup.mixed().test({
@@ -33,8 +33,9 @@ export const collectionSchema = yup
 export const profileSchema = yup
   .object()
   .shape({
-    nickName: yup.string().trim().matches(/([\w.\-\s]+){3,20}/, 'Please enter your nickname and it should be more than 3 characters'),
-    description: yup.string().trim().matches(/([\w.\-\s]+){20,1400}/, 'Description must have more than 20 characters'),
+    name: yup.string().trim().min(3, 'Name is too short').max(20, 'Name is too long'),
+    nickName: yup.string().trim().min(3, 'NickName is too short').max(20, 'NickName is too long'),
+    description: yup.string().trim().min(20, 'Description is too short').max(1400, 'Description is too long'),
     socialAccounts: yup.array().of(yup.object().shape({
       platform: yup.number().min(0).max(2),
       username: yup.string().trim().matches(/([\w.\-\s]+){3,20}/, 'fill all the required social account'),
