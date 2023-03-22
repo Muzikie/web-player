@@ -1,6 +1,7 @@
 interface BaseEntity {
   creatorAddress: string;
   name: string;
+  artistName: string;
 }
 
 interface LoyaltyOwner {

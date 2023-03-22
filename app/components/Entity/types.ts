@@ -6,9 +6,9 @@ import {
 } from '~/configs';
 
 export enum entityThemes {
-  minimal = 'minimal',
-  normal = 'normal',
-  large = 'large',
+  ProfilePage = 'ProfilePage',
+  CollectionPage = 'CollectionPage',
+  HomePage= 'HomePage',
 }
 
 export enum entityMode {
@@ -25,4 +25,6 @@ export interface EntityRowProps<Entity> {
   theme?: entityTheme;
   mode?: entityMode;
   className?: string;
+  rowNumber?:number;
+  showRowNumber?: boolean;
 }

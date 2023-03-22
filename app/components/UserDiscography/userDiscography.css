@@ -1,6 +1,9 @@
 .component.userDiscography {
   position: relative;
   margin-top: var(--padding-l);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
 
   & header {
     padding-left: var(--padding-xs);

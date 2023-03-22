@@ -1,8 +1,15 @@
 .component.entity.row {
   width: 100%;
-  padding-top: var(--padding-xs);
+  padding-top: var(--padding-s);
   padding-bottom: var(--padding-s);
   box-sizing: border-box;
+
+  & strong {
+    color: var(--gray);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--size-h3);
+    line-height: 0;
+  }
 
   & .container {
     display: flex;
@@ -35,6 +42,10 @@
     flex-shrink: 1;
     flex-grow: 3;
 
+    & .rowNumber {
+      margin-right: var(--padding-s);
+    }
+
     & .thumbnail + .text {
       padding-left: var(--padding-s);
     }
@@ -42,15 +53,8 @@
     & .detail {
       display: flex;
       flex-direction: column;
-
-      & .audioCount {
-        & strong {
-          color: var(--gray);
-          font-weight: var(--font-weight-bold);
-          font-size: var(--size-h3);
-          padding-right: 4px;
-          line-height: 0;
-        }
+      & strong {
+        padding: var(--border-radius-xs);
       }
     }
 
