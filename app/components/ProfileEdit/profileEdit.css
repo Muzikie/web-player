@@ -4,31 +4,6 @@
   padding: var(--padding-l);
   margin-bottom: var(--padding-l);
 
-  & .profileEditBanner, & .profileEditAvatar {
-    position: absolute;
-    height: 30px;
-    width: 30px;
-    z-index: 9;
-    border-radius: var(--border-radius-xs);
-    margin: 0px;
-    padding: 0px;
-
-    & img {
-      object-fit: cover;
-      width: 100%;
-    }
-  }
-
-  & .profileEditBanner {
-    left: 4rem;
-    top: 3.2rem;
-  }
-
-  & .profileEditAvatar {
-    left: 4rem;
-    top: 7.1rem;
-  }
-
   & fieldset {
     padding-bottom: var(--padding-m);
   }

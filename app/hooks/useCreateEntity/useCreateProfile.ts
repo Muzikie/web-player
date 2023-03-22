@@ -133,6 +133,8 @@ export const useCreateProfile = () => {
 
   return {
     name,
+    avatar,
+    banner,
     nickName,
     description,
     socialAccounts,
