@@ -5,3 +5,8 @@ export type ProfileDetailsProps = {
   data: Profile;
 };
 export type ProfileState = boolean;
+
+export type ProfileEditProps = {
+  profile: Profile
+  setShowForm: (value: boolean) => void;
+}
