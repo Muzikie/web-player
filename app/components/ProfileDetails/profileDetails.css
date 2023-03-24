@@ -43,6 +43,7 @@
 
 .viewProfile {
   display: flex;
+  flex-flow: column nowrap;
   align-items: center;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -177,8 +178,7 @@
 
 @media (min-width: 480px) {
   .component.viewProfile {
-    flex-direction: row;
-    flex-wrap: wrap;
+   flex-flow: row wrap;
 
     & .profileAvatar {
       margin-left: var(--padding-m);
