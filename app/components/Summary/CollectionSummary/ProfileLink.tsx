@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
