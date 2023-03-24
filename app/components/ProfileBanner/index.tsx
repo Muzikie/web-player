@@ -3,16 +3,15 @@ import React from 'react';
 // internal import
 import { API_URLS, FILES } from '~/configs'
 import Image from '../common/Image'
-import PopularAudios from '../PopularAudios'
 import { ProfileAddress } from './types'
 
-const ProfileBanner = ({ data, audios } : ProfileAddress) => {
+const ProfileBanner = ({ data, audios }: ProfileAddress) => {
   const { creatorAddress, profileID, name } = data
 
   return (
     <section className="component profileBanner">
       <figure className="bannerWrapper">
-        <Image 
+        <Image
           className="photo"
           src={`${API_URLS.STREAMER}/${profileID}-${FILES.profile}.jpg`}
           placeHolder="/images/artist.jpg"
@@ -20,9 +19,8 @@ const ProfileBanner = ({ data, audios } : ProfileAddress) => {
         />
       </figure>
       <header>
-        <h2>{ name ?? creatorAddress }</h2>
+        <h2>{name ?? creatorAddress}</h2>
       </header>
-      <PopularAudios audios={audios} />
     </section>
   );
 };

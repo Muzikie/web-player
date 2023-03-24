@@ -52,6 +52,9 @@ const ViewProfile = ({ profile, setShowForm }: ProfileEditProps) => (
         Edit
       </PrimaryButton>
     </div>
+    <figure className="bubblesPattern">
+      <img src="/images/bubbles.svg" />
+    </figure>
   </section>
 );
 

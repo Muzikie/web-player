@@ -6,21 +6,6 @@
   margin-bottom: var(--padding-l);
   box-shadow: var(--primary-shadow);
   box-sizing: border-box;
-
-  & .bubblesPattern {
-    position: absolute;
-    bottom: 0;
-    right: 3rem;
-    width: 292px;
-    height: 43px;
-    z-index: 0;
-
-    & img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
 }
 
 .component.editProfile {
@@ -62,6 +47,21 @@
   flex-direction: column;
   flex-wrap: nowrap;
   position: relative;
+
+  & .bubblesPattern {
+    position: absolute;
+    bottom: 0;
+    right: 3rem;
+    width: 292px;
+    height: 43px;
+    z-index: 0;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 
   & .profileAvatar {
     position: relative;

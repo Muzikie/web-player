@@ -43,9 +43,6 @@ const ProfileDetails = ({ data }: ProfileDetailsProps) => {
         ? <EditProfile setShowForm={setShowForm} profile={profile} />
         : <ViewProfile setShowForm={setShowForm} profile={profile} />
       }
-      <figure className="bubblesPattern">
-        <img src="/images/bubbles.svg" />
-      </figure>
     </section>
   );
 };
