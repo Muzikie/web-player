@@ -22,7 +22,7 @@ export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | '
   files: FileList | null;
 }
 
-export interface ProfileTxProps extends Omit<CreateCommandParams, 'name' |'creatorAddress' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'> {
+export interface ProfileTxProps extends Omit<CreateCommandParams, 'creatorAddress' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'> {
   avatar: FileList | null;
   banner: FileList | null;
 }

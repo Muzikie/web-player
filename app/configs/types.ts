@@ -1,7 +1,6 @@
 interface BaseEntity {
   creatorAddress: string;
   name: string;
-  artistName: string;
 }
 
 interface LoyaltyOwner {
@@ -72,6 +71,7 @@ export interface Playlist extends BaseEntity {
 }
 
 export interface CreateCommandParams extends BaseEntity {
+  name: string;
   nickName: string;
   description: string;
   socialAccounts: SocialAccount[];

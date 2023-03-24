@@ -119,6 +119,7 @@ export const useCreateProfile = () => {
 
   useEffect(() => {
     validate('profile', {
+      name,
       nickName,
       description,
       socialAccounts,
