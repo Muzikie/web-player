@@ -54,7 +54,7 @@
     bottom: 0;
     transform: translateY(100%);
     border-radius: 0 0 var(--border-radius-xs) var(--border-radius-xs);
-    padding: 0px 5px;
+    padding: 0 5px;
     box-sizing: border-box;
     color: var(--color-error);
   }

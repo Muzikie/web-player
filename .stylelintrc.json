@@ -1,6 +1,16 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "selector-class-pattern": "^([a-z]+)([A-Z][a-zA-Z]*)?$"
+    "selector-class-pattern": "^[a-z][a-zA-Z]*(-[a-z][a-zA-Z]*)?$|^([a-z][a-zA-Z]*)?$",
+    "selector-pseudo-element-colon-notation": "single",
+    "no-descending-specificity": null,
+    "alpha-value-notation": null,
+    "custom-property-pattern": null,
+    "rule-empty-line-before": null,
+    "font-family-no-missing-generic-family-keyword": null,
+    "property-no-vendor-prefix": null,
+    "comment-empty-line-before": null,
+    "color-function-notation": "legacy",
+    "font-family-name-quotes": "always-where-required"
   }
 }

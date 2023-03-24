@@ -103,7 +103,7 @@
       height: 6px;
       border-radius: 3px;
 
-      &::focus {
+      &:focus {
         outline: none;
       }
 
@@ -135,7 +135,7 @@
 .component.imagePlaceHolder {
   display: block;
   width: 59px;
-  height: 59xp;
+  height: 59px;
   border-radius: (--border-radius-r);
 }
 
