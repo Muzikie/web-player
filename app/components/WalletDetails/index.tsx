@@ -1,9 +1,11 @@
 import React from 'react';
 import { WalletAddressProps } from './types';
 import CopyButton from '../common/CopyButton';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 
 const WalletDetails = ({ address }: WalletAddressProps) => {
-  // {info.balances && info.balances.length === 0 ? 0 : info.balances[0].availableBalance}
+  const { info } = useAccount();
+  const balance = info?.balances?.length > 0 ? info.balances[0].availableBalance : 0;
 
   return (
     <section className="component walletDetails">
@@ -13,7 +15,7 @@ const WalletDetails = ({ address }: WalletAddressProps) => {
       </header>
       <div className="balance">
         <span className="balanceTitle">Balance:</span>
-        <h2 className="balanceValue">0 MZK</h2>
+        <h2 className="balanceValue">{`${balance} MZK`}</h2>
       </div>
     </section>
   );

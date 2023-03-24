@@ -7,19 +7,20 @@ import PopularAudios from '../PopularAudios'
 import { ProfileAddress } from './types'
 
 const ProfileBanner = ({ data, audios } : ProfileAddress) => {
-  const { creatorAddress } = data
+  const { creatorAddress, profileID, name } = data
 
   return (
     <section className="component profileBanner">
       <figure className="bannerWrapper">
         <Image 
           className="photo"
-          src={`${API_URLS.STREAMER}/${creatorAddress}-${FILES.profile}.jpg`}
+          src={`${API_URLS.STREAMER}/${profileID}-${FILES.profile}.jpg`}
           placeHolder="/images/artist.jpg"
-          alt={creatorAddress}/> 
+          alt={creatorAddress}
+        />
       </figure>
       <header>
-        <h2>{ creatorAddress }</h2>
+        <h2>{ name ?? creatorAddress }</h2>
       </header>
       <PopularAudios audios={audios} />
     </section>
