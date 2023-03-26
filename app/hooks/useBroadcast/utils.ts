@@ -12,6 +12,10 @@ export const signTransaction = async ({
   command, module, params, files = [], account,
 }: SignTransactionProps): Promise<SignTransactionResult|Error> => {
   const schema = SCHEMAS[`${module}/${command}`];
+  if (!schema) {
+    return new Error('Could not find the corresponding schema');
+  }
+
   const fileSignatures: { [key: string]: Buffer } = {};
   for await (const file of files) {
     const fileContent = await file.value.arrayBuffer();
@@ -42,6 +46,9 @@ export const signTransaction = async ({
     bufferize(account.privateKey),
     schema
   );
+  // @todo improve the transaction signature validation
+  // meaning, check if there is an array called signatures
+  // which includes a valid signature (buffer of length 64)
   if (!schema || !signedTx.id || !Buffer.isBuffer(signedTx.id)) {
     return new Error('Error while signing transaction');
   }
