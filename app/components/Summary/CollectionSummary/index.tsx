@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* Internal dependencies */
-import { IconButton } from '~/components/common/Button';
+//import { IconButton } from '~/components/common/Button';
 import { API_URLS } from '~/configs';
 import ProfileLink from './ProfileLink';
 import { CollectionSummaryProps } from './types';
@@ -9,11 +9,10 @@ import { CollectionSummaryProps } from './types';
 const CollectionSummary = ({ collection, profile }: CollectionSummaryProps) => (
   <section className="component collectionSummary">
     <header>
-      <h1>{ collection.name }</h1>
+      <h2>{collection.name}</h2>
       <ProfileLink profile={profile} />
       <span className="releaseDate">{`${collection.releaseYear} Collection`}</span>
-
-      <div className="actionButtons">
+      {/* <div className="actionButtons">
         <IconButton
           icon="play"
           theme="primary medium"
@@ -26,10 +25,10 @@ const CollectionSummary = ({ collection, profile }: CollectionSummaryProps) => (
           className="follow"
           onClick={(e) => { console.log('Create the follow logic', e); }}
         />
-      </div>
+      </div> */}
     </header>
     <figure className="photo">
-      <img src={`${API_URLS.STREAMER}/${collection.collectionID}-cover.jpg`} alt={ collection.name } />
+      <img src={`${API_URLS.STREAMER}/${collection.collectionID}-cover.jpg`} alt={collection.name} />
     </figure>
   </section>
 );

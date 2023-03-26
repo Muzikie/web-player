@@ -1,8 +1,11 @@
 .screen.collection {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-bottom: 100px;
   box-sizing: border-box;
-  overflow-y: scroll;
+  position: relative;
+  width: 100%;
 
   & .audioList,
   & .similarArtists,
