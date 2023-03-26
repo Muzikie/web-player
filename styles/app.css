@@ -1,6 +1,6 @@
-@import 'variables.css';
-@import 'typography.css';
-@import 'index.css';
+@import url('variables.css');
+@import url('typography.css');
+@import url('index.css');
 
 body {
   padding: 0;

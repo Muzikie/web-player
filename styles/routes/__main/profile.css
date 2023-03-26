@@ -4,7 +4,6 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-bottom: 100px;
   box-sizing: border-box;
   overflow-y: scroll;
   padding: var(--padding-m);
@@ -17,14 +16,13 @@
 
 @media (min-width: 800px) {
   .screen.profile {
-    flex-direction: row;
-    flex-wrap: wrap; 
+    flex-flow: row wrap; 
     align-items: stretch;
     justify-content: space-between;
 
     & .component.profileDetails {
       flex-basis: 58%;
-      margin-bottom: 0px;
+      margin-bottom: 0;
     }
 
     & .component.walletDetails {

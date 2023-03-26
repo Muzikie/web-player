@@ -1,7 +1,7 @@
 .component.list {
   --slider-height: 260px;
   --title-width: 70px;
-  
+
   display: flex;
   flex-flow: row nowrap;
   padding-bottom: var(--padding-l);
