@@ -14,9 +14,9 @@
     "dev:remix": "remix watch",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "dev:css": "sh collectStyles.sh && postcss styles --base styles --dir app/css -w",
-    "stylelint": "stylelint 'app/components/**/*.css' 'app/css/route/**/*.css' --formatter=verbose --config=.stylelintrc.json",
+    "lint:css": "npx stylelint 'app/components/**/*.css' 'styles/**/*.css' --formatter=verbose --config=.stylelintrc.json",
     "build:css": "sh collectStyles.sh && postcss styles --base styles --dir app/css --env production",
-    "lint": "npx eslint app --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "npx eslint app --ext .js,.jsx,.ts,.tsx --fix && npm run lint:css",
     "test": "jest --config ./jest.config.js"
   },
   "dependencies": {
