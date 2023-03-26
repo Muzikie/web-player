@@ -46,7 +46,6 @@
   flex-flow: column nowrap;
   align-items: center;
   flex-direction: column;
-  flex-wrap: nowrap;
   position: relative;
 
   & .bubblesPattern {
