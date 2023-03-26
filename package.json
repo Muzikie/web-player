@@ -14,8 +14,9 @@
     "dev:remix": "remix watch",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "dev:css": "sh collectStyles.sh && postcss styles --base styles --dir app/css -w",
+    "lint:css": "npx stylelint 'app/components/**/*.css' 'styles/**/*.css' --formatter=verbose --config=.stylelintrc.json",
     "build:css": "sh collectStyles.sh && postcss styles --base styles --dir app/css --env production",
-    "lint": "npx eslint app --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "npx eslint app --ext .js,.jsx,.ts,.tsx --fix && npm run lint:css",
     "test": "jest --config ./jest.config.js"
   },
   "dependencies": {
@@ -65,6 +66,8 @@
     "postcss-import-ext-glob": "^2.1.1",
     "postcss-nesting": "^10.1.10",
     "remix-esbuild-override": "^3.0.4",
+    "stylelint": "^15.3.0",
+    "stylelint-config-standard": "^31.0.0",
     "typescript": "^4.7.4"
   },
   "engines": {

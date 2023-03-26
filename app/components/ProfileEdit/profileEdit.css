@@ -10,8 +10,8 @@
     width: 30px;
     z-index: 9;
     border-radius: var(--border-radius-xs);
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 
     & img {
       object-fit: cover;
