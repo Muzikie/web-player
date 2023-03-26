@@ -1,8 +1,6 @@
-import { Audio } from '~/configs'
+import { Audio, Profile } from '~/configs'
 
 export type ProfileAddress = {
-  data: {
-    creatorAddress: string
-  };
+  data: Profile;
   audios: Audio[];
 };

@@ -21,6 +21,7 @@ export interface FileInputProps {
   name?: string;
   accept?: string;
   multiple?: boolean;
+  value: FileList | null;
 }
 
 export interface TextareaProps {

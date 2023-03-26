@@ -1,18 +1,19 @@
 import React from 'react';
 
+/* Internal dependencies */
 import { Input, FileInput, Textarea } from '~/components/common/Input';
-import { useCreateProfile, ValidationStatus } from '~/hooks/useCreateEntity';
-import Image from '../common/Image';
 import { PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
-import { API_URLS, FILES, socialPlatformNames } from '~/configs';
+import { useCreateProfile, ValidationStatus } from '~/hooks/useCreateEntity';
+import { socialPlatformNames } from '~/configs';
 import { ProfileEditProps } from './types';
-import { useAccount } from '~/hooks/useAccount/useAccount';
-import './profileEdit.css';
+import './profileDetails.css';
 
 const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
   const {
     name,
+    avatar,
+    banner,
     nickName,
     description,
     socialAccounts,
@@ -21,22 +22,15 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
     formValidity,
     broadcastStatus,
   } = useCreateProfile();
-  const { info } = useAccount();
 
   return (
-    <form className="component profileEdit">
+    <form className="component editProfile">
       <fieldset>
         <div>
-          <figure className="profileEditBanner">
-            <Image
-              src={`${API_URLS.STREAMER}/${info.address}-${FILES.profile}.jpg`}
-              alt={info.address}
-              placeHolder="/images/artist.jpg"
-            />
-          </figure>
           <FileInput
             icon="file"
             name="banner"
+            value={banner}
             accept='.png,.jpg,.jpeg'
             multiple={false}
             title="Click to update banner"
@@ -45,16 +39,10 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
           />
         </div>
         <div>
-          <figure className="profileEditAvatar">
-            <Image
-              src={`${API_URLS.STREAMER}/${info.address}-${FILES.profile}.jpg`}
-              alt={info.address}
-              placeHolder="/images/artist.jpg"
-            />
-          </figure>
           <FileInput
             icon="file"
             name="avatar"
+            value={avatar}
             accept='.png,.jpg,.jpeg'
             multiple={false}
             title="Click to update Avatar"
