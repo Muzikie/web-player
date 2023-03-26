@@ -8,20 +8,17 @@
   & figure {
     position: relative;
     width: 100%;
-    height: 0;
-    padding-bottom: 18rem;
+    height: 29.66rem;
     overflow: hidden;
     border-radius: var(--border-radius-x);
-    margin-bottom: var(--padding-x);
+    margin-bottom: var(--padding-l);
     box-shadow: 0 25px 25px 0 var(--color-primary-shadow);
 
     & img {
-      min-width: 100%;
       object-fit: cover;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
+      position: relative;
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -45,7 +42,7 @@
   }
 }
 
-@media (min-width: 680px) {
+@media (min-width: 700px) {
   .component.profileBanner {
     flex-wrap: wrap;
     height: 29.66rem;
@@ -66,8 +63,8 @@
 
     & figure {
       width: 50%;
+      height: 100%;
       margin-bottom: 0;
-      padding-bottom: 26rem;
     }
 
     & .component.popularAudios {
@@ -82,8 +79,6 @@
 
 @media (min-width: 1024px) {
   .component.profileBanner {
-    height: 29.66rem;
-
     & header {
       & h2 {
         padding-left: var(--padding-xs);
@@ -91,3 +86,4 @@
     }
   }
 }
+
