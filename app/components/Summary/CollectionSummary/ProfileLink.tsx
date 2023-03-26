@@ -12,7 +12,7 @@ const ProfileLink = ({ profile }: ProfileLinkProps) => (
   <Link to={ROUTES.PROFILE.replace(':id', profile.creatorAddress)} className="profile">
     <figure>
       <Image
-        src={`${API_URLS.STREAMER}/${profile.creatorAddress}-avatar.jpg`}
+        src={`${API_URLS.STREAMER}/${profile.profileID}-avatar.jpg`}
         placeHolder="/images/artist.jpg"
       />
     </figure>
