@@ -6,7 +6,7 @@ import {
   SCHEMAS,
   CHAIN_ID,
 } from '~/configs';
-import { SignTransactionProps, SignTransactionResult } from './types';
+import { SignTransactionProps, SignTransactionResult } from '../useCreateEntity/types';
 
 export const signTransaction = async ({
   command, module, params, files, account,

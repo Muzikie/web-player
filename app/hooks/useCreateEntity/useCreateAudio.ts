@@ -11,7 +11,7 @@ import {
 import { ValidationStatus, ValidationResult } from './types';
 import { validate } from './validator';
 import { bufferize } from '~/helpers/convertors';
-import { useBroadcast } from './useBroadcast';
+import { useBroadcast } from '../useBroadcast/useBroadcast';
 
 export const useCreateAudio = () => {
   const { updateAccount } = useAccount();

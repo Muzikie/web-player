@@ -2,7 +2,7 @@
 import { HTTP_STATUS } from '~/configs';
 import { DryRunTxResponse, PostTxResponse, Method } from '~/context/socketContext/types';
 import { useWS } from '../useWS/useWS';
-import { SignTransactionProps } from './types';
+import { SignTransactionProps } from '../useCreateEntity/types';
 import { postTransaction } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
 import { signTransaction } from './utils';

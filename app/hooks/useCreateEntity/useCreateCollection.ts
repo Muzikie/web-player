@@ -8,7 +8,7 @@ import { MODULES, COMMANDS } from '~/configs';
 import { ValidationStatus, ValidationResult } from './types';
 import { validate } from './validator';
 
-import { useBroadcast } from './useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast'
 
 export const useCreateCollection = () => {
   const { updateAccount } = useAccount();

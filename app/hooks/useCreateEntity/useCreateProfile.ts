@@ -15,7 +15,7 @@ import {
 import { ValidationResult, ValidationStatus } from './types';
 import { validate } from './validator';
 
-import { useBroadcast } from './useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast'
 
 export const useCreateProfile = () => {
   const { updateAccount } = useAccount();
