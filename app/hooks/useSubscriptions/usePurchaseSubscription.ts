@@ -19,7 +19,6 @@ export const usePurchaseSubscription = () => {
   const [fetchStatus, setStatus] = useState<FetchStatus>(FetchStatus.loading);
   const { updateAccount } = useAccount();
   const { request, isConnected } = useWS();
-  const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
   const { broadcast } = useBroadcast();
 
   const getAvailableSubs = async () => {
@@ -35,7 +34,11 @@ export const usePurchaseSubscription = () => {
   };
 
   const purchase = async () => {
-    if (!ids.length) return HTTP_STATUS.BAD_REQUEST.MESSAGE;
+    // @todo We should inform the user that there are no subscriptions available
+    if (!ids.length) return {
+      error: true,
+      message: HTTP_STATUS.INTERNAL_ERROR.MESSAGE,
+    };
 
     const data = await updateAccount();
     // Create blockchain transaction and broadcast it
@@ -47,8 +50,9 @@ export const usePurchaseSubscription = () => {
         members: [cryptography.address.getAddressFromLisk32Address(data.address)],
       },
       account: data,
+      files: [],
     });
-    setBroadcastStatus(result);
+    return result;
   };
 
   useEffect(() => {
@@ -60,6 +64,5 @@ export const usePurchaseSubscription = () => {
   return {
     purchase,
     fetchStatus,
-    broadcastStatus
   };
 };

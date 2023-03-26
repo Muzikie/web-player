@@ -9,7 +9,7 @@ import {
 import { SignTransactionProps, SignTransactionResult } from '../useCreateEntity/types';
 
 export const signTransaction = async ({
-  command, module, params, files, account,
+  command, module, params, files = [], account,
 }: SignTransactionProps): Promise<SignTransactionResult|Error> => {
   const schema = SCHEMAS[`${module}/${command}`];
   const fileSignatures: { [key: string]: Buffer } = {};

@@ -37,7 +37,7 @@ export interface SignTransactionProps {
   command: COMMANDS,
   module: MODULES,
   params: { [key: string]: unknown },
-  files?: { value: File, key: string }[],
+  files: { value: File, key: string }[],
   account: ProfileInfoType,
 }
 
