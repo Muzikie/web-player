@@ -13,11 +13,27 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
+export const loader = async ({ request }: any) => {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+  const agreement = session.get('agreement');
+  const address = session.get('address');
+  if (agreement && address) {
+    return redirect('/')
+  }
+  if (!agreement && !address) {
+    // redirect users to agreement page when the agreement cookie is not set
+    return redirect('/login')
+  }
+  return session;
+}
+
 export async function action({ request }: any) {
   const session = await getSession(request.headers.get('Cookie'));
-  
+
   session.set('agreement', true);
-  
+
   return redirect('/', {
     headers: {
       'Set-Cookie': await commitSession(session),

@@ -30,7 +30,7 @@ export async function loader({ request }: LoaderBaseProps) {
     session.unset('address');
     session.unset('publicKey');
     session.unset('privateKey');
-  // Redirect to the home page if they are already signed in and they are not trying to logout.
+    // Redirect to the home page if they are already signed in and they are not trying to logout.
   } else if (address) {
     return redirect('/');
   }
@@ -77,7 +77,7 @@ export async function action({ request }: LoaderBaseProps) {
   session.set('privateKey', privateKey);
 
   const agreement = session.get('agreement')
-  if (agreement == null) {
+  if (!agreement) {
     // Redirect back to the agreement page.
     return redirect('/agreement', {
       headers: {

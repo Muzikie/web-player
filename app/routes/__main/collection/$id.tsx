@@ -16,12 +16,23 @@ import CollectionSummary from '~/components/Summary/CollectionSummary';
 import { liskThemes } from '~/components/List/types';
 import styles from '~/css/routes/__main/collection.css';
 import { entityThemes } from '~/components/Entity/types';
+import { redirect } from '@remix-run/node';
+import { getSession } from '~/hooks/useSession';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ params }: collectionLoaderProps) => {
+export const loader = async ({ params, request }: collectionLoaderProps) => {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+  const agreement = session.get('agreement');
+  const address = session.get('address');
+  if (!agreement && address) {
+    // redirect users to agreement page when the agreement cookie is not set
+    return redirect('/agreement')
+  }
   invariant(params.id, 'Expected params.id');
 
   const collection = await getCollection(params.id);

@@ -9,6 +9,8 @@ import {
   getPlaylist,
   getPlaylistAudios,
 } from '~/models/entity.server';
+import { redirect } from '@remix-run/node';
+import { getSession } from '~/hooks/useSession';
 import { playlistLoaderParams, PlaylistLoaderData } from '../../types';
 import List from '~/components/List';
 import PlaylistSummary from '~/components/Summary/PlaylistSummary';
@@ -18,9 +20,18 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ params }: playlistLoaderParams) => {
-  invariant(params.id, 'Expected params.id');
+export const loader = async ({ params, request }: playlistLoaderParams) => {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+  const agreement = session.get('agreement');
+  const address = session.get('address');
+  if (!agreement && address) {
+    // redirect users to agreement page when the agreement cookie is not set
+    return redirect('/agreement')
+  }
 
+  invariant(params.id, 'Expected params.id');
   const playlist = await getPlaylist(params.id);
   const audios = await getPlaylistAudios(params.id);
 
