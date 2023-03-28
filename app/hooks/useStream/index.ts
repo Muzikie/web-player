@@ -10,8 +10,6 @@ import { useAccount } from '../useAccount/useAccount';
 import { bufferize } from '~/helpers/convertors';
 import { useBroadcast } from '../useBroadcast/useBroadcast'
 
-
-
 export const useStream = () => {
   const { updateAccount } = useAccount();
   const [queue, setQueue] = useState<string[]>([]);
@@ -37,6 +35,7 @@ export const useStream = () => {
         }]
       },
       account: data,
+      files: [],
     });
     setBroadcastStatus(result);
     if (!result.error) {
