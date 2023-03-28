@@ -9,7 +9,6 @@
   & > span {
     display: block;
     width: var(--item-size) !important;
-    opacity: 0;
     flex-grow: 1;
     color: var(--gray);
   }
@@ -27,13 +26,13 @@
     }
   }
 
-  &.track {
-    & .duration,
-    & .streamCount {
-      text-align: right;
+  &.audio {
+    & .duration  {
+      text-align: center;
     }
 
     & .streamCount {
+      text-align: right;
       display: none;
     }
 
@@ -54,7 +53,7 @@
 
 @media (min-width: 680px) {
   .component.entity.action {
-    &.track {
+    &.audio {
       & .streamCount {
         display: block;
       }

@@ -5,6 +5,7 @@
   &.iconButton {
     color: var(--white);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &.primaryButton,
@@ -21,7 +22,7 @@
   &.primaryButton {
     background-color: var(--color-secondary);
     color: var(--white);
-    box-shadow: 0 -6px 6px 0px var(--color-primary-shadow);
+    box-shadow: 0 -6px 6px 0 var(--color-primary-shadow);
     border: 0;
 
     &.disabled {
@@ -32,7 +33,7 @@
     &.white {
       background-color: var(--white);
       color: var(--color-secondary);
-      box-shadow: 0 -6px 6px 0px #ffffff21;
+      box-shadow: 0 -6px 6px 0 #ffffff21;
 
       &.disabled {
         box-shadow: none;

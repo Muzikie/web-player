@@ -15,3 +15,5 @@ export const rehydrate = (value: any, defaultValue: any = '') => {
 };
 
 export const hydrate = (value: any) => JSON.stringify(value);
+
+export const bufferize = (value: any) => Buffer.from(value, 'hex');

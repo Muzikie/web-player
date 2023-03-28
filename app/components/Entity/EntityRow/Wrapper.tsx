@@ -1,8 +1,11 @@
 import React from 'react';
 import { memo, ReactNode, MouseEvent, useContext } from 'react';
+
+/* Internal dependencies */
+import { Link } from '~/components/common/Link';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
-import { Link } from '@remix-run/react';
-import { Entity, entityMode, TrackType } from '../types';
+import { Audio } from '~/configs';
+import { Entity, entityMode } from '../types';
 import { getID } from '../utils';
 
 interface WrapperProps {
@@ -24,11 +27,11 @@ const Wrapper = ({
     );
   }
 
-  if (entity === 'track') {
+  if (entity === 'audio') {
     const play = (e: MouseEvent) => {
       e.preventDefault();
       if (setCurrent) {
-        setCurrent(data as TrackType);
+        setCurrent(data as Audio);
       }
     };
 
@@ -49,6 +52,6 @@ const Wrapper = ({
   );
 };
 
-const areEqual = (prev: WrapperProps, next: WrapperProps) => (prev.data.id === next.data.id);
+const areEqual = (prev: WrapperProps, next: WrapperProps) => (prev.data.name === next.data.name);
 
 export default memo(Wrapper, areEqual);

@@ -2,7 +2,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 /* Internal dependencies */
-import { API_URLS, JSON_RPC_VERSION } from '~/constants/api';
+import { API_URLS, JSON_RPC_VERSION } from '~/configs';
 import { DEFAULT_VALUES, EVENTS, MESSAGES } from './constants';
 import {
   SocketContextType,
@@ -12,8 +12,7 @@ import {
   RequestResult,
 } from './types';
 
-// @todo - generate a random id
-const getID = () => '1234';
+const getID = () => (1000 * Math.random()).toFixed(0);
 
 export const SocketContext = createContext<SocketContextType>({
   ws: null,
@@ -32,27 +31,22 @@ const SocketProvider = ({ children }: SocketProviderProps) => {
   const [ws, setWS] = useState<WebSocket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
-  const request = (method: Method, params: RequestParams) =>
+  const request = (method: Method, params: RequestParams, id: string = getID()) =>
     new Promise<RequestResult<Method>>((resolve, reject) => {
       if (ws) {
         ws.addEventListener(EVENTS.MESSAGE, (event) => {
-          try {
-            const parsedData = JSON.parse(event.data);
+          const parsedData = JSON.parse(event.data);
+          if (id === parsedData.id) {
             resolve({
               data: parsedData.result ?? DEFAULT_VALUES[method],
               error: false,
-            });
-          } catch (e) {
-            reject({
-              message: MESSAGES.FAILED,
-              error: true,
             });
           }
         });
         ws.send(
           JSON.stringify({
             jsonrpc: JSON_RPC_VERSION,
-            id: getID(),
+            id,
             method,
             params
           }),

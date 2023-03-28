@@ -1,25 +1,7 @@
 .component.entity.thumbnail {
-  --size-xs: 59px;
-  --size-s: 62px;
-  --size-m: 70px;
-  --size-l: 80px;
-
   display: block;
-
-  &.minimal {
-    width: var(--size-s);
-    height: var(--size-s);
-  }
-
-  &.normal {
-    width: var(--size-m);
-    height: var(--size-m);
-  }
-
-  &.large {
-    width: var(--size-l);
-    height: var(--size-l);
-  }
+  width: var(--thumbnail);
+  height: var(--thumbnail);
 
   & figure {
     width: 100%;
@@ -37,30 +19,31 @@
     }
   }
 
-  &.album {
+  &.collection {
+    padding-bottom: 0;
+
     & figure {
-      border-radius: var(--border-radius-s);
+      border-radius: var(--border-radius-m);
     }
   }
 
   &.empty,
-  &.artist {
+  &.profile {
     & figure {
       border-radius: var(--border-radius-xs);
     }
   }
 
-  &.track {
-    width: var(--size-xs);
-    height: var(--size-xs);
+  &.audio {
+    width: var(--box-size-xxs);
+    height: var(--box-size-xxs);
 
     & figure {
       width: 100%;
       height: 100%;
       box-sizing: border-box;
       border-radius: var(--border-radius-r);
-      border: solid 2px var(--white);
-      box-shadow: 0 8px 8px 0 var(--color-primary-opaque);
+      padding: 0;
     }
   }
-}
+} 

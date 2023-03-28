@@ -4,7 +4,6 @@
 
 
   height: var(--menu-button);
-  height: var(--menu-button);
   box-sizing: border-box;
   z-index: 5;
 
@@ -20,7 +19,7 @@
       color: var(--color-secondary);
 
       &.menuCut {
-        font-size: 7px;
+        font-size: 10px;
       }
     }
   }
@@ -33,9 +32,9 @@
     box-sizing: border-box;
     right: 0;
     background: var(--color-secondary);
-    padding: 0px 30px;
+    padding: 0 30px;
     border-radius: 14px;
-    box-shadow: -10px 10px 20px 0px #4532483b;
+    box-shadow: -10px 10px 20px 0 #4532483b;
 
     &.active {
       display: block;
@@ -62,6 +61,7 @@
           padding-left: 10px;
           box-sizing: border-box;
           font-family: var(--body-font);
+          font-size: var(--size-h4);
         }
 
         &:after {
@@ -79,7 +79,7 @@
         &.active {
           & i {
             color: var(--white);
-            filter: drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.6));
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
           }
 
           &:after {

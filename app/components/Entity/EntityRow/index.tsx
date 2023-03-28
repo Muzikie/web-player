@@ -1,28 +1,16 @@
 import React from 'react';
 import Wrapper from './Wrapper';
 import EntityThumbnail from '../EntityThumbnail';
+import Fit from './Fit';
+import NumberOfAudios from './NumberOfAudios';
+import Subtitle from './Subtitle';
+import ReleaseYear from './ReleaseYear';
 import Actions from '../Actions';
-import Icon from '~/components/common/Icon';
-import { Entity, EntityRowProps, entityThemes, entityMode } from '../types';
+import { Entity, EntityRowProps, entityMode, entityThemes } from '../types';
 import { getEntity } from '../utils';
 
-const Subtitle = ({ data }: EntityRowProps<Entity>) => {
-  let subtitle = '-';
-  if ('playlistID' in data) {
-    subtitle = data.description;
-  } else if ('audioID' in data) {
-    subtitle = data.artistName;
-  } else {
-    subtitle = 'Artist';
-  }
-
-  return (
-    <span className="artistName">{subtitle}</span>
-  )
-};
-
 const EntityRow = ({
-  data, className = '', theme = entityThemes.normal, mode = entityMode.view,
+  data, className = '', mode = entityMode.view, theme = entityThemes.ProfilePage, rowNumber, showRowNumber
 }: EntityRowProps<Entity>) => {
   const entity = getEntity(data);
 
@@ -31,24 +19,32 @@ const EntityRow = ({
       entity={entity}
       data={data}
       mode={mode}
-      className={`component entity row ${entity} ${theme} ${className}`}
+      className={`component entity row ${entity} ${className}`}
     >
       <div className="container">
         <div className="primaryInfo">
-          {
-            ('audioID' in data)
-              ? (<Icon name="play" />)
-              : (
-                <EntityThumbnail
-                  data={data}
-                  theme={theme}
-                  className="thumbnail"
-                />
-              )
+          {showRowNumber && theme === entityThemes.ProfilePage ? <span className='rowNumber'>{rowNumber}<strong>.</strong></span> : null}
+          {theme === entityThemes.CollectionPage && entity === 'audio' ? null :
+            (<EntityThumbnail
+              data={data}
+              className="thumbnail"
+            />)
           }
           <div className="text">
-            <h4 className="albumName">{ data.name }</h4>
-            <Subtitle data={data} />
+            <h4 className="collectionName">{data.name}</h4>
+            <div className='detail'>
+              {theme === entityThemes.ProfilePage ?
+                null :
+                (<span><Subtitle data={data} /> <Fit data={data} /></span>)
+              }
+              <span>
+                {theme === entityThemes.ProfilePage ?
+                  <ReleaseYear data={data} /> :
+                  null
+                }
+                <NumberOfAudios data={data} />
+              </span>
+            </div>
           </div>
         </div>
         <Actions data={data} mode={mode} />

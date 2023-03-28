@@ -6,11 +6,11 @@ import { useLoaderData } from '@remix-run/react';
 /* Internal dependencies */
 import {
   getRecentlyPlayed,
-  getArtists,
-  getAlbums,
+  getProfiles,
+  getCollections,
 } from '~/models/entity.server';
 import { HomeLoaderData } from '../../types';
-import Collection from '~/components/Collection';
+import List from '~/components/List';
 import { entityThemes } from '~/components/Entity/types';
 import styles from '~/css/routes/__main/index.css';
 
@@ -21,40 +21,39 @@ export function links() {
 export const loader = async () => {
   return json<HomeLoaderData>({
     recentlyPlayed: await getRecentlyPlayed(),
-    artists: await getArtists(),
-    albums: await getAlbums(),
+    profiles: await getProfiles(),
+    collections: await getCollections(),
   });
 };
 
-const Home = () => {
+const HomeScreen = () => {
   const {
     recentlyPlayed,
-    // artists,
-    albums,
+    // profiles,
+    collections,
   } = useLoaderData() as HomeLoaderData;
 
   return (
     <section className="screen home">
-      <Collection
+      <List
         className="recent"
         title="Recent"
-        itemTheme={entityThemes.minimal}
+        itemTheme={entityThemes.HomePage}
         items={!recentlyPlayed?.length ? [] : recentlyPlayed}
       />
-      {/* <Collection
+      {/* <List
         className="favorite"
         title="Favorite"
-        itemTheme={entityThemes.minimal}
-        items={!artists?.length ? [] : artists}
+        items={!profiles?.length ? [] : profiles}
       /> */}
-      <Collection
+      <List
         className="favorite"
         title="Favorite"
-        itemTheme={entityThemes.minimal}
-        items={!albums?.length ? [] : albums}
+        itemTheme={entityThemes.CollectionPage}
+        items={!collections?.length ? [] : collections}
       />
     </section>
   );
 };
 
-export default Home;
+export default HomeScreen;

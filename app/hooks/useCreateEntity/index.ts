@@ -1,3 +1,4 @@
-export { useCreateTrack } from './useCreateTrack';
-export { useCreateAlbum } from './useCreateAlbum';
+export { useCreateAudio } from './useCreateAudio';
+export { useCreateCollection } from './useCreateCollection';
+export { useCreateProfile } from './useCreateProfile'
 export * from './types';

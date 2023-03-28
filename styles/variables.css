@@ -1,16 +1,16 @@
  :root {
   /****  Color  ****/
   --green: #01b84a;
-  --white: #ffffff;
-  --white-disabled: #cccccc;
+  --white: #fff;
+  --white-disabled: #ccc;
   --color-primary: #feeae3;
   --color-primary-light: #fef2ee;
   --color-secondary: #453248;
-  --black: #000000;
+  --black: #000;
   --color-purple: #a755af;
   --color-primary-see-through: rgba(19, 14, 29, 0.7);
   --color-primary-opaque: rgba(19, 14, 29, 0.35);
-  --color-primary-shadow: rgba(19, 14, 29, 0.2);
+  --color-primary-shadow: rgba(19, 14, 29, 0.1);
   --white-see-through: #ffffffa0;
   --gray: #99868B;
   --color-secondary-disabled: var(--gray);
@@ -25,40 +25,42 @@
 
   /****  Typography  ****/
   --body-font: 'Poppins', sans-serif;
-  --size-h1: 4em; /* 64 */
-  --size-h2: 2.4em; /* 38 */
-  --size-h3: 1.75em; /* 28 */
-  --size-h4: 1.25em;  /* 20 */
-  --size-h5: 1em; /* 16 -> 15 */
-  --size-span: 0.875em; /* 14 */
-  --size-small: 0.75em; /* 12 */
+  --size-h1: 4rem; /* 64 */
+  --size-h2: 2.4rem; /* 38 */
+  --size-h3: 1.65rem; /* 28 */
+  --size-h4: 1.25rem;  /* 20 */
+  --size-h5: 1rem; /* 16 -> 15 */
+  --size-span: 0.875rem; /* 14 */
+  --size-small: 0.75rem; /* 12 */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-bold: 500;
   --font-weight-black: 700;
 
   /****  Sizes  ****/
-  --left-sidebar: 140px;
-  --right-sidebar: 350px;
-  --player-height-s: 70px;
-  --player-height-m: 84px;
-  --box-size-xxs: 32px;
-  --box-size-xs: 40px;
-  --box-size-s: 46px;
-  --box-size-m: 54px;
-  --box-size-l: 100px;
-  --box-size-xl: 146px;
-  --padding-xs: 8px;
-  --padding-s: 12px;
-  --padding-m: 28px;
-  --padding-l: 36px;
-  --padding-x: 50px;
-
-  --border-radius-xs: 6px;
-  --border-radius-s: 10px;
-  --border-radius-m: 15px;
-  --border-radius-l: 40px;
-  --border-radius-x: 45px;
+  --thumbnail:5.5rem;
+  --left-sidebar: 8.75rem;
+  --right-sidebar: 21.875rem;
+  --player-height-s: 4.375rem;
+  --player-height-m: 5.25rem;
+  --box-size-xxs: 2rem;
+  --box-size-xs: 2.5rem;
+  --box-size-s: 2.875rem;
+  --box-size-m: 3.375rem;
+  --box-size-l: 4.387rem;
+  --box-size-xl: 6.25rem;
+  --box-size-xxl: 9.125rem;
+  --padding-xs: 0.66rem;
+  --padding-s: 1rem;
+  --padding-m: 2.33rem;
+  --padding-l: 3rem;
+  --padding-x: 5rem;
+  --centered-box-max-size: 50rem;
+  --border-radius-xs: 0.5rem;
+  --border-radius-s: 0.83rem;
+  --border-radius-m: 1.25rem;
+  --border-radius-l: 3.33rem;
+  --border-radius-x: 3.75rem;
   --border-radius-r: 50%;
 
   /****  Composition  ****/
@@ -73,4 +75,7 @@
   --medium-viewport: 1024px;
   --small-viewport: 600px;
   --xSmall-viewport: 360px;
+
+  /****  Effects  ****/
+  --primary-shadow: 0px 20px 10px var(--color-primary-shadow);
 }

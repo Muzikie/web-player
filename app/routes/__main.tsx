@@ -13,6 +13,7 @@ import MainHeader from '~/components/MainHeader';
 import { getSession, commitSession } from '~/hooks/useSession';
 import Player from '~/components/Player';
 import styles from '~/css/routes/__main.css';
+import { bufferize } from '~/helpers/convertors';
 import { LoaderBaseProps } from './types';
 
 export function links() {
@@ -30,8 +31,8 @@ export async function loader({ request }: LoaderBaseProps) {
 
   const data = {
     address: address ?? '',
-    publicKey: publicKey ? Buffer.from(publicKey).toString('hex') : '',
-    privateKey: privateKey ? Buffer.from(privateKey).toString('hex') : '',
+    publicKey: publicKey ? bufferize(publicKey).toString('hex') : '',
+    privateKey: privateKey ? bufferize(privateKey).toString('hex') : '',
   };
 
   return json(data, {

@@ -1,3 +1,24 @@
 .component.userDiscography {
   position: relative;
+  margin-top: var(--padding-l);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  & header {
+    padding-left: var(--padding-xs);
+    padding-bottom: var(--padding-s);
+
+    & h3 {
+      color: var(--gray);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+ 
+  & .content {
+    & .newCollectionButton {
+      width: 195px;
+      margin-top: 30px;
+    }
+  }
 }

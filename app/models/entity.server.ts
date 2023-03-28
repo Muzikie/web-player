@@ -1,11 +1,11 @@
-import type {
-  AlbumType,
-  ArtistType,
-  TrackType,
-  PlaylistType,
-  Entity,
-} from '~/components/Entity/types';
-import { API_URLS } from '~/constants/api';
+import {
+  Collection,
+  Profile,
+  Audio,
+  Playlist,
+  API_URLS,
+} from '~/configs';
+import { Entity } from '~/components/Entity/types';
 
 export type SearchResultType = {
   [key: string]: Entity[];
@@ -13,62 +13,69 @@ export type SearchResultType = {
 
 const get = (url: string) => fetch(url).then((res) => res.json()).then(res => res.data);
 
-export async function getAlbums(): Promise<Array<AlbumType>> {
+export async function getCollections(): Promise<Array<Collection>> {
   return get(`${API_URLS.STREAMER}/api/v1/collections`).then(res => res);
 }
 
-export async function getAlbum(id: number): Promise<AlbumType> {
+export async function getCollection(id: number): Promise<Collection> {
   return get(`${API_URLS.STREAMER}/api/v1/collections/${id}`).then(res => res[0]);
 }
 
-export async function getAlbumTracks(id: number): Promise<Array<TrackType>> {
+export async function getCollectionAudios(id: number): Promise<Array<Audio>> {
   return get(`${API_URLS.STREAMER}/api/v1/collections/${id}/audios`);
 }
 
-export async function getTracks(): Promise<Array<TrackType>> {
+export async function getAudios(): Promise<Array<Audio>> {
   return get(`${API_URLS.STREAMER}/api/v1/audios`);
 }
 
-export async function getArtists(): Promise<Array<ArtistType>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users`);
+export async function getProfiles(): Promise<Array<Profile>> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles`);
 }
 
-export async function getArtist(id: number): Promise<ArtistType> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${id}`).then(res => res[0]);
+export async function getProfile(address: string): Promise<Profile> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${address}`).then((res) => {
+    if (res[0]) {
+      return res[0];
+    }
+    return {
+      creatorAddress: address,
+    };
+  });
 }
 
-export async function getArtistAlbums(id: number): Promise<Array<AlbumType>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${id}/collections`);
+export async function getProfileCollections(id: string): Promise<Array<Collection>> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/collections`);
 }
 
-export async function getArtistTracks(id: number): Promise<Array<TrackType>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${id}/audios`);
+export async function getProfileAudios(id: string, options: any): Promise<Array<Audio>> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${id}/audios`).then(res => res.splice(options.offset ?? 0, options.limit ?? 10));
 }
 
 export async function getRecentlyPlayed(): Promise<Array<Entity>> {
   return get(`${API_URLS.STREAMER}/api/v1/audios?limit=6`);
 }
 
-export async function getPlaylists(): Promise<Array<PlaylistType>> {
+export async function getPlaylists(): Promise<Array<Playlist>> {
   return get(`${API_URLS.STREAMER}/api/v1/playlists`);
 }
 
-export async function getPlaylist(id: number): Promise<PlaylistType> {
+export async function getPlaylist(id: number): Promise<Playlist> {
   return get(`${API_URLS.STREAMER}/api/v1/playlists/${id}`);
 }
 
-export async function getPlaylistTracks(id: number): Promise<Array<TrackType>> {
-  return get(`${API_URLS.STREAMER}/api/v1/playlists/${id}/tracks`);
+export async function getPlaylistAudios(id: number): Promise<Array<Audio>> {
+  return get(`${API_URLS.STREAMER}/api/v1/playlists/${id}/audios`);
 }
 
 export async function search(query: string): Promise<Array<SearchResultType>> {
   return get(`${API_URLS.STREAMER}/api/v1/search/${query}`);
 }
 
-export async function getUserAlbums(address: string): Promise<Array<AlbumType>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${address}/collections`);
+export async function getUserCollections(address: string): Promise<Array<Collection>> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${address}/collections`);
 }
 
-export async function getUserTracks(address: string): Promise<Array<TrackType>> {
-  return get(`${API_URLS.STREAMER}/api/v1/users/${address}/audios`);
+export async function getUserAudios(address: string): Promise<Array<Audio>> {
+  return get(`${API_URLS.STREAMER}/api/v1/profiles/${address}/audios`);
 }

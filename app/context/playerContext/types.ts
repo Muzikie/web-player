@@ -1,13 +1,14 @@
 import { ReactElement } from 'react';
-import { TrackType } from '../../components/Entity/types';
 
-export type Current = TrackType|null;
+import { Audio } from '~/configs';
+
+export type Current = Audio|null;
 
 export interface PlayerContextType {
   current:Current;
   isPlaying: boolean;
   setIsPlaying: (state: boolean) => void;
-  setCurrent: (track: Current) => void;
+  setCurrent: (audio: Current) => void;
 }
 
 export interface PlayerProviderProps {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Entity, entityMode, EntityRowProps } from '../types';
-import ArtistActions from './ArtistActions';
-import AlbumActions from './AlbumActions';
+import ProfileActions from './ProfileActions';
+import CollectionActions from './CollectionActions';
 import PlaylistActions from './PlaylistActions';
-import TrackActions from './TrackActions';
+import AudioActions from './AudioActions';
 import EditActions from './EditActions';
 
 const Actions = ({ data, mode }: EntityRowProps<Entity>) => {
@@ -11,15 +11,15 @@ const Actions = ({ data, mode }: EntityRowProps<Entity>) => {
     return <EditActions data={data} />;
   }
   if ('audioID' in data) {
-    return <TrackActions data={data} />;
+    return <AudioActions data={data} />;
   }
   if ('collectionID' in data) {
-    return <AlbumActions data={data} />;
+    return <CollectionActions data={data} />;
   }
   if ('playlistID' in data) {
     return <PlaylistActions data={data} />;
   }
-  return <ArtistActions data={data} />;
+  return <ProfileActions data={data} />;
 };
 
 export default Actions;

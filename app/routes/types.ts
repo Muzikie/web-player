@@ -1,31 +1,25 @@
-import { ChangeEvent } from 'react';
 import { SearchResultType } from '~/models/entity.server';
-import { AlbumType, TrackType, ArtistType, PlaylistType, Entity } from '~/components/Entity/types';
-import { ProfileInfoType } from '~/context/profileContext/types';
 
-export interface AgreementFormProps {
-  terms: {
-    value: boolean[];
-    isValid: boolean;
-  };
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}
-
-export interface AgreementInfoProps {
-  disabled: boolean;
-}
+import {
+  Collection,
+  Audio,
+  Profile,
+  Playlist
+} from '~/configs';
+import { Entity } from '~/components/Entity/types';
 
 export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
 }
 
-export interface AlbumLoaderData {
-  album: Awaited<AlbumType>;
-  tracks: Awaited<TrackType[]>;
+export interface CollectionLoaderData {
+  collection: Awaited<Collection>;
+  profile: Awaited<Profile>;
+  audios: Awaited<Audio[]>;
   id: number;
 }
 
-export interface albumLoaderProps {
+export interface collectionLoaderProps {
   params: {
     id: number;
   };
@@ -34,8 +28,8 @@ export interface albumLoaderProps {
 
 export interface HomeLoaderData {
   recentlyPlayed: Awaited<Entity[]>;
-  artists: Awaited<ArtistType[]>;
-  albums: Awaited<AlbumType[]>;
+  profiles: Awaited<Profile[]>;
+  collections: Awaited<Collection[]>;
 }
 
 export interface LoaderBaseProps {
@@ -43,8 +37,8 @@ export interface LoaderBaseProps {
 }
 
 export interface PlaylistLoaderData {
-  playlist: Awaited<PlaylistType>;
-  tracks: Awaited<TrackType[]>;
+  playlist: Awaited<Playlist>;
+  audios: Awaited<Audio[]>;
   id: number;
 }
 
@@ -55,30 +49,27 @@ export interface playlistLoaderParams {
   request: Request;
 }
 
-export interface ArtistLoaderData {
-  artist: Awaited<ArtistType>;
-  albums: Awaited<AlbumType[]>;
-  tracks: Awaited<TrackType[]>;
-  id: number;
+export interface ProfileLoaderData {
+  profile: Awaited<Profile>;
+  collections: Awaited<Collection[]>;
+  audios: Awaited<Audio[]>;
+  id: string;
 }
 
-export interface artistLoaderProps {
+export interface profileLoaderProps {
   params: {
-    id: number;
+    id: string;
   };
   request: Request;
 }
 
-export interface ProfileLoaderData {
-  profileInfo: Partial<ProfileInfoType>;
-}
 
 export interface DiscographyLoaderData {
-  albums: Awaited<AlbumType[]>;
-  tracks: Awaited<TrackType[]>;
+  collections: Awaited<Collection[]>;
+  audios: Awaited<Audio[]>;
 }
 
 export interface DiscographyProps {
-  tracks: TrackType[];
-  albums: AlbumType[];
+  audios: Audio[];
+  collections: Collection[];
 }

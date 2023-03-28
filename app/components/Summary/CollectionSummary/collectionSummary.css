@@ -1,0 +1,108 @@
+.component.collectionSummary {
+  --max-collection-art-size: 320px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  margin-bottom: var(--padding-m);
+  margin-top: var(--padding-m);
+  align-items: center;
+
+  & header {
+    width: 100%;
+    color: var(--color-secondary);
+    margin-bottom: var(--padding-m);
+    padding-left: var(--padding-m);
+    box-sizing: border-box;
+
+    & h2 {
+      margin-bottom: 3px;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      font-weight: var(--font-weight-black);
+    }
+
+    & h4 {
+      color: var(--color-secondary);
+    }
+
+    & .profile {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: var(--padding-s);
+      cursor: pointer;
+
+      & figure {
+        width: 23px;
+        height: 23px;
+        border-radius: var(--border-radius-r);
+        margin-right: 4px;
+
+        & img {
+          width: 100%;
+        }
+      }
+
+      & .releaseDate {
+        color: var(--gray)
+      }
+    }
+
+    & .actionButtons {
+      padding: var(--padding-m) 0;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 95px;
+    }
+  }
+
+  & .photo {
+    width: calc(100vw - calc(2 * var(--padding-m)));
+    height: calc(100vw - calc(2 * var(--padding-m)));
+    max-height: var(--max-collection-art-size);
+    border-radius: var(--border-radius-l);
+    box-shadow: 0 25px 25px 0 rgba(0, 0, 0, 0.25);
+    
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .component.collectionSummary {
+    display: flex;
+    /* flex-flow: row nowrap; */
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    padding-left: var(--padding-m);
+    box-sizing: border-box;
+    & .photo {
+      width: var(--max-collection-art-size);
+      height: var(--max-collection-art-size);
+      flex-shrink: 0;
+    }
+
+    & header {
+      padding: var(--padding-m) 0 0 var(--padding-m);
+      width: 50%;
+
+     & h2 {
+      word-wrap: normal;
+      text-overflow: ellipsis;
+      overflow: hidden;
+     }
+    }
+  }
+}

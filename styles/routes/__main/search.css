@@ -1,5 +1,6 @@
 .screen.search {
   padding-top: var(--box-size-s);
+  margin: 0 auto;
 
   & .inputHeader {
     padding: 0 var(--box-size-xs);

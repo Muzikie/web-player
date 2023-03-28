@@ -7,10 +7,10 @@ import invariant from 'tiny-invariant';
 /* Internal dependencies */
 import {
   getPlaylist,
-  getPlaylistTracks,
+  getPlaylistAudios,
 } from '~/models/entity.server';
 import { playlistLoaderParams, PlaylistLoaderData } from '../../types';
-import Collection from '~/components/Collection';
+import List from '~/components/List';
 import PlaylistSummary from '~/components/Summary/PlaylistSummary';
 import styles from '~/css/routes/__main/playlist.css';
 
@@ -22,7 +22,7 @@ export const loader = async ({ params }: playlistLoaderParams) => {
   invariant(params.id, 'Expected params.id');
 
   const playlist = await getPlaylist(params.id);
-  const tracks = await getPlaylistTracks(params.id);
+  const audios = await getPlaylistAudios(params.id);
 
   if (!playlist) {
     throw new Response('Not Found', { status: 404 });
@@ -30,26 +30,26 @@ export const loader = async ({ params }: playlistLoaderParams) => {
 
   return json<PlaylistLoaderData>({
     playlist,
-    tracks,
+    audios,
     id: params.id,
   });
 };
 
-const Playlist = () => {
+const PlaylistScreen = () => {
   const {
     playlist,
-    tracks,
+    audios,
   } = useLoaderData() as PlaylistLoaderData;
 
   return (
     <section className="screen playlist">
       <PlaylistSummary data={playlist} />
-      <Collection
-        className="trackList"
-        items={!tracks.length ? [] : tracks}
+      <List
+        className="audioList"
+        items={!audios.length ? [] : audios}
       />
     </section>
   );
 };
 
-export default Playlist;
+export default PlaylistScreen;

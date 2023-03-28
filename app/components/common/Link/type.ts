@@ -1,23 +1,14 @@
-import { MouseEvent, ReactElement } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 
-export interface BaseProps {
+export interface BaseLinkProps {
   to: string;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   className?: string;
+  children?: ReactNode;
+  theme?: 'dark' | 'light';
 }
 
-export interface IconLinkProps extends BaseProps {
-  title?: string;
-  icon: string;
-  children?: Element;
+export interface CompoundLinkProps extends BaseLinkProps {
+  icon?: string;
 }
 
-export interface CompoundLinkProps extends BaseProps {
-  icon: string;
-  children: string|ReactElement;
-}
-
-export interface TextLinkProps extends BaseProps {
-  title: string|ReactElement;
-  theme?: 'dark';
-}

@@ -5,7 +5,7 @@
   width: 100%;
   height: auto;
   border-radius: 45px 45px 0 0;
-  box-shadow: 0 -10px 18px 0px var(--color-primary-shadow);
+  box-shadow: 0 -10px 18px 0 var(--color-primary-shadow);
   transition: all ease 200ms;
 
   &.dark {
@@ -38,10 +38,10 @@
   .component.modal {
     &.modalRelative {
       position: relative;
-      box-shadow: 0 -10px 18px 0px var(--color-primary-shadow),
-        0 10px 18px 0px var(--color-primary-shadow);
+      box-shadow: 0 -10px 18px 0 var(--color-primary-shadow),
+        0 10px 18px 0 var(--color-primary-shadow);
       border-radius: var(--border-radius-x);
-      padding-button: var(--padding-m);
+      padding-bottom: var(--padding-m);
     }
   }
 }

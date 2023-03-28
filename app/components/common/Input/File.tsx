@@ -10,14 +10,15 @@ const FileInput = ({
   title,
   name,
   accept,
+  value,
   multiple = true,
   className = '',
-  icon = '',
+  icon = 'file',
 }: FileInputProps) => (
   <label className={`component fileInput ${className}`}>
     {
       icon && (
-        <Icon name={icon} />
+        <Icon name={value ? 'check' : icon} />
       )
     }
     <input

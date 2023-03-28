@@ -1,16 +1,25 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import { IconLink } from '~/components/common/Link';
+/* Internal dependencies */
+import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
+import { ROUTES } from '~/routes/routes';
+
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
   const { info } = useContext(ProfileContext);
+  const location = useLocation();
 
   const onClick = () => {
     setIsActive(!isActive);
   };
+
+  useEffect(() => {
+    setIsActive(false);
+  }, [location.pathname]);
 
   return (
     <aside className="component mainMenu">
@@ -21,48 +30,53 @@ const MainMenu = () => {
       />
       <section className={`menuContainer ${isActive ? 'active' : ''}`}>
         <div className="list">
-          <IconLink
-            title="Home"
+          <Link
             icon="home"
-            to="/"
+            to={ROUTES.HOME}
             className="menuItem"
-            onClick={onClick}
-          />
-          <IconLink
-            title="Search"
+          >
+            Home
+          </Link>
+          <Link
             icon="search"
-            to="/search"
+            to={ROUTES.SEARCH}
             className="menuItem"
-            onClick={onClick}
-          />
+          >
+            Search
+          </Link>
 
           {!!info.address && (
             <>
               {' '}
-              <IconLink
-                title="Profile"
+              <Link
                 icon="user"
-                to="/profile/discography"
+                to={ROUTES.MY_PROFILE}
                 className="menuItem"
-                onClick={onClick}
-              />
-              <IconLink
-                title="Subscription"
+              >
+                Profile
+              </Link>
+              <Link
+                icon="user"
+                to={ROUTES.UPLOAD_COLLECTION}
+                className="menuItem"
+              >
+                Upload
+              </Link>
+              <Link
                 icon="file"
-                to="/subscription/active"
+                to={ROUTES.SUBSCRIPTION_ACTIVE}
                 className="menuItem"
-                onClick={onClick}
-              />
+              >
+                Subscription
+              </Link>
             </>
           )}
 
-          <IconLink
-            title={info.address ? 'Logout' : 'Login'}
+          <Link
             icon="key"
-            to={`/login?action=${info.address ? 'logout' : 'login'}`}
+            to={`${ROUTES.LOGIN}?action=${info.address ? 'logout' : 'login'}`}
             className="menuItem"
-            onClick={onClick}
-          />
+          >{info.address ? 'Logout' : 'Login'}</Link>
         </div>
       </section>
     </aside>

@@ -1,13 +1,14 @@
 /* External dependencies */
 import React, { useContext, useRef, MutableRefObject } from 'react';
-import { Link } from '@remix-run/react';
 
 /* Internal dependencies */
+import { Link } from '~/components/common/Link';
 import { useAudio } from '~/hooks/useAudio/useAudio';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { IconButton } from '~/components/common/Button';
-import { API_URLS } from '~/constants/api';
+import { API_URLS } from '~/configs';
 import EntityThumbnail from '~/components/Entity/EntityThumbnail';
+import { ROUTES } from '~/routes/routes';
 import PlaceHolderImage from './PlaceHolderImage';
 import ProgressBar from './ProgressBar';
 
@@ -28,7 +29,7 @@ const PlayerContent = () => {
   return (
     <>
       <section className="primaryInfo">
-        <Link to={`/album/${current?.audioID ?? ''}`}>
+        <Link to={ROUTES.COLLECTION.replace(':id', current?.audioID ?? '')}>
           { current
             ? <EntityThumbnail data={current} />
             : <PlaceHolderImage />
@@ -36,7 +37,7 @@ const PlayerContent = () => {
         </Link>
         <header>
           <h5>{ current?.name ?? '...' }</h5>
-          <span>{ current?.artistName ?? '...' }</span>
+          <span>{ current?.creatorAddress ?? '...' }</span>
         </header>
       </section>
       <audio

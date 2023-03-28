@@ -1,7 +1,8 @@
 import React, { useState, createContext, useEffect } from 'react';
-import { PlayerContextType, PlayerProviderProps, PlayerState, Current } from './types';
+
 import { useStorage, STORAGE_KEYS } from '~/hooks/useStorage';
-import { TrackType } from '~/components/Entity/types';
+import { Audio } from '~/configs';
+import { PlayerContextType, PlayerProviderProps, PlayerState, Current } from './types';
 
 export const PlayerContext = createContext<PlayerContextType>({
   current: null,
@@ -15,7 +16,7 @@ const PlayerProvider = ({ children }: PlayerProviderProps) => {
     current: null,
     isPlaying: false,
   });
-  const [current, setCurrent] = useState<TrackType|null>(data.current);
+  const [current, setCurrent] = useState<Audio|null>(data.current);
   const [isPlaying, setIsPlaying] = useState<boolean>(data.isPlaying);
 
   useEffect(() => {

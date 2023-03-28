@@ -1,50 +1,31 @@
 /* External dependencies */
-import React, { useMemo } from 'react';
+import React from 'react';
 
 /* Internal dependencies */
-import EntityRow from '~/components/Entity/EntityRow';
-import { TrackType, entityMode } from '~/components/Entity/types';
+import { Link } from '~/components/common/Link';
+import { ROUTES } from '~/routes/routes';
+import { PrimaryButton } from '../common/Button';
 import { UserDiscographyProps } from './types';
+import List from '../List'
 
-const UserDiscography = ({ tracks, albums }: UserDiscographyProps) => {
-  const discography = useMemo(() => {
-    return tracks.reduce((acc: {[key: string]: TrackType[]}, item: TrackType) => {
-      if (!acc[item.collectionID]) {
-        acc[item.collectionID] = [];
-      }
-
-      acc[item.collectionID].push(item);
-      return acc;
-    }, {});
-  }, [albums]);
-
+const UserDiscography = ({ collections }: UserDiscographyProps) => {
   return (
-    <section className="component userDiscography tabContainer">
-      <div>
-        {
-          albums.map((album, index) => (
-            <section key={`album-${album.collectionID}-${index}`}>
-              <EntityRow
-                data={albums[index]}
-                mode={entityMode.edit}
-              />
-              <section className='albumTracks'>
-                {
-                  discography[album.collectionID]
-                    ? discography[album.collectionID].map((track, index) => (
-                      <EntityRow
-                        key={`track-${track.audioID}-${index}`}
-                        data={track}
-                        mode={entityMode.edit}
-                      />
-                    ))
-                    : null
-                }
-              </section>
-            </section>
-          ))
-        }
-      </div>
+    <section className='component userDiscography tabContainer'>
+      <header>
+        <h3>Albums</h3>
+      </header>
+      <List
+        items={!collections?.length ? [] : collections}
+        emptyState={{
+          title: 'You don’t have audios or collection yet.',
+          subtitle: 'Start by creating your first collection, then add audios to it.',
+          content: (
+            <Link to={ROUTES.UPLOAD_COLLECTION}>
+              <PrimaryButton className='newCollectionButton'>New collection</PrimaryButton>
+            </Link>
+          ),
+        }}
+      />
     </section>
   );
 };

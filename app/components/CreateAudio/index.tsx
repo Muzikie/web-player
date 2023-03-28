@@ -1,27 +1,28 @@
 import React from 'react';
 
-import { useCreateTrack, ValidationStatus } from '~/hooks/useCreateEntity';
+/* Internal dependencies */
+import { useCreateAudio, ValidationStatus } from '~/hooks/useCreateEntity';
 import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
-import { IconLink } from '~/components/common/Link';
-import { VALID_GENRES } from '~/constants/app';
-import Feedback from './Feedback';
+import { Link } from '~/components/common/Link';
+import Feedback from '~/components/Feedback';
+import { ROUTES } from '~/routes/routes';
+import { VALID_GENRES } from '~/configs';
 
 const CreateAudio = () => {
   const {
     name,
     releaseYear,
-    artistName,
     genre,
     collectionID,
-    status,
+    formValidity,
     onChange,
-    broadcast,
-    feedback,
-  } = useCreateTrack();
-  const { albums } = useUserDiscography();
+    signAndBroadcast,
+    broadcastStatus,
+  } = useCreateAudio();
+  const { collections } = useUserDiscography();
 
   return (
     <form className="component createAudio">
@@ -40,23 +41,16 @@ const CreateAudio = () => {
           placeholder="Release year"
           type="text"
         />
-        <Input
-          value={artistName}
-          onChange={onChange}
-          name="artistName"
-          placeholder="Enter artist name"
-          type="text"
-        />
         <div className='collectionRow'>
           <Select
-            placeholder="Select a collection (Album)"
+            placeholder="Select a collection (Collection)"
             name="collectionID"
-            options={albums}
+            options={collections}
             value={collectionID}
             onChange={onChange}
           />
-          <IconLink
-            to="/profile/createAlbum"
+          <Link
+            to={ROUTES.UPLOAD_COLLECTION}
             icon="cross"
             className='addCollection'
           />
@@ -78,13 +72,17 @@ const CreateAudio = () => {
         />
       </fieldset>
       <PrimaryButton
-        onClick={broadcast}
-        disabled={status !== ValidationStatus.valid}
+        onClick={signAndBroadcast}
+        disabled={formValidity.status !== ValidationStatus.valid}
         type="button"
       >
         Create
       </PrimaryButton>
-      <Feedback data={feedback} />
+      {
+        ((formValidity.status === ValidationStatus.invalid) && formValidity.message)
+          ? <Feedback data={{ message: formValidity.message, error: true }} />
+          : <Feedback data={broadcastStatus} />
+      }
     </form>
   );
 };

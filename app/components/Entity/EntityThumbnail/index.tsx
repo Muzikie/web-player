@@ -1,21 +1,21 @@
 import React from 'react';
 
-import { EntityRowProps, Entity, entityThemes } from '../types';
-import { API_URLS } from '~/constants/api';
-import { getEntity, getCollectionID } from '../utils';
+import { EntityRowProps, Entity } from '../types';
+import { API_URLS, FILES } from '~/configs';
+import { getEntity, getID } from '../utils';
 
 const EntityThumbnail = ({
-  data, className = '', theme = entityThemes.normal,
+  data, className = ''
 }: EntityRowProps<Entity>) => {
 
   const entity = getEntity(data);
-  const wrapper = `component entity thumbnail ${entity} ${theme} ${className}`;
-  const id = getCollectionID(data);
+  const wrapper = `component entity thumbnail ${entity} ${className}`;
+  const id = getID(data);
 
   return (
     <section className={wrapper}>
       <figure>
-        <img src={`${API_URLS.STREAMER}/${id}.jpg`} alt={data.name} />
+        <img src={`${API_URLS.STREAMER}/${id}-${FILES[entity]}.jpg`} alt={data.name} />
       </figure>
     </section>
   );

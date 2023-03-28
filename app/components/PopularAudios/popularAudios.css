@@ -1,0 +1,34 @@
+.component.popularAudios {
+  position: relative;
+
+  & .audiosLists {
+    padding: 0;
+  }
+
+  & .popularHeader {
+    padding-left: var(--padding-xs);
+    padding-bottom: var(--padding-s);
+
+    & h3 {
+      color: var(--gray);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+
+  & .content {
+    & .newCollectionButton {
+      width: 195px;
+      margin-top: var(--padding-s);
+    }
+  }
+}
+
+@media (min-width: 680px) {
+  .component.popularAudios {
+    padding-left: var(--padding-m);
+
+    & .popularHeader {
+      padding-left: 0;
+    }
+  }
+}

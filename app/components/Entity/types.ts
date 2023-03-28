@@ -1,14 +1,14 @@
-interface BaseEntity {
-  creatorAddress: string;
-  name: string;
-  hash: string;
-  meta: string;
-}
+import {
+  Collection,
+  Profile,
+  Audio,
+  Playlist,
+} from '~/configs';
 
 export enum entityThemes {
-  minimal = 'minimal',
-  normal = 'normal',
-  large = 'large',
+  ProfilePage = 'ProfilePage',
+  CollectionPage = 'CollectionPage',
+  HomePage= 'HomePage',
 }
 
 export enum entityMode {
@@ -18,47 +18,13 @@ export enum entityMode {
 
 export type entityTheme = entityThemes | undefined;
 
-export interface AlbumType extends BaseEntity {
-  coArtists: string[];
-  collectionType: number;
-  audios: string[];
-  releaseYear: string;
-  artistName: string;
-  collectionID: string;
-}
-
-export interface ArtistType extends BaseEntity {
-  description?: string;
-}
-
-interface LoyaltyOwnerJSON {
-  address: string;
-  shares: number;
-  income: string;
-}
-
-export interface TrackType extends BaseEntity {
-  genre: number[];
-  collectionID: string;
-  owners: LoyaltyOwnerJSON[];
-  releaseYear: string;
-  artistName: string;
-  audioID: string;
-}
-
-export interface PlaylistType extends BaseEntity {
-  playlistID: string;
-  owners: LoyaltyOwnerJSON[];
-  releaseYear: string;
-  tracks: TrackType[];
-  description: string;
-}
-
-export type Entity = AlbumType | ArtistType | TrackType | PlaylistType;
+export type Entity = Collection | Profile | Audio | Playlist;
 
 export interface EntityRowProps<Entity> {
   data: Entity;
   theme?: entityTheme;
   mode?: entityMode;
   className?: string;
+  rowNumber?:number;
+  showRowNumber?: boolean;
 }

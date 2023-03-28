@@ -1,7 +1,15 @@
 .component.entity.row {
   width: 100%;
-  padding: 10px;
+  padding-top: var(--padding-s);
+  padding-bottom: var(--padding-s);
   box-sizing: border-box;
+
+  & strong {
+    color: var(--gray);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--size-h3);
+    line-height: 0;
+  }
 
   & .container {
     display: flex;
@@ -14,7 +22,8 @@
 
   &.large {
     & .container {
-      padding: 10px;
+      padding-top: var(--padding-xs);
+      padding-bottom: var(--padding-s);
       background-color: #ffffff20;
       border: solid 1px #ffffff40;
       border-radius: var(--border-radius-m);
@@ -26,15 +35,27 @@
     display: flex;
     align-items: center;
     flex-flow: row nowrap;
-    flex-basis: 50em;
+    flex-basis: 50rem;
   }
 
   & .primaryInfo {
     flex-shrink: 1;
     flex-grow: 3;
 
+    & .rowNumber {
+      margin-right: var(--padding-s);
+    }
+
     & .thumbnail + .text {
       padding-left: var(--padding-s);
+    }
+
+    & .detail {
+      display: flex;
+      flex-direction: column;
+      & strong {
+        padding: var(--border-radius-xs);
+      }
     }
 
     & h4 {
@@ -48,7 +69,6 @@
 
   &:hover {
     & footer {
-      & > span,
       & > button {
         opacity: 1 !important;
       }

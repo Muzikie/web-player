@@ -1,3 +1,12 @@
+import {
+  Audio,
+  Collection,
+  CreateCommandParams,
+  MODULES,
+  COMMANDS,
+} from '~/configs';
+import { ProfileInfoType } from '~/context/profileContext/types';
+
 export enum ValidationStatus {
   pending = 'PENDING',
   clean = 'CLEAN',
@@ -5,23 +14,40 @@ export enum ValidationStatus {
   valid = 'VALID',
 }
 
-export interface TrackNFTData {
-  name: string;
-  releaseYear: string;
-  artistName: string;
-  collectionID: string;
-  genre: number[];
+export interface AudioTxProps extends Omit<Audio, 'owners' | 'audioID' | 'duration' | 'creatorAddress' | 'audioSignature' | 'audioHash'> {
   files: FileList | null;
 }
 
-export interface AlbumNFTData {
-  name: string;
-  releaseYear: string;
-  artistName: string;
-  collectionType: number;
+export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | 'collectionID' | 'audios' | 'coverSignature' | 'coverHash'> {
   files: FileList | null;
 }
 
-export type validateProps = TrackNFTData | AlbumNFTData;
+export interface ProfileTxProps extends Omit<CreateCommandParams, 'creatorAddress' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'> {
+  avatar: FileList | null;
+  banner: FileList | null;
+}
 
-export type EntityName = 'track' | 'album';
+export type validateProps = AudioTxProps | CollectionTxProps | ProfileTxProps;
+
+export type EntityName = 'audio' | 'collection' | 'profile';
+
+type TransactionProp = 'id' | 'params' | 'module' | 'command' | 'signatures' | 'nonce' | 'fee' | 'senderPublicKey';
+
+export interface SignTransactionProps {
+  command: COMMANDS,
+  module: MODULES,
+  params: { [key: string]: unknown },
+  files: { value: File, key: string }[],
+  account: ProfileInfoType,
+}
+
+export interface SignTransactionResult {
+  transaction: Record<TransactionProp, any>,
+  txId: string,
+  txBytes: Buffer;
+}
+
+export interface ValidationResult {
+  status: ValidationStatus;
+  message?: string;
+}

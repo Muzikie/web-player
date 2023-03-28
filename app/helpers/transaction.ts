@@ -1,13 +1,9 @@
 import { DryRunTxResponse } from '~/context/socketContext/types';
-
-const {
-  SUCCESS_CODE,
-  TX_STATUS,
-} = require('~/constants/app');
+import { HTTP_STATUS, SUCCESS_CODE } from '~/configs';
 
 export const getTransactionExecutionStatus = (module: string, id: string, response: DryRunTxResponse) => {
   if (response.error || !response.data.events.length) {
-    return TX_STATUS.FAIL;
+    return HTTP_STATUS.BAD_REQUEST.CODE;
   }
 
   const expectedEventName = `${module}:commandExecutionResult`;
@@ -16,7 +12,7 @@ export const getTransactionExecutionStatus = (module: string, id: string, respon
   const txExecResultEvent = commandExecResultEvents.find((e) =>
     e.topics.includes(id));
   if (!txExecResultEvent) {
-    return TX_STATUS.FAIL;
+    return HTTP_STATUS.BAD_REQUEST.CODE;
   }
-  return txExecResultEvent.data === SUCCESS_CODE ? TX_STATUS.SUCCESS : TX_STATUS.FAIL;
+  return txExecResultEvent.data === SUCCESS_CODE ? HTTP_STATUS.OK.CODE : HTTP_STATUS.BAD_REQUEST.CODE;
 };
