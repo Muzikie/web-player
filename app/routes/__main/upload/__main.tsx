@@ -23,7 +23,7 @@ export const loader = async ({ request }: any) => {
     // redirect users to home page when users are logout
     return redirect('/')
   }
-  if (!agreement && address) {
+  if (!agreement) {
     // redirect users to agreement page when the agreement cookie is not set
     return redirect('/agreement')
   }
