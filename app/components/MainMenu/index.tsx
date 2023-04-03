@@ -30,47 +30,50 @@ const MainMenu = () => {
       />
       <section className={`menuContainer ${isActive ? 'active' : ''}`}>
         <div className="list">
-          <Link
-            icon="home"
-            to={ROUTES.HOME}
-            className="menuItem"
-          >
-            Home
-          </Link>
-          <Link
-            icon="search"
-            to={ROUTES.SEARCH}
-            className="menuItem"
-          >
-            Search
-          </Link>
-
-          {!!info.address && (
+          {location.pathname !== '/agreement' && (
             <>
-              {' '}
               <Link
-                icon="user"
-                to={ROUTES.MY_PROFILE}
+                icon="home"
+                to={ROUTES.HOME}
                 className="menuItem"
               >
-                Profile
+                Home
               </Link>
               <Link
-                icon="user"
-                to={ROUTES.UPLOAD_COLLECTION}
+                icon="search"
+                to={ROUTES.SEARCH}
                 className="menuItem"
               >
-                Upload
+                Search
               </Link>
-              <Link
-                icon="file"
-                to={ROUTES.SUBSCRIPTION_ACTIVE}
-                className="menuItem"
-              >
-                Subscription
-              </Link>
+              {!!info.address && (
+                <>
+                  <Link
+                    icon="user"
+                    to={ROUTES.MY_PROFILE}
+                    className="menuItem"
+                  >
+                    Profile
+                  </Link>
+                  <Link
+                    icon="user"
+                    to={ROUTES.UPLOAD_COLLECTION}
+                    className="menuItem"
+                  >
+                    Upload
+                  </Link>
+                  <Link
+                    icon="file"
+                    to={ROUTES.SUBSCRIPTION_ACTIVE}
+                    className="menuItem"
+                  >
+                    Subscription
+                  </Link>
+                </>
+              )}
             </>
           )}
+
 
           <Link
             icon="key"
