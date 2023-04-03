@@ -1,42 +1,28 @@
 /* External dependencies */
 import React from 'react';
-import { json, redirect } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-
 /* Internal dependencies */
 import {
   getRecentlyPlayed,
   getProfiles,
   getCollections,
 } from '~/models/entity.server';
-import { HomeLoaderData, LoaderBaseProps } from '../../types';
+import { HomeLoaderData } from '../../types';
 import List from '~/components/List';
 import { entityThemes } from '~/components/Entity/types';
 import styles from '~/css/routes/__main/index.css';
-import { getSession } from '~/hooks/useSession';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ request }: LoaderBaseProps) => {
-
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
-  const agreement = session.get('agreement');
-  const address = session.get('address');
-  if (!agreement && address) {
-    // redirect users to agreement page when the agreement cookie is not set
-    return redirect('/agreement')
-  }
-
+export const loader = async () => {
   return json<HomeLoaderData>({
     recentlyPlayed: await getRecentlyPlayed(),
     profiles: await getProfiles(),
     collections: await getCollections(),
   });
-
 };
 
 const HomeScreen = () => {

@@ -1,9 +1,6 @@
 /* External dependencies */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { redirect } from '@remix-run/node';
-import { getSession } from '~/hooks/useSession';
-
 /* Internal dependencies */
 import { PrimaryButton } from '~/components/common/Button';
 import { PartialView } from '~/components/PartialView';
@@ -13,19 +10,6 @@ import styles from '~/css/routes/__main/register.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
-}
-
-export const loader = async ({ request }: any) => {
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
-  const agreement = session.get('agreement');
-  const address = session.get('address');
-  if (!agreement && address) {
-    // redirect users to agreement page when the agreement cookie is not set
-    return redirect('/agreement')
-  }
-  return session;
 }
 
 const SecretKeyGenerator = () => (
