@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
 
-
 import {
   MODULES,
   COMMANDS,
@@ -16,11 +15,9 @@ export const useStream = () => {
   const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
   const { broadcast } = useBroadcast();
 
-
   const registerStream = (audioID: string) => {
     setQueue((prevQueue) => [...prevQueue, audioID]);
   };
-
 
   const registerOne = async (audioID: string) => {
     const data = await updateAccount();
