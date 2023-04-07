@@ -15,7 +15,7 @@ const getConsumed = (price: string, consumable: string): string => {
   const consumableBN = new BigNumber(consumable);
   const consumedBN = priceBN.multipliedBy(factor).minus(consumableBN);
   return consumedBN.toString();
-}
+};
 
 const SubscriptionInfo = ({ data }: SubscriptionInfoProps) => {
   const list = [

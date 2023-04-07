@@ -15,7 +15,6 @@ export const audioSchema = yup
     collectionID: yup.string().trim().matches(/([\w\d]+){10,}/, 'Please select a collection type'),
   });
 
-
 export const collectionSchema = yup
   .object()
   .shape({

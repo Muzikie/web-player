@@ -1,12 +1,12 @@
 import React from 'react';
 
 // internal import
-import { API_URLS, FILES } from '~/configs'
-import Image from '../common/Image'
-import { ProfileAddress } from './types'
+import { API_URLS, FILES } from '~/configs';
+import Image from '../common/Image';
+import { ProfileAddress } from './types';
 
-const ProfileBanner = ({ data, audios }: ProfileAddress) => {
-  const { creatorAddress, profileID, name } = data
+const ProfileBanner = ({ data }: ProfileAddress) => {
+  const { creatorAddress, profileID, name } = data;
 
   return (
     <section className="component profileBanner">

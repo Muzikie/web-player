@@ -1,22 +1,22 @@
 import { Collection, Audio, Profile, API_URLS } from '~/configs';
 
-export type SearchResultType = {
+export interface SearchResultType {
   audio: Audio[];
   profile: Profile[];
   collection: Collection[];
 }
 
-type JSON = { [key: string]: any };
-type Asset = {
+interface JSON { [key: string]: any }
+interface Asset {
   key: string;
   value: File;
-};
+}
 
-type TransactionSuccess = {
+interface TransactionSuccess {
   _id: string;
 }
 
-type TransactionFailure = {
+interface TransactionFailure {
   error: string;
 }
 

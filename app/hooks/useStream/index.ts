@@ -6,7 +6,7 @@ import {
 } from '~/configs';
 import { useAccount } from '../useAccount/useAccount';
 import { bufferize } from '~/helpers/convertors';
-import { useBroadcast } from '../useBroadcast/useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast';
 
 export const useStream = () => {
   const { updateAccount } = useAccount();
@@ -34,7 +34,6 @@ export const useStream = () => {
       setQueue((prevQueue) => prevQueue.filter(item => item !== audioID));
     }
   };
-
 
   useEffect(() => {
     if (queue.length) {

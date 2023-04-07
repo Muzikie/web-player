@@ -11,11 +11,9 @@ import {
   socialPlatformNames,
   SocialAccount,
 } from '~/configs';
-
 import { ValidationResult, ValidationStatus } from './types';
 import { validate } from './validator';
-
-import { useBroadcast } from '../useBroadcast/useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast';
 
 export const useCreateProfile = () => {
   const { updateAccount } = useAccount();

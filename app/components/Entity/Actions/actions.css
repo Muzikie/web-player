@@ -20,6 +20,7 @@
   }
 
   &.edit {
+
     & button {
       height: 18px;
       font-size: 12px;
@@ -27,6 +28,7 @@
   }
 
   &.audio {
+
     & .duration  {
       text-align: center;
     }
@@ -52,8 +54,11 @@
 }
 
 @media (min-width: 680px) {
+
   .component.entity.action {
+
     &.audio {
+
       & .streamCount {
         display: block;
       }

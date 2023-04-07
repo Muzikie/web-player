@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { ImageType } from './types'
+import { ImageType } from './types';
 
 const Image = ({ src, alt, className, placeHolder } : ImageType) => {
   const image = useRef<HTMLImageElement>(null);
@@ -18,7 +18,7 @@ const Image = ({ src, alt, className, placeHolder } : ImageType) => {
 
   return (
     <img ref={image} className={className} src={src} alt={alt} />
-  )
+  );
 };
 
 export default Image;

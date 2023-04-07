@@ -129,13 +129,16 @@
 }
 
 @media (max-width: 850px) {
+
   .component.purchase {
+
     & .description p {
       width: 100%;
     }
   }
 
   .component.offer {
+
     & .content {
       flex-direction: column;
       align-items: center;
@@ -165,7 +168,9 @@
 }
 
 @media (max-width: 480px) {
+
   .component.offer {
+
     & .sidebar {
       width: 88%;
     }

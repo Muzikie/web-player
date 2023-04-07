@@ -12,7 +12,7 @@ const NumberOfAudios = ({ data }: EntityRowProps<Entity>) => {
     <span className="component audioCount">
       <span>{count}</span>
     </span>
-  )
-}
+  );
+};
 
 export default NumberOfAudios;

@@ -1,8 +1,8 @@
-export type ProgressBarProps = {
+export interface ProgressBarProps {
   duration: number;
   progress: number;
   setProgress: (progress: number) => void;
-};
+}
 
 export enum PlayerState {
   loginError = 'loginError',

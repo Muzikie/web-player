@@ -174,8 +174,8 @@
   }
 }
 
-
 @media (min-width: 480px) {
+
   .component.viewProfile {
    flex-flow: row wrap;
 
@@ -198,7 +198,9 @@
 }
 
 @media (min-width: 900px) {
+
   .component.viewProfile {
+
     & .profileName {
       width: 39%;
     }
@@ -206,6 +208,7 @@
 }
 
 @media (min-width: 1280px) {
+
   .component.viewProfile {
     justify-content: space-around;
 

@@ -6,7 +6,7 @@ import { Link } from '~/components/common/Link';
 import { ROUTES } from '~/routes/routes';
 import { PrimaryButton } from '../common/Button';
 import { UserDiscographyProps } from './types';
-import List from '../List'
+import List from '../List';
 
 const UserDiscography = ({ collections }: UserDiscographyProps) => {
   return (

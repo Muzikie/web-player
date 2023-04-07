@@ -24,6 +24,7 @@
     }
 
     & header {
+
       &:not(:first-child) {
         padding: 0 var(--padding-m);
       }
@@ -140,6 +141,7 @@
 }
 
 @media (min-width: 680px) {
+
   .component.player {
     /* & .controls {
       & button {

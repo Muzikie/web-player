@@ -35,7 +35,9 @@
 }
 
 @media (max-width: 480px) {
+
   .component.modal {
+
     &.modalRelative {
       position: relative;
       box-shadow: 0 -10px 18px 0 var(--color-primary-shadow),

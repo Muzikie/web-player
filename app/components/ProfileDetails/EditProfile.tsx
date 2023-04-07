@@ -106,7 +106,7 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
           : <Feedback data={broadcastStatus} />
       }
     </form >
-  )
-}
+  );
+};
 
 export default ProfileEdit;

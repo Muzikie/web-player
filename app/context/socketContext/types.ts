@@ -119,10 +119,10 @@ export interface ErrorResponse {
   error: true;
 }
 
-export type SuccessResponse<T extends Method> = {
+export interface SuccessResponse<T extends Method> {
   data: DefaultValues[T];
   error: false;
-};
+}
 
 export type AuthResponse = SuccessResponse<Method.auth_getAuthAccount> | ErrorResponse;
 export type TokenResponse = SuccessResponse<Method.token_getBalances> | ErrorResponse;

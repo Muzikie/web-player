@@ -43,6 +43,7 @@
 }
 
 @media (min-width: 700px) {
+
   .component.profileBanner {
     flex-wrap: wrap;
     height: 29.66rem;
@@ -78,12 +79,14 @@
 }
 
 @media (min-width: 1024px) {
+
   .component.profileBanner {
+
     & header {
+
       & h2 {
         padding-left: var(--padding-xs);
       }
     }
   }
 }
-

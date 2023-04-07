@@ -7,7 +7,6 @@ import { IconButton } from '~/components/common/Button';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { ROUTES } from '~/routes/routes';
 
-
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
   const { info } = useContext(ProfileContext);
