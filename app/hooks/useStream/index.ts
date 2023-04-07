@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { cryptography } from '@liskhq/lisk-client';
 
 import {
   MODULES,

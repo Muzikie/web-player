@@ -49,7 +49,7 @@ export const signTransaction = async ({
   // @todo improve the transaction signature validation
   // meaning, check if there is an array called signatures
   // which includes a valid signature (buffer of length 64)
-  if (!schema || !signedTx.id || !Buffer.isBuffer(signedTx.id)) {
+  if (!signedTx.id || !Buffer.isBuffer(signedTx.id)) {
     return new Error('Error while signing transaction');
   }
 
