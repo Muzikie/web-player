@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
 
 import { useWS } from '../useWS/useWS';
@@ -7,62 +6,58 @@ import {
   MODULES,
   COMMANDS,
   DEV_ACCOUNT,
-  HTTP_STATUS,
 } from '~/configs';
 import { useAccount } from '../useAccount/useAccount';
-import { FetchStatus } from './types';
 import { bufferize } from '~/helpers/convertors';
 import { useBroadcast } from '../useBroadcast/useBroadcast'
+import { PurchaseErrors } from './types';
 
 export const usePurchaseSubscription = () => {
-  const [ids, setIDs] = useState<string[]>([]);
-  const [fetchStatus, setStatus] = useState<FetchStatus>(FetchStatus.loading);
   const { updateAccount } = useAccount();
-  const { request, isConnected } = useWS();
+  const { request } = useWS();
   const { broadcast } = useBroadcast();
 
-  const getAvailableSubs = async () => {
+  const getSubNFTs = async () => {
     const devAccountInfo = <SubsAccountResponse>(
       await request(Method.subscription_getAccount, { address: DEV_ACCOUNT.ADDRESS })
     );
+
     if (!devAccountInfo.error && devAccountInfo.data.subscription?.owned.length > 0) {
-      setIDs(devAccountInfo.data.subscription?.owned);
-      setStatus(FetchStatus.success);
-    } else {
-      setStatus(FetchStatus.error);
+      return devAccountInfo.data.subscription?.owned;
     }
+    return [];
   };
 
   const purchase = async () => {
-    // @todo We should inform the user that there are no subscriptions available
-    if (!ids.length) return {
-      error: true,
-      message: HTTP_STATUS.INTERNAL_ERROR.MESSAGE,
-    };
+    const subNFTs = await getSubNFTs();
+    if (subNFTs.length === 0) {
+      return {
+        error: true,
+        message: PurchaseErrors.NoSubNFTs,
+      };
+    }
 
-    const data = await updateAccount();
+    const account = await updateAccount();
+    if (account.balances.length === 0) {
+      return {
+        error: true,
+        message: PurchaseErrors.InsufficientBalance,
+      };
+    }
+
     // Create blockchain transaction and broadcast it
     const result = await broadcast({
       module: MODULES.SUBSCRIPTION,
       command: COMMANDS.PURCHASE,
       params: {
-        subscriptionID: bufferize(ids[0]),
-        members: [cryptography.address.getAddressFromLisk32Address(data.address)],
+        subscriptionID: bufferize(subNFTs[0]),
+        members: [cryptography.address.getAddressFromLisk32Address(account.address)],
       },
-      account: data,
+      account,
       files: [],
     });
     return result;
   };
 
-  useEffect(() => {
-    if (isConnected) {
-      getAvailableSubs();
-    }
-  }, [isConnected]);
-
-  return {
-    purchase,
-    fetchStatus,
-  };
+  return { purchase };
 };

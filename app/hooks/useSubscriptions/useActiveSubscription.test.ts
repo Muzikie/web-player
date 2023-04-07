@@ -50,7 +50,7 @@ describe('useActiveSubscription', () => {
     const { result } = renderHook(() => useActiveSubscription());
 
     expect(result.current.subscription).toBeUndefined();
-    expect(result.current.subscriptionStatus).toBe(SubscriptionStatus.loading);
+    expect(result.current.subscriptionStatus).toBe(SubscriptionStatus.Loading);
     expect(result.current.updateSubscription).toBeInstanceOf(Function);
   });
 
@@ -58,11 +58,11 @@ describe('useActiveSubscription', () => {
     const { result } = renderHook(() => useActiveSubscription());
 
     // Initial state
-    expect(result.current.subscriptionStatus).toBe(SubscriptionStatus.loading);
+    expect(result.current.subscriptionStatus).toBe(SubscriptionStatus.Loading);
     // Flush promises
     await new Promise((resolve) => setTimeout(resolve, 1));
     // State after retrieval
-    expect(result.current.subscriptionStatus).toBe(SubscriptionStatus.subscribed);
+    expect(result.current.subscriptionStatus).toBe(SubscriptionStatus.Subscribed);
     expect(result.current.subscription?.price).toBe('1000000000');
   });
 });

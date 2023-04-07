@@ -26,10 +26,6 @@ export const useStream = () => {
       command: COMMANDS.STREAM,
       params: {
         audioID: bufferize(audioID),
-        owners: [{
-          address: cryptography.address.getAddressFromLisk32Address(data.address),
-          shares: 100
-        }]
       },
       account: data,
       files: [],
@@ -48,5 +44,8 @@ export const useStream = () => {
     }
   }, [queue]);
 
-  return { registerStream };
+  return {
+    registerStream,
+    broadcastStatus,
+  };
 };
