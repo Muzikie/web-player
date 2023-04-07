@@ -2,7 +2,7 @@
 import { HTTP_STATUS } from '~/configs';
 import { DryRunTxResponse, PostTxResponse, Method } from '~/context/socketContext/types';
 import { useWS } from '../useWS/useWS';
-import { SignTransactionProps } from './types';
+import { SignTransactionProps } from '../useCreateEntity/types';
 import { postTransaction } from '~/models/entity.client';
 import { getTransactionExecutionStatus } from '~/helpers/transaction';
 import { signTransaction } from './utils';
@@ -10,8 +10,9 @@ import { signTransaction } from './utils';
 export const useBroadcast = () => {
   const { request } = useWS();
 
-  const broadcast = async ({ module, command, params, account, files }: SignTransactionProps) => {
-    const result = await signTransaction({ module, command, params, account, files });
+  const broadcast = async (props: SignTransactionProps) => {
+    const { module, command, account, files } = props;
+    const result = await signTransaction(props);
     if (result instanceof Error) {
       return {
         error: true,
