@@ -14,4 +14,8 @@
   & .light {
     color: var(--color-primary);
   }
+
+  &.disabledLink {
+    pointer-events: none;
+  }
 }

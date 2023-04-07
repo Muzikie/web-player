@@ -9,7 +9,10 @@ const ExtendedLogo = () => {
   const { pathname } = useLocation();
   return (
     <div className="component logo extended">
-      <Link to={pathname === '/agreement' ? ROUTES.AGREEMENT : ROUTES.HOME}>
+      <Link
+        disabled={pathname === '/agreement'}
+        to={ROUTES.HOME}
+      >
         <figure>
           <img src="/images/logo.svg" alt="Muzikie" />
         </figure>
