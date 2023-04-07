@@ -23,7 +23,6 @@ export interface collectionLoaderProps {
   params: {
     id: number;
   };
-  request: Request;
 }
 
 export interface HomeLoaderData {
@@ -46,7 +45,6 @@ export interface playlistLoaderParams {
   params: {
     id: number;
   };
-  request: Request;
 }
 
 export interface ProfileLoaderData {

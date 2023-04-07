@@ -15,9 +15,9 @@ export function links() {
 
 export async function action({ request }: any) {
   const session = await getSession(request.headers.get('Cookie'));
-  
+
   session.set('agreement', true);
-  
+
   return redirect('/', {
     headers: {
       'Set-Cookie': await commitSession(session),

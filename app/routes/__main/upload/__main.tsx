@@ -1,7 +1,6 @@
 /* External dependencies */
 import React from 'react';
 import { Outlet } from '@remix-run/react';
-
 /* Internal dependencies */
 import styles from '~/css/routes/__main/upload.css';
 import { ROUTES } from '~/routes/routes';

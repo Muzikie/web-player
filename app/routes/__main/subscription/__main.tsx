@@ -1,7 +1,6 @@
 /* External dependencies */
 import React, { useEffect, useContext } from 'react';
 import { Outlet } from '@remix-run/react';
-
 /* Internal dependencies */
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import styles from '~/css/routes/__main/subscription.css';
@@ -18,7 +17,7 @@ const SubscriptionScreen = () => {
   const { setCurrent } = useContext(PlayerContext);
 
   useEffect(() => {
-    if(!subscription) {
+    if (!subscription) {
       setCurrent(null);
     }
   }, [subscription]);

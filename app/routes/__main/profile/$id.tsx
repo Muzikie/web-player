@@ -3,7 +3,6 @@ import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
-
 /* Internal dependencies */
 import {
   getProfile,
@@ -15,7 +14,7 @@ import ProfileBanner from '~/components/ProfileBanner';
 import ProfileDetails from '~/components/ProfileDetails';
 import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/profile.css';
-import UserDiscography from '~/components/UserDiscography'
+import UserDiscography from '~/components/UserDiscography';
 import { profileLoaderProps, ProfileLoaderData } from '../../types';
 
 export function links() {

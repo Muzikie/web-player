@@ -2,7 +2,6 @@
 import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-
 /* Internal dependencies */
 import {
   getRecentlyPlayed,

@@ -3,7 +3,6 @@ import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
-
 /* Internal dependencies */
 import {
   getPlaylist,
@@ -20,7 +19,6 @@ export function links() {
 
 export const loader = async ({ params }: playlistLoaderParams) => {
   invariant(params.id, 'Expected params.id');
-
   const playlist = await getPlaylist(params.id);
   const audios = await getPlaylistAudios(params.id);
 

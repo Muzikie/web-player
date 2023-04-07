@@ -6,6 +6,7 @@ export interface BaseLinkProps {
   className?: string;
   children?: ReactNode;
   theme?: 'dark' | 'light';
+  disabled?: boolean;
 }
 
 export interface CompoundLinkProps extends BaseLinkProps {
