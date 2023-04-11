@@ -12,6 +12,10 @@ export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
 }
 
+export interface AudioCollectionLoaderData {
+  collectionsAudio: Awaited<Collection[]>;
+}
+
 export interface CollectionLoaderData {
   collection: Awaited<Collection>;
   profile: Awaited<Profile>;

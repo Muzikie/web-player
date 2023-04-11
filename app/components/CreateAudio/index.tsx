@@ -11,7 +11,7 @@ import Feedback from '~/components/Feedback';
 import { ROUTES } from '~/routes/routes';
 import { VALID_GENRES } from '~/configs';
 
-const CreateAudio = () => {
+const CreateAudio = ({ collectionsAudio }: any) => {
   const {
     name,
     releaseYear,
@@ -45,7 +45,7 @@ const CreateAudio = () => {
           <Select
             placeholder="Select a collection (Collection)"
             name="collectionID"
-            options={collections}
+            options={collectionsAudio}
             value={collectionID}
             onChange={onChange}
           />
