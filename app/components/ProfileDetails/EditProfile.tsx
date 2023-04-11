@@ -8,68 +8,75 @@ import { useCreateProfile, ValidationStatus } from '~/hooks/useCreateEntity';
 import { socialPlatformNames } from '~/configs';
 import { ProfileEditProps } from './types';
 import './profileDetails.css';
+import { useForm } from 'react-hook-form'
+import { profileSchema } from '~/hooks/useCreateEntity/schemas'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
-  const {
-    name,
-    avatar,
-    banner,
-    nickName,
-    description,
-    socialAccounts,
-    onChange,
-    signAndBroadcast,
-    formValidity,
-    broadcastStatus,
-  } = useCreateProfile();
+  const { signAndBroadcast, broadcastStatus, socialAccounts, formValidity } = useCreateProfile();
+
+  const { handleSubmit, register, watch, formState } = useForm({
+    resolver: yupResolver(profileSchema),
+    mode: 'onBlur', // validate on blur
+    shouldFocusError: true, // focus input with error after submit
+    defaultValues: {
+      name: '',
+      nickName: '',
+      description: '',
+      socialAccounts,
+      files: null,
+      message: '',
+    },
+  });
+
+  const onSubmit = async (data: Record<string, any>) => {
+    await signAndBroadcast(data);
+  };
+
+  const errorMessage = Object.values(formState.errors)[0]?.message as string;
 
   return (
-    <form className="component editProfile">
+    <form onSubmit={handleSubmit(onSubmit)} className="component editProfile">
       <fieldset>
         <div>
           <FileInput
             icon="file"
             name="banner"
-            value={banner}
             accept='.png,.jpg,.jpeg'
             multiple={false}
             title="Click to update banner"
             className="fileInput"
-            onChange={onChange}
+            register={register}
           />
         </div>
         <div>
           <FileInput
             icon="file"
             name="avatar"
-            value={avatar}
+            register={register}
             accept='.png,.jpg,.jpeg'
             multiple={false}
             title="Click to update Avatar"
             className="fileInput"
-            onChange={onChange}
           />
         </div>
         <Input
-          value={name}
+          register={register}
           name="name"
           placeholder="Enter name"
           type="text"
-          onChange={onChange}
         />
         <Input
-          value={nickName}
+          register={register}
           name="nickName"
           placeholder="Enter nickname"
           type="text"
-          onChange={onChange}
         />
         <Textarea
-          value={description}
+          register={register}
           name="description"
           placeholder="Describe yourself"
           className="descriptionInput"
-          onChange={onChange}
         />
         {socialAccounts && socialAccounts.length > 0 ? (
           <>
@@ -81,7 +88,7 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
                   name={socialPlatformNames[platform]}
                   placeholder={`${socialPlatformNames[platform]} channel`}
                   type="text"
-                  onChange={onChange}
+                  register={register}
                 />
               ))
             }

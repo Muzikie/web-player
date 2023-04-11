@@ -1,6 +1,8 @@
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form"
+
 export interface FeedbackProps {
   data: {
-    message: string;
+    message: string | FieldError ;
     error: boolean;
   };
 }
