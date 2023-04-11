@@ -1,6 +1,8 @@
 /* External dependencies */
 import React, { useState } from 'react';
 
+import { UseFormRegister, UseFormRegisterReturn } from 'react-hook-form'
+
 /* Internal dependencies */
 import { IconButton } from '../Button';
 import Icon from '../Icon';
@@ -8,14 +10,13 @@ import { InputProps } from './types';
 
 const Input = ({
   type = 'text',
-  value,
-  onChange,
+  register,
   placeholder,
   className = '',
   icon = '',
   message = '',
   name = '',
-}: InputProps) => {
+}: InputProps & { register: UseFormRegister<any> }) => {
   const [visibility, setVisibility] = useState(false);
 
   const toggleVisibility = () => {
@@ -33,9 +34,8 @@ const Input = ({
       }
       <input
         type={type === 'password' && visibility ? 'text' : type}
-        value={value}
+        {...register(name)}
         name={name}
-        onChange={onChange}
         placeholder={placeholder}
         className={`component input ${className}`}
       />
