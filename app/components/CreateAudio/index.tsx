@@ -17,7 +17,6 @@ const CreateAudio = ({ collectionsAudio }: CollectionInfo) => {
     value: item.collectionID,
     label: `${item.name} - ${item.releaseYear}`,
   }));
-  console.log('CollectionsInfo', CollectionsInfo)
   const {
     name,
     releaseYear,

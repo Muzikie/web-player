@@ -12,10 +12,8 @@ export const loader = async ({ request }: collectionLoaderProps) => {
     request.headers.get('Cookie')
   );
   const address = session.get('address');
-  console.log('address', address)
   const collections = await getCollections();
   const collectionsAudio = collections.filter((items) => items.creatorAddress === address)
-  console.log('collectionsAudio.item', collectionsAudio);
 
   return json<AudioCollectionLoaderData>({
     collectionsAudio,
@@ -24,7 +22,6 @@ export const loader = async ({ request }: collectionLoaderProps) => {
 
 const UploadAudioScreen = () => {
   const { collectionsAudio } = useLoaderData() as AudioCollectionLoaderData;
-  console.log('collectionsAudio', collectionsAudio);
   return (
     <section className="screen create tabContainer">
       <CreateAudio collectionsAudio={collectionsAudio} />
