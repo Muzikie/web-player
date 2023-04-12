@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useFetcher, useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
@@ -14,7 +14,7 @@ const LoginForm = () => {
   const fetcher = useFetcher();
   // const [secret, setSecret] = useState({ value: '', isValid: false });
   const { setProfileInfo, info } = useAccount();
-  const { register, handleSubmit, formState, watch } = useForm<any>();
+  const { register, watch } = useForm();
   const secretKey = watch('passphrase');
 
 

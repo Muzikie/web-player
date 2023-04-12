@@ -1,11 +1,12 @@
 import { ChangeEventHandler } from 'react';
+import { UseFormRegister } from 'react-hook-form'
 
 type InputTheme = 'text'|'number'|'password'|'email';
 
 export interface InputProps {
   type: InputTheme;
-  value?: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  register?: UseFormRegister<any>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
   icon?: string;

@@ -1,5 +1,5 @@
 /* External dependencies */
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
 
 /* Internal dependencies */
@@ -10,7 +10,6 @@ import {
 } from '~/configs';
 import { bufferize } from '~/helpers/convertors';
 import { useBroadcast } from './useBroadcast';
-
 
 
 export const useCreateAudio = () => {

@@ -1,12 +1,11 @@
 /* External dependencies */
-import { useState} from 'react';
+import { useState } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
 
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS } from '~/configs';
 import { useBroadcast } from './useBroadcast'
-
 
 
 export const useCreateCollection = () => {

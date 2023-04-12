@@ -18,7 +18,7 @@ const CreateAudio = () => {
   const { signAndBroadcast, broadcastStatus } = useCreateAudio();
   const { collections } = useUserDiscography();
 
-  const { handleSubmit, register, watch, formState } = useForm({
+  const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(audioSchema),
     mode: 'onBlur', // validate on blur
     shouldFocusError: true, // focus input with error after submit
@@ -32,14 +32,12 @@ const CreateAudio = () => {
     },
   });
 
-  console.log(watch('genre'))
-
   const onSubmit = async (data: Record<string, any>) => {
     await signAndBroadcast(data);
   };
 
   const errorMessage = Object.values(formState.errors)[0]?.message as string;
-
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='component createAudio'>
       <fieldset>

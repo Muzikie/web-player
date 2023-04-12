@@ -11,7 +11,7 @@ export const audioSchema = yup
       name: 'files',
       test: item => !!item?.[0]?.name,
     }),
-    genre: yup.array().of(yup.number().min(0).max(VALID_GENRES.length - 1)).min(1).max(2).required('Please select a genre'),
+    genre: yup.number().min(0).max(VALID_GENRES.length - 1).min(0).max(2).required('Please select a genre'),
     collectionID: yup.string().trim().matches(/([\w\d]+){10,}/, 'Please select a collection type'),
   });
 

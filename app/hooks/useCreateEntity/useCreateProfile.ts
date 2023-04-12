@@ -1,5 +1,5 @@
 /* External dependencies */
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState } from 'react';
 import { cryptography } from '@liskhq/lisk-client';
 
 /* Internal dependencies */
@@ -8,41 +8,28 @@ import {
   MODULES,
   COMMANDS,
   SocialAccountPlatform,
-  socialPlatformNames,
-  SocialAccount,
 } from '~/configs';
-
-import { ValidationResult, ValidationStatus } from './types';
-import { validate } from './validator';
-
 import { useBroadcast } from './useBroadcast'
 
 export const useCreateProfile = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
-
   const initialValue = [
     { platform: SocialAccountPlatform.Twitter, username: '' },
     { platform: SocialAccountPlatform.Instagram, username: '' },
     { platform: SocialAccountPlatform.Youtube, username: '' },
   ];
 
-  const [formValidity, setFormValidity] = useState<ValidationResult>({
-    status: ValidationStatus.clean
+
+  const [broadcastStatus, setBroadcastStatus] = useState({
+    error: false,
+    message: '',
+    loading: false,
   });
-  const [nickName, setNickName] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [socialAccounts, setSocialAccounts] = useState<SocialAccount[]>(initialValue);
-  const [banner, setBanner] = useState<FileList | null>(null);
-  const [avatar, setAvatar] = useState<FileList | null>(null);
-  const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
-  const [formIsChanged, setFormIsChanged] = useState(false);
-
-
 
   const signAndBroadcast = async (value : any) => {
     const data = await updateAccount();
+    setBroadcastStatus({ error: false, message: '', loading: true });
     const result = await broadcast({
       module: MODULES.PROFILE,
       command: COMMANDS.CREATE,
@@ -63,29 +50,12 @@ export const useCreateProfile = () => {
       ],
     });
 
-    setBroadcastStatus(result);
+    setBroadcastStatus({ ...result, loading: false });
   };
 
-  useEffect(() => {
-    validate('profile', {
-      name,
-      nickName,
-      description,
-      socialAccounts,
-      avatar,
-      banner
-    }).then((result: ValidationResult) => {
-      if(formIsChanged){
-        setFormValidity(result);
-      }
-    });
-  }, [nickName, description, socialAccounts, avatar, banner]);
-
   return {
-
-    socialAccounts,
     signAndBroadcast,
-    formValidity,
+    initialValue,
     broadcastStatus,
   };
 };

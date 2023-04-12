@@ -9,7 +9,7 @@ export const Select = <T extends string | number,>({
   name,
   placeholder,
 }: SelectProps<T> & { register: UseFormRegister<any> }) => (
-    <section className={`component select ${{...register(name)} ? '' : 'notSelected'}`}>
+    <section className={`component select ${register(name)  ? '' : 'notSelected'}`}>
       <select {...register(name)} >
         {
           placeholder && <option value="">{placeholder}</option>

@@ -1,10 +1,9 @@
 /* External dependencies */
-import React, { useState, ChangeEvent } from 'react';
+import React from 'react';
 
 /* Internal dependencies */
 import { Input } from '~/components/common/Input';
-import { validateSecretKey } from '~/helpers/validators';
-import { SecretKeyInputProps } from './type';
+
 
 const SecretKeyInput = ({ register }: any) => {
   return (
