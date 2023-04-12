@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* Internal dependencies */
-import { useCreateAudio, ValidationStatus } from '~/hooks/useCreateEntity';
+import { useCreateAudio } from '~/hooks/useCreateEntity';
 import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
@@ -36,7 +36,7 @@ const CreateAudio = () => {
     await signAndBroadcast(data);
   };
 
-  const errorMessage = Object.values(formState.errors)[0]?.message as string;
+  const errorMessage = formState.errors && Object.values(formState.errors)[0]?.message as string;
   
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='component createAudio'>
@@ -70,7 +70,7 @@ const CreateAudio = () => {
       <PrimaryButton type='submit'>
         <>{broadcastStatus.loading ? <span>loading...</span> : <span>Create</span>}</>
       </PrimaryButton>
-      {formState.errors && Object.keys(formState.errors).length > 0 ? (
+      {errorMessage ? (
         <Feedback
           data={{
             message: errorMessage,

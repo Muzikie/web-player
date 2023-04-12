@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
   const { signAndBroadcast, broadcastStatus, initialValue } = useCreateProfile();
 
-  const { handleSubmit, register, watch, formState } = useForm({
+  const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(profileSchema),
     mode: 'onBlur', // validate on blur
     shouldFocusError: true, // foconBlurus input with error after submit
@@ -33,8 +33,8 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
     await signAndBroadcast(data);
   };
 
-  const errorMessage = Object.values(formState.errors)[0]?.message as string;
-  console.log(watch);
+  const errorMessage = formState.errors && Object.values(formState.errors)[0]?.message as string;
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='component editProfile'>
       <fieldset>
@@ -94,7 +94,7 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
       >
         Cancel
       </PrimaryButton>
-      {formState.errors && Object.keys(formState.errors).length > 0 ? (
+      {errorMessage ? (
         <Feedback
           data={{
             message: errorMessage,

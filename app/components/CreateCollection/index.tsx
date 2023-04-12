@@ -13,7 +13,7 @@ import { collectionSchema } from '~/hooks/useCreateEntity/schemas';
 const CreateCollection = () => {
   const { signAndBroadcast, broadcastStatus } = useCreateCollection();
 
-  const { handleSubmit, register, watch, formState } = useForm({
+  const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(collectionSchema),
     mode: 'onBlur', // validate on blur
     shouldFocusError: true, // focus input with error after submit
@@ -30,7 +30,7 @@ const CreateCollection = () => {
     await signAndBroadcast(data);
   };
 
-  const errorMessage = Object.values(formState.errors)[0]?.message as string;
+  const errorMessage = formState.errors && Object.values(formState.errors)[0]?.message as string;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='component createCollection'>
@@ -55,7 +55,7 @@ const CreateCollection = () => {
       <PrimaryButton type='submit'>
         <>{broadcastStatus.loading ? <span>loading...</span> : <span>Create</span>}</>
       </PrimaryButton>
-      {formState.errors && Object.keys(formState.errors).length > 0 ? (
+      {errorMessage ? (
         <Feedback
           data={{
             message: errorMessage,
