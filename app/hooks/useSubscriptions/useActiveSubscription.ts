@@ -17,13 +17,13 @@ import { SubscriptionStatus } from './types';
 export const useActiveSubscription = () => {
   const { info } = useAccount();
   const [subscription, setSubscription] = useState<SubscriptionData|null>();
-  const [subscriptionStatus, setStatus] = useState<SubscriptionStatus>(SubscriptionStatus.loading);
+  const [subscriptionStatus, setStatus] = useState<SubscriptionStatus>(SubscriptionStatus.Loading);
   const { request, isConnected } = useWS();
 
   const updateSubscription = async () => {
     if (!info.address) {
       // set empty data
-      setStatus(SubscriptionStatus.notLoggedIn);
+      setStatus(SubscriptionStatus.NotLoggedIn);
     } else {
       const accountInfo = <SubsAccountResponse> await request(
         Method.subscription_getAccount,
@@ -37,14 +37,14 @@ export const useActiveSubscription = () => {
   
         if (!response.error) {
           setSubscription(response.data);
-          setStatus(SubscriptionStatus.subscribed);
+          setStatus(SubscriptionStatus.Subscribed);
         } else {
           // set empty data
-          setStatus(SubscriptionStatus.notSubscribed);
+          setStatus(SubscriptionStatus.NotSubscribed);
         }
       } else {
         // set empty data
-        setStatus(SubscriptionStatus.notSubscribed);
+        setStatus(SubscriptionStatus.NotSubscribed);
       }
     }
   };

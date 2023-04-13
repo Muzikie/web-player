@@ -6,15 +6,22 @@ import Icon from '~/components/common/Icon';
 import { PrimaryButton } from '~/components/common/Button';
 import { Link } from '~/components/common/Link';
 import { usePurchaseSubscription } from '~/hooks/useSubscriptions';
+import Feedback from '../Feedback';
 
 const PurchaseSubscription = () => {
-  const [status, setStatus] = useState('READY');
+  const [feedback, setFeedback] = useState({
+    error: false,
+    message: '',
+  });
   const { purchase } = usePurchaseSubscription();
 
   const onSubmit = async () => {
-    setStatus('PENDING');
+    setFeedback({
+      error: false,
+      message: 'loading',
+    });
     const feedback = await purchase();
-    setStatus(feedback);
+    setFeedback(feedback);
   };
 
   return (
@@ -26,7 +33,7 @@ const PurchaseSubscription = () => {
               <img src="/images/letter.svg" alt="Letter icon" />
             </figure>
             <h4>
-              Share the word of Muzikie and receive free sbuscription
+              Share the word of Muzikie and receive free subscription
             </h4>
           </header>
           <p>
@@ -42,11 +49,12 @@ const PurchaseSubscription = () => {
           <span>To our new users</span>
           <PrimaryButton
             className="subscribeButton"
-            disabled={status !== 'READY'}
+            disabled={feedback.error || feedback.message !== ''}
             onClick={onSubmit}
           >
             Subscribe now
           </PrimaryButton>
+          <Feedback data={feedback} />
         </aside>
         <main className="mainOffer">
           <div className="description">

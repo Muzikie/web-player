@@ -30,53 +30,60 @@ const MainMenu = () => {
       />
       <section className={`menuContainer ${isActive ? 'active' : ''}`}>
         <div className="list">
-          <Link
-            icon="home"
-            to={ROUTES.HOME}
-            className="menuItem"
-          >
-            Home
-          </Link>
-          <Link
-            icon="search"
-            to={ROUTES.SEARCH}
-            className="menuItem"
-          >
-            Search
-          </Link>
-
-          {!!info.address && (
-            <>
-              {' '}
-              <Link
-                icon="user"
-                to={ROUTES.MY_PROFILE}
-                className="menuItem"
-              >
-                Profile
-              </Link>
-              <Link
-                icon="user"
-                to={ROUTES.UPLOAD_COLLECTION}
-                className="menuItem"
-              >
-                Upload
-              </Link>
-              <Link
-                icon="file"
-                to={ROUTES.SUBSCRIPTION_ACTIVE}
-                className="menuItem"
-              >
-                Subscription
-              </Link>
-            </>
-          )}
-
+          {
+            location.pathname !== '/agreement' && (
+              <>
+                <Link
+                  icon="home"
+                  to={ROUTES.HOME}
+                  className="menuItem"
+                >
+                  Home
+                </Link>
+                <Link
+                  icon="search"
+                  to={ROUTES.SEARCH}
+                  className="menuItem"
+                >
+                  Search
+                </Link>
+              </>
+            )
+          }
+          {
+            location.pathname !== '/agreement' && !!info.address && (
+              <>
+                <Link
+                  icon="user"
+                  to={ROUTES.MY_PROFILE}
+                  className="menuItem"
+                >
+                  Profile
+                </Link>
+                <Link
+                  icon="user"
+                  to={ROUTES.UPLOAD_COLLECTION}
+                  className="menuItem"
+                >
+                  Upload
+                </Link>
+                <Link
+                  icon="file"
+                  to={ROUTES.SUBSCRIPTION_ACTIVE}
+                  className="menuItem"
+                >
+                  Subscription
+                </Link>
+              </>
+            )
+          }
           <Link
             icon="key"
             to={`${ROUTES.LOGIN}?action=${info.address ? 'logout' : 'login'}`}
             className="menuItem"
-          >{info.address ? 'Logout' : 'Login'}</Link>
+          >
+            {info.address ? 'Logout' : 'Login'}
+          </Link>
         </div>
       </section>
     </aside>

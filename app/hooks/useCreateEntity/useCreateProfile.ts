@@ -9,7 +9,8 @@ import {
   COMMANDS,
   SocialAccountPlatform,
 } from '~/configs';
-import { useBroadcast } from './useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast'
+
 
 export const useCreateProfile = () => {
   const { updateAccount } = useAccount();

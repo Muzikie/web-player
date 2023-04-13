@@ -9,7 +9,7 @@ import {
   COMMANDS,
 } from '~/configs';
 import { bufferize } from '~/helpers/convertors';
-import { useBroadcast } from './useBroadcast';
+import { useBroadcast } from '../useBroadcast/useBroadcast';
 
 
 export const useCreateAudio = () => {

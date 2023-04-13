@@ -8,7 +8,7 @@ import MainMenu from '../MainMenu';
 
 const MainHeader = () => {
   const { pathname } = useLocation();
-  const pageType = pathname === '/login' || pathname === '/register' ? 'public' : 'private';
+  const pageType = pathname === '/login' || pathname === '/register' || pathname === '/agreement' ? 'public' : 'private';
 
   return (
     <header className={`component mainHeader ${pageType}`}>

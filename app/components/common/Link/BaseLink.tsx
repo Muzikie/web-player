@@ -11,6 +11,7 @@ const BaseLink = ({
   className,
   onClick,
   children,
+  disabled,
 }: BaseLinkProps) => {
   const isActive = useActiveRoute(to);
   const props: any = {
@@ -20,14 +21,19 @@ const BaseLink = ({
       if (typeof onClick === 'function') {
         onClick(e);
       }
-    }
+    },
   };
 
   return (
-    <Link {...props} className={`component link ${isActive ? 'active' : ''} ${className}`}>
+    <Link
+      {...props}
+      className={`component link ${isActive ? 'active' : ''} ${
+        disabled ? 'disabledLink' : ''
+      } ${className}`}
+    >
       {children}
     </Link>
   );
-}
+};
 
 export default BaseLink;

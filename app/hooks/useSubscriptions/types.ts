@@ -1,13 +1,18 @@
 export enum SubscriptionStatus {
-  loading = 'LOADING',
-  error = 'ERROR',
-  subscribed = 'SUBSCRIBED',
-  notSubscribed = 'NOT_SUBSCRIBED',
-  notLoggedIn = 'NOT_LOGGED_IN',
+  Loading = 'LOADING',
+  Error = 'ERROR',
+  Subscribed = 'SUBSCRIBED',
+  NotSubscribed = 'NOT_SUBSCRIBED',
+  NotLoggedIn = 'NOT_LOGGED_IN',
 }
 
 export enum FetchStatus {
-  loading = 'LOADING',
-  error = 'ERROR',
-  success = 'SUCCESS',
+  Loading = 'LOADING',
+  Error = 'ERROR',
+  Success = 'SUCCESS',
+}
+
+export enum PurchaseErrors {
+  NoSubNFTs = 'No subscriptions available. Try later.',
+  InsufficientBalance = 'Insufficient balance. Please top up your account.',
 }

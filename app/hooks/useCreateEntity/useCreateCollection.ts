@@ -5,7 +5,7 @@ import { cryptography } from '@liskhq/lisk-client';
 /* Internal dependencies */
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { MODULES, COMMANDS } from '~/configs';
-import { useBroadcast } from './useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast'
 
 
 export const useCreateCollection = () => {
