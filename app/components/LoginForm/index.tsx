@@ -1,17 +1,22 @@
 /* External dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useFetcher, useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
 import { PrimaryButton } from '~/components/common/Button';
 import SecretKeyInput from '~/components/SecretKeyInput';
 import { useAccount } from '~/hooks/useAccount/useAccount';
+import { useForm } from 'react-hook-form'
+import { validateSecretKey } from '~/helpers/validators'
 
 const LoginForm = () => {
   const profileInfo = useLoaderData();
   const fetcher = useFetcher();
-  const [secret, setSecret] = useState({ value: '', isValid: false });
+  // const [secret, setSecret] = useState({ value: '', isValid: false });
   const { setProfileInfo, info } = useAccount();
+  const { register, watch } = useForm();
+  const secretKey = watch('passphrase');
+
 
   useEffect(() => {
     if (profileInfo.address !== info.address) {
@@ -21,10 +26,10 @@ const LoginForm = () => {
 
   return (
     <fetcher.Form method="post">
-      <SecretKeyInput onChange={setSecret} />
+      <SecretKeyInput register={register}/>
       <PrimaryButton
         type="submit"
-        disabled={!secret.isValid}
+        disabled={!validateSecretKey(secretKey)}
         className="loginButton"
       >
         Login

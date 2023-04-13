@@ -1,32 +1,31 @@
 /* External dependencies */
 import React from 'react';
+import { UseFormRegister } from 'react-hook-form'
 
 /* Internal dependencies */
 import Icon from '../Icon';
 import { FileInputProps } from './types';
 
 const FileInput = ({
-  onChange,
   title,
-  name,
+  name = '',
   accept,
-  value,
+  register,
   multiple = true,
   className = '',
   icon = 'file',
-}: FileInputProps) => (
+}: FileInputProps & { register: UseFormRegister<any> }) => (
   <label className={`component fileInput ${className}`}>
     {
       icon && (
-        <Icon name={value ? 'check' : icon} />
+        <Icon name={register(name) ? 'check' : icon} />
       )
     }
     <input
       type="file"
-      name={name}
       accept={accept}
       multiple={multiple}
-      onChange={onChange}
+      {...register(name)}
     />
     <span>{title}</span>
   </label>
