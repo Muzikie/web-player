@@ -7,12 +7,12 @@ import { Input } from '~/components/common/Input';
 
 const SecretKeyInput = ({ register }: any) => {
   return (
-    <div className='component secretKeyInput'>
+    <div className="component secretKeyInput">
       <Input
-        type='password'
-        placeholder='Secret Key'
-        icon='key'
-        name='passphrase'
+        type="password"
+        placeholder="Secret Key"
+        icon="key"
+        name="passphrase"
         register={register}
       />
     </div>

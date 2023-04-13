@@ -9,8 +9,8 @@ import { InputProps } from './types';
 
 const Input = ({
   type = 'text',
-  register,
   onChange,
+  register,
   placeholder,
   className = '',
   icon = '',
@@ -34,8 +34,8 @@ const Input = ({
       }
       <input
         type={type === 'password' && visibility ? 'text' : type}
+        onChange={onChange}
         {...(register && register(name))}
-        onChange={onChange} 
         name={name}
         placeholder={placeholder}
         className={`component input ${className}`}

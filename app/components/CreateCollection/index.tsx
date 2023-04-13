@@ -29,42 +29,38 @@ const CreateCollection = () => {
   const onSubmit = async (data: Record<string, any>) => {
     await signAndBroadcast(data);
   };
-
-  const errorMessage = formState.errors && Object.values(formState.errors)[0]?.message as string;
+  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const formError = errorMessage
+    ? {
+      message: errorMessage,
+      error: true,
+    }
+    : broadcastStatus;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='component createCollection'>
+    <form onSubmit={handleSubmit(onSubmit)} className="component createCollection">
       <fieldset>
-        <Input register={register} name='name' placeholder='Enter name' type='text' />
-        <Input register={register} name='releaseYear' placeholder='Release year' type='text' />
+        <Input register={register} name="name" placeholder="Enter name" type="text" />
+        <Input register={register} name="releaseYear" placeholder="Release year" type="text" />
         <Select
-          placeholder='Select a collection type'
-          name='collectionType'
+          placeholder="Select a collection type"
+          name="collectionType"
           options={VALID_COLLECTION_TYPES}
           register={register}
         />
         <FileInput
-          icon='file'
-          name='files'
-          accept='.png,.jpg,.jpeg'
+          icon="file"
+          name="files"
+          accept=".png,.jpg,.jpeg"
           multiple={false}
-          title='Upload cover image'
+          title="Upload cover image"
           register={register}
         />
       </fieldset>
-      <PrimaryButton type='submit'>
+      <PrimaryButton type="submit">
         <>{broadcastStatus.loading ? <span>loading...</span> : <span>Create</span>}</>
       </PrimaryButton>
-      {errorMessage ? (
-        <Feedback
-          data={{
-            message: errorMessage,
-            error: true,
-          }}
-        />
-      ) : (
-        <Feedback data={broadcastStatus} />
-      )}
+      <Feedback data={formError} />
     </form>
   );
 };

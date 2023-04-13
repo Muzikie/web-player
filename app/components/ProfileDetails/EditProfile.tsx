@@ -32,41 +32,46 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
   const onSubmit = async (data: Record<string, any>) => {
     await signAndBroadcast(data);
   };
+  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const formError = errorMessage
+    ? {
+      message: errorMessage,
+      error: true,
+    }
+    : broadcastStatus;
 
-  const errorMessage = formState.errors && Object.values(formState.errors)[0]?.message as string;
-  
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='component editProfile'>
+    <form onSubmit={handleSubmit(onSubmit)} className="component editProfile">
       <fieldset>
         <div>
           <FileInput
-            icon='file'
-            name='banner'
-            accept='.png,.jpg,.jpeg'
+            icon="file"
+            name="banner"
+            accept=".png,.jpg,.jpeg"
             multiple={false}
-            title='Click to update banner'
-            className='fileInput'
+            title="Click to update banner"
+            className="fileInput"
             register={register}
           />
         </div>
         <div>
           <FileInput
-            icon='file'
-            name='avatar'
+            icon="file"
+            name="avatar"
             register={register}
-            accept='.png,.jpg,.jpeg'
+            accept=".png,.jpg,.jpeg"
             multiple={false}
-            title='Click to update Avatar'
-            className='fileInput'
+            title="Click to update Avatar"
+            className="fileInput"
           />
         </div>
-        <Input register={register} name='name' placeholder='Enter name' type='text' />
-        <Input register={register} name='nickName' placeholder='Enter nickname' type='text' />
+        <Input register={register} name="name" placeholder="Enter name" type="text" />
+        <Input register={register} name="nickName" placeholder="Enter nickname" type="text" />
         <Textarea
           register={register}
-          name='description'
-          placeholder='Describe yourself'
-          className='descriptionInput'
+          name="description"
+          placeholder="Describe yourself"
+          className="descriptionInput"
         />
         {initialValue && initialValue.length > 0 ? (
           <>
@@ -76,34 +81,25 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
                 value={username}
                 name={socialPlatformNames[platform]}
                 placeholder={`${socialPlatformNames[platform]} channel`}
-                type='text'
+                type="text"
                 register={register}
               />
             ))}
           </>
         ) : null}
       </fieldset>
-      <PrimaryButton type='submit'>
+      <PrimaryButton type="submit">
         <>{broadcastStatus.loading ? <span>loading...</span> : <span>Create</span>}</>
       </PrimaryButton>
       <PrimaryButton
         onClick={() => setShowForm(false)}
-        className='white'
+        className="white"
         disabled={false}
-        type='button'
+        type="button"
       >
         Cancel
       </PrimaryButton>
-      {errorMessage ? (
-        <Feedback
-          data={{
-            message: errorMessage,
-            error: true,
-          }}
-        />
-      ) : (
-        <Feedback data={broadcastStatus} />
-      )}
+      <Feedback data={formError} />
     </form>
   );
 };

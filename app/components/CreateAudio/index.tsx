@@ -35,51 +35,47 @@ const CreateAudio = () => {
   const onSubmit = async (data: Record<string, any>) => {
     await signAndBroadcast(data);
   };
+  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const formError = errorMessage
+    ? {
+      message: errorMessage,
+      error: true,
+    }
+    : broadcastStatus;
 
-  const errorMessage = formState.errors && Object.values(formState.errors)[0]?.message as string;
-  
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='component createAudio'>
+    <form onSubmit={handleSubmit(onSubmit)} className="component createAudio">
       <fieldset>
-        <Input register={register} name='name' placeholder='Enter name' type='text' />
-        <Input register={register} name='releaseYear' placeholder='Release year' type='text' />
-        <div className='collectionRow'>
+        <Input register={register} name="name" placeholder="Enter name" type="text" />
+        <Input register={register} name="releaseYear" placeholder="Release year" type="text" />
+        <div className="collectionRow">
           <Select
-            placeholder='Select a collection (Collection)'
-            name='collectionID'
+            placeholder="Select a collection (Collection)"
+            name="collectionID"
             options={collections}
             register={register}
           />
-          <Link to={ROUTES.UPLOAD_COLLECTION} icon='cross' className='addCollection' />
+          <Link to={ROUTES.UPLOAD_COLLECTION} icon="cross" className="addCollection" />
         </div>
         <Select
-          placeholder='Select a genre'
-          name='genre'
+          placeholder="Select a genre"
+          name="genre"
           options={VALID_GENRES}
           register={register}
         />
         <FileInput
-          icon='file'
-          name='files'
-          accept='.mp3,.wav'
+          icon="file"
+          name="files"
+          accept=".mp3,.wav"
           multiple={false}
-          title='Upload MP3'
+          title="Upload MP3"
           register={register}
         />
       </fieldset>
-      <PrimaryButton type='submit'>
-        <>{broadcastStatus.loading ? <span>loading...</span> : <span>Create</span>}</>
+      <PrimaryButton type="submit">
+        <span>{broadcastStatus.loading ? 'loading...' : 'Create'}</span>
       </PrimaryButton>
-      {errorMessage ? (
-        <Feedback
-          data={{
-            message: errorMessage,
-            error: true,
-          }}
-        />
-      ) : (
-        <Feedback data={broadcastStatus} />
-      )}
+      <Feedback data={formError} />
     </form>
   );
 };
