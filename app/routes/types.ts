@@ -12,8 +12,8 @@ export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
 }
 
-export interface AudioCollectionLoaderData {
-  collectionsAudio: Awaited<Collection[]>;
+export interface CollectionInfoLoaderData {
+  CollectionInfo: Awaited<Collection[]>;
 }
 
 export interface CollectionLoaderData {

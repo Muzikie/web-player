@@ -5,7 +5,7 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { getCollections } from '~/models/entity.server';
 import { getSession } from '~/hooks/useSession';
-import { AudioCollectionLoaderData, collectionLoaderProps } from '../../../../types';
+import { CollectionInfoLoaderData, collectionLoaderProps } from '../../../../types';
 
 export const loader = async ({ request }: collectionLoaderProps) => {
   const session = await getSession(
@@ -13,18 +13,18 @@ export const loader = async ({ request }: collectionLoaderProps) => {
   );
   const address = session.get('address');
   const collections = await getCollections();
-  const collectionsAudio = collections.filter((items) => items.creatorAddress === address)
+  const CollectionInfo = collections.filter((items) => items.creatorAddress === address)
 
-  return json<AudioCollectionLoaderData>({
-    collectionsAudio,
+  return json<CollectionInfoLoaderData>({
+    CollectionInfo,
   })
 };
 
 const UploadAudioScreen = () => {
-  const { collectionsAudio } = useLoaderData() as AudioCollectionLoaderData;
+  const { CollectionInfo } = useLoaderData() as CollectionInfoLoaderData;
   return (
     <section className="screen create tabContainer">
-      <CreateAudio collectionsAudio={collectionsAudio} />
+      <CreateAudio CollectionInfo={CollectionInfo} />
     </section>
   );
 }

@@ -2,7 +2,6 @@ import React from 'react';
 
 /* Internal dependencies */
 import { useCreateAudio, ValidationStatus } from '~/hooks/useCreateEntity';
-//import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
@@ -12,8 +11,8 @@ import { ROUTES } from '~/routes/routes';
 import { VALID_GENRES } from '~/configs';
 import { CollectionInfo } from './types';
 
-const CreateAudio = ({ collectionsAudio }: CollectionInfo) => {
-  const CollectionsInfo = collectionsAudio.map((item) => ({
+const CreateAudio = ({ CollectionInfo }: CollectionInfo) => {
+  const CollectionsInfo = CollectionInfo.map((item) => ({
     value: item.collectionID,
     label: `${item.name} - ${item.releaseYear}`,
   }));
@@ -27,7 +26,6 @@ const CreateAudio = ({ collectionsAudio }: CollectionInfo) => {
     signAndBroadcast,
     broadcastStatus,
   } = useCreateAudio();
-  //const { collections } = useUserDiscography();
 
   return (
     <form className="component createAudio">
