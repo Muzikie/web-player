@@ -9,18 +9,18 @@ import {
   COMMANDS,
   SocialAccountPlatform,
 } from '~/configs';
-import { useBroadcast } from '../useBroadcast/useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast';
+import { Params } from './types';
 
+const initialValue = [
+  { platform: SocialAccountPlatform.Twitter, username: '' },
+  { platform: SocialAccountPlatform.Instagram, username: '' },
+  { platform: SocialAccountPlatform.Youtube, username: '' },
+];
 
 export const useCreateProfile = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
-  const initialValue = [
-    { platform: SocialAccountPlatform.Twitter, username: '' },
-    { platform: SocialAccountPlatform.Instagram, username: '' },
-    { platform: SocialAccountPlatform.Youtube, username: '' },
-  ];
-
 
   const [broadcastStatus, setBroadcastStatus] = useState({
     error: false,
@@ -28,17 +28,17 @@ export const useCreateProfile = () => {
     loading: false,
   });
 
-  const signAndBroadcast = async (value : any) => {
+  const signAndBroadcast = async (formValues : Params) => {
     const data = await updateAccount();
     setBroadcastStatus({ error: false, message: '', loading: true });
     const result = await broadcast({
       module: MODULES.PROFILE,
       command: COMMANDS.CREATE,
       params: {
-        name: value.name,
-        nickName: value.nickName,
-        description: value.description,
-        socialAccounts: value.socialAccounts,
+        name: formValues.name,
+        nickName: formValues.nickName,
+        description: formValues.description,
+        socialAccounts: formValues.socialAccounts,
         owners: [{
           address: cryptography.address.getAddressFromLisk32Address(data.address),
           shares: 100
@@ -46,8 +46,8 @@ export const useCreateProfile = () => {
       },
       account: data,
       files: [
-        { key: 'avatar', value: value.avatar[0] },
-        { key: 'banner', value: value.banner[0] },
+        { key: 'avatar', value: formValues.avatar[0] },
+        { key: 'banner', value: formValues.banner[0] },
       ],
     });
 
