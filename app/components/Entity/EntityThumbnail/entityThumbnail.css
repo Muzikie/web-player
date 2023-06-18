@@ -15,6 +15,7 @@
   }
 
   &.playlist {
+
     & figure {
       border-radius: var(--border-radius-m);
     }
@@ -30,6 +31,7 @@
 
   &.empty,
   &.profile {
+
     & figure {
       border-radius: var(--border-radius-xs);
     }

@@ -1,4 +1,4 @@
-type onChangeValue = {
+interface onChangeValue {
   value: string;
   isValid: boolean;
 }

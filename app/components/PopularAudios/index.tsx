@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '~/routes/routes'
+import { ROUTES } from '~/routes/routes';
 import { PrimaryButton } from '../common/Button';
 import { entityThemes } from '../Entity/types';
-import List from '../List'
-import { liskThemes } from '../List/types'
+import List from '../List';
+import { liskThemes } from '../List/types';
 import { PopularAdiosProps } from './types';
 
 const PopularAudios = ({ audios }: PopularAdiosProps) => {

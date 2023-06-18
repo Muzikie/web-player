@@ -24,6 +24,7 @@
   }
 
   &.notSelected {
+
     & select {
       color: #a499a2;
     }

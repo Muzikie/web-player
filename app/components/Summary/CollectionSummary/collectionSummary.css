@@ -83,13 +83,16 @@
 }
 
 @media (min-width: 700px) {
+
   .component.collectionSummary {
     display: flex;
+
     /* flex-flow: row nowrap; */
     flex-direction: row-reverse;
     justify-content: flex-end;
     padding-left: var(--padding-m);
     box-sizing: border-box;
+
     & .photo {
       width: var(--max-collection-art-size);
       height: var(--max-collection-art-size);

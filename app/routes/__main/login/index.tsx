@@ -11,7 +11,6 @@ import { LoaderBaseProps } from '../../types';
 import { bufferize } from '~/helpers/convertors';
 import styles from '~/css/routes/__main/login.css';
 
-
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
@@ -75,7 +74,7 @@ export async function action({ request }: LoaderBaseProps) {
   session.set('publicKey', publicKey);
   session.set('privateKey', privateKey);
 
-  const agreement = session.get('agreement')
+  const agreement = session.get('agreement');
   if (!agreement) {
     // Redirect back to the agreement page.
     return redirect('/agreement', {

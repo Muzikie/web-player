@@ -60,6 +60,6 @@ const PlayerContent = () => {
       </section>
     </>
   );
-}
+};
 
 export default PlayerContent;

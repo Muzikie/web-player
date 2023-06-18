@@ -74,10 +74,13 @@
 }
 
 @media (min-width: 680px) {
+
   .component.profileSummary {
     display: flex;
+
     /* flex-flow: row nowrap; */
     flex-direction: row-reverse;
+
     & .photo {
       width: var(--max-collection-art-size);
       height: var(--max-collection-art-size);

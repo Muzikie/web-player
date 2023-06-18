@@ -4,109 +4,104 @@ import React from 'react';
 import { Input, FileInput, Textarea } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
-import { useCreateProfile, ValidationStatus } from '~/hooks/useCreateEntity';
+import { useCreateProfile } from '~/hooks/useCreateEntity';
 import { socialPlatformNames } from '~/configs';
 import { ProfileEditProps } from './types';
 import './profileDetails.css';
+import { useForm } from 'react-hook-form';
+import { profileSchema } from '~/hooks/useCreateEntity/schemas';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
-  const {
-    name,
-    avatar,
-    banner,
-    nickName,
-    description,
-    socialAccounts,
-    onChange,
-    signAndBroadcast,
-    formValidity,
-    broadcastStatus,
-  } = useCreateProfile();
+  const { signAndBroadcast, broadcastStatus, initialValue } = useCreateProfile();
+
+  const { handleSubmit, register, formState } = useForm({
+    resolver: yupResolver(profileSchema),
+    mode: 'onBlur', // validate on blur
+    shouldFocusError: true, // foconBlurus input with error after submit
+    defaultValues: {
+      name: '',
+      nickName: '',
+      description: '',
+      socialAccounts: initialValue,
+      files: [],
+      message: '',
+    },
+  });
+
+  const onSubmit = async (data: Record<string, any>) => {
+    await signAndBroadcast(data);
+  };
+  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const formError = errorMessage
+    ? {
+      message: errorMessage,
+      error: true,
+    }
+    : broadcastStatus;
 
   return (
-    <form className="component editProfile">
+    <form onSubmit={handleSubmit(onSubmit)} className="component editProfile">
       <fieldset>
         <div>
           <FileInput
             icon="file"
             name="banner"
-            value={banner}
-            accept='.png,.jpg,.jpeg'
+            accept=".png,.jpg,.jpeg"
             multiple={false}
             title="Click to update banner"
             className="fileInput"
-            onChange={onChange}
+            register={register}
           />
         </div>
         <div>
           <FileInput
             icon="file"
             name="avatar"
-            value={avatar}
-            accept='.png,.jpg,.jpeg'
+            register={register}
+            accept=".png,.jpg,.jpeg"
             multiple={false}
             title="Click to update Avatar"
             className="fileInput"
-            onChange={onChange}
           />
         </div>
-        <Input
-          value={name}
-          name="name"
-          placeholder="Enter name"
-          type="text"
-          onChange={onChange}
-        />
-        <Input
-          value={nickName}
-          name="nickName"
-          placeholder="Enter nickname"
-          type="text"
-          onChange={onChange}
-        />
+        <Input register={register} name="name" placeholder="Enter name" type="text" />
+        <Input register={register} name="nickName" placeholder="Enter nickname" type="text" />
         <Textarea
-          value={description}
+          register={register}
           name="description"
           placeholder="Describe yourself"
           className="descriptionInput"
-          onChange={onChange}
         />
-        {socialAccounts && socialAccounts.length > 0 ? (
+        {initialValue && initialValue.length > 0 ? (
           <>
-            {
-              socialAccounts.map(({ platform, username }) => (
-                <Input
-                  key={socialPlatformNames[platform]}
-                  value={username}
-                  name={socialPlatformNames[platform]}
-                  placeholder={`${socialPlatformNames[platform]} channel`}
-                  type="text"
-                  onChange={onChange}
-                />
-              ))
-            }
-
+            {initialValue.map(({ platform, username }) => (
+              <Input
+                key={socialPlatformNames[platform]}
+                value={username}
+                name={socialPlatformNames[platform]}
+                placeholder={`${socialPlatformNames[platform]} channel`}
+                type="text"
+                register={register}
+              />
+            ))}
           </>
         ) : null}
-
       </fieldset>
-      <PrimaryButton
-        onClick={signAndBroadcast}
-        type="button"
-        disabled={formValidity.status !== ValidationStatus.valid}
-      >
-        Save
+      <PrimaryButton type="submit">
+        <>{broadcastStatus.loading ? <span>loading...</span> : <span>Create</span>}</>
       </PrimaryButton>
-      <PrimaryButton onClick={() => setShowForm(false)} className="white" disabled={false} type="button">
+      <PrimaryButton
+        onClick={() => setShowForm(false)}
+        className="white"
+        disabled={false}
+        type="button"
+      >
         Cancel
       </PrimaryButton>
-      {
-        ((formValidity.status === ValidationStatus.invalid) && formValidity.message)
-          ? <Feedback data={{ message: formValidity.message, error: true }} />
-          : <Feedback data={broadcastStatus} />
-      }
-    </form >
-  )
-}
+      <Feedback data={formError} />
+    </form>
+  );
+};
 
 export default ProfileEdit;

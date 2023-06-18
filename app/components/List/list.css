@@ -29,12 +29,14 @@
 
   & header + .itemsFrame {
     width: calc(100% - var(--title-width));
+
     & section:only-child {
       margin-top: 1.4rem;
     }
   }
 
   &.vertical {
+
     & .itemsContainer {
       display: flex;
       flex-flow: row wrap;
@@ -43,6 +45,7 @@
       &.wide,
       &.normal,
       &.compressed {
+
         & > * {
           width: 100%;
         }
@@ -52,17 +55,23 @@
 }
 
 @media (min-width: 680px) {
+
   .component.list {
+
     &.vertical {
+
       & .itemsContainer {
+
         &.wide,
         &.normal {
+
           & > * {
             width: 100%;
           }
         }
 
         &.compressed {
+
           & > * {
             width: 50%;
           }
@@ -73,22 +82,29 @@
 }
 
 @media (min-width: 1024px) {
+
   .component.list {
+
     &.vertical {
+
       & .itemsContainer {
+
         &.wide {
+
           & > * {
             width: 100%;
           }
         }
 
         &.normal {
+
           & > * {
             width: 50%;
           }
         }
 
         &.compressed {
+
           & > * {
             width: 33.333%;
           }
@@ -99,22 +115,29 @@
 }
 
 @media (min-width: 1280px) {
+
   .component.list {
+
     &.vertical {
+
       & .itemsContainer {
+
         &.wide {
+
           & > * {
             width: 100%;
           }
         }
 
         &.normal {
+
           & > * {
             width: 33.333%;
           }
         }
 
         &.compressed {
+
           & > * {
             width: 25%;
           }

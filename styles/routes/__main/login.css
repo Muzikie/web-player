@@ -1,11 +1,14 @@
 .screen.login {
+
   & .wrapper {
+
     & .loginButton {
       margin-top: 20px;
     }
   }
 
   & .modal {
+
     & ul {
       padding: 26px 0;
 

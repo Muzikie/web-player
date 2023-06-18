@@ -1,16 +1,16 @@
 import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
 
 import { SelectProps } from './types';
 
 export const Select = <T extends string | number,>({
   options,
-  value,
+  register,
   name,
   placeholder,
-  onChange
-}: SelectProps<T>) => (
-    <section className={`component select ${value ? '' : 'notSelected'}`}>
-      <select name={name} value={value} onChange={onChange}>
+}: SelectProps<T> & { register: UseFormRegister<any> }) => (
+    <section className={`component select ${register(name)  ? '' : 'notSelected'}`}>
+      <select {...register(name)} >
         {
           placeholder && <option value="">{placeholder}</option>
         }

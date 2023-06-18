@@ -24,6 +24,7 @@ export interface CollectionLoaderData {
 }
 
 export interface collectionLoaderProps {
+  request: Request;
   params: {
     id: number;
   };
@@ -64,7 +65,6 @@ export interface profileLoaderProps {
   };
   request: Request;
 }
-
 
 export interface DiscographyLoaderData {
   collections: Awaited<Collection[]>;

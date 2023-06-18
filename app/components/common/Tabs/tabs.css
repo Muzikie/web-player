@@ -15,6 +15,7 @@
     }
 
     &.active {
+
       &:before {
         content: '';
         position: absolute;

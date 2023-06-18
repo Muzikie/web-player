@@ -14,18 +14,18 @@ export enum ValidationStatus {
   valid = 'VALID',
 }
 
-export interface AudioTxProps extends Omit<Audio, 'owners' | 'audioID' | 'duration' | 'creatorAddress' | 'audioSignature' | 'audioHash'> {
+export type AudioTxProps = {
   files: FileList | null;
-}
+} & Omit<Audio, 'owners' | 'audioID' | 'duration' | 'creatorAddress' | 'audioSignature' | 'audioHash'>
 
-export interface CollectionTxProps extends Omit<Collection, 'creatorAddress' | 'collectionID' | 'audios' | 'coverSignature' | 'coverHash'> {
+export type CollectionTxProps = {
   files: FileList | null;
-}
+} & Omit<Collection, 'creatorAddress' | 'collectionID' | 'audios' | 'coverSignature' | 'coverHash'>
 
-export interface ProfileTxProps extends Omit<CreateCommandParams, 'creatorAddress' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'> {
+export type ProfileTxProps = {
   avatar: FileList | null;
   banner: FileList | null;
-}
+} & Omit<CreateCommandParams, 'creatorAddress' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature'>
 
 export type validateProps = AudioTxProps | CollectionTxProps | ProfileTxProps;
 
@@ -33,10 +33,12 @@ export type EntityName = 'audio' | 'collection' | 'profile';
 
 type TransactionProp = 'id' | 'params' | 'module' | 'command' | 'signatures' | 'nonce' | 'fee' | 'senderPublicKey';
 
+export interface Params { [key: string]: unknown }
+
 export interface SignTransactionProps {
   command: COMMANDS,
   module: MODULES,
-  params: { [key: string]: unknown },
+  params: Params,
   files: { value: File, key: string }[],
   account: ProfileInfoType,
 }

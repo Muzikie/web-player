@@ -9,12 +9,12 @@ export interface ButtonType {
   children?: string|ReactElement;
 }
 
-export interface IconButtonProps extends ButtonType {
+export type IconButtonProps = {
   icon: string;
   theme?: string;
-}
+} & ButtonType
 
-export interface FlexibleButtonProps extends ButtonType {
+export type FlexibleButtonProps = {
   children: string|ReactElement;
-}
+} & ButtonType
 
