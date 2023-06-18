@@ -66,6 +66,14 @@ export interface profileLoaderProps {
   request: Request;
 }
 
+export interface UploadLoaderProps {
+  request: Request;
+}
+
+export interface UploadLoaderData {
+  id: string;
+}
+
 export interface DiscographyLoaderData {
   collections: Awaited<Collection[]>;
   audios: Awaited<Audio[]>;

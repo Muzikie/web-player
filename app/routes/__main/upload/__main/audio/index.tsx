@@ -13,11 +13,11 @@ export const loader = async ({ request }: collectionLoaderProps) => {
   );
   const address = session.get('address');
   const collections = await getCollections();
-  const CollectionInfo = collections.filter((items) => items.creatorAddress === address)
+  const CollectionInfo = collections.filter((items) => items.creatorAddress === address);
 
   return json<CollectionInfoLoaderData>({
     CollectionInfo,
-  })
+  });
 };
 
 const UploadAudioScreen = () => {
@@ -27,6 +27,6 @@ const UploadAudioScreen = () => {
       <CreateAudio CollectionInfo={CollectionInfo} />
     </section>
   );
-}
+};
 
 export default UploadAudioScreen;

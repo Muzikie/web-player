@@ -1,14 +1,29 @@
 .screen.upload {
    position: relative;
    width: 100%;
-
-   & > .tabContainer {
-      padding: 40px 20px 0;
-   }
+   margin-top: var(--padding-l);
+   padding: 40px 20px 0;
+   box-sizing: border-box;
 
    & .tabsHeader {
       width: 100%;
       position: relative;
-      padding-top: var(--padding-x);
+      padding-top: var(--padding-m);
+      padding-bottom: var(--padding-s);
+   }
+}
+
+@media (min-width: 800px) {
+   .screen.upload  {
+      display: flex;
+      justify-content: space-around;
+
+      & section:first-child {
+         width: 30%;
+      }
+
+      & .tab{
+         width: 65%;
+      }
    }
 }

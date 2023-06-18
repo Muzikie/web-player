@@ -1,5 +1,5 @@
 import { Collection } from '~/configs';
 
-export type CollectionInfo = {
+export interface CollectionInfo {
   CollectionInfo: Collection[],
 }
