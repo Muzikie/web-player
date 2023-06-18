@@ -8,14 +8,14 @@ import styles from '~/css/routes/__main/upload.css';
 import { ROUTES } from '~/routes/routes';
 import { Tabs } from '~/components/common/Tabs';
 import WalletDetails from '~/components/WalletDetails';
-import { uploadLoaderProps, UploadLoaderData } from '../../types';
+import { UploadLoaderProps, UploadLoaderData } from '../../types';
 import { getSession } from '~/hooks/useSession';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ request }: uploadLoaderProps) => {
+export const loader = async ({ request }: UploadLoaderProps) => {
   const session = await getSession(
     request.headers.get('Cookie')
   );
@@ -23,7 +23,7 @@ export const loader = async ({ request }: uploadLoaderProps) => {
   return json<UploadLoaderData>({
     id: session.get('address')
   });
-}
+};
 
 const UploadScreen = () => {
   const { id } = useLoaderData() as UploadLoaderData;
@@ -44,6 +44,6 @@ const UploadScreen = () => {
       </div>
     </section>
   );
-}
+};
 
 export default UploadScreen;
