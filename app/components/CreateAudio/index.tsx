@@ -1,7 +1,7 @@
 import React from 'react';
 
 /* Internal dependencies */
-import { useCreateAudio, ValidationStatus } from '~/hooks/useCreateEntity';
+import { useCreateAudio } from '~/hooks/useCreateEntity';
 import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
@@ -10,79 +10,72 @@ import { Link } from '~/components/common/Link';
 import Feedback from '~/components/Feedback';
 import { ROUTES } from '~/routes/routes';
 import { VALID_GENRES } from '~/configs';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { audioSchema } from '~/hooks/useCreateEntity/schemas';
+import { useForm } from 'react-hook-form';
 
 const CreateAudio = () => {
-  const {
-    name,
-    releaseYear,
-    genre,
-    collectionID,
-    formValidity,
-    onChange,
-    signAndBroadcast,
-    broadcastStatus,
-  } = useCreateAudio();
+  const { signAndBroadcast, broadcastStatus } = useCreateAudio();
   const { collections } = useUserDiscography();
 
+  const { handleSubmit, register, formState } = useForm({
+    resolver: yupResolver(audioSchema),
+    mode: 'onBlur', // validate on blur
+    shouldFocusError: true, // focus input with error after submit
+    defaultValues: {
+      name: '',
+      releaseYear: '',
+      collectionID: '',
+      genre: 0,
+      files: null,
+      message: '',
+    },
+  });
+
+  const onSubmit = async (data: Record<string, any>) => {
+    await signAndBroadcast(data);
+  };
+  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const formError = errorMessage
+    ? {
+      message: errorMessage,
+      error: true,
+    }
+    : broadcastStatus;
+
   return (
-    <form className="component createAudio">
+    <form onSubmit={handleSubmit(onSubmit)} className="component createAudio">
       <fieldset>
-        <Input
-          value={name}
-          onChange={onChange}
-          name="name"
-          placeholder="Enter name"
-          type="text"
-        />
-        <Input
-          value={releaseYear}
-          onChange={onChange}
-          name="releaseYear"
-          placeholder="Release year"
-          type="text"
-        />
-        <div className='collectionRow'>
+        <Input register={register} name="name" placeholder="Enter name" type="text" />
+        <Input register={register} name="releaseYear" placeholder="Release year" type="text" />
+        <div className="collectionRow">
           <Select
             placeholder="Select a collection (Collection)"
             name="collectionID"
             options={collections}
-            value={collectionID}
-            onChange={onChange}
+            register={register}
           />
-          <Link
-            to={ROUTES.UPLOAD_COLLECTION}
-            icon="cross"
-            className='addCollection'
-          />
+          <Link to={ROUTES.UPLOAD_COLLECTION} icon="cross" className="addCollection" />
         </div>
         <Select
           placeholder="Select a genre"
           name="genre"
           options={VALID_GENRES}
-          value={genre}
-          onChange={onChange}
+          register={register}
         />
         <FileInput
           icon="file"
           name="files"
-          accept='.mp3,.wav'
+          accept=".mp3,.wav"
           multiple={false}
           title="Upload MP3"
-          onChange={onChange}
+          register={register}
         />
       </fieldset>
-      <PrimaryButton
-        onClick={signAndBroadcast}
-        disabled={formValidity.status !== ValidationStatus.valid}
-        type="button"
-      >
-        Create
+      <PrimaryButton type="submit">
+        <span>{broadcastStatus.loading ? 'loading...' : 'Create'}</span>
       </PrimaryButton>
-      {
-        ((formValidity.status === ValidationStatus.invalid) && formValidity.message)
-          ? <Feedback data={{ message: formValidity.message, error: true }} />
-          : <Feedback data={broadcastStatus} />
-      }
+      <Feedback data={formError} />
     </form>
   );
 };

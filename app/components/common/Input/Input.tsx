@@ -1,6 +1,7 @@
 /* External dependencies */
 import React, { useState } from 'react';
 
+
 /* Internal dependencies */
 import { IconButton } from '../Button';
 import Icon from '../Icon';
@@ -8,8 +9,8 @@ import { InputProps } from './types';
 
 const Input = ({
   type = 'text',
-  value,
   onChange,
+  register,
   placeholder,
   className = '',
   icon = '',
@@ -33,9 +34,9 @@ const Input = ({
       }
       <input
         type={type === 'password' && visibility ? 'text' : type}
-        value={value}
-        name={name}
         onChange={onChange}
+        {...(register && register(name))}
+        name={name}
         placeholder={placeholder}
         className={`component input ${className}`}
       />

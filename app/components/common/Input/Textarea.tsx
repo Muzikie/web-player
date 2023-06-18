@@ -1,18 +1,18 @@
 import React from 'react';
+import { UseFormRegister } from 'react-hook-form'
 
 /* Internal dependencies */
 import Icon from '../Icon';
 import { TextareaProps } from './types';
 
 const Textarea = ({
-  value,
-  onChange,
+  register,
   placeholder,
   className = '',
   icon = '',
   message = '',
   name = '',
-}: TextareaProps) => {
+}: TextareaProps& { register: UseFormRegister<any> }) => {
 
   return (
     <div className="component textarea">
@@ -24,9 +24,8 @@ const Textarea = ({
           : null
       }
       <textarea
-        value={value}
+        {...register(name)}
         name={name}
-        onChange={onChange}
         placeholder={placeholder}
         className={`component input ${className}`}
       />

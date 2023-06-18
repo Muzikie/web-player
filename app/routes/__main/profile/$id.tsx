@@ -54,8 +54,14 @@ const ProfileScreen = () => {
 
   return (
     <section className="screen profile">
-      <ProfileBanner data={profile} audios={audios} />
-      <UserDiscography collections={collections} audios={audios} />
+      <ProfileBanner
+        data={profile}
+        audios={audios}
+      />
+      <UserDiscography
+        collections={collections}
+        profile={profile}
+      />
       <ProfileDetails data={profile} />
       <WalletDetails address={id} />
     </section>
