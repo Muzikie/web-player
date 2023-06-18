@@ -6,8 +6,8 @@ import { useFetcher, useLoaderData } from '@remix-run/react';
 import { PrimaryButton } from '~/components/common/Button';
 import SecretKeyInput from '~/components/SecretKeyInput';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { useForm } from 'react-hook-form'
-import { validateSecretKey } from '~/helpers/validators'
+import { useForm } from 'react-hook-form';
+import { validateSecretKey } from '~/helpers/validators';
 
 const LoginForm = () => {
   const profileInfo = useLoaderData();
@@ -16,7 +16,6 @@ const LoginForm = () => {
   const { setProfileInfo, info } = useAccount();
   const { register, watch } = useForm();
   const secretKey = watch('passphrase');
-
 
   useEffect(() => {
     if (profileInfo.address !== info.address) {

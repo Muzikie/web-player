@@ -2,7 +2,7 @@ import React from 'react';
 
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
-import Image from '~/components/common/Image'
+import Image from '~/components/common/Image';
 import { API_URLS } from '~/configs';
 import { truncateAddress } from '~/helpers/formatters';
 import { ROUTES } from '~/routes/routes';

@@ -42,6 +42,7 @@
   }
 
   &.invalid {
+
     & > input {
       border-bottom-color: var(--color-error);
     }

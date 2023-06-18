@@ -34,6 +34,7 @@
 }
 
 @media (min-width: 680px) {
+
   .component.partialView {
     background-image: url('../../../images/guitars.jpg');
     display: flex;

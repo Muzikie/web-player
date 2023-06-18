@@ -1,7 +1,6 @@
 .component.activeSubscription {
    --info-height: 50px;
 
-
    position: relative;
    width: 100%;
 
@@ -49,7 +48,9 @@
    }
 
    & .subscriptionFooter {
+
       & figure {
+
          & .svg {
             height: 34px;
          }

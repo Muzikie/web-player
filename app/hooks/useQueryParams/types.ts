@@ -3,7 +3,7 @@ export interface QueryParam {
 }
 export type SetQueryParam = (paramsToSet: QueryParam) => void;
 export type RemoveQueryParam = (key: string) => void;
-export type Response = {
+export interface Response {
   queryParams: QueryParam;
   setQueryParam: SetQueryParam;
   removeQueryParam: RemoveQueryParam;

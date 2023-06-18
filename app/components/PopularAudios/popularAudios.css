@@ -16,6 +16,7 @@
   }
 
   & .content {
+
     & .newCollectionButton {
       width: 195px;
       margin-top: var(--padding-s);
@@ -24,6 +25,7 @@
 }
 
 @media (min-width: 680px) {
+
   .component.popularAudios {
     padding-left: var(--padding-m);
 

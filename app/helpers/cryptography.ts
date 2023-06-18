@@ -11,5 +11,5 @@ export const validateCredentials = async (secret: string) => {
     address,
     publicKey,
     privateKey,
-  }
+  };
 };

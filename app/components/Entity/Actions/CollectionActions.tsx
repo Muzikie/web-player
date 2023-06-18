@@ -1,9 +1,6 @@
 import React from 'react';
-// import { IconButton } from '~/components/common/Button';
-import { Collection } from '~/configs';
-import { EntityRowProps } from '../types';
 
-const CollectionActions = ({ data }: EntityRowProps<Collection>) => (
+const CollectionActions = () => (
   <footer className="component entity action collection">
     {/* <IconButton
       icon="heart"

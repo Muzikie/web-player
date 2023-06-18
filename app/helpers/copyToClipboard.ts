@@ -12,7 +12,7 @@ const copyToClipboard = (text: string, successCallBack?: () => void) => {
   }
   navigator.clipboard.writeText(text).then(() => {
     successCallBack && successCallBack();
-  })
-}
+  });
+};
 
 export default copyToClipboard;

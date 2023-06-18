@@ -9,7 +9,7 @@ const ReleaseYear = ({ data }: EntityRowProps<Entity>) => {
       {data.releaseYear}
       <strong>.</strong>
     </span>
-  )
+  );
 };
 
 export default ReleaseYear;

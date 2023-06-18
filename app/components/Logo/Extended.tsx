@@ -20,7 +20,6 @@ const ExtendedLogo = () => {
       </Link>
     </div>
   );
-}
-
+};
 
 export default ExtendedLogo;

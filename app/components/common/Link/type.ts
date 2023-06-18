@@ -9,7 +9,7 @@ export interface BaseLinkProps {
   disabled?: boolean;
 }
 
-export interface CompoundLinkProps extends BaseLinkProps {
+export type CompoundLinkProps = {
   icon?: string;
-}
+} & BaseLinkProps
 

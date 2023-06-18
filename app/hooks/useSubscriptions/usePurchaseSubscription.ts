@@ -9,7 +9,7 @@ import {
 } from '~/configs';
 import { useAccount } from '../useAccount/useAccount';
 import { bufferize } from '~/helpers/convertors';
-import { useBroadcast } from '../useBroadcast/useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast';
 import { PurchaseErrors } from './types';
 
 export const usePurchaseSubscription = () => {
