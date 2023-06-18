@@ -1,5 +1,5 @@
 import React from 'react';
-import { UseFormRegister } from 'react-hook-form'
+import { UseFormRegister } from 'react-hook-form';
 
 /* Internal dependencies */
 import Icon from '../Icon';

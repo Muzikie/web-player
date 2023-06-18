@@ -4,7 +4,6 @@ import React from 'react';
 /* Internal dependencies */
 import { Input } from '~/components/common/Input';
 
-
 const SecretKeyInput = ({ register }: any) => {
   return (
     <div className="component secretKeyInput">

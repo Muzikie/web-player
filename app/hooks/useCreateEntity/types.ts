@@ -33,7 +33,7 @@ export type EntityName = 'audio' | 'collection' | 'profile';
 
 type TransactionProp = 'id' | 'params' | 'module' | 'command' | 'signatures' | 'nonce' | 'fee' | 'senderPublicKey';
 
-export type Params = { [key: string]: unknown };
+export interface Params { [key: string]: unknown }
 
 export interface SignTransactionProps {
   command: COMMANDS,

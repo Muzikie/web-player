@@ -4,7 +4,7 @@ import React from 'react';
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { PrimaryButton } from '~/components/common/Button';
-import List from '~/components/List'
+import List from '~/components/List';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { ROUTES } from '~/routes/routes';
 import { UserDiscographyProps } from './types';
