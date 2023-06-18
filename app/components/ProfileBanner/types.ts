@@ -1,6 +1,6 @@
-import { Audio, Profile } from '~/configs'
+import { Audio, Profile } from '~/configs';
 
-export type ProfileAddress = {
+export interface ProfileAddress {
   data: Profile;
   audios: Audio[];
-};
+}

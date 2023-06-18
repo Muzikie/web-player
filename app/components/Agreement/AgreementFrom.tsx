@@ -1,9 +1,8 @@
 import React from 'react';
 
 /* Internal dependencies */
-import { Checkbox } from '../common/Checkbox'
-import { AgreementFormProps } from './types'
-
+import { Checkbox } from '../common/Checkbox';
+import { AgreementFormProps } from './types';
 
 const AgreementForm = ({
   terms, handleChange,
@@ -30,6 +29,5 @@ const AgreementForm = ({
     />
   </>
 );
-
 
 export default AgreementForm;

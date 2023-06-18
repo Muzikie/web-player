@@ -40,6 +40,7 @@
   }
 
   & footer {
+
     & h4 {
       color: var(--white);
       margin-bottom: var(--padding-s);
@@ -54,6 +55,7 @@
 }
 
 @media (min-width: 600px) {
+
   .screen.agreement {
     background-image: url('../../../images/guitars.jpg');
     display: flex;

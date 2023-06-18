@@ -14,6 +14,6 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
 
   return (
     <span className="component profileName">{subtitle}</span>
-  )
+  );
 };
 export default Subtitle;

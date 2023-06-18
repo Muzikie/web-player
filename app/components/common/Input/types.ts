@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from 'react';
-import { UseFormRegister } from 'react-hook-form'
+import { UseFormRegister } from 'react-hook-form';
 
 type InputTheme = 'text'|'number'|'password'|'email';
 

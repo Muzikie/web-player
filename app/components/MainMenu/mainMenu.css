@@ -2,7 +2,6 @@
   --menu-width: 200px;
   --menu-button: var(--box-size-xs);
 
-
   height: var(--menu-button);
   box-sizing: border-box;
   z-index: 5;
@@ -77,6 +76,7 @@
         }
 
         &.active {
+
           & i {
             color: var(--white);
             filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));

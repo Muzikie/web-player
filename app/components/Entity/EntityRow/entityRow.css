@@ -21,6 +21,7 @@
   }
 
   &.large {
+
     & .container {
       padding-top: var(--padding-xs);
       padding-bottom: var(--padding-s);
@@ -53,6 +54,7 @@
     & .detail {
       display: flex;
       flex-direction: column;
+
       & strong {
         padding: var(--border-radius-xs);
       }
@@ -68,7 +70,9 @@
   }
 
   &:hover {
+
     & footer {
+
       & > button {
         opacity: 1 !important;
       }

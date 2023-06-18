@@ -12,6 +12,10 @@ export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
 }
 
+export interface CollectionInfoLoaderData {
+  CollectionInfo: Awaited<Collection[]>;
+}
+
 export interface CollectionLoaderData {
   collection: Awaited<Collection>;
   profile: Awaited<Profile>;
@@ -20,6 +24,7 @@ export interface CollectionLoaderData {
 }
 
 export interface collectionLoaderProps {
+  request: Request;
   params: {
     id: number;
   };
@@ -61,7 +66,7 @@ export interface profileLoaderProps {
   request: Request;
 }
 
-export interface uploadLoaderProps {
+export interface UploadLoaderProps {
   request: Request;
 }
 

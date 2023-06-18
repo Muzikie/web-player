@@ -1,8 +1,10 @@
 import React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { audioSchema } from '~/hooks/useCreateEntity/schemas';
+import { useForm } from 'react-hook-form';
 
 /* Internal dependencies */
 import { useCreateAudio } from '~/hooks/useCreateEntity';
-import { useUserDiscography } from '~/hooks/useUserDiscography/useUserDiscography';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
 import { Select } from '~/components/common/Select';
@@ -10,14 +12,10 @@ import { Link } from '~/components/common/Link';
 import Feedback from '~/components/Feedback';
 import { ROUTES } from '~/routes/routes';
 import { VALID_GENRES } from '~/configs';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { audioSchema } from '~/hooks/useCreateEntity/schemas';
-import { useForm } from 'react-hook-form';
+import { CollectionInfo } from './types';
 
-const CreateAudio = () => {
+const CreateAudio = ({ CollectionInfo }: CollectionInfo) => {
   const { signAndBroadcast, broadcastStatus } = useCreateAudio();
-  const { collections } = useUserDiscography();
-
   const { handleSubmit, register, formState } = useForm({
     resolver: yupResolver(audioSchema),
     mode: 'onBlur', // validate on blur
@@ -31,6 +29,11 @@ const CreateAudio = () => {
       message: '',
     },
   });
+
+  const CollectionsInfo = CollectionInfo.map((item) => ({
+    value: item.collectionID,
+    label: `${item.name} - ${item.releaseYear}`,
+  }));
 
   const onSubmit = async (data: Record<string, any>) => {
     await signAndBroadcast(data);
@@ -52,10 +55,14 @@ const CreateAudio = () => {
           <Select
             placeholder="Select a collection (Collection)"
             name="collectionID"
-            options={collections}
+            options={CollectionsInfo}
             register={register}
           />
-          <Link to={ROUTES.UPLOAD_COLLECTION} icon="cross" className="addCollection" />
+          <Link
+            to={ROUTES.UPLOAD_COLLECTION}
+            icon="cross"
+            className='addCollection'
+          />
         </div>
         <Select
           placeholder="Select a genre"

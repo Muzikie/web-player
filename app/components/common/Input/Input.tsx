@@ -1,7 +1,6 @@
 /* External dependencies */
 import React, { useState } from 'react';
 
-
 /* Internal dependencies */
 import { IconButton } from '../Button';
 import Icon from '../Icon';

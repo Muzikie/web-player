@@ -5,7 +5,6 @@ import { DEV_ACCOUNT } from '~/configs';
 import { useWS } from '../useWS/useWS';
 import { useAccount } from '../useAccount/useAccount';
 
-
 export const useSubscriptions = () => {
   const { info } = useAccount();
   const [subIDs, setSubIDs] = useState<string[]>([]);

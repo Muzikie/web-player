@@ -26,8 +26,8 @@ export async function loader({ request }: LoaderBaseProps) {
     '/upload/collection',
     '/subscription/active',
     '/subscription/purchase',
-  ]
-  const url = new URL(request.url)
+  ];
+  const url = new URL(request.url);
   const { pathname } = url;
   const session = await getSession(
     request.headers.get('Cookie')

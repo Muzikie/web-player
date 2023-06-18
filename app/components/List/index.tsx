@@ -51,6 +51,6 @@ const List = ({
       </div>
     </section>
   );
-}
+};
 
 export default List;

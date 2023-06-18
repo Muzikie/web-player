@@ -7,7 +7,7 @@ import {
 } from '~/configs';
 import { Entity } from '~/components/Entity/types';
 
-export type SearchResultType = {
+export interface SearchResultType {
   [key: string]: Entity[];
 }
 
