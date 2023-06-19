@@ -96,20 +96,22 @@ interface LockedBalance {
   height: number;
 }
 
-interface Balance {
+export interface Balance {
   tokenID: string,
   availableBalance: string,
   lockedBalances: LockedBalance[]
 }
 
+export interface Auth {
+  nonce: string,
+  numberOfSignatures: number,
+  mandatoryKeys: string[],
+  optionalKeys: string[]
+}
+
 export interface Account {
   address: string;
-  auth: {
-    nonce: string,
-    numberOfSignatures: number,
-    mandatoryKeys: string[],
-    optionalKeys: string[]
-  };
+  auth: Auth;
   balances: Balance[];
 }
 
@@ -117,7 +119,7 @@ export type EndpointParams = Partial<Record<
   'offset' | 'limit' | 'sort'
   | 'audioID' | 'collectionID' | 'profileID'
   | 'transactionID' | 'blockID' | 'subscriptionID'
-  | 'creatorAddress',
+  | 'creatorAddress' | 'address',
 string>>;
 
 export interface MetaProps {

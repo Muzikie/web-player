@@ -2,9 +2,14 @@ import {
   Collection,
   Audio,
   Profile,
+  Auth,
+  Balance,
   API_URLS,
   API_VERSION,
+  EndpointParams,
+  AwaitedEndpointResult,
 } from '~/configs';
+import { removeNullValues } from '~/helpers/helpers';
 
 export interface SearchResultType {
   audio: Audio[];
@@ -25,6 +30,13 @@ interface TransactionSuccess {
 interface TransactionFailure {
   error: string;
 }
+
+const getList = (entity: string, params: EndpointParams) => {
+  const validatedParams = removeNullValues(params);
+  const search = new URLSearchParams(validatedParams);
+  const queryString = search.toString();
+  return fetch(`${API_URLS.STREAMER}/api/${API_VERSION}/${entity}?${queryString}`).then((res) => res.json());
+};
 
 const get = (url: string) => fetch(url).then((res) => res.json()).then(res => res.data);
 const post = (url: string, body: any) => fetch(
@@ -55,4 +67,18 @@ export async function search(query: string): Promise<SearchResultType> {
     audio,
     collection,
   };
+}
+
+export async function getAuth({ params }: { params: EndpointParams }): AwaitedEndpointResult<Auth> {
+  const results = await getList('auth', params);
+  const newAccount = {
+    nonce: '0',
+    optionalKeys: [],
+    mandatoryKeys: [],
+  };
+  return results?.data?.length ? results.data[0] : newAccount;
+}
+
+export async function getTokenBalances({ params }: { params: EndpointParams }): AwaitedEndpointResult<Array<Balance>> {
+  return getList('token/balances', params);
 }
