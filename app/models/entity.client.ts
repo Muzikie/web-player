@@ -69,7 +69,7 @@ export async function search(query: string): Promise<SearchResultType> {
   };
 }
 
-export async function getAuth({ params }: { params: EndpointParams }): AwaitedEndpointResult<Auth> {
+export async function getAuth({ params }: { params: EndpointParams }): Promise<Auth> {
   const results = await getList('auth', params);
   const newAccount = {
     nonce: '0',

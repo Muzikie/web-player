@@ -104,7 +104,7 @@ export interface Balance {
 
 export interface Auth {
   nonce: string,
-  numberOfSignatures: number,
+  numberOfSignatures?: number,
   mandatoryKeys: string[],
   optionalKeys: string[]
 }
@@ -149,4 +149,4 @@ export interface NetworkStatus {
   }
 }
 
-export type KeyValue = { [key: string]: any };
+export interface KeyValue { [key: string]: any }
