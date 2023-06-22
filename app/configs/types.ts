@@ -105,8 +105,8 @@ export interface Balance {
 export interface Auth {
   nonce: string,
   numberOfSignatures?: number,
-  mandatoryKeys: string[],
-  optionalKeys: string[]
+  mandatoryKeys?: string[],
+  optionalKeys?: string[]
 }
 
 export interface Account {

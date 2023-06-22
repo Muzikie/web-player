@@ -11,6 +11,7 @@ export interface ProfileInfoType {
   address: string;
   publicKey: string;
   privateKey: string;
+  passphrase?: string;
   auth: Auth;
   token: Balance[];
 }

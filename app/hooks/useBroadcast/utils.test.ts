@@ -8,8 +8,10 @@ import { signTransaction } from './utils';
 describe('useBroadcast', () => {
   const account = {
     ...accountMock,
-    balances: [],
-    nonce: '1',
+    token: [],
+    auth: {
+      nonce: '1',
+    }
   };
 
   it.skip('should sign audio/create transaction given valid props', async () => {

@@ -17,7 +17,6 @@ export const useAccount = () => {
       token,
       auth,
     };
-
     setProfileInfo(data);
     return data;
   };
