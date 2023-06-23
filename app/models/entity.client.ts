@@ -1,4 +1,15 @@
-import { Collection, Audio, Profile, API_URLS } from '~/configs';
+import {
+  Collection,
+  Audio,
+  Profile,
+  Auth,
+  Balance,
+  API_URLS,
+  API_VERSION,
+  EndpointParams,
+  AwaitedEndpointResult,
+} from '~/configs';
+import { removeNullValues } from '~/helpers/helpers';
 
 export interface SearchResultType {
   audio: Audio[];
@@ -20,6 +31,13 @@ interface TransactionFailure {
   error: string;
 }
 
+const getList = (entity: string, params: EndpointParams) => {
+  const validatedParams = removeNullValues(params);
+  const search = new URLSearchParams(validatedParams);
+  const queryString = search.toString();
+  return fetch(`${API_URLS.STREAMER}/api/${API_VERSION}/${entity}?${queryString}`).then((res) => res.json());
+};
+
 const get = (url: string) => fetch(url).then((res) => res.json()).then(res => res.data);
 const post = (url: string, body: any) => fetch(
   url,
@@ -37,10 +55,10 @@ export async function postTransaction(json: JSON, files: Asset[]): Promise<Trans
 }
 
 export async function search(query: string): Promise<SearchResultType> {
-  const promise1 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/v1/profiles?name=${query}`);
-  const promise2 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/v1/profiles?nickName=${query}`);
-  const promise3 = <Promise<Audio[]>> get(`${API_URLS.STREAMER}/api/v1/audios?name=${query}`);
-  const promise4 = <Promise<Collection[]>> get(`${API_URLS.STREAMER}/api/v1/collections?name=${query}`);
+  const promise1 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/profiles?name=${query}`);
+  const promise2 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/profiles?nickName=${query}`);
+  const promise3 = <Promise<Audio[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/audios?name=${query}`);
+  const promise4 = <Promise<Collection[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/collections?name=${query}`);
 
   const [names, nickNames, audio, collection] = await Promise.all([promise1, promise2, promise3, promise4]);
 
@@ -49,4 +67,18 @@ export async function search(query: string): Promise<SearchResultType> {
     audio,
     collection,
   };
+}
+
+export async function getAuth({ params }: { params: EndpointParams }): Promise<Auth> {
+  const results = await getList('auth', params);
+  const newAccount = {
+    nonce: '0',
+    optionalKeys: [],
+    mandatoryKeys: [],
+  };
+  return results?.data?.length ? results.data[0] : newAccount;
+}
+
+export async function getTokenBalances({ params }: { params: EndpointParams }): AwaitedEndpointResult<Array<Balance>> {
+  return getList('token/balances', params);
 }

@@ -31,7 +31,7 @@ export const signTransaction = async ({
   const tx = {
     module,
     command,
-    nonce: BigInt(account.nonce),
+    nonce: BigInt(account.auth.nonce),
     senderPublicKey: bufferize(account.publicKey),
     params: {
       ...params,

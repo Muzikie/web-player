@@ -54,8 +54,8 @@ export interface playlistLoaderParams {
 
 export interface ProfileLoaderData {
   profile: Awaited<Profile>;
-  collections: Awaited<Collection[]>;
-  audios: Awaited<Audio[]>;
+  collections?: Awaited<Collection[]>;
+  audios?: Awaited<Audio[]>;
   id: string;
 }
 

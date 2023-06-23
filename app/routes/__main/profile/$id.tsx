@@ -5,16 +5,16 @@ import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
 /* Internal dependencies */
 import {
-  getProfile,
-  getProfileCollections,
-  getProfileAudios,
+  getProfiles
+  // getProfileCollections,
+  // getProfileAudios,
 } from '~/models/entity.server';
 import { getSession } from '~/hooks/useSession';
-import ProfileBanner from '~/components/ProfileBanner';
-import ProfileDetails from '~/components/ProfileDetails';
+//import ProfileBanner from '~/components/ProfileBanner';
+//import ProfileDetails from '~/components/ProfileDetails';
 import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/profile.css';
-import UserDiscography from '~/components/UserDiscography';
+//import UserDiscography from '~/components/UserDiscography';
 import { profileLoaderProps, ProfileLoaderData } from '../../types';
 
 export function links() {
@@ -28,9 +28,9 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
   );
 
   const address = params.id === 'me' ? session.get('address') : params.id;
-  const profile = await getProfile(address);
-  const collections = await getProfileCollections(address);
-  const audios = await getProfileAudios(address, { limit: 4 });
+  const profile = await getProfiles(address);
+  // const collections = await getProfileCollections(address);
+  // const audios = await getProfileAudios(address, { limit: 4 });
 
   if (!profile) {
     throw new Response('Not Found', { status: 404 });
@@ -38,23 +38,23 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
 
   return json<ProfileLoaderData>({
     profile,
-    collections,
-    audios,
+    // collections,
+    // audios,
     id: address,
   });
 };
 
 const ProfileScreen = () => {
   const {
-    profile,
-    collections,
-    audios,
+    // profile,
+    // collections,
+    // audios,
     id,
   } = useLoaderData() as ProfileLoaderData;
 
   return (
     <section className="screen profile">
-      <ProfileBanner
+      {/* <ProfileBanner
         data={profile}
         audios={audios}
       />
@@ -62,7 +62,7 @@ const ProfileScreen = () => {
         collections={collections}
         profile={profile}
       />
-      <ProfileDetails data={profile} />
+      <ProfileDetails data={profile} /> */}
       <WalletDetails address={id} />
     </section>
   );
