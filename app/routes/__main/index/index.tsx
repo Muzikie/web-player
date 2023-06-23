@@ -1,14 +1,14 @@
 /* External dependencies */
 import React from 'react';
-// import { json } from '@remix-run/node';
-// import { useLoaderData } from '@remix-run/react';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 // /* Internal dependencies */
-// import {
-//   getRecentlyPlayed,
-//   getProfiles,
-//   getCollections,
-// } from '~/models/entity.server';
-// import { HomeLoaderData } from '../../types';
+import {
+  // getProfiles,
+  getAudios,
+  getCollections,
+} from '~/models/entity.server';
+import { HomeLoaderData } from '../../types';
 import List from '~/components/List';
 import { entityThemes } from '~/components/Entity/types';
 import styles from '~/css/routes/__main/index.css';
@@ -17,40 +17,56 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-// export const loader = async () => {
-//   return json<HomeLoaderData>({
-//     recentlyPlayed: await getRecentlyPlayed(),
-//     profiles: await getProfiles(),
-//     collections: await getCollections(),
-//   });
-// };
+export const loader = async () => {
+  const { data: collections } = await getCollections({ params: {} });
+  const { data: trending } = await getAudios({ params: {} });
+  // const { data: profiles } = await getProfiles({ params: {} });
+
+  return json<HomeLoaderData>({
+    profiles: [],
+    trending,
+    collections,
+  });
+};
 
 const HomeScreen = () => {
-  // const {
-  //   recentlyPlayed,
-  //   // profiles,
-  //   collections,
-  // } = useLoaderData() as HomeLoaderData;
+  const {
+    trending,
+    profiles,
+    collections,
+  } = useLoaderData() as HomeLoaderData;
 
   return (
     <section className="screen home">
-      <List
-        className="recent"
-        title="Recent"
-        itemTheme={entityThemes.HomePage}
-        items={[]}
-      />
-      {/* <List
-        className="favorite"
-        title="Favorite"
-        items={!profiles?.length ? [] : profiles}
-      /> */}
-      <List
-        className="favorite"
-        title="Favorite"
-        itemTheme={entityThemes.CollectionPage}
-        items={[]}
-      />
+      {
+        trending.length && (
+          <List
+            className="recent"
+            title="Recent"
+            itemTheme={entityThemes.HomePage}
+            items={trending}
+          />
+        )
+      }
+      {
+        profiles.length && (
+          <List
+            className="favorite"
+            title="Favorite"
+            items={profiles}
+          />
+        )
+      }
+      {
+        collections.length && (
+          <List
+            className="favorite"
+            title="Favorite"
+            itemTheme={entityThemes.CollectionPage}
+            items={collections}
+          />
+        )
+      }
     </section>
   );
 };
