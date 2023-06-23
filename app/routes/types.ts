@@ -20,13 +20,13 @@ export interface CollectionLoaderData {
   collection: Awaited<Collection>;
   profile: Awaited<Profile>;
   audios: Awaited<Audio[]>;
-  id: number;
+  id: string;
 }
 
 export interface collectionLoaderProps {
   request: Request;
   params: {
-    id: number;
+    id: string;
   };
 }
 
