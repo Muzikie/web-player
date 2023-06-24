@@ -1,11 +1,12 @@
 import React from 'react';
 
 // internal import
+import PopularAudios from '../PopularAudios';
 import { API_URLS, FILES } from '~/configs';
 import Image from '../common/Image';
 import { ProfileAddress } from './types';
 
-const ProfileBanner = ({ data }: ProfileAddress) => {
+const ProfileBanner = ({ data, audios }: ProfileAddress) => {
   const { creatorAddress, profileID, name } = data;
 
   return (
@@ -21,6 +22,7 @@ const ProfileBanner = ({ data }: ProfileAddress) => {
       <header>
         <h2>{name || creatorAddress}</h2>
       </header>
+      <PopularAudios audios={audios} />
     </section>
   );
 };
