@@ -3,18 +3,19 @@ import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
+
 /* Internal dependencies */
 import {
-  getProfiles
-  // getProfileCollections,
-  // getProfileAudios,
+  getProfiles,
+  getCollections,
+  getAudios,
 } from '~/models/entity.server';
 import { getSession } from '~/hooks/useSession';
-//import ProfileBanner from '~/components/ProfileBanner';
-//import ProfileDetails from '~/components/ProfileDetails';
+import ProfileBanner from '~/components/ProfileBanner';
+import ProfileDetails from '~/components/ProfileDetails';
 import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/profile.css';
-//import UserDiscography from '~/components/UserDiscography';
+import UserDiscography from '~/components/UserDiscography';
 import { profileLoaderProps, ProfileLoaderData } from '../../types';
 
 export function links() {
@@ -28,41 +29,41 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
   );
 
   const address = params.id === 'me' ? session.get('address') : params.id;
-  const profile = await getProfiles(address);
-  // const collections = await getProfileCollections(address);
-  // const audios = await getProfileAudios(address, { limit: 4 });
+  const { data: profiles } = await getProfiles({ params: { creatorAddress: address } });
+  const { data: collections } = await getCollections({ params: { creatorAddress: address } });
+  const { data: audios } = await getAudios({ params: { creatorAddress: address } });
 
-  if (!profile) {
+  if (!profiles?.length) {
     throw new Response('Not Found', { status: 404 });
   }
 
   return json<ProfileLoaderData>({
-    profile,
-    // collections,
-    // audios,
+    profile: profiles[0],
+    collections,
+    audios,
     id: address,
   });
 };
 
 const ProfileScreen = () => {
   const {
-    // profile,
-    // collections,
-    // audios,
+    profile,
+    collections,
+    audios,
     id,
   } = useLoaderData() as ProfileLoaderData;
 
   return (
     <section className="screen profile">
-      {/* <ProfileBanner
+      <ProfileBanner
         data={profile}
-        audios={audios}
+        audios={audios?.length ? audios : []}
       />
       <UserDiscography
-        collections={collections}
+        collections={collections?.length ? collections : []}
         profile={profile}
       />
-      <ProfileDetails data={profile} /> */}
+      <ProfileDetails data={profile} />
       <WalletDetails address={id} />
     </section>
   );
