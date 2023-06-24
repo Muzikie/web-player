@@ -19,7 +19,7 @@ const UserDiscography = ({ collections, profile }: UserDiscographyProps) => {
       <List
         items={!collections?.length ? [] : collections}
         emptyState={{
-          title: 'You don’t have audios or collection yet.',
+          title: 'No audios or collection to display.',
           subtitle: 'Start by creating your first collection, then add audios to it.',
           content: info.address === profile.creatorAddress ? (
             <Link to={ROUTES.UPLOAD_COLLECTION}>

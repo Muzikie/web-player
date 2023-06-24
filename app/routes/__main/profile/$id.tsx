@@ -33,12 +33,23 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
   const { data: collections } = await getCollections({ params: { creatorAddress: address } });
   const { data: audios } = await getAudios({ params: { creatorAddress: address } });
 
-  if (!profiles?.length) {
-    throw new Response('Not Found', { status: 404 });
-  }
+  const defaultProfile = {
+    name: '',
+    nickName: '',
+    description: '',
+    avatarHash: '',
+    avatarSignature: '',
+    bannerHash: '',
+    bannerSignature: '',
+    socialAccounts: [],
+    profileID: '',
+    creatorAddress: address,
+  };
+
+  const profile = profiles?.length > 0 ? profiles[0] : defaultProfile;
 
   return json<ProfileLoaderData>({
-    profile: profiles[0],
+    profile,
     collections,
     audios,
     id: address,

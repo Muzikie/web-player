@@ -19,7 +19,7 @@ const ProfileBanner = ({ data }: ProfileAddress) => {
         />
       </figure>
       <header>
-        <h2>{name ?? creatorAddress}</h2>
+        <h2>{name || creatorAddress}</h2>
       </header>
     </section>
   );
