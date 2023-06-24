@@ -6,7 +6,6 @@ import {
   Profile,
   Playlist
 } from '~/configs';
-import { Entity } from '~/components/Entity/types';
 
 export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
@@ -20,18 +19,18 @@ export interface CollectionLoaderData {
   collection: Awaited<Collection>;
   profile: Awaited<Profile>;
   audios: Awaited<Audio[]>;
-  id: number;
+  id: string;
 }
 
 export interface collectionLoaderProps {
   request: Request;
   params: {
-    id: number;
+    id: string;
   };
 }
 
 export interface HomeLoaderData {
-  recentlyPlayed: Awaited<Entity[]>;
+  trending: Awaited<Audio[]>;
   profiles: Awaited<Profile[]>;
   collections: Awaited<Collection[]>;
 }
