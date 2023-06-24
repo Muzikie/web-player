@@ -90,6 +90,7 @@
       margin: 0;
       color: var(--color-secondary);
       font-weight: var(--font-weight-black);
+      word-break: break-all;
     }
   }
 

@@ -16,19 +16,19 @@ const ViewProfile = ({ profile, setShowForm }: ProfileEditProps) => {
       <figure className="profileAvatar">
         <Image
           src={`${API_URLS.STREAMER}/${profile.profileID}-${FILES.profile}.jpg`}
-          alt={profile.name}
+          alt={profile.name || profile.creatorAddress}
           placeHolder="/images/artist.jpg"
         />
       </figure>
 
       <header className="profileName">
-        <h2>{profile.name}</h2>
+        <h2>{profile.name || profile.creatorAddress}</h2>
       </header>
 
       <section className="bioContainer">
         <h4>Bio</h4>
         <p>
-          {profile.description}
+          {profile.description || 'Here artists can introduce themselves.'}
         </p>
       </section>
 
@@ -45,7 +45,7 @@ const ViewProfile = ({ profile, setShowForm }: ProfileEditProps) => {
                   <div className='iconBox'>
                     <Icon name={socialPlatformNames[platform]} />
                   </div>
-                  <span>{username || 'Not yet'}</span>
+                  <span>{username || 'Not set'}</span>
                 </a>
               </li>
             ))
