@@ -39,7 +39,7 @@ const HomeScreen = () => {
   return (
     <section className="screen home">
       {
-        trending.length && (
+        trending.length > 0 && (
           <List
             className="recent"
             title="Recent"
@@ -49,7 +49,7 @@ const HomeScreen = () => {
         )
       }
       {
-        profiles.length && (
+        profiles.length > 0 && (
           <List
             className="favorite"
             title="Favorite"
@@ -58,7 +58,7 @@ const HomeScreen = () => {
         )
       }
       {
-        collections.length && (
+        collections.length > 0 && (
           <List
             className="favorite"
             title="Favorite"
