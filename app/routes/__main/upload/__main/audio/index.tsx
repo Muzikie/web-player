@@ -14,7 +14,7 @@ export const loader = async ({ request }: collectionLoaderProps) => {
     request.headers.get('Cookie')
   );
   const address = session.get('address');
-  const collections = await getCollections();
+  const { data:  collections } = await getCollections({ params: {} });
   const CollectionInfo = collections.filter((items) => items.creatorAddress === address);
 
   return json<CollectionInfoLoaderData>({
