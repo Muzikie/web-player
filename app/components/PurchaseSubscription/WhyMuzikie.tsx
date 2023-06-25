@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Icon from '~/components/common/Icon';
-import { Reason } from './types';
+import type { Reason } from './types';
 
 const reasons: Reason[] = [
   {
@@ -21,7 +21,7 @@ const reasons: Reason[] = [
   }
 ];
 
-const Reason = ({ data }: { data: Reason }) => (
+const ReasonToJoin = ({ data }: { data: Reason }) => (
   <div className="reason">
     <Icon name={data.icon} />
     <h3>{data.title}</h3>
@@ -37,7 +37,7 @@ const WhyMuzikie = () => (
     <div className="reasons">
       {
         reasons.map((reason) => (
-          <Reason key={reason.title} data={reason} />
+          <ReasonToJoin key={reason.title} data={reason} />
         ))
       }
     </div>
