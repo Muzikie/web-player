@@ -3,6 +3,7 @@ import React from 'react';
 import { Outlet } from '@remix-run/react';
 import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+
 /* Internal dependencies */
 import PlayerProvider from '~/context/playerContext/playerContextProvider';
 import ProfileProvider from '~/context/profileContext/profileContextProvider';

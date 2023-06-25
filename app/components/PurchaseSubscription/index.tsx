@@ -8,7 +8,6 @@ import Intro from './Intro';
 import { PurchaseSubscriptionProps } from './types';
 
 const PurchaseSubscription = ({ subscriptionPlans }: PurchaseSubscriptionProps) => {
-  console.log('subscriptionPlans', subscriptionPlans);
   const [feedback, setFeedback] = useState({
     error: false,
     message: '',

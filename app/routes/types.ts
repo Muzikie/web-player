@@ -23,6 +23,13 @@ export interface CollectionLoaderData {
   id: string;
 }
 
+export interface ListScreenProps {
+  request: Request;
+  params: {
+    id: string;
+  };
+}
+
 export interface collectionLoaderProps {
   request: Request;
   params: {
@@ -86,4 +93,8 @@ export interface DiscographyProps {
 
 export interface PurchaseSubscriptionData {
   subscriptionPlans: Awaited<Subscription[]>;
+}
+
+export interface ActiveSubscriptionData {
+  activeSubscription: Awaited<Subscription|null>;
 }

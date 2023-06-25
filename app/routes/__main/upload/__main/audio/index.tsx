@@ -1,11 +1,13 @@
+/* External dependencies */
 import React from 'react';
-
-import CreateAudio from '~/components/CreateAudio';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+
+/* Internal dependencies */
+import CreateAudio from '~/components/CreateAudio';
 import { getCollections } from '~/models/entity.server';
 import { getSession } from '~/hooks/useSession';
-import { CollectionInfoLoaderData, collectionLoaderProps } from '../../../../types';
+import { CollectionInfoLoaderData, collectionLoaderProps } from '~/routes/types';
 
 export const loader = async ({ request }: collectionLoaderProps) => {
   const session = await getSession(
