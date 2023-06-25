@@ -71,6 +71,7 @@ export type Playlist = {
 } & BaseEntity
 
 export interface Subscription {
+  name: string;
   subscriptionID: string;
   creatorAddress: string;
   maxMembers: number;

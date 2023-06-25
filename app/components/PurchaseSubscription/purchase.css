@@ -1,192 +1,94 @@
 .component.purchase {
   color: var(--color-secondary);
+  box-sizing: border-box;
+  padding-bottom: calc(2 * var(--padding-l));
 
-  & .description {
+  & .intro {
     display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    gap: 10px;
-    padding: var(--padding-l);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     & p {
-      width: 544px;
-    }
-  }
-
-  & .title {
-    display: flex;
-    width: 90%;
-    flex-direction: row;
-    padding: 0;
-  }
-
-  & h4 {
-    width: 253px;
-  }
-
-  & img {
-    width: 35px;
-    height: 37px;
-    margin-right: var(--padding-s);
-    padding-top: var(--padding-xs);
-  }
-}
-
-.component.offer {
-  color: var(--color-secondary);
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-
-  & .content {
-    display: flex;
-    width: 95%;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: self-start;
-  }
-
-  & .sidebar {
-    width: 29%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    padding-top: var(--padding-s);
-
-    & span:first-child {
-      font-weight: var(--font-weight-black);
-      margin-bottom: var(--padding-xs);
+      width: 90%;
+      max-width: 544px;
       font-size: var(--size-h3);
-    }
-
-    & span:nth-child(2) {
-      font-weight: var(--font-weight-bold);
-      font-size: var(--size-h4);
-    }
-
-    & span:nth-child(3) {
-      position: absolute;
-      display: none;
-      background-color: #feeae3;
-      padding: var(--padding-xs);
-      border-radius: var(--border-radius-xs);
-      top: 209px;
-    }
-
-    & .subscribeButton {
-      margin-top: var(--padding-m);
-    }
-  }
-
-  & .mainOffer {
-    display: flex;
-    width: 70%;
-    flex-direction: row;
-    justify-content: space-around;
-    box-sizing: border-box;
-
-    & .description {
-      width: 250px;
       text-align: center;
-      line-height: 26px;
-      padding-top: var(--padding-s);
-      font-size: var(--size-h5);
     }
   }
-  
-  & .social {
-    text-align: left;
 
-    & li {
+  & .plans {
+    & .container {
+      padding: var(--padding-l) var(--padding-m);
+      text-align: center;
+    }
+
+    & .plan-list {
       display: flex;
+      flex-flow: column nowrap;
       align-items: center;
-      line-height: 45px;
-      font-size: var(--size-h4);
-      font-weight: var(--font-weight-normal);
-    }
+      justify-content: center;
+      gap: var(--padding-m);
 
-    & .notChecked {
-      color: var(--color-secondary);
-    }
+      & .subscriptionPlan {
+        width: 100%;
+        text-align: center;
+        padding: var(--padding-l) var(--padding-m);
+        box-sizing: border-box;
+        border-radius: var(--border-radius-s);
+        background-color: var(--color-primary-light);
 
-    & .checked {
-      color: var(--green);
-    }
+        & > h3,
+        & > h4 {
+          margin-bottom: var(--padding-m);
+        }
 
-    & img {
-      margin-right: var(--padding-s);
-    }
-
-    & i {
-      font-size: var(--size-h3);
-      width: 25px;
-      height: 23px;
-      padding-left: var(--padding-xs);
-      margin-right: var(--padding-s);
-    }
-  }
-}
-
-@media (max-width: 850px) {
-
-  .component.purchase {
-
-    & .description p {
-      width: 100%;
-    }
-  }
-
-  .component.offer {
-
-    & .content {
-      flex-direction: column;
-      align-items: center;
-      padding-right: 0 !important;
-      padding-left: 0 !important;
-    }
-
-    & .sidebar {
-      width: 66%;
-      border-bottom: 1px solid #feeae3;
-      padding-bottom: var(--padding-x);
-      margin-bottom: var(--padding-m);
-    }
-
-    & .sidebar span:nth-child(3) {
-      display: flex;
-    }
-
-    & .mainOffer {
-      width: 100%;
-    }
-
-    & .subscribeButton {
-      width: 70%;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-
-  .component.offer {
-
-    & .sidebar {
-      width: 88%;
-    }
-
-    & .mainOffer {
-      flex-direction: column;
-      align-items: center;
-
-      & .description {
-        width: 85%;
+        & button {
+          font-size: var(--size-h3);
+          padding: calc(var(--box-size-xxs) / 2);
+          height: calc(2 * var(--box-size-xxs));
+          font-weight: var(--font-weight-light);
+        }
       }
+    }
+  }
 
-      & .social {
-        width: 76%;
-        margin-top: var(--padding-m);
-        margin-bottom: var(--padding-s);
+  & .whyMuzikie {
+    & .container {
+      padding: var(--padding-l) var(--padding-m);
+      text-align: center;
+    }
+
+    & .reasons {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: flex-start;
+      justify-content: center;
+      gap: var(--padding-m);
+
+      & .reason {
+        width: 100%;
+        text-align: center;
+
+        & .description {
+          font-weight: var(--font-weight-light);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .component.purchase {
+    & .plans {
+      & .plan-list {
+        flex-direction: row;
+      }
+    }
+
+    & .whyMuzikie {
+      & .reasons {
+        flex-direction: row;
       }
     }
   }

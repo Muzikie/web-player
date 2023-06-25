@@ -4,7 +4,8 @@ import {
   Collection,
   Audio,
   Profile,
-  Playlist
+  Playlist,
+  Subscription,
 } from '~/configs';
 
 export interface SearchLoaderData {
@@ -81,4 +82,8 @@ export interface DiscographyLoaderData {
 export interface DiscographyProps {
   audios: Audio[];
   collections: Collection[];
+}
+
+export interface PurchaseSubscriptionData {
+  subscriptionPlans: Awaited<Subscription[]>;
 }
