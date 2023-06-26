@@ -8,6 +8,14 @@
   box-shadow: 0 -10px 18px 0 var(--color-primary-shadow);
   transition: all ease 200ms;
 
+  &.modalRelative {
+    position: relative !important;
+    box-shadow: 0 -10px 18px 0 var(--color-primary-shadow),
+      0 10px 18px 0 var(--color-primary-shadow);
+    border-radius: var(--border-radius-l);
+    padding-bottom: var(--padding-m);
+  }
+
   &.dark {
     background: var(--color-secondary);
   }
@@ -31,19 +39,5 @@
     transform: translateY(100%);
     opacity: 0;
     pointer-events: none;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .component.modal {
-
-    &.modalRelative {
-      position: relative;
-      box-shadow: 0 -10px 18px 0 var(--color-primary-shadow),
-        0 10px 18px 0 var(--color-primary-shadow);
-      border-radius: var(--border-radius-x);
-      padding-bottom: var(--padding-m);
-    }
   }
 }

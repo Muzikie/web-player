@@ -6,5 +6,5 @@ export interface ModalProps {
   className?: string;
   children: ReactNode;
   theme?: 'dark' | 'light';
-  notStickyInMobile?: boolean;
+  modalRelative?: boolean;
 }
