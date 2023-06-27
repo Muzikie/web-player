@@ -61,7 +61,6 @@ const ProfileScreen = () => {
     profile,
     collections,
     audios,
-    id,
   } = useLoaderData() as ProfileLoaderData;
 
   return (
@@ -75,7 +74,7 @@ const ProfileScreen = () => {
         profile={profile}
       />
       <ProfileDetails data={profile} />
-      <WalletDetails address={id} />
+      <WalletDetails />
     </section>
   );
 };

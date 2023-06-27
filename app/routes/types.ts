@@ -91,13 +91,8 @@ export interface DiscographyProps {
   collections: Collection[];
 }
 
-export interface PurchaseLoaderProps {
-  request: Request;
-}
-
 export interface PurchaseSubscriptionData {
   subscriptionPlans: Awaited<Subscription[]>;
-  id: string;
 }
 
 export interface ActiveSubscriptionData {

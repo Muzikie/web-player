@@ -7,17 +7,11 @@ import WalletDetails from '~/components/WalletDetails';
 import ActionAndInfo from '~/components/ActionAndInfo';
 import Modal from '~/components/Modal';
 import {
-  PurchaseLoaderProps,
   PurchaseSubscriptionData,
 } from '~/routes/types';
 import { getSubscriptions } from '~/models/entity.server';
 import { DEV_ACCOUNT, Subscription } from '~/configs';
-import { getSession } from '~/hooks/useSession';
-
-export const loader = async ({ request }: PurchaseLoaderProps) => {
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
+export const loader = async () => {
 
   const { data: subscriptions } = await getSubscriptions({
     params: {
@@ -39,22 +33,20 @@ export const loader = async ({ request }: PurchaseLoaderProps) => {
   }, {});
 
   return json<PurchaseSubscriptionData>({
-    subscriptionPlans: Object.values(subscriptionPlans),
-    id: session.get('address'),
+    subscriptionPlans: Object.values(subscriptionPlans)
   });
 };
 
 const PurchaseSubscriptionScreen = () => {
   const {
     subscriptionPlans,
-    id,
   } = useLoaderData() as PurchaseSubscriptionData;
 
   return (
     <section className="screen subscription tabContainer">
       <div className='wrap'>
         <section className='wallet'>
-          <WalletDetails address={id} />
+          <WalletDetails showButton={true} />
         </section>
         <section className='warningInfo'>
           <Modal className='modalRelative warning'>
