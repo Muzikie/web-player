@@ -2,6 +2,31 @@
    position: relative;
    width: 100%;
 
+   & .wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      margin-top: 25px;
+      margin-bottom: 75px;
+   }
+   
+   & .wallet {
+      position: relative;
+      width: 40%;
+      margin-right: 10px;
+   }
+
+   & .warningInfo {
+      position: relative;
+      width: 40%;
+      margin-left: 10px;
+   }
+
+   & .walletDetails {
+      height: 100%;
+   }
+
    & > .tabContainer {
       padding: 40px 20px 0;
       box-sizing: border-box;
@@ -12,4 +37,5 @@
       position: relative;
       padding-top: var(--padding-x);
    }
+
 }

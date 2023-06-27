@@ -33,6 +33,10 @@
     }
   }
 
+  & .walletFooter {
+    margin-top: var(--padding-l);
+  }
+
 }
 
 @media (min-width: 1280px) {

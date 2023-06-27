@@ -3,6 +3,7 @@ import { Subscription } from '~/configs';
 export interface SubscriptionPlanProps {
   data: Subscription;
   onSubmit: () => void;
+  availableBalance: string;
   feedback: {
     error: boolean;
     message: string;
