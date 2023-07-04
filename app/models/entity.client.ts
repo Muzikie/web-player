@@ -10,48 +10,42 @@ import {
   AwaitedEndpointResult,
 } from '~/configs';
 import { removeNullValues } from '~/helpers/helpers';
-
-export interface SearchResultType {
-  audio: Audio[];
-  profile: Profile[];
-  collection: Collection[];
-}
-
-interface JSON { [key: string]: any }
-interface Asset {
-  key: string;
-  value: File;
-}
-
-interface TransactionSuccess {
-  _id: string;
-}
-
-interface TransactionFailure {
-  error: string;
-}
+import { DryRunTxResponse, PostTxResponse } from '~/context/socketContext/types';
+import type {
+  Asset,
+  PostOptions,
+  SearchResultType,
+  transactionCreationProps,
+} from './types';
 
 const getList = (entity: string, params: EndpointParams) => {
   const validatedParams = removeNullValues(params);
   const search = new URLSearchParams(validatedParams);
   const queryString = search.toString();
-  return fetch(`${API_URLS.STREAMER}/api/${API_VERSION}/${entity}?${queryString}`).then((res) => res.json());
+  return fetch(`${API_URLS.STREAMER}/api/${API_VERSION}/${entity}?${queryString}`)
+    .then((res) => res.json());
 };
 
 const get = (url: string) => fetch(url).then((res) => res.json()).then(res => res.data);
-const post = (url: string, body: any) => fetch(
+const post = (url: string, body: any, options: PostOptions = {}) => fetch(
   url,
   {
     method: 'POST',
+    ...options,
     body,
   }
-).then((res) => res.json()).then(res => res.data).catch(console.log);
+).then(res => {
+  console.log('res', res);
+  return res.json();
+});
 
-export async function postTransaction(json: JSON, files: Asset[]): Promise<TransactionSuccess|TransactionFailure> {
-  const data = new FormData();
-  files.forEach((file) => data.append(file.key, file.value));
-  data.append('data', JSON.stringify(json));
-  return post(`${API_URLS.STREAMER}/api/v1/transactions`, data);
+export async function uploadFiles(assets: { id: string, file: Asset }[]): Promise<string[]> {
+  return Promise.all<string>(assets.map(({ id, file }) => {
+    const data = new FormData();
+    data.append('file', file.value);
+
+    return post(`${API_URLS.STORAGE}/upload/${id}`, data, {});
+  })).catch(err => err.message);
 }
 
 export async function search(query: string): Promise<SearchResultType> {
@@ -81,4 +75,30 @@ export async function getAuth({ params }: { params: EndpointParams }): Promise<A
 
 export async function getTokenBalances({ params }: { params: EndpointParams }): AwaitedEndpointResult<Array<Balance>> {
   return getList('token/balances', params);
+}
+
+export async function dryRunTransaction(params: transactionCreationProps): Promise<DryRunTxResponse> {
+  const JsonPostOptions: PostOptions = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  return post(
+    `${API_URLS.STREAMER}/api/${API_VERSION}/transactions/dryrun`,
+    JSON.stringify(params),
+    JsonPostOptions
+  ).catch(console.log);
+}
+
+export async function broadcastTransaction(params: transactionCreationProps): Promise<PostTxResponse> {
+  const JsonPostOptions: PostOptions = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  return post(
+    `${API_URLS.STREAMER}/api/${API_VERSION}/transactions`,
+    JSON.stringify(params),
+    JsonPostOptions
+  ).catch(console.log);
 }

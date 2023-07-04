@@ -1,17 +1,13 @@
 /* Internal dependencies */
 import { HTTP_STATUS } from '~/configs';
-import { DryRunTxResponse, PostTxResponse, Method } from '~/context/socketContext/types';
-import { useWS } from '../useWS/useWS';
 import { SignTransactionProps } from '../useCreateEntity/types';
-import { postTransaction } from '~/models/entity.client';
-import { getTransactionExecutionStatus } from '~/helpers/transaction';
+import { uploadFiles, dryRunTransaction, broadcastTransaction } from '~/models/entity.client';
+import { getTransactionExecutionStatus, getEntityIDFromDryRunEvents } from '~/helpers/transaction';
 import { signTransaction } from './utils';
 
 export const useBroadcast = () => {
-  const { request } = useWS();
-
   const broadcast = async (props: SignTransactionProps) => {
-    const { module, command, account, files } = props;
+    const { module, files } = props;
     const result = await signTransaction(props);
     if (result instanceof Error) {
       return {
@@ -19,42 +15,32 @@ export const useBroadcast = () => {
         message: result.message || HTTP_STATUS.NOT_SIGNED.MESSAGE,
       };
     }
-    const { txId, txBytes, transaction } = result;
+    const { txId, txBytes } = result;
+    const txString = txBytes.toString('hex');
 
     // dry-run transaction to get the errors
-    const dryRunResponse = <DryRunTxResponse>(
-      await request(Method.txpool_dryRunTransaction, { transaction: txBytes.toString('hex') })
-    );
+    const dryRunResponse = await dryRunTransaction({ transaction: txString });
 
     const txStatus = getTransactionExecutionStatus(module, txId, dryRunResponse);
     if (txStatus === HTTP_STATUS.OK.CODE) {
-      // Post transaction to the Streamer
-      const streamerData = {
-        transactionID: txId,
-        creatorAddress: account.address,
-        module,
-        command,
-        ...Object.keys(transaction.params)
-          .filter(key => key.match(/Hash|Signature/))
-          .reduce((hashes: { [key: string]: string }, key) => {
-            hashes[key] = transaction.params[key].toString('hex');
-            return hashes;
-          }, {})
-      };
-
-      const postResponse = await postTransaction(
-        streamerData,
-        files,
-      );
+      const entityID = getEntityIDFromDryRunEvents(module, dryRunResponse);
+      const postResponse = await uploadFiles([{
+        id: entityID,
+        file: files[0],
+      }]);
+      const uploadSuccess = postResponse.reduce((acc, curr) => {
+        if (curr.error === true || !acc) {
+          acc = false;
+        }
+        return acc;
+      }, true);
 
       // Broadcast on the Blockchain
-      if ('_id' in postResponse) {
-        const response = <PostTxResponse>(
-          await request(Method.txpool_postTransaction, { transaction: txBytes.toString('hex') })
-        );
+      if (uploadSuccess) {
+        const broadcastResponse = await broadcastTransaction({ transaction: txString });
 
         // Check if the NFT is created correctly
-        if (!response.error) {
+        if (!broadcastResponse.error) {
           return {
             message: HTTP_STATUS.OK.MESSAGE,
             error: false
