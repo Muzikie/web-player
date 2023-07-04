@@ -47,7 +47,7 @@ interface BlockEvent {
   module: string;
   name: string;
   topics: string[];
-  data: string;
+  data: Record<string, unknown>;
 }
 
 export interface DryRunTxData {
@@ -87,8 +87,8 @@ export interface SubscriptionData {
 export enum Method {
   auth_getAuthAccount = 'auth_getAuthAccount',
   token_getBalances = 'token_getBalances',
-  txpool_postTransaction = 'txpool_postTransaction',
-  txpool_dryRunTransaction = 'txpool_dryRunTransaction',
+  postTransaction = 'post.transactions',
+  dryRunTransaction = 'post.transactions.dryrun',
   collection_getAccount = 'collection_getAccount',
   collection_getCollection = 'collection_getCollection',
   audio_getAccount = 'audio_getAccount',
@@ -100,8 +100,8 @@ export enum Method {
 export interface DefaultValues {
   [Method.auth_getAuthAccount]: AuthData;
   [Method.token_getBalances]: TokenData;
-  [Method.txpool_postTransaction]: PostTxData;
-  [Method.txpool_dryRunTransaction]: DryRunTxData;
+  [Method.postTransaction]: PostTxData;
+  [Method.dryRunTransaction]: DryRunTxData;
   [Method.collection_getAccount]: CollectionAccountData;
   [Method.collection_getCollection]: CollectionData;
   [Method.audio_getAccount]: AudioAccountData;
@@ -126,8 +126,8 @@ export interface SuccessResponse<T extends Method> {
 
 export type AuthResponse = SuccessResponse<Method.auth_getAuthAccount> | ErrorResponse;
 export type TokenResponse = SuccessResponse<Method.token_getBalances> | ErrorResponse;
-export type PostTxResponse = SuccessResponse<Method.txpool_postTransaction> | ErrorResponse;
-export type DryRunTxResponse = SuccessResponse<Method.txpool_dryRunTransaction> | ErrorResponse;
+export type PostTxResponse = SuccessResponse<Method.postTransaction> | ErrorResponse;
+export type DryRunTxResponse = SuccessResponse<Method.dryRunTransaction> | ErrorResponse;
 export type CollectionAccountResponse = SuccessResponse<Method.collection_getAccount> | ErrorResponse;
 export type CollectionResponse = SuccessResponse<Method.collection_getCollection> | ErrorResponse;
 export type AudioAccountResponse = SuccessResponse<Method.audio_getAccount> | ErrorResponse;

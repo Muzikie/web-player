@@ -1,4 +1,4 @@
-import { SearchResultType } from '~/models/entity.server';
+import type { SearchResultType } from '~/models/types';
 
 import {
   Collection,
