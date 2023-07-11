@@ -1,36 +1,42 @@
 import React from 'react';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 /* Internal dependencies */
 import { Input, FileInput, Textarea } from '~/components/common/Input';
-import { PrimaryButton } from '~/components/common/Button';
+import { IconButton, PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
 import { useCreateProfile } from '~/hooks/useCreateEntity';
 import { socialPlatformNames } from '~/configs';
+import { profileSchema } from '~/hooks/useCreateEntity/schemas';
 import { ProfileEditProps } from './types';
 import './profileDetails.css';
-import { useForm } from 'react-hook-form';
-import { profileSchema } from '~/hooks/useCreateEntity/schemas';
-import { yupResolver } from '@hookform/resolvers/yup';
 
-const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
-  const { signAndBroadcast, broadcastStatus, initialValue } = useCreateProfile();
+const ProfileEdit = ({ setShowForm, profile }: ProfileEditProps) => {
+  const { signAndBroadcast, broadcastStatus } = useCreateProfile();
 
-  const { handleSubmit, register, formState } = useForm({
+  const {
+    avatarHash,
+    avatarSignature,
+    bannerHash,
+    bannerSignature,
+    ...defaultValues
+  } = Object.assign({ message: '', avatar: [], banner: [] }, profile);
+  console.log(avatarHash, avatarSignature, bannerHash, bannerSignature);
+  const { handleSubmit, register, formState, control } = useForm({
     resolver: yupResolver(profileSchema),
     mode: 'onBlur', // validate on blur
-    shouldFocusError: true, // foconBlurus input with error after submit
-    defaultValues: {
-      name: '',
-      nickName: '',
-      description: '',
-      socialAccounts: initialValue,
-      files: [],
-      message: '',
-    },
+    shouldFocusError: true, // focus on input with an error after submission
+    defaultValues,
+  });
+  const { fields, remove } = useFieldArray({
+    control,
+    rules: { minLength: 3 },
+    name: 'socialAccounts',
   });
 
-  const onSubmit = async (data: Record<string, any>) => {
-    await signAndBroadcast(data);
+  const onSubmit = async (data: Record<string, unknown>) => {
+    await signAndBroadcast(data, profile);
   };
   const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
   const formError = errorMessage
@@ -39,61 +45,69 @@ const ProfileEdit = ({ setShowForm }: ProfileEditProps) => {
       error: true,
     }
     : broadcastStatus;
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="component editProfile">
       <fieldset>
-        <div>
-          <FileInput
-            icon="file"
-            name="banner"
-            accept=".png,.jpg,.jpeg"
-            multiple={false}
-            title="Click to update banner"
-            className="fileInput"
-            register={register}
-          />
-        </div>
-        <div>
-          <FileInput
-            icon="file"
-            name="avatar"
-            register={register}
-            accept=".png,.jpg,.jpeg"
-            multiple={false}
-            title="Click to update Avatar"
-            className="fileInput"
-          />
-        </div>
-        <Input register={register} name="name" placeholder="Enter name" type="text" />
-        <Input register={register} name="nickName" placeholder="Enter nickname" type="text" />
+        <FileInput
+          accept=".png,.jpg,.jpeg"
+          multiple={false}
+          placeholder="Click to update banner"
+          className="fileInput"
+          {...register('banner', { required: false })}
+        />
+        <FileInput
+          {...register('avatar', { required: false })}
+          accept=".png,.jpg,.jpeg"
+          multiple={false}
+          placeholder="Click to update Avatar"
+          className="fileInput"
+        />
+        <Input
+          {...register('name', { required: false })}
+          name="name"
+          placeholder="Enter name"
+          type="text"
+        />
+        <Input
+          {...register('nickName', { required: false })}
+          name="nickName"
+          placeholder="Enter nickname"
+          type="text"
+        />
         <Textarea
-          register={register}
+          {...register('description', { required: false })}
           name="description"
           placeholder="Describe yourself"
           className="descriptionInput"
         />
-        {initialValue && initialValue.length > 0 ? (
-          <>
-            {initialValue.map(({ platform, username }) => (
+        {
+          fields.map(({ platform }) => (
+            <fieldset key={socialPlatformNames[platform]} className="socialAccountInput">
               <Input
-                key={socialPlatformNames[platform]}
-                value={username}
-                name={socialPlatformNames[platform]}
-                placeholder={`${socialPlatformNames[platform]} channel`}
+                className="input"
+                placeholder={socialPlatformNames[platform]}
                 type="text"
-                register={register}
+                {...register(`socialAccounts.${platform}.username`, { required: false })} 
               />
-            ))}
-          </>
-        ) : null}
+              <IconButton
+                icon="trash"
+                className="removeButton"
+                onClick={() => { console.log('remove', platform); remove(platform); }}
+              ></IconButton>
+            </fieldset>
+          ))
+        }
       </fieldset>
-      <PrimaryButton type="submit">
-        <>{broadcastStatus.loading ? <span>loading...</span> : <span>Create</span>}</>
+      <PrimaryButton
+        type="submit"
+        className="button"
+        disabled={formError.error}
+      >
+        {broadcastStatus.loading ? 'loading...' : 'Create'}
       </PrimaryButton>
       <PrimaryButton
         onClick={() => setShowForm(false)}
-        className="white"
+        className="button white"
         disabled={false}
         type="button"
       >
