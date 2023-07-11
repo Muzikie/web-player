@@ -31,7 +31,7 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
   const address = params.id === 'me' ? session.get('address') : params.id;
   const { data: profiles } = await getProfiles({ params: { creatorAddress: address } });
   const { data: collections } = await getCollections({ params: { creatorAddress: address } });
-  const { data: audios } = await getAudios({ params: { creatorAddress: address } });
+  const { data: audios } = await getAudios({ params: { ownerAddress: address, limit: '5' } });
 
   const defaultProfile = {
     name: '',
