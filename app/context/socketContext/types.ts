@@ -43,7 +43,7 @@ interface PostTxData {
   transactionID: string;
 }
 
-interface BlockEvent {
+export interface BlockEvent {
   module: string;
   name: string;
   topics: string[];

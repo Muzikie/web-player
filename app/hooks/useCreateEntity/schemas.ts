@@ -42,12 +42,20 @@ export const profileSchema = yup
     avatar: yup.mixed().test({
       message: 'Please enter a avatar image',
       name: 'files',
-      test: item => !!item?.[0]?.name,
+      test: (item) => {
+        console.log('avatar yup', item);
+        if (!item.length) return true;
+        return !!item?.[0]?.type.includes('image');
+      },
     }),
     banner: yup.mixed().test({
       message: 'Please enter a banner image',
       name: 'files',
-      test: item => !!item?.[0]?.name,
+      test: (item) => {
+        console.log('banner yup', item);
+        if (!item.length) return true;
+        return !!item?.[0]?.type.includes('image');
+      },
     }),
   });
   
