@@ -1,14 +1,14 @@
 /* Internal dependencies */
 import { HTTP_STATUS } from '~/configs';
-import { SignTransactionProps } from '../useCreateEntity/types';
-import { uploadFiles, dryRunTransaction, broadcastTransaction } from '~/models/entity.client';
-import { getTransactionExecutionStatus, getEntityIDFromDryRunEvents } from '~/helpers/transaction';
+import { BroadcastProps } from '../useCreateEntity/types';
+import { dryRunTransaction, broadcastTransaction } from '~/models/entity.client';
+import { getTransactionExecutionStatus, getEntityEvent } from '~/helpers/transaction';
 import { signTransaction } from './utils';
 
 export const useBroadcast = () => {
-  const broadcast = async (props: SignTransactionProps) => {
-    const { module, files } = props;
-    const result = await signTransaction(props);
+  const broadcast = async (props: BroadcastProps) => {
+    const { module, command, account, params } = props;
+    const result = await signTransaction({ command, module, account, params });
     if (result instanceof Error) {
       return {
         error: true,
@@ -23,38 +23,20 @@ export const useBroadcast = () => {
 
     const txStatus = getTransactionExecutionStatus(module, txId, dryRunResponse);
     if (txStatus === HTTP_STATUS.OK.CODE) {
-      const entityID = getEntityIDFromDryRunEvents(module, dryRunResponse);
-      const postResponse = await uploadFiles([{
-        id: entityID,
-        file: files[0],
-      }]);
-      const uploadSuccess = postResponse.reduce((acc, curr) => {
-        if (curr.error === true || !acc) {
-          acc = false;
-        }
-        return acc;
-      }, true);
+      const broadcastResponse = await broadcastTransaction({ transaction: txString });
 
-      // Broadcast on the Blockchain
-      if (uploadSuccess) {
-        const broadcastResponse = await broadcastTransaction({ transaction: txString });
-
-        // Check if the NFT is created correctly
-        if (!broadcastResponse.error) {
-          return {
-            message: HTTP_STATUS.OK.MESSAGE,
-            error: false
-          };
-        }
+      // Check if the NFT is created correctly
+      if (!broadcastResponse.error) {
         return {
-          message: HTTP_STATUS.INTERNAL_ERROR.MESSAGE,
-          error: true
+          message: HTTP_STATUS.OK.MESSAGE,
+          error: false,
+          events: getEntityEvent(module, dryRunResponse),
         };
-
       }
       return {
         message: HTTP_STATUS.INTERNAL_ERROR.MESSAGE,
         error: true,
+        events: getEntityEvent(module, dryRunResponse),
       };
     }
     return {
