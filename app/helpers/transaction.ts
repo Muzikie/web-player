@@ -1,5 +1,5 @@
 import { DryRunTxResponse } from '~/context/socketContext/types';
-import { HTTP_STATUS, SUCCESS_CODE } from '~/configs';
+import { HTTP_STATUS } from '~/configs';
 
 export const getTransactionExecutionStatus = (module: string, id: string, response: DryRunTxResponse) => {
   if (response.error || !response.data.events.length) {
@@ -14,5 +14,20 @@ export const getTransactionExecutionStatus = (module: string, id: string, respon
   if (!txExecResultEvent) {
     return HTTP_STATUS.BAD_REQUEST.CODE;
   }
-  return txExecResultEvent.data === SUCCESS_CODE ? HTTP_STATUS.OK.CODE : HTTP_STATUS.BAD_REQUEST.CODE;
+  return txExecResultEvent?.data?.success ? HTTP_STATUS.OK.CODE : HTTP_STATUS.BAD_REQUEST.CODE;
+};
+
+export const getEntityIDFromDryRunEvents = (module: string, response: DryRunTxResponse): string => {
+  if (response.error || !response.data.events.length) {
+    return '';
+  }
+
+  // Get command specific event, if it exists, it includes the entityID
+  const commandAcceptanceEvent = response.data.events.filter((e) =>
+    e.module === module && e.name !== 'commandExecutionResult');
+
+  if (!commandAcceptanceEvent.length) {
+    return '';
+  }
+  return commandAcceptanceEvent[0].data[`${module}ID`] as string;
 };

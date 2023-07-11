@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import { search, SearchResultType } from '~/models/entity.client';
+import type { SearchResultType } from '~/models/types';
+import { search } from '~/models/entity.client';
 
 export const useSearch = () => {
   const [query, setQuery] = useState('');
