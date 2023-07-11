@@ -25,6 +25,11 @@
     margin-bottom: var(--padding-s);
     border-radius: var(--border-radius-s);
     border: solid 1px var(--brightOutline);
+
+    &:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 1px var(--color-primary);
+    }
   }
 
   & .icon + input {
@@ -42,7 +47,6 @@
   }
 
   &.invalid {
-
     & > input {
       border-bottom-color: var(--color-error);
     }
