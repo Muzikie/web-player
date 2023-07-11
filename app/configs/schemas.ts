@@ -202,10 +202,81 @@ export const PROFILE_CREATE_SCHEMA = {
   },
 };
 
+export const PROFILE_SET_ATTRIBUTES_SCHEMA = {
+  $id: 'profile/setAttributes',
+  title: 'setAttributeAsset transaction asset for profile module',
+  type: 'object',
+  required: [
+    'profileID',
+    'name',
+    'nickName',
+    'description',
+    'socialAccounts',
+    'avatarHash',
+    'avatarSignature',
+    'bannerHash',
+    'bannerSignature',
+  ],
+  properties: {
+    profileID: {
+      dataType: 'bytes',
+      fieldNumber: 1,
+    },
+    name: {
+      dataType: 'string',
+      fieldNumber: 2,
+    },
+    nickName: {
+      dataType: 'string',
+      fieldNumber: 3,
+    },
+    description: {
+      dataType: 'string',
+      fieldNumber: 4,
+    },
+    socialAccounts: {
+      type: 'array',
+      fieldNumber: 5,
+      items: {
+        $id: 'profile/profile/socialAccounts',
+        type: 'object',
+        required: ['username', 'platform'],
+        properties: {
+          username: {
+            dataType: 'string',
+            fieldNumber: 1,
+          },
+          platform: {
+            dataType: 'uint32',
+            fieldNumber: 2,
+          },
+        },
+      },
+    },
+    avatarHash: {
+      dataType: 'bytes',
+      fieldNumber: 6,
+    },
+    avatarSignature: {
+      dataType: 'bytes',
+      fieldNumber: 7,
+    },
+    bannerHash: {
+      dataType: 'bytes',
+      fieldNumber: 8,
+    },
+    bannerSignature: {
+      dataType: 'bytes',
+      fieldNumber: 9,
+    },
+  },
+};
+
 export const SCHEMAS = {
   [AUDIO_CREATE_SCHEMA.$id]: AUDIO_CREATE_SCHEMA,
   [AUDIO_STREAM_SCHEMA.$id]: AUDIO_STREAM_SCHEMA,
   [COLLECTION_CREATE_SCHEMA.$id]: COLLECTION_CREATE_SCHEMA,
   [SUBSCRIPTION_PURCHASE_SCHEMA.$id]: SUBSCRIPTION_PURCHASE_SCHEMA,
   [PROFILE_CREATE_SCHEMA.$id]: PROFILE_CREATE_SCHEMA,
+  [PROFILE_SET_ATTRIBUTES_SCHEMA.$id]: PROFILE_SET_ATTRIBUTES_SCHEMA,
 };
