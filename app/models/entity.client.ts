@@ -34,17 +34,17 @@ const post = (url: string, body: any, options: PostOptions = {}) => fetch(
     ...options,
     body,
   }
-).then(res => {
-  console.log('res', res);
-  return res.json();
-});
+).then(res => res.json());
 
-export async function uploadFiles(assets: { id: string, file: Asset }[]): Promise<string[]> {
-  return Promise.all<string>(assets.map(({ id, file }) => {
+export async function uploadFiles(id: string, files: Asset[]): Promise<string[]> {
+  return Promise.all<string>(files.filter(item => !!item.value).map(({ value, key }) => {
     const data = new FormData();
-    data.append('file', file.value);
+    data.append('file', value);
 
-    return post(`${API_URLS.STORAGE}/upload/${id}`, data, {});
+    return post(
+      `${API_URLS.STORAGE}/upload/${id}${key}`,
+      data,
+    );
   })).catch(err => err.message);
 }
 
@@ -70,7 +70,7 @@ export async function getAuth({ params }: { params: EndpointParams }): Promise<A
     optionalKeys: [],
     mandatoryKeys: [],
   };
-  return results?.data?.length ? results.data[0] : newAccount;
+  return results?.data ?? newAccount;
 }
 
 export async function getTokenBalances({ params }: { params: EndpointParams }): AwaitedEndpointResult<Array<Balance>> {
@@ -82,6 +82,7 @@ export async function dryRunTransaction(params: transactionCreationProps): Promi
     headers: {
       'Content-Type': 'application/json',
     },
+    mode: 'cors',
   };
   return post(
     `${API_URLS.STREAMER}/api/${API_VERSION}/transactions/dryrun`,
