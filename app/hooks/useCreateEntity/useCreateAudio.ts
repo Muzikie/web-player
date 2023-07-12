@@ -55,6 +55,8 @@ export const useCreateAudio = () => {
       }
       return acc;
     }, true);
+    // @todo React upon upload failure
+    console.log('uploadSuccess', uploadSuccess);
     setBroadcastStatus({ ...result, loading: false });
   };
 

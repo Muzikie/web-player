@@ -16,7 +16,7 @@ const FileInput = ({
   <label className={`component fileInput ${className}`}>
     {
       icon && (
-        <Icon name={restProps?.name ? 'check' : icon} />
+        <Icon name={restProps.name ? 'check' : icon} />
       )
     }
     <input

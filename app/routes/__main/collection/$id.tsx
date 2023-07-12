@@ -18,6 +18,19 @@ import styles from '~/css/routes/__main/collection.css';
 import { entityThemes } from '~/components/Entity/types';
 import { Audio, Profile } from '~/configs';
 
+const defaultProfile: Profile = {
+  creatorAddress: '',
+  name: '',
+  nickName: '',
+  description: '',
+  avatarHash: '',
+  avatarSignature: '',
+  bannerHash: '',
+  bannerSignature: '',
+  socialAccounts: [],
+  profileID: '',
+};
+
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
@@ -25,18 +38,7 @@ export function links() {
 export const loader = async ({ params }: collectionLoaderProps) => {
   invariant(params.id, 'Expected params.id');
   let audios: Audio[] = [];
-  let profile: Profile = {
-    creatorAddress: '',
-    name: '',
-    nickName: '',
-    description: '',
-    avatarHash: '',
-    avatarSignature: '',
-    bannerHash: '',
-    bannerSignature: '',
-    socialAccounts: [],
-    profileID: '',
-  };
+  let profile: Profile;
 
   const { data: collections } = await getCollections({ params: { collectionID: params.id } });
   if (collections.length) {
@@ -44,7 +46,7 @@ export const loader = async ({ params }: collectionLoaderProps) => {
     const audiosResult = await getAudios({ params: { collectionID } });
     const profilesResult = await getProfiles({ params: { creatorAddress } });
     audios = audiosResult.data;
-    profile = profilesResult.data.length ? profilesResult.data[0] : { ...profilesResult.data[0], creatorAddress };
+    profile = profilesResult.data.length ? profilesResult.data[0] : { ...defaultProfile, creatorAddress };
   } else {
     throw new Error('Collection not found');
   }

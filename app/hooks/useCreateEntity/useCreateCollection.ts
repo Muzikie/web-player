@@ -1,6 +1,5 @@
 /* External dependencies */
 import { useState } from 'react';
-import { cryptography } from '@liskhq/lisk-client';
 
 /* Internal dependencies */
 import { uploadFiles } from '~/models/entity.client';
@@ -48,6 +47,8 @@ export const useCreateCollection = () => {
       }
       return acc;
     }, true);
+    // @todo React upon upload failure
+    console.log('uploadSuccess', uploadSuccess);
     setBroadcastStatus({ ...result, loading: false });
   };
 
