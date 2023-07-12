@@ -1,6 +1,5 @@
 import { cryptography } from '@liskhq/lisk-client';
 import { accountMock } from '../../../test/mocks/account';
-import { mockFile } from '../../../test/mocks/file';
 import { COMMANDS, MODULES, VALID_GENRES } from '~/configs';
 import { bufferize } from '~/helpers/convertors';
 import { signTransaction } from './utils';
@@ -16,7 +15,6 @@ describe('useBroadcast', () => {
 
   it.skip('should sign audio/create transaction given valid props', async () => {
     const name = 'Test Audio';
-    const file = mockFile({ name, type: 'audio/mp3' });
     const command = COMMANDS.CREATE;
     const module = MODULES.AUDIO;
     const params = {
