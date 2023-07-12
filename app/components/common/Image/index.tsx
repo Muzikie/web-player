@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ImageType } from './types';
 
-const ImageComp = ({ src, alt, className, placeHolder }: ImageType) => {
+const Image = ({ src, alt, className, placeHolder }: ImageType) => {
   const image = useRef<HTMLImageElement>(null);
   const [isHydrated, setIsHydrated] = useState(false);
   useEffect(() => {
@@ -23,4 +23,4 @@ const ImageComp = ({ src, alt, className, placeHolder }: ImageType) => {
   );
 };
 
-export default ImageComp;
+export default Image;
