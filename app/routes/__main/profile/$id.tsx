@@ -75,7 +75,7 @@ const ProfileScreen = () => {
         profile={profile}
       />
       <ProfileDetails data={profile} />
-      <WalletDetails address={id} />
+      <WalletDetails address={id} audios={audios?.length ? audios : []} />
     </section>
   );
 };

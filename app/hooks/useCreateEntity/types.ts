@@ -39,7 +39,6 @@ export interface SignTransactionProps {
   command: COMMANDS,
   module: MODULES,
   params: Params,
-  // files: { value: File, key: string }[],
   account: ProfileInfoType,
 }
 
@@ -47,7 +46,6 @@ export interface BroadcastProps {
   command: COMMANDS,
   module: MODULES,
   params: Params,
-  // files: { value: File, key: string }[],
   account: ProfileInfoType,
 }
 

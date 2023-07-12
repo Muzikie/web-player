@@ -85,6 +85,19 @@ export const AUDIO_STREAM_SCHEMA = {
   },
 };
 
+export const AUDIO_RECLAIM_SCHEMA = {
+  $id: 'audio/reclaim',
+  title: 'ReclaimAsset transaction asset for audio module',
+  type: 'object',
+  required: ['id'],
+  properties: {
+    id: {
+      dataType: 'bytes',
+      fieldNumber: 1,
+    },
+  },
+};
+
 export const COLLECTION_CREATE_SCHEMA = {
   $id: 'collection/create',
   title: 'CreateAsset transaction asset for collection module',
@@ -275,6 +288,7 @@ export const PROFILE_SET_ATTRIBUTES_SCHEMA = {
 export const SCHEMAS = {
   [AUDIO_CREATE_SCHEMA.$id]: AUDIO_CREATE_SCHEMA,
   [AUDIO_STREAM_SCHEMA.$id]: AUDIO_STREAM_SCHEMA,
+  [AUDIO_RECLAIM_SCHEMA.$id]: AUDIO_RECLAIM_SCHEMA,
   [COLLECTION_CREATE_SCHEMA.$id]: COLLECTION_CREATE_SCHEMA,
   [SUBSCRIPTION_PURCHASE_SCHEMA.$id]: SUBSCRIPTION_PURCHASE_SCHEMA,
   [PROFILE_CREATE_SCHEMA.$id]: PROFILE_CREATE_SCHEMA,

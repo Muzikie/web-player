@@ -19,15 +19,14 @@ export const useStream = () => {
   };
 
   const registerOne = async (audioID: string) => {
-    const data = await updateAccount();
+    const account = await updateAccount();
     const result = await broadcast({
       module: MODULES.AUDIO,
       command: COMMANDS.STREAM,
       params: {
         audioID: bufferize(audioID),
       },
-      account: data,
-      files: [],
+      account,
     });
     setBroadcastStatus(result);
     if (!result.error) {

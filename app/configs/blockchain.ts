@@ -16,6 +16,7 @@ export enum COMMANDS {
   DESTROY = 'destroy',
   SET_ATTRIBUTES = 'setAttributes',
   UPDATE_MEMBERS = 'updateMembers',
+  RECLAIM = 'reclaim',
 }
 
 export const FILES = {

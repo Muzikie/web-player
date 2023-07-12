@@ -21,7 +21,7 @@ const SubscriptionInfo = ({ data }: SubscriptionInfoProps) => {
     { title: 'Price', content: fromBaseToken(data.price, TOKEN) },
     { title: 'Value to spend', content: fromBaseToken(data.consumable, TOKEN) },
     { title: 'Consumed', content: fromBaseToken(getConsumed(data.price, data.consumable), TOKEN) },
-    { title: 'Members', content: `${data.maxMembers} user ${data.maxMembers === 1 ? '' : 's'}` }
+    { title: 'Members', content: `${data.maxMembers} user${data.maxMembers === 1 ? '' : 's'}` }
   ];
 
   return (

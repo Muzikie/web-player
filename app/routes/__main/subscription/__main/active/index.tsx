@@ -19,7 +19,7 @@ export const loader = async ({ request }: ListScreenProps) => {
   const address = session.get('address');
 
   const { data: subscriptions } = await getSubscriptions({ params: {
-    creatorAddress: address,
+    memberAddress: address,
   } });
 
   return json<ActiveSubscriptionData>({

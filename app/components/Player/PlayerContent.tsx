@@ -6,10 +6,9 @@ import { Link } from '~/components/common/Link';
 import { useAudio } from '~/hooks/useAudio/useAudio';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import { IconButton } from '~/components/common/Button';
-import { API_URLS } from '~/configs';
+import { API_URLS, Audio, FILES } from '~/configs';
 import EntityThumbnail from '~/components/Entity/EntityThumbnail';
 import { ROUTES } from '~/routes/routes';
-import PlaceHolderImage from './PlaceHolderImage';
 import ProgressBar from './ProgressBar';
 
 const PlayerContent = () => {
@@ -30,10 +29,7 @@ const PlayerContent = () => {
     <>
       <section className="primaryInfo">
         <Link to={ROUTES.COLLECTION.replace(':id', current?.audioID ?? '')}>
-          { current
-            ? <EntityThumbnail data={current} />
-            : <PlaceHolderImage />
-          }
+          <EntityThumbnail data={current || {} as Audio} />
         </Link>
         <header>
           <h5>{ current?.name ?? '...' }</h5>
@@ -41,7 +37,7 @@ const PlayerContent = () => {
         </header>
       </section>
       <audio
-        src={current?.audioID ? `${API_URLS.STREAMER}/api/v1/audios/stream/${current?.audioID}` : ''}
+        src={current?.audioID ? `${API_URLS.STORAGE}/stream/${current?.audioID}${FILES.audio.secondary}` : ''}
         ref={audioRef}
         data-audio-id={current?.audioID}
         onTimeUpdate={onTimeUpdate}
