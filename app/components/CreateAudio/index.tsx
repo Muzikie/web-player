@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useCreateAudio } from '~/hooks/useCreateEntity';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
-import { Select } from '~/components/common/Select';
+import Select from '~/components/common/Select';
 import { Link } from '~/components/common/Link';
 import Feedback from '~/components/Feedback';
 import { ROUTES } from '~/routes/routes';
@@ -49,14 +49,21 @@ const CreateAudio = ({ CollectionInfo }: CollectionInfo) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="component createAudio">
       <fieldset>
-        <Input register={register} name="name" placeholder="Enter name" type="text" />
-        <Input register={register} name="releaseYear" placeholder="Release year" type="text" />
+        <Input
+          {...register('name', { required: true })}
+          placeholder="Enter name"
+          type="text"
+        />
+        <Input
+          {...register('releaseYear', { required: true })}
+          placeholder="Release year"
+          type="text"
+        />
         <div className="collectionRow">
           <Select
+            {...register('collectionID', { required: true })}
             placeholder="Select a collection (Collection)"
-            name="collectionID"
             options={CollectionsInfo}
-            register={register}
           />
           <Link
             to={ROUTES.UPLOAD_COLLECTION}
@@ -65,18 +72,16 @@ const CreateAudio = ({ CollectionInfo }: CollectionInfo) => {
           />
         </div>
         <Select
+          {...register('genre', { required: true })}
           placeholder="Select a genre"
-          name="genre"
           options={VALID_GENRES}
-          register={register}
         />
         <FileInput
+          {...register('files', { required: true })}
           icon="file"
-          name="files"
           accept=".mp3,.wav"
           multiple={false}
-          title="Upload MP3"
-          register={register}
+          placeholder="Upload MP3"
         />
       </fieldset>
       <PrimaryButton type="submit">

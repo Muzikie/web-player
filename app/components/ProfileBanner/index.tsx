@@ -14,7 +14,7 @@ const ProfileBanner = ({ data, audios }: ProfileAddress) => {
       <figure className="bannerWrapper">
         <Image
           className="photo"
-          src={`${API_URLS.STREAMER}/${profileID}-${FILES.profile}.jpg`}
+          src={`${API_URLS.STORAGE}/${profileID}${FILES.profile.secondary}.jpg`}
           placeHolder="/images/artist.jpg"
           alt={creatorAddress}
         />

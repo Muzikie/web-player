@@ -23,11 +23,11 @@ const ProfileDetails = ({ data }: ProfileDetailsProps) => {
     socialAccounts: [
       {
         username: '',
-        platform: SocialAccountPlatform.Twitter,
+        platform: SocialAccountPlatform.Instagram
       },
       {
         username: '',
-        platform: SocialAccountPlatform.Instagram
+        platform: SocialAccountPlatform.Twitter,
       },
       {
         username: '',

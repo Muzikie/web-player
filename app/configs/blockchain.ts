@@ -19,8 +19,18 @@ export enum COMMANDS {
 }
 
 export const FILES = {
-  [MODULES.AUDIO]: 'cover',
-  [MODULES.COLLECTION]: 'cover',
-  [MODULES.PROFILE]: 'avatar',
-  [MODULES.PLAYLIST]: 'cover',
+  [MODULES.AUDIO]: {
+    primary: 'cover',
+    secondary: 'audio',
+  },
+  [MODULES.COLLECTION]: {
+    primary: 'cover',
+  },
+  [MODULES.PROFILE]: {
+    primary: 'avatar',
+    secondary: 'banner'
+  },
+  [MODULES.PLAYLIST]: {
+    primary: 'cover',
+  },
 };

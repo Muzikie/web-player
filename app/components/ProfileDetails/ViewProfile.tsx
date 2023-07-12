@@ -15,7 +15,7 @@ const ViewProfile = ({ profile, setShowForm }: ProfileEditProps) => {
     <section className="component viewProfile ">
       <figure className="profileAvatar">
         <Image
-          src={`${API_URLS.STREAMER}/${profile.profileID}-${FILES.profile}.jpg`}
+          src={`${API_URLS.STORAGE}/${profile.profileID}${FILES.profile.primary}.jpg`}
           alt={profile.name || profile.creatorAddress}
           placeHolder="/images/artist.jpg"
         />

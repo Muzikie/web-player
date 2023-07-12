@@ -120,7 +120,7 @@ export type EndpointParams = Partial<Record<
   'offset' | 'limit' | 'sort'
   | 'audioID' | 'collectionID' | 'profileID'
   | 'transactionID' | 'blockID' | 'subscriptionID'
-  | 'creatorAddress' | 'address',
+  | 'creatorAddress' | 'address' | 'ownerAddress',
 string>>;
 
 export interface MetaProps {

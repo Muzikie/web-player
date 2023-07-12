@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useCreateCollection } from '~/hooks/useCreateEntity';
 import { Input, FileInput } from '~/components/common/Input';
 import { PrimaryButton } from '~/components/common/Button';
-import { Select } from '~/components/common/Select';
+import Select from '~/components/common/Select';
 import Feedback from '~/components/Feedback';
 import { VALID_COLLECTION_TYPES } from '~/configs';
 import { collectionSchema } from '~/hooks/useCreateEntity/schemas';
@@ -40,21 +40,27 @@ const CreateCollection = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="component createCollection">
       <fieldset>
-        <Input register={register} name="name" placeholder="Enter name" type="text" />
-        <Input register={register} name="releaseYear" placeholder="Release year" type="text" />
+        <Input
+          {...register('name', { required: true })}
+          placeholder="Enter name"
+          type="text"
+        />
+        <Input
+          {...register('releaseYear', { required: true })}
+          placeholder="Release year"
+          type="text"
+        />
         <Select
+          {...register('collectionType', { required: true })}
           placeholder="Select a collection type"
-          name="collectionType"
           options={VALID_COLLECTION_TYPES}
-          register={register}
         />
         <FileInput
+          {...register('files', { required: true })}
           icon="file"
-          name="files"
           accept=".png,.jpg,.jpeg"
           multiple={false}
-          title="Upload cover image"
-          register={register}
+          placeholder="Upload cover image"
         />
       </fieldset>
       <PrimaryButton type="submit">
