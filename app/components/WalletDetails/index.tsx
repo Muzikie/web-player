@@ -16,7 +16,7 @@ const WalletDetails = ({ address, audios }: WalletAddressProps) => {
   const { broadcast } = useBroadcast();
   const [status, setStatus] = useState({ error: false, message: '' });
   const [account, setAccount] = useState<ProfileInfoType>(info);
-  const availableBalance = account?.token?.length > 0 ? account.token[0].availableBalance : '0';
+  const availableBalance = account.token?.length > 0 ? account.token[0].availableBalance : '0';
 
   const unclaimed = audios.reduce((total, item) => {
     const me = item.owners.find(owner => owner.address === address);
