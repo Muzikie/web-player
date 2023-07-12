@@ -23,7 +23,7 @@ const ProfileBanner = ({ data, audios }: ProfileAddress) => {
       <header>
         <h2>{name || truncateAddress(creatorAddress)}</h2>
       </header>
-      {audios.length && <PopularAudios audios={audios} />}
+      {audios.length > 0 && <PopularAudios audios={audios} />}
     </section>
   );
 };
