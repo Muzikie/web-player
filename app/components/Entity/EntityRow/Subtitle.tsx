@@ -6,14 +6,14 @@ const Subtitle = ({ data }: EntityRowProps<Entity>) => {
   if ('playlistID' in data) {
     subtitle = data.description;
   } else if ('collectionID' in data) {
-    // @todo add profile name
-    subtitle = data.artistName;
+    // @todo add data.profile.name
+    subtitle = data.name;
   } else {
     subtitle = data.name ?? '-';
   }
 
   return (
     <span className="component profileName">{subtitle}</span>
-  )
+  );
 };
 export default Subtitle;

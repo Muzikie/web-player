@@ -1,35 +1,30 @@
 import { ChangeEventHandler } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 
 type InputTheme = 'text'|'number'|'password'|'email';
 
-export interface InputProps {
-  type: InputTheme;
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  placeholder?: string;
+interface BaseInput {
   className?: string;
   icon?: string;
-  message?: string;
   name?: string;
+  register?: UseFormRegister<any>;
+  registerConfig?: Record<string, unknown>;
+  placeholder?: string;
 }
 
-export interface FileInputProps {
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  title: string;
-  className?: string;
-  icon?: string;
-  name?: string;
+export interface InputProps extends BaseInput {
+  type: InputTheme;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  message?: string;
+}
+
+export interface FileInputProps extends BaseInput {
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   accept?: string;
   multiple?: boolean;
-  value: FileList | null;
 }
 
-export interface TextareaProps {
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  placeholder?: string;
-  className?: string;
-  icon?: string;
+export interface TextareaProps extends BaseInput {
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
   message?: string;
-  name?: string;
 }

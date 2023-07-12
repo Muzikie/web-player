@@ -1,35 +1,33 @@
 /* External dependencies */
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 /* Internal dependencies */
 import Icon from '../Icon';
 import { FileInputProps } from './types';
 
 const FileInput = ({
-  onChange,
-  title,
-  name,
+  placeholder,
   accept,
-  value,
   multiple = true,
   className = '',
   icon = 'file',
-}: FileInputProps) => (
+  ...restProps
+}: FileInputProps, ref) => (
   <label className={`component fileInput ${className}`}>
     {
       icon && (
-        <Icon name={value ? 'check' : icon} />
+        <Icon name={restProps.name ? 'check' : icon} />
       )
     }
     <input
       type="file"
-      name={name}
       accept={accept}
       multiple={multiple}
-      onChange={onChange}
+      {...restProps}
+      ref={ref}
     />
-    <span>{title}</span>
+    <span>{placeholder}</span>
   </label>
 );
 
-export default FileInput;
+export default forwardRef(FileInput);

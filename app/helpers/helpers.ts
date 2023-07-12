@@ -1,3 +1,5 @@
+import type { KeyValue } from '~/configs/types';
+
 export const greet = (timestamp = 0) => {
   const date = timestamp ? new Date(timestamp) : new Date();
   const hour = date.getHours();
@@ -51,3 +53,14 @@ export const waitFor = (seconds: number): Promise<void> =>
       resolve();
     }, seconds * 1000);
   });
+
+export const removeNullValues = (obj: KeyValue): KeyValue => {
+  const newObj: KeyValue = {};
+  for (const key in obj) {
+    if (obj[key] != null) {
+      newObj[key] = obj[key];
+    }
+  }
+
+  return newObj;
+};

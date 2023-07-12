@@ -1,4 +1,3 @@
-
 import React, { MouseEvent } from 'react';
 import { ButtonType } from './type';
 

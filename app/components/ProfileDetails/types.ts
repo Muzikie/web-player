@@ -1,12 +1,12 @@
 import { Profile } from '~/configs';
 
 export type Placeholder = Omit<Profile, 'nickName' | 'profileID' | 'avatarHash' | 'avatarSignature' | 'bannerHash' | 'bannerSignature' | 'creatorAddress'>;
-export type ProfileDetailsProps = {
+export interface ProfileDetailsProps {
   data: Profile;
-};
+}
 export type ProfileState = boolean;
 
-export type ProfileEditProps = {
+export interface ProfileEditProps {
   profile: Profile
   setShowForm: (value: boolean) => void;
 }

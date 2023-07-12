@@ -1,29 +1,31 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 /* Internal dependencies */
-import { useWS } from '~/hooks/useWS/useWS';
 import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { Method, AuthResponse, TokenResponse } from '~/context/socketContext/types';
+import { getAuth, getTokenBalances } from '~/models/entity.client';
 
 export const useAccount = () => {
   const { info, setProfileInfo } = useContext(ProfileContext);
-  const { request } = useWS();
+  const [isAccountLoaded, setISAccountLoaded] = useState(false);
 
   const updateAccount = async () => {
-    const auth = <AuthResponse> await request(Method.auth_getAuthAccount, { address: info.address });
-    const token = <TokenResponse> await request(Method.token_getBalances, { address: info.address });
-    const data = { ...info };
-    if (!auth.error) {
-      setProfileInfo({ nonce: auth.data.nonce });
-      data.nonce = auth.data.nonce;
-    }
-    if (!token.error) {
-      setProfileInfo(token.data);
-      data.balances = token.data.balances;
-    }
-
+    setISAccountLoaded(true);
+    const auth = await getAuth({ params: { address: info.address } });
+    const { data: token } = await getTokenBalances({ params: { address: info.address } });
+    const data = {
+      ...info,
+      token,
+      auth,
+    };
+    setProfileInfo(data);
     return data;
   };
+
+  useEffect(() => {
+    if(info.address !== '' && !isAccountLoaded) {
+      updateAccount();
+    }
+  }, [info]);
 
   return {
     info,

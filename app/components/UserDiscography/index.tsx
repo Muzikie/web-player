@@ -3,12 +3,14 @@ import React from 'react';
 
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
+import { PrimaryButton } from '~/components/common/Button';
+import List from '~/components/List';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 import { ROUTES } from '~/routes/routes';
-import { PrimaryButton } from '../common/Button';
 import { UserDiscographyProps } from './types';
-import List from '../List'
 
-const UserDiscography = ({ collections }: UserDiscographyProps) => {
+const UserDiscography = ({ collections, profile }: UserDiscographyProps) => {
+  const { info } = useAccount();
   return (
     <section className='component userDiscography tabContainer'>
       <header>
@@ -17,13 +19,13 @@ const UserDiscography = ({ collections }: UserDiscographyProps) => {
       <List
         items={!collections?.length ? [] : collections}
         emptyState={{
-          title: 'You don’t have audios or collection yet.',
+          title: 'No audios or collection to display.',
           subtitle: 'Start by creating your first collection, then add audios to it.',
-          content: (
+          content: info.address === profile.creatorAddress ? (
             <Link to={ROUTES.UPLOAD_COLLECTION}>
               <PrimaryButton className='newCollectionButton'>New collection</PrimaryButton>
             </Link>
-          ),
+          ) : null,
         }}
       />
     </section>

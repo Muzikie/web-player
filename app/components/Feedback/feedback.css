@@ -10,6 +10,7 @@
   }
 
   &.success {
+
     & h5 {
       background-color: var(--color-success-see-through);
       color: var(--color-success);
@@ -17,6 +18,7 @@
   }
 
   &.error {
+
     & h5 {
       background-color: var(--color-error-see-through);
       color: var(--color-error);

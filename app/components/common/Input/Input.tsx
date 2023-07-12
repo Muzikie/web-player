@@ -1,5 +1,5 @@
 /* External dependencies */
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 
 /* Internal dependencies */
 import { IconButton } from '../Button';
@@ -8,20 +8,18 @@ import { InputProps } from './types';
 
 const Input = ({
   type = 'text',
-  value,
-  onChange,
   placeholder,
   className = '',
   icon = '',
   message = '',
-  name = '',
-}: InputProps) => {
+  ...restProps
+}: InputProps, ref) => {
   const [visibility, setVisibility] = useState(false);
 
   const toggleVisibility = () => {
     setVisibility(!visibility);
   };
-  
+
   return (
     <div className={`component input ${message ? 'invalid' : ''}`}>
       {
@@ -32,12 +30,11 @@ const Input = ({
           : null
       }
       <input
-        type={type === 'password' && visibility ? 'text' : type}
-        value={value}
-        name={name}
-        onChange={onChange}
         placeholder={placeholder}
         className={`component input ${className}`}
+        type={type === 'password' && visibility ? 'text' : type}
+        {...restProps}
+        ref={ref}
       />
       {
         type === 'password'
@@ -55,4 +52,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default forwardRef(Input);

@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { SelectProps } from './types';
 
-export const Select = <T extends string | number,>({
+const Select = <T extends string | number,>({
   options,
-  value,
-  name,
   placeholder,
-  onChange
-}: SelectProps<T>) => (
-    <section className={`component select ${value ? '' : 'notSelected'}`}>
-      <select name={name} value={value} onChange={onChange}>
+  ...restProps
+}: SelectProps<T>, ref) => (
+    <section className={`component select ${restProps.name  ? '' : 'notSelected'}`}>
+      <select {...restProps} ref={ref}>
         {
           placeholder && <option value="">{placeholder}</option>
         }
@@ -25,3 +23,5 @@ export const Select = <T extends string | number,>({
       </select>
     </section>
   );
+
+export default forwardRef(Select);

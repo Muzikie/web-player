@@ -1,7 +1,6 @@
 /* External dependencies */
 import React from 'react';
 import { json, redirect } from '@remix-run/node';
-
 /* Internal dependencies */
 import { validateCredentials } from '~/helpers/cryptography';
 import LoginForm from '~/components/LoginForm';
@@ -11,7 +10,6 @@ import { PartialView } from '~/components/PartialView';
 import { LoaderBaseProps } from '../../types';
 import { bufferize } from '~/helpers/convertors';
 import styles from '~/css/routes/__main/login.css';
-
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -30,7 +28,7 @@ export async function loader({ request }: LoaderBaseProps) {
     session.unset('address');
     session.unset('publicKey');
     session.unset('privateKey');
-  // Redirect to the home page if they are already signed in and they are not trying to logout.
+    // Redirect to the home page if they are already signed in and they are not trying to logout.
   } else if (address) {
     return redirect('/');
   }
@@ -61,7 +59,7 @@ export async function action({ request }: LoaderBaseProps) {
     passphrase
   );
 
-  if (address == null) {
+  if (!address) {
     session.flash('error', 'Invalid username/password');
 
     // Redirect back to the login page with errors.
@@ -76,8 +74,8 @@ export async function action({ request }: LoaderBaseProps) {
   session.set('publicKey', publicKey);
   session.set('privateKey', privateKey);
 
-  const agreement = session.get('agreement')
-  if (agreement == null) {
+  const agreement = session.get('agreement');
+  if (!agreement) {
     // Redirect back to the agreement page.
     return redirect('/agreement', {
       headers: {
@@ -86,7 +84,7 @@ export async function action({ request }: LoaderBaseProps) {
     });
   }
 
-  // Login succeeded, send them to the home page.
+  // Login and agreement succeeded, send them to the home page.
   return redirect('/', {
     headers: {
       'Set-Cookie': await commitSession(session),

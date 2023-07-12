@@ -1,147 +1,84 @@
 /* External dependencies */
-import { useState, ChangeEvent, useEffect } from 'react';
-import { cryptography } from '@liskhq/lisk-client';
+import { useState } from 'react';
 
 /* Internal dependencies */
+import { uploadFiles } from '~/models/entity.client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import {
   MODULES,
   COMMANDS,
-  SocialAccountPlatform,
-  socialPlatformNames,
   SocialAccount,
+  Profile,
 } from '~/configs';
-
-import { ValidationResult, ValidationStatus } from './types';
-import { validate } from './validator';
-
-import { useBroadcast } from './useBroadcast'
+import { useBroadcast } from '../useBroadcast/useBroadcast';
+import { getFileSignatures } from '../useBroadcast/utils';
+import { Params } from './types';
+import { getEntityIDFromEvents } from '~/helpers/transaction';
+import { bufferize } from '~/helpers/convertors';
 
 export const useCreateProfile = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
 
-  const initialValue = [
-    { platform: SocialAccountPlatform.Twitter, username: '' },
-    { platform: SocialAccountPlatform.Instagram, username: '' },
-    { platform: SocialAccountPlatform.Youtube, username: '' },
-  ];
-
-  const [formValidity, setFormValidity] = useState<ValidationResult>({
-    status: ValidationStatus.clean
+  const [broadcastStatus, setBroadcastStatus] = useState({
+    error: false,
+    message: '',
+    loading: false,
   });
-  const [nickName, setNickName] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [socialAccounts, setSocialAccounts] = useState<SocialAccount[]>(initialValue);
-  const [banner, setBanner] = useState<FileList | null>(null);
-  const [avatar, setAvatar] = useState<FileList | null>(null);
-  const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
-  const [formIsChanged, setFormIsChanged] = useState(false);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if(!formIsChanged) setFormIsChanged(true);
-    switch (e.target.name) {
-    case 'name':
-      setName(e.target.value);
-      break;
-    case 'nickName':
-      setNickName(e.target.value);
-      break;
-    case 'description':
-      setDescription(e.target.value);
-      break;
-    case 'banner':
-      setBanner(e.target.files ?? null);
-      break;
-    case 'avatar':
-      setAvatar(e.target.files ?? null);
-      break;
-    case 'youtube':
-      setSocialAccounts(
-        socialAccounts.map(({ platform, username }) => {
-          if (socialPlatformNames[platform] === e.target.name) {
-            return { platform, username: e.target.value };
-          }
-          return { platform, username };
-        }),
-      );
-      break;
-    case 'instagram':
-      setSocialAccounts(
-        socialAccounts.map(({ platform, username }) => {
-          if (socialPlatformNames[platform] === e.target.name) {
-            return { platform, username: e.target.value };
-          }
-          return { platform, username };
-        }),
-      );
-      break;
-    case 'twitter':
-      setSocialAccounts(
-        socialAccounts.map(({ platform, username }) => {
-          if (socialPlatformNames[platform] === e.target.name) {
-            return { platform, username: e.target.value };
-          }
-          return { platform, username };
-        }),
-      );
-      break;
-    default:
-      break;
-    }
-  };
+  const signAndBroadcast = async (formValues : Params, profile: Profile) => {
+    const account = await updateAccount();
+    setBroadcastStatus({ error: false, message: '', loading: true });
 
-  const signAndBroadcast = async () => {
-    const data = await updateAccount();
+    // Create if doesn't exist, update if it does
+    const command = profile.profileID ? COMMANDS.SET_ATTRIBUTES : COMMANDS.CREATE;
+    const commandSpecificParams = profile.profileID
+      ? { profileID: bufferize(profile.profileID) }
+      : {};
+
+    const avatarSignatureAndHash = (formValues.avatar as File[])[0]
+      ? await getFileSignatures([{ key: 'avatar', value: (formValues.avatar as File[])[0] }], account)
+      : { avatarHash: bufferize(profile.avatarHash), avatarSignature: bufferize(profile.avatarSignature) };
+
+    const bannerSignatureAndHash = (formValues.banner as File[])[0]
+      ? await getFileSignatures([{ key: 'banner', value: (formValues.banner as File[])[0] }], account)
+      : { bannerHash: bufferize(profile.bannerHash), bannerSignature: bufferize(profile.bannerSignature) };
+
     const result = await broadcast({
       module: MODULES.PROFILE,
-      command: COMMANDS.CREATE,
+      command,
       params: {
-        name,
-        nickName,
-        description,
-        socialAccounts,
-        owners: [{
-          address: cryptography.address.getAddressFromLisk32Address(data.address),
-          shares: 100
-        }]
+        name: formValues.name,
+        nickName: formValues.nickName,
+        description: formValues.description,
+        socialAccounts: (formValues.socialAccounts as SocialAccount[]).filter((item) => !!item.username),
+        ...commandSpecificParams,
+        ...avatarSignatureAndHash,
+        ...bannerSignatureAndHash,
       },
-      account: data,
-      files: [
-        { key: 'avatar', value: avatar[0] },
-        { key: 'banner', value: banner[0] },
-      ],
+      account,
     });
-
-    setBroadcastStatus(result);
+ 
+    // upload files
+    const entityID = profile.profileID ?? getEntityIDFromEvents(MODULES.PROFILE, result.events || []);
+    const files = [
+      { key: 'avatar', value: (formValues.avatar as File[])[0] },
+      { key: 'banner', value: (formValues.banner as File[])[0] },
+    ];
+    const uploadResponse = await uploadFiles(entityID, files);
+    const uploadSuccess = uploadResponse.reduce((acc, curr) => {
+      if (curr.error === true || !acc) {
+        acc = false;
+      }
+      return acc;
+    }, true);
+    // @todo React upon upload failure
+    console.log('uploadSuccess', uploadSuccess);
+    setBroadcastStatus({ ...result, loading: false });
   };
 
-  useEffect(() => {
-    validate('profile', {
-      name,
-      nickName,
-      description,
-      socialAccounts,
-      avatar,
-      banner
-    }).then((result: ValidationResult) => {
-      if(formIsChanged){
-        setFormValidity(result);
-      }
-    });
-  }, [nickName, description, socialAccounts, avatar, banner]);
-
   return {
-    name,
-    avatar,
-    banner,
-    nickName,
-    description,
-    socialAccounts,
-    onChange,
     signAndBroadcast,
-    formValidity,
     broadcastStatus,
   };
 };

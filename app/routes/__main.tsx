@@ -1,7 +1,7 @@
 /* External dependencies */
 import React from 'react';
 import { Outlet } from '@remix-run/react';
-import { json } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
@@ -21,13 +21,33 @@ export function links() {
 }
 
 export async function loader({ request }: LoaderBaseProps) {
+  const privatePath: string[] = [
+    '/profile/me',
+    '/upload/audio',
+    '/upload/collection',
+    '/subscription/active',
+    '/subscription/purchase',
+  ];
+  const url = new URL(request.url);
+  const { pathname } = url;
   const session = await getSession(
     request.headers.get('Cookie')
   );
-
   const address = session.get('address');
   const publicKey = session.get('publicKey');
   const privateKey = session.get('privateKey');
+  const agreement = session.get('agreement');
+
+  if (!address) {
+    if (privatePath.includes(pathname)) {
+      return redirect('/login');
+    }
+  }
+  if (address && pathname !== '/agreement') {
+    if (!agreement) {
+      return redirect('/agreement');
+    }
+  }
 
   const data = {
     address: address ?? '',

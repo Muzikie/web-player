@@ -24,9 +24,42 @@
 
   & .descriptionInput {
     height: var(--right-sidebar);
+    resize: vertical;
   }
 
-  & button {
+  & .socialAccountInput {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0;
+
+    & .input {
+      flex-grow: 1;
+      flex-shrink: 1;
+      margin-right: var(--padding-s);
+    }
+
+    & .removeButton {
+      flex-grow: 0;
+      flex-shrink: 1;
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.1rem;
+      color: gray;
+      border: color(srgb 0.935 0.8859 0.8696) solid 1px;
+      background-color: color(srgb 0.985 0.9586 0.9505);
+      padding: 0 11px;
+
+      &:hover {
+        cursor: pointer;
+        color: var(--color-secondary);
+        background-color: var(--white-see-through);
+      }
+    }
+  }
+
+  & .button {
     margin-bottom: var(--padding-s);
     display: flex;
     justify-content: center;
@@ -75,7 +108,7 @@
     & img {
       height: 100%;
       object-fit: cover;
-      position: absolute;
+      width: 100%;
     }
   }
 
@@ -90,6 +123,7 @@
       margin: 0;
       color: var(--color-secondary);
       font-weight: var(--font-weight-black);
+      word-break: break-all;
     }
   }
 
@@ -174,8 +208,8 @@
   }
 }
 
-
 @media (min-width: 480px) {
+
   .component.viewProfile {
    flex-flow: row wrap;
 
@@ -198,7 +232,9 @@
 }
 
 @media (min-width: 900px) {
+
   .component.viewProfile {
+
     & .profileName {
       width: 39%;
     }
@@ -206,6 +242,7 @@
 }
 
 @media (min-width: 1280px) {
+
   .component.viewProfile {
     justify-content: space-around;
 

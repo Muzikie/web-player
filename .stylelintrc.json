@@ -6,11 +6,21 @@
     "no-descending-specificity": null,
     "alpha-value-notation": null,
     "custom-property-pattern": null,
-    "rule-empty-line-before": null,
+    "rule-empty-line-before": [
+      "always",
+      {
+        "ignore": ["after-comment", "first-nested"],
+        "severity": "error"
+      }
+    ],
     "font-family-no-missing-generic-family-keyword": null,
     "property-no-vendor-prefix": null,
-    "comment-empty-line-before": null,
     "color-function-notation": "legacy",
-    "font-family-name-quotes": "always-where-required"
+    "font-family-name-quotes": "always-where-required",
+    "selector-pseudo-class-no-unknown": null,
+    "length-zero-no-unit": null,
+    "at-rule-no-unknown": null,
+    "selector-no-vendor-prefix": true,
+    "max-empty-lines": 1
   }
 }

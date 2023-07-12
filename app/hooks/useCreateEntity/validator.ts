@@ -15,6 +15,6 @@ export const validate = async (entityName: EntityName, props: validateProps): Pr
     return {
       status: ValidationStatus.invalid,
       message: error?.message || 'Form is not valid',
-    }
+    };
   }
 };

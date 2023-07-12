@@ -26,146 +26,192 @@
 }
 
 .component.icon {
+
   &.instagram:before {
     content: "\e747";
   }
+
   &.youtube:before {
     content: "\e748";
   }
+
   &.menuCut:before {
     content: "\e900";
   }
+
   &.check:before {
     content: "\e928";
   }
+
   &.chevron-left:before {
     content: "\e901";
   }
+
   &.chevron-right:before {
     content: "\e902";
   }
+
   &.copy:before {
     content: "\e903";
   }
+
   &.eye:before {
     content: "\e91b";
   }
+
   &.eye-off:before {
     content: "\e91c";
   }
+
   &.fast-forward:before {
     content: "\e904";
   }
+
   &.file:before {
     content: "\e91d";
   }
+
   &.flag:before {
     content: "\e929";
   }
+
   &.heart:before {
     content: "\e905";
   }
+
   &.home:before {
     content: "\e91e";
   }
+
   &.image:before {
     content: "\e91f";
   }
+
   &.info:before {
     content: "\e92a";
   }
+
   &.key:before {
     content: "\e920";
   }
+
   &.link-diagonal:before {
     content: "\e906";
   }
+
   &.link-horizontal:before {
     content: "\e907";
   }
+
   &.menu:before {
     content: "\e921";
   }
+
   &.message:before {
     content: "\e908";
   }
+
   &.dark:before {
     content: "\e909";
   }
+
   &.more-horizontal:before {
     content: "\e90a";
   }
+
   &.more-vertical:before {
     content: "\e90b";
   }
+
   &.music:before {
     content: "\e90c";
   }
+
   &.pause:before {
     content: "\e90d";
   }
+
   &.percent:before {
     content: "\e922";
   }
+
   &.pie-chart:before {
     content: "\e923";
   }
+
   &.play:before {
     content: "\e90e";
   }
+
   &.power:before {
     content: "\e924";
   }
+
   &.repeat:before {
     content: "\e90f";
   }
+
   &.rewind:before {
     content: "\e910";
   }
+
   &.rotate-ccw:before {
     content: "\e911";
   }
+
   &.rotate-cw:before {
     content: "\e912";
   }
+
   &.search:before {
     content: "\e913";
   }
+
   &.settings:before {
     content: "\e914";
   }
+
   &.share:before {
     content: "\e925";
   }
+
   &.shuffle:before {
     content: "\e926";
   }
+
   &.skip-back:before {
     content: "\e915";
   }
+
   &.skip-forward:before {
     content: "\e916";
   }
+
   &.sun:before {
     content: "\e917";
   }
+
   &.trash:before {
     content: "\e918";
   }
+
   &.user:before {
     content: "\e927";
   }
+
   &.volume:before {
     content: "\e919";
   }
+
   &.cross:before {
     content: "\e91a";
   }
+
   &.telegram:before {
     content: "\ea95";
   }
+
   &.twitter:before {
     content: "\ea96";
   }
 }
-

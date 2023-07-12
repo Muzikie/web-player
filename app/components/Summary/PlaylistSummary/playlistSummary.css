@@ -39,6 +39,8 @@
 
         & img {
           width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
 
@@ -72,10 +74,13 @@
 }
 
 @media (min-width: 680px) {
+
   .component.playlistSummary {
     display: flex;
+
     /* flex-flow: row nowrap; */
     flex-direction: row-reverse;
+
     & .photo {
       width: var(--max-collection-art-size);
       height: var(--max-collection-art-size);

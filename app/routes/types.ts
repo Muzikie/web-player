@@ -1,33 +1,44 @@
-import { SearchResultType } from '~/models/entity.server';
+import type { SearchResultType } from '~/models/types';
 
 import {
   Collection,
   Audio,
   Profile,
-  Playlist
+  Playlist,
+  Subscription,
 } from '~/configs';
-import { Entity } from '~/components/Entity/types';
 
 export interface SearchLoaderData {
   result: Awaited<SearchResultType[]>;
+}
+
+export interface CollectionInfoLoaderData {
+  CollectionInfo: Awaited<Collection[]>;
 }
 
 export interface CollectionLoaderData {
   collection: Awaited<Collection>;
   profile: Awaited<Profile>;
   audios: Awaited<Audio[]>;
-  id: number;
+  id: string;
+}
+
+export interface ListScreenProps {
+  request: Request;
+  params: {
+    id: string;
+  };
 }
 
 export interface collectionLoaderProps {
-  params: {
-    id: number;
-  };
   request: Request;
+  params: {
+    id: string;
+  };
 }
 
 export interface HomeLoaderData {
-  recentlyPlayed: Awaited<Entity[]>;
+  trending: Awaited<Audio[]>;
   profiles: Awaited<Profile[]>;
   collections: Awaited<Collection[]>;
 }
@@ -46,13 +57,12 @@ export interface playlistLoaderParams {
   params: {
     id: number;
   };
-  request: Request;
 }
 
 export interface ProfileLoaderData {
   profile: Awaited<Profile>;
-  collections: Awaited<Collection[]>;
-  audios: Awaited<Audio[]>;
+  collections?: Awaited<Collection[]>;
+  audios?: Awaited<Audio[]>;
   id: string;
 }
 
@@ -63,6 +73,13 @@ export interface profileLoaderProps {
   request: Request;
 }
 
+export interface UploadLoaderProps {
+  request: Request;
+}
+
+export interface UploadLoaderData {
+  id: string;
+}
 
 export interface DiscographyLoaderData {
   collections: Awaited<Collection[]>;
@@ -72,4 +89,12 @@ export interface DiscographyLoaderData {
 export interface DiscographyProps {
   audios: Audio[];
   collections: Collection[];
+}
+
+export interface PurchaseSubscriptionData {
+  subscriptionPlans: Awaited<Subscription[]>;
+}
+
+export interface ActiveSubscriptionData {
+  activeSubscription: Awaited<Subscription|null>;
 }

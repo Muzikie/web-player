@@ -1,94 +1,59 @@
 /* External dependencies */
-import { useState, ChangeEvent, useEffect } from 'react';
-import { cryptography } from '@liskhq/lisk-client';
+import { useState } from 'react';
 
 /* Internal dependencies */
+import { uploadFiles } from '~/models/entity.client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { MODULES, COMMANDS } from '~/configs';
-import { ValidationStatus, ValidationResult } from './types';
-import { validate } from './validator';
-
-import { useBroadcast } from './useBroadcast'
+import { getEntityIDFromEvents } from '~/helpers/transaction';
+import { MODULES, COMMANDS, FILES } from '~/configs';
+import { useBroadcast } from '../useBroadcast/useBroadcast';
+import { getFileSignatures } from '../useBroadcast/utils';
+import { Params } from './types';
 
 export const useCreateCollection = () => {
   const { updateAccount } = useAccount();
   const { broadcast } = useBroadcast();
 
-  const [formValidity, setFormValidity] = useState<ValidationResult>({
-    status: ValidationStatus.clean
+  const [broadcastStatus, setBroadcastStatus] = useState({
+    error: false,
+    message: '',
+    loading: false,
   });
-  const [name, setName] = useState<string>('');
-  const [releaseYear, setReleaseYear] = useState<string>('');
-  const [collectionType, setCollectionType] = useState<number>(-1);
-  const [files, setFiles] = useState<FileList | null>(null);
-  const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
-  const [formIsChanged, setFormIsChanged] = useState(false);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if(!formIsChanged) setFormIsChanged(true);
-    switch (e.target.name) {
-    case 'name':
-      setName(e.target.value);
-      break;
-    case 'releaseYear':
-      setReleaseYear(e.target.value);
-      break;
-    case 'collectionType':
-      setCollectionType(Number(e.target.value));
-      break;
-    case 'files':
-      setFiles(e.target.files ?? null);
-      break;
-    default:
-      break;
-    }
-  };
+  const signAndBroadcast = async (formValues: Params) => {
+    const account = await updateAccount();
+    setBroadcastStatus({ error: false, message: '', loading: true });
 
-  const signAndBroadcast = async () => {
-    const data = await updateAccount();
+    const files = [{ key: FILES.collection.primary, value: (formValues.files as File[])[0] }];
+    const coverSignatureAndHash = await getFileSignatures(files, account);
+
     const result = await broadcast({
       module: MODULES.COLLECTION,
       command: COMMANDS.CREATE,
       params: {
-        name,
-        releaseYear,
-        collectionType,
-        owners: [{
-          address: cryptography.address.getAddressFromLisk32Address(data.address),
-          shares: 100
-        }]
+        name: formValues.name,
+        releaseYear: formValues.releaseYear,
+        collectionType: formValues.collectionType,
+        ...coverSignatureAndHash,
       },
-      account: data,
-      files: [{ key: 'cover', value: files[0] }],
+      account,
     });
-    setBroadcastStatus(result);
+    const entityID = getEntityIDFromEvents(MODULES.COLLECTION, result.events || []);
+
+    const uploadResponse = await uploadFiles(entityID, files);
+    const uploadSuccess = uploadResponse.reduce((acc, curr) => {
+      if (curr.error === true || !acc) {
+        acc = false;
+      }
+      return acc;
+    }, true);
+    // @todo React upon upload failure
+    console.log('uploadSuccess', uploadSuccess);
+    setBroadcastStatus({ ...result, loading: false });
   };
 
-  useEffect(() => {
-    validate('collection', {
-      name,
-      releaseYear,
-      collectionType,
-      files,
-    }).then((result: ValidationResult) => {
-      if(formIsChanged){
-        setFormValidity(result);
-      }
-    });
-  }, [
-    name,
-    releaseYear,
-    collectionType,
-    files,
-  ]);
-
   return {
-    name,
-    releaseYear,
-    collectionType,
-    onChange,
     signAndBroadcast,
-    formValidity,
     broadcastStatus,
   };
 };

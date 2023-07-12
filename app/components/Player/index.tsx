@@ -18,7 +18,7 @@ const Player = () => {
   const { info } = useAccount();
   const { subscriptionStatus } = useActiveSubscription();
 
-  const isSubscribe = subscriptionStatus === SubscriptionStatus.subscribed;
+  const isSubscribe = subscriptionStatus === SubscriptionStatus.Subscribed;
   const isLogin = !!info.address;
 
   const isAuthPath = ['/registered', '/login'].includes(location.pathname);
