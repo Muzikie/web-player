@@ -1,23 +1,25 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ImageType } from './types';
 
-const Image = ({ src, alt, className, placeHolder } : ImageType) => {
+const Image = ({ src, alt, className, placeHolder }: ImageType) => {
   const image = useRef<HTMLImageElement>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   const imageNotFound = () => {
-    if (image.current) {
+    if (image.current && image.current?.naturalWidth === 0) {
       image.current.src = placeHolder;
     }
   };
 
-  useEffect(() => {
-    if (image.current?.naturalWidth === 0) {
-      imageNotFound();
-    }
-  }, [src, image.current]);
+  if (isHydrated) {
+    return <img ref={image} className={className} src={src} alt={alt} onError={imageNotFound} />;
+  }
 
   return (
-    <img ref={image} className={className} src={src} alt={alt} />
+    null
   );
 };
 

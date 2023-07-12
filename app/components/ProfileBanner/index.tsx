@@ -4,6 +4,7 @@ import React from 'react';
 import PopularAudios from '../PopularAudios';
 import { API_URLS, FILES } from '~/configs';
 import Image from '../common/Image';
+import { truncateAddress } from '~/helpers/formatters';
 import { ProfileAddress } from './types';
 
 const ProfileBanner = ({ data, audios }: ProfileAddress) => {
@@ -20,9 +21,9 @@ const ProfileBanner = ({ data, audios }: ProfileAddress) => {
         />
       </figure>
       <header>
-        <h2>{name || creatorAddress}</h2>
+        <h2>{name || truncateAddress(creatorAddress)}</h2>
       </header>
-      <PopularAudios audios={audios} />
+      {audios.length > 0 && <PopularAudios audios={audios} />}
     </section>
   );
 };
