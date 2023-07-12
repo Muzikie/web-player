@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Image from '~/components/common/Image';
 import { EntityRowProps, Entity } from '../types';
 import { API_URLS, FILES } from '~/configs';
 import { getEntity, getID } from '../utils';
@@ -15,7 +16,11 @@ const EntityThumbnail = ({
   return (
     <section className={wrapper}>
       <figure>
-        <img src={`${API_URLS.STREAMER}/${id}-${FILES[entity]}.jpg`} alt={data.name} />
+        <Image
+          src={`${API_URLS.STORAGE}/${id}${FILES[entity].primary}.jpg`}
+          placeHolder="/images/artist.jpg"
+          alt={data.name} 
+        />
       </figure>
     </section>
   );

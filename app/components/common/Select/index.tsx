@@ -1,16 +1,14 @@
-import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import React, { forwardRef } from 'react';
 
 import { SelectProps } from './types';
 
-export const Select = <T extends string | number,>({
+const Select = <T extends string | number,>({
   options,
-  register,
-  name,
   placeholder,
-}: SelectProps<T> & { register: UseFormRegister<any> }) => (
-    <section className={`component select ${register(name)  ? '' : 'notSelected'}`}>
-      <select {...register(name)} >
+  ...restProps
+}: SelectProps<T>, ref) => (
+    <section className={`component select ${restProps.name  ? '' : 'notSelected'}`}>
+      <select {...restProps} ref={ref}>
         {
           placeholder && <option value="">{placeholder}</option>
         }
@@ -25,3 +23,5 @@ export const Select = <T extends string | number,>({
       </select>
     </section>
   );
+
+export default forwardRef(Select);

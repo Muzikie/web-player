@@ -5,9 +5,10 @@ import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
 /* Internal dependencies */
 import {
-  getProfile,
-  getCollection,
-  getCollectionAudios,
+  // getProfile,
+  getCollections,
+  getAudios,
+  getProfiles,
 } from '~/models/entity.server';
 import { collectionLoaderProps, CollectionLoaderData } from '../../types';
 import List from '~/components/List';
@@ -15,6 +16,20 @@ import CollectionSummary from '~/components/Summary/CollectionSummary';
 import { liskThemes } from '~/components/List/types';
 import styles from '~/css/routes/__main/collection.css';
 import { entityThemes } from '~/components/Entity/types';
+import { Audio, Profile } from '~/configs';
+
+const defaultProfile: Profile = {
+  creatorAddress: '',
+  name: '',
+  nickName: '',
+  description: '',
+  avatarHash: '',
+  avatarSignature: '',
+  bannerHash: '',
+  bannerSignature: '',
+  socialAccounts: [],
+  profileID: '',
+};
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -22,13 +37,22 @@ export function links() {
 
 export const loader = async ({ params }: collectionLoaderProps) => {
   invariant(params.id, 'Expected params.id');
+  let audios: Audio[] = [];
+  let profile: Profile;
 
-  const collection = await getCollection(params.id);
-  const audios = await getCollectionAudios(params.id);
-  const profile = await getProfile(collection.creatorAddress);
+  const { data: collections } = await getCollections({ params: { collectionID: params.id } });
+  if (collections.length) {
+    const { creatorAddress, collectionID } = collections[0];
+    const audiosResult = await getAudios({ params: { collectionID } });
+    const profilesResult = await getProfiles({ params: { creatorAddress } });
+    audios = audiosResult.data;
+    profile = profilesResult.data.length ? profilesResult.data[0] : { ...defaultProfile, creatorAddress };
+  } else {
+    throw new Error('Collection not found');
+  }
 
   return json<CollectionLoaderData>({
-    collection,
+    collection: collections[0],
     profile,
     audios,
     id: params.id,

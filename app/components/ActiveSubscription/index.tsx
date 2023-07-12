@@ -2,12 +2,11 @@ import React from 'react';
 import BigNumber from 'bignumber.js';
 
 import { fromBaseToken } from '~/helpers/formatters';
-import { useActiveSubscription } from '~/hooks/useSubscriptions';
 import Modal from '../Modal';
 import { PrimaryButton } from '~/components/common/Button';
 import EmptyState from '~/components/common/EmptyState';
 import { SubscriptionInfoProps } from './types';
-import { TOKEN, DEV_SHARE } from '~/configs';
+import { TOKEN, DEV_SHARE, Subscription } from '~/configs';
 
 const getConsumed = (price: string, consumable: string): string => {
   const factor = new BigNumber(DEV_SHARE);
@@ -22,7 +21,7 @@ const SubscriptionInfo = ({ data }: SubscriptionInfoProps) => {
     { title: 'Price', content: fromBaseToken(data.price, TOKEN) },
     { title: 'Value to spend', content: fromBaseToken(data.consumable, TOKEN) },
     { title: 'Consumed', content: fromBaseToken(getConsumed(data.price, data.consumable), TOKEN) },
-    { title: 'Members', content: `${data.maxMembers} user ${data.maxMembers === 1 ? '' : 's'}` }
+    { title: 'Members', content: `${data.maxMembers} user${data.maxMembers === 1 ? '' : 's'}` }
   ];
 
   return (
@@ -41,10 +40,8 @@ const SubscriptionInfo = ({ data }: SubscriptionInfoProps) => {
     </div>
   );
 };
-const ActiveSubscription = () => {
-  const { subscription } = useActiveSubscription();
-
-  if (!subscription) {
+const ActiveSubscription = ({ data }: { data: Subscription | null }) => {
+  if (!data) {
     return (
       <EmptyState
         title="You don't have an active subscription"
@@ -54,7 +51,7 @@ const ActiveSubscription = () => {
   }
   return (
     <section className="component activeSubscription">
-      <SubscriptionInfo data={subscription} />
+      <SubscriptionInfo data={data} />
       <Modal className="subscriptionFooter">
         <div className="wrapper">
           <figure>

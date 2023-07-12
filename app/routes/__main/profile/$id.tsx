@@ -3,11 +3,12 @@ import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import invariant from 'tiny-invariant';
+
 /* Internal dependencies */
 import {
-  getProfile,
-  getProfileCollections,
-  getProfileAudios,
+  getProfiles,
+  getCollections,
+  getAudios,
 } from '~/models/entity.server';
 import { getSession } from '~/hooks/useSession';
 import ProfileBanner from '~/components/ProfileBanner';
@@ -28,13 +29,24 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
   );
 
   const address = params.id === 'me' ? session.get('address') : params.id;
-  const profile = await getProfile(address);
-  const collections = await getProfileCollections(address);
-  const audios = await getProfileAudios(address, { limit: 4 });
+  const { data: profiles } = await getProfiles({ params: { creatorAddress: address } });
+  const { data: collections } = await getCollections({ params: { creatorAddress: address } });
+  const { data: audios } = await getAudios({ params: { ownerAddress: address, limit: '5' } });
 
-  if (!profile) {
-    throw new Response('Not Found', { status: 404 });
-  }
+  const defaultProfile = {
+    name: '',
+    nickName: '',
+    description: '',
+    avatarHash: '',
+    avatarSignature: '',
+    bannerHash: '',
+    bannerSignature: '',
+    socialAccounts: [],
+    profileID: '',
+    creatorAddress: address,
+  };
+
+  const profile = profiles?.length > 0 ? profiles[0] : defaultProfile;
 
   return json<ProfileLoaderData>({
     profile,
@@ -56,14 +68,14 @@ const ProfileScreen = () => {
     <section className="screen profile">
       <ProfileBanner
         data={profile}
-        audios={audios}
+        audios={audios?.length ? audios : []}
       />
       <UserDiscography
-        collections={collections}
+        collections={collections?.length ? collections : []}
         profile={profile}
       />
       <ProfileDetails data={profile} />
-      <WalletDetails address={id} />
+      <WalletDetails address={id} audios={audios?.length ? audios : []} />
     </section>
   );
 };

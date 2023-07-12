@@ -6,16 +6,10 @@ import {
   SCHEMAS,
   CHAIN_ID,
 } from '~/configs';
+import { ProfileInfoType } from '~/context/profileContext/types';
 import { SignTransactionProps, SignTransactionResult } from '../useCreateEntity/types';
 
-export const signTransaction = async ({
-  command, module, params, files = [], account,
-}: SignTransactionProps): Promise<SignTransactionResult|Error> => {
-  const schema = SCHEMAS[`${module}/${command}`];
-  if (!schema) {
-    return new Error('Could not find the corresponding schema');
-  }
-
+export const getFileSignatures = async (files: { value: File, key: string }[], account: ProfileInfoType): Promise<{ [key: string]: Buffer }> => {
   const fileSignatures: { [key: string]: Buffer } = {};
   for await (const file of files) {
     const fileContent = await file.value.arrayBuffer();
@@ -27,16 +21,24 @@ export const signTransaction = async ({
     fileSignatures[`${file.key}Signature`] = signature;
   }
 
+  return fileSignatures;
+};
+
+export const signTransaction = async ({
+  command, module, params, account,
+}: SignTransactionProps): Promise<SignTransactionResult|Error> => {
+  const schema = SCHEMAS[`${module}/${command}`];
+  if (!schema) {
+    return new Error('Could not find the corresponding schema');
+  }
+
   // Create blockchain transaction and broadcast it
   const tx = {
     module,
     command,
-    nonce: BigInt(account.nonce),
+    nonce: BigInt(account.auth.nonce),
     senderPublicKey: bufferize(account.publicKey),
-    params: {
-      ...params,
-      ...fileSignatures,
-    },
+    params,
   };
   const fee = transactions.computeMinFee(tx, schema);
   // Sign the transaction

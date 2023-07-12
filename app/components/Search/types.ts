@@ -1,4 +1,4 @@
-import { SearchResultType } from '~/models/entity.client';
+import { SearchResultType } from '~/models/types';
 
 export interface SearchInputProps {
   query: string;

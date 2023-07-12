@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { Auth,Balance } from '~/configs/types';
 
 export interface TokenBalance {
   tokenID: string;
@@ -10,8 +11,9 @@ export interface ProfileInfoType {
   address: string;
   publicKey: string;
   privateKey: string;
-  nonce: string;
-  balances: TokenBalance[];
+  passphrase?: string;
+  auth: Auth;
+  token: Balance[];
 }
 
 export interface ProfileContextType {

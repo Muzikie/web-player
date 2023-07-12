@@ -70,6 +70,17 @@ export type Playlist = {
   meta: string;
 } & BaseEntity
 
+export interface Subscription {
+  name: string;
+  subscriptionID: string;
+  creatorAddress: string;
+  maxMembers: number;
+  streams: string;
+  price: string;
+  consumable: string;
+  members: { address: string }[]
+}
+
 export type CreateCommandParams = {
   name: string;
   nickName: string;
@@ -80,3 +91,63 @@ export type CreateCommandParams = {
   bannerHash: Buffer;
   bannerSignature: Buffer;
 } & BaseEntity
+
+interface LockedBalance {
+  amount: string,
+  height: number;
+}
+
+export interface Balance {
+  tokenID: string,
+  availableBalance: string,
+  lockedBalances: LockedBalance[]
+}
+
+export interface Auth {
+  nonce: string,
+  numberOfSignatures?: number,
+  mandatoryKeys?: string[],
+  optionalKeys?: string[]
+}
+
+export interface Account {
+  address: string;
+  auth: Auth;
+  balances: Balance[];
+}
+
+export type EndpointParams = Partial<Record<
+  'offset' | 'limit' | 'sort'
+  | 'audioID' | 'collectionID' | 'profileID'
+  | 'transactionID' | 'blockID' | 'subscriptionID'
+  | 'creatorAddress' | 'address' | 'ownerAddress' | 'memberAddress',
+string>>;
+
+export interface MetaProps {
+  total: number;
+  offset: number;
+  count: number;
+}
+
+export interface EndpointResult<T> {
+  data: T;
+  meta: MetaProps;
+}
+
+export type AwaitedEndpointResult<T> = Promise<EndpointResult<T>>;
+
+export interface NetworkStatus {
+  data: {
+    networkVersion: string;
+    chainID: string;
+    height: number;
+    finalizedHeight: number;
+  },
+  meta: {
+    lastUpdate: number;
+    lastBlockHeight: number;
+    lastBlockID: string;
+  }
+}
+
+export interface KeyValue { [key: string]: any }

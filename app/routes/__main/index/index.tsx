@@ -2,10 +2,10 @@
 import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-/* Internal dependencies */
+// /* Internal dependencies */
 import {
-  getRecentlyPlayed,
-  getProfiles,
+  // getProfiles,
+  getAudios,
   getCollections,
 } from '~/models/entity.server';
 import { HomeLoaderData } from '../../types';
@@ -18,39 +18,55 @@ export function links() {
 }
 
 export const loader = async () => {
+  const { data: collections } = await getCollections({ params: {} });
+  const { data: trending } = await getAudios({ params: {} });
+  // const { data: profiles } = await getProfiles({ params: {} });
+
   return json<HomeLoaderData>({
-    recentlyPlayed: await getRecentlyPlayed(),
-    profiles: await getProfiles(),
-    collections: await getCollections(),
+    profiles: [],
+    trending,
+    collections,
   });
 };
 
 const HomeScreen = () => {
   const {
-    recentlyPlayed,
-    // profiles,
+    trending,
+    profiles,
     collections,
   } = useLoaderData() as HomeLoaderData;
 
   return (
     <section className="screen home">
-      <List
-        className="recent"
-        title="Recent"
-        itemTheme={entityThemes.HomePage}
-        items={!recentlyPlayed?.length ? [] : recentlyPlayed}
-      />
-      {/* <List
-        className="favorite"
-        title="Favorite"
-        items={!profiles?.length ? [] : profiles}
-      /> */}
-      <List
-        className="favorite"
-        title="Favorite"
-        itemTheme={entityThemes.CollectionPage}
-        items={!collections?.length ? [] : collections}
-      />
+      {
+        trending.length > 0 && (
+          <List
+            className="recent"
+            title="Recent"
+            itemTheme={entityThemes.HomePage}
+            items={trending}
+          />
+        )
+      }
+      {
+        profiles.length > 0 && (
+          <List
+            className="favorite"
+            title="Favorite"
+            items={profiles}
+          />
+        )
+      }
+      {
+        collections.length > 0 && (
+          <List
+            className="favorite"
+            title="Favorite"
+            itemTheme={entityThemes.CollectionPage}
+            items={collections}
+          />
+        )
+      }
     </section>
   );
 };

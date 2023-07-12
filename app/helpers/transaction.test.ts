@@ -13,16 +13,20 @@ describe('Transaction', () => {
     error: false,
     data: {
       events: [
-        { module: 'audio', name: 'commandExecutionResult', topics: ['123'], data: '0800' }
+        { module: 'audio', name: 'commandExecutionResult', topics: ['123'], data: { success: false } },
       ],
+      success: true,
+      result: 1
     },
   } as DryRunTxResponse;
   const DryRunExecutionSuccess = {
     error: false,
     data: {
       events: [
-        { module: 'audio', name: 'commandExecutionResult', topics: ['123'], data: '0801' }
+        { module: 'audio', name: 'commandExecutionResult', topics: ['123'], data: { success: true } },
       ],
+      success: true,
+      result: 1
     },
   } as DryRunTxResponse;
   const module = 'audio';

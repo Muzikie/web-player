@@ -38,7 +38,7 @@ export const usePurchaseSubscription = () => {
     }
 
     const account = await updateAccount();
-    if (account.balances.length === 0) {
+    if (account.token.length === 0) {
       return {
         error: true,
         message: PurchaseErrors.InsufficientBalance,
@@ -54,7 +54,6 @@ export const usePurchaseSubscription = () => {
         members: [cryptography.address.getAddressFromLisk32Address(account.address)],
       },
       account,
-      files: [],
     });
     return result;
   };

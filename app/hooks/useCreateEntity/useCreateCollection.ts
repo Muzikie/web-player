@@ -1,11 +1,13 @@
 /* External dependencies */
 import { useState } from 'react';
-import { cryptography } from '@liskhq/lisk-client';
 
 /* Internal dependencies */
+import { uploadFiles } from '~/models/entity.client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { MODULES, COMMANDS } from '~/configs';
+import { getEntityIDFromEvents } from '~/helpers/transaction';
+import { MODULES, COMMANDS, FILES } from '~/configs';
 import { useBroadcast } from '../useBroadcast/useBroadcast';
+import { getFileSignatures } from '../useBroadcast/utils';
 import { Params } from './types';
 
 export const useCreateCollection = () => {
@@ -19,8 +21,12 @@ export const useCreateCollection = () => {
   });
 
   const signAndBroadcast = async (formValues: Params) => {
-    const data = await updateAccount();
+    const account = await updateAccount();
     setBroadcastStatus({ error: false, message: '', loading: true });
+
+    const files = [{ key: FILES.collection.primary, value: (formValues.files as File[])[0] }];
+    const coverSignatureAndHash = await getFileSignatures(files, account);
+
     const result = await broadcast({
       module: MODULES.COLLECTION,
       command: COMMANDS.CREATE,
@@ -28,14 +34,21 @@ export const useCreateCollection = () => {
         name: formValues.name,
         releaseYear: formValues.releaseYear,
         collectionType: formValues.collectionType,
-        owners: [{
-          address: cryptography.address.getAddressFromLisk32Address(data.address),
-          shares: 100
-        }]
+        ...coverSignatureAndHash,
       },
-      account: data,
-      files: [{ key: 'cover', value: formValues.files[0] }],
+      account,
     });
+    const entityID = getEntityIDFromEvents(MODULES.COLLECTION, result.events || []);
+
+    const uploadResponse = await uploadFiles(entityID, files);
+    const uploadSuccess = uploadResponse.reduce((acc, curr) => {
+      if (curr.error === true || !acc) {
+        acc = false;
+      }
+      return acc;
+    }, true);
+    // @todo React upon upload failure
+    console.log('uploadSuccess', uploadSuccess);
     setBroadcastStatus({ ...result, loading: false });
   };
 

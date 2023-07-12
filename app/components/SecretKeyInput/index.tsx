@@ -11,8 +11,7 @@ const SecretKeyInput = ({ register }: any) => {
         type="password"
         placeholder="Secret Key"
         icon="key"
-        name="passphrase"
-        register={register}
+        {...register('passphrase', { required: true })}
       />
     </div>
   );

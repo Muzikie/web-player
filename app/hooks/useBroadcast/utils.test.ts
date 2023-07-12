@@ -1,6 +1,5 @@
 import { cryptography } from '@liskhq/lisk-client';
 import { accountMock } from '../../../test/mocks/account';
-import { mockFile } from '../../../test/mocks/file';
 import { COMMANDS, MODULES, VALID_GENRES } from '~/configs';
 import { bufferize } from '~/helpers/convertors';
 import { signTransaction } from './utils';
@@ -8,13 +7,14 @@ import { signTransaction } from './utils';
 describe('useBroadcast', () => {
   const account = {
     ...accountMock,
-    balances: [],
-    nonce: '1',
+    token: [],
+    auth: {
+      nonce: '1',
+    }
   };
 
   it.skip('should sign audio/create transaction given valid props', async () => {
     const name = 'Test Audio';
-    const file = mockFile({ name, type: 'audio/mp3' });
     const command = COMMANDS.CREATE;
     const module = MODULES.AUDIO;
     const params = {
@@ -31,8 +31,7 @@ describe('useBroadcast', () => {
       ],
     };
 
-    const files: { value: File; key: string }[] = [{ value: file, key: 'audio' }];
-    const result = await signTransaction({ command, module, params, files, account });
+    const result = await signTransaction({ command, module, params, account });
  
     expect(result).toMatchObject({
       txId: expect.any(String),
@@ -48,7 +47,7 @@ describe('useBroadcast', () => {
       audioID: bufferize('ef2f53fca6966b5f5f6673f6ef3b0c17'),
     };
 
-    const result = await signTransaction({ command, module, params, files: [], account });
+    const result = await signTransaction({ command, module, params, account });
  
     expect(result).toMatchObject({
       txId: expect.any(String),
