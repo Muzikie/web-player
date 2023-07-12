@@ -33,8 +33,7 @@ describe('useBroadcast', () => {
       ],
     };
 
-    const files: { value: File; key: string }[] = [{ value: file, key: 'audio' }];
-    const result = await signTransaction({ command, module, params, files, account });
+    const result = await signTransaction({ command, module, params, account });
  
     expect(result).toMatchObject({
       txId: expect.any(String),
@@ -50,7 +49,7 @@ describe('useBroadcast', () => {
       audioID: bufferize('ef2f53fca6966b5f5f6673f6ef3b0c17'),
     };
 
-    const result = await signTransaction({ command, module, params, files: [], account });
+    const result = await signTransaction({ command, module, params, account });
  
     expect(result).toMatchObject({
       txId: expect.any(String),

@@ -7,21 +7,21 @@ const Select = <T extends string | number,>({
   placeholder,
   ...restProps
 }: SelectProps<T>, ref) => (
-  <section className={`component select ${restProps.name  ? '' : 'notSelected'}`}>
-    <select {...restProps} ref={ref}>
-      {
-        placeholder && <option value="">{placeholder}</option>
-      }
-      {options.map((option) => {
-        const val = typeof option === 'string' || typeof option === 'number' ? option : option.value;
-        return (
-          <option key={val} value={val}>
-            {typeof option === 'string' || typeof option === 'number' ? option : option.label}
-          </option>
-        );
-      })}
-    </select>
-  </section>
-);
+    <section className={`component select ${restProps.name  ? '' : 'notSelected'}`}>
+      <select {...restProps} ref={ref}>
+        {
+          placeholder && <option value="">{placeholder}</option>
+        }
+        {options.map((option) => {
+          const val = typeof option === 'string' || typeof option === 'number' ? option : option.value;
+          return (
+            <option key={val} value={val}>
+              {typeof option === 'string' || typeof option === 'number' ? option : option.label}
+            </option>
+          );
+        })}
+      </select>
+    </section>
+  );
 
 export default forwardRef(Select);
