@@ -3,7 +3,7 @@ interface BaseEntity {
   name: string;
 }
 
-interface LoyaltyOwner {
+export interface LoyaltyOwner {
   address: string;
   shares: number;
   income: string;
@@ -36,6 +36,12 @@ export interface SocialAccount {
   platform: SocialAccountPlatform;
 }
 
+export interface CollectionPeep {
+  collectionType: number;
+  name: string;
+  releaseYear: string;
+}
+
 export type Profile = {
   name: string;
   nickName: string;
@@ -51,6 +57,7 @@ export type Profile = {
 export type Audio = {
   genre: number[];
   collectionID: string;
+  collection: CollectionPeep;
   owners: LoyaltyOwner[];
   releaseYear: string;
   audioID: string;

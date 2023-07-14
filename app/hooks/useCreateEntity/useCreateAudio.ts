@@ -6,7 +6,7 @@ import { cryptography } from '@liskhq/lisk-client';
 import { uploadFiles } from '~/models/entity.client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { getEntityIDFromEvents } from '~/helpers/transaction';
-import { MODULES, COMMANDS, FILES } from '~/configs';
+import { MODULES, COMMANDS, FILES, LoyaltyOwner } from '~/configs';
 import { useBroadcast } from '../useBroadcast/useBroadcast';
 import { getFileSignatures } from '../useBroadcast/utils';
 import { bufferize } from '~/helpers/convertors';
@@ -38,10 +38,10 @@ export const useCreateAudio = () => {
         fit: [],
         genre: [formValues.genre],
         collectionID: bufferize(formValues.collectionID),
-        owners: [{
-          address: cryptography.address.getAddressFromLisk32Address(account.address),
-          shares: 100
-        }],
+        owners: (formValues.owners as LoyaltyOwner[]).map((owner) => ({
+          address: cryptography.address.getAddressFromLisk32Address(owner.address),
+          shares: owner.shares,
+        })),
         ...audioSignatureAndHash,
       },
       account,

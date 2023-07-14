@@ -14,6 +14,7 @@ export interface SearchLoaderData {
 
 export interface CollectionInfoLoaderData {
   CollectionInfo: Awaited<Collection[]>;
+  address: string;
 }
 
 export interface CollectionLoaderData {
