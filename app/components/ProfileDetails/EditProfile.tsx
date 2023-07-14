@@ -92,7 +92,7 @@ const ProfileEdit = ({ setShowForm, profile }: ProfileEditProps) => {
               <IconButton
                 icon="trash"
                 className="removeButton"
-                onClick={() => { console.log('remove', platform); remove(platform); }}
+                onClick={() => { remove(platform); }}
               ></IconButton>
             </fieldset>
           ))
