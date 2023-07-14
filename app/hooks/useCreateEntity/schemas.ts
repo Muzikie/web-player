@@ -13,6 +13,19 @@ export const audioSchema = yup
     }),
     genre: yup.number().min(0).max(VALID_GENRES.length - 1).min(0).max(2).required('Please select a genre'),
     collectionID: yup.string().trim().matches(/([\w\d]+){10,}/, 'Please select a collection type'),
+    owners: yup.array().of(yup.object().shape({
+      address: yup.string().matches(/lsk[\w\d]{38}/, 'Address must be a valid Lisk wallet address'),
+      shares: yup.number().min(1).max(100),
+    })).test(
+      'sum-of-percentage',
+      'The sum of the shares must be 100',
+      (owners) => {
+        const sum = owners?.reduce((acc, owner) => {
+          return acc + (owner?.shares ?? 0);
+        }, 0) || 0;
+        return sum === 100;
+      }
+    ),
   });
 
 export const collectionSchema = yup

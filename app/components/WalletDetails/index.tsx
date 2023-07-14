@@ -18,7 +18,7 @@ const WalletDetails = ({ address, audios }: WalletAddressProps) => {
   const [account, setAccount] = useState<ProfileInfoType>(info);
   const availableBalance = account.token?.length > 0 ? account.token[0].availableBalance : '0';
 
-  const unclaimed = audios.reduce((total, item) => {
+  const unclaimed = audios?.reduce((total, item) => {
     const me = item.owners.find(owner => owner.address === address);
     total = total.plus(BigNumber(me?.income ?? 0));
     return total;
@@ -62,7 +62,7 @@ const WalletDetails = ({ address, audios }: WalletAddressProps) => {
         <h2 className="balanceValue">{`${fromBaseToken(availableBalance)} MZK`}</h2>
       </div>
       {
-        account.address === address && (
+        audios && account.address === address && (
           <>
             <div className="balance claim">
               <span className="balanceTitle">Unclaimed income:</span>
