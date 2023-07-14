@@ -47,6 +47,7 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
   const onSubmit = async (data: Record<string, any>) => {
     await signAndBroadcast(data);
   };
+
   const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
   const formError = errorMessage
     ? {
@@ -96,7 +97,7 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
           </legend>
           {
             fields.map(({ address }, index: number) => (
-              <fieldset key={address} className="ownerItem">
+              <fieldset key={address + index} className="ownerItem">
                 <Input
                   className="input"
                   placeholder="Owner's wallet address"
@@ -112,7 +113,7 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
                 <IconButton
                   icon="trash"
                   className="removeButton"
-                  onClick={() => { console.log('remove', address); remove(index); }}
+                  onClick={() => { remove(index); }}
                 />
               </fieldset>
             ))
