@@ -33,7 +33,7 @@ const PlayerContent = () => {
         </Link>
         <header>
           <h5>{ current?.name ?? '...' }</h5>
-          <span>{ current?.creatorAddress ?? '...' }</span>
+          <span>{ current?.collection?.name ?? '...' }</span>
         </header>
       </section>
       <audio
