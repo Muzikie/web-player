@@ -44,4 +44,61 @@
       }
     }
   }
+
+  & .royaltyOwners {
+    & legend {
+      color: var(--color-secondary);
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      padding: 0 0 10px 0;
+
+      & span {
+        flex-grow: 1;
+        flex-shrink: 0;
+        margin-right: var(--padding-s);
+      }
+
+      & i:before {
+        transform: rotate(45deg);
+        display: block;
+      }
+    }
+  
+    & .removeButton,
+    & .addButton {
+      align-items: center;
+      font-size: 1.1rem;
+      color: var(--gray);
+      border: color(srgb 0.935 0.8859 0.8696) solid 1px;
+      background-color: color(srgb 0.985 0.9586 0.9505);
+      padding: 0 11px;
+
+      &:hover {
+        cursor: pointer;
+        color: var(--color-secondary);
+        background-color: var(--white-see-through);
+      }
+    }
+
+    & .ownerItem {
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 0;
+
+      & .input {
+        flex-grow: 1;
+        flex-shrink: 1;
+        margin-right: var(--padding-s);
+      }
+
+      & .removeButton {
+        flex-grow: 0;
+        flex-shrink: 1;
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+      }
+    }
+  }
 }

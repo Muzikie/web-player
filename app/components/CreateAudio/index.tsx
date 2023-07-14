@@ -1,12 +1,12 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { audioSchema } from '~/hooks/useCreateEntity/schemas';
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 
 /* Internal dependencies */
 import { useCreateAudio } from '~/hooks/useCreateEntity';
+import { audioSchema } from '~/hooks/useCreateEntity/schemas';
 import { Input, FileInput } from '~/components/common/Input';
-import { PrimaryButton } from '~/components/common/Button';
+import { IconButton, PrimaryButton } from '~/components/common/Button';
 import Select from '~/components/common/Select';
 import { Link } from '~/components/common/Link';
 import Feedback from '~/components/Feedback';
@@ -14,9 +14,9 @@ import { ROUTES } from '~/routes/routes';
 import { VALID_GENRES } from '~/configs';
 import { CollectionInfo } from './types';
 
-const CreateAudio = ({ CollectionInfo }: CollectionInfo) => {
+const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
   const { signAndBroadcast, broadcastStatus } = useCreateAudio();
-  const { handleSubmit, register, formState } = useForm({
+  const { handleSubmit, register, formState, control } = useForm({
     resolver: yupResolver(audioSchema),
     mode: 'onBlur', // validate on blur
     shouldFocusError: true, // focus input with error after submit
@@ -26,8 +26,17 @@ const CreateAudio = ({ CollectionInfo }: CollectionInfo) => {
       collectionID: '',
       genre: 0,
       files: null,
+      owners: [{
+        address: creatorAddress,
+        shares: 100,
+      }],
       message: '',
     },
+  });
+  const { fields, remove, append } = useFieldArray({
+    control,
+    rules: { minLength: 1 },
+    name: 'owners',
   });
 
   const CollectionsInfo = CollectionInfo.map((item) => ({
@@ -76,6 +85,39 @@ const CreateAudio = ({ CollectionInfo }: CollectionInfo) => {
           placeholder="Select a genre"
           options={VALID_GENRES}
         />
+        <fieldset className="royaltyOwners">
+          <legend>
+            <span>Royalty owners</span>
+            <IconButton
+              icon="cross"
+              className="addButton"
+              onClick={() => append({ address: '', shares: 0 })}
+            />
+          </legend>
+          {
+            fields.map(({ address }, index: number) => (
+              <fieldset key={address} className="ownerItem">
+                <Input
+                  className="input"
+                  placeholder="Owner's wallet address"
+                  type="text"
+                  {...register(`owners.${index}.address`, { required: false })} 
+                />
+                <Input
+                  className="input"
+                  placeholder="Owner's royalty shares (%)"
+                  type="text"
+                  {...register(`owners.${index}.shares`, { required: false })} 
+                />
+                <IconButton
+                  icon="trash"
+                  className="removeButton"
+                  onClick={() => { console.log('remove', address); remove(index); }}
+                />
+              </fieldset>
+            ))
+          }
+        </fieldset>
         <FileInput
           {...register('files', { required: true })}
           icon="file"
@@ -84,7 +126,7 @@ const CreateAudio = ({ CollectionInfo }: CollectionInfo) => {
           placeholder="Upload MP3"
         />
       </fieldset>
-      <PrimaryButton type="submit">
+      <PrimaryButton type="submit" disabled={formError.loading || formError.error}>
         <span>{broadcastStatus.loading ? 'loading...' : 'Create'}</span>
       </PrimaryButton>
       <Feedback data={formError} />
