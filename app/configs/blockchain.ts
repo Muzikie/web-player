@@ -19,7 +19,7 @@ export enum COMMANDS {
   RECLAIM = 'reclaim',
 }
 
-export const FILES = {
+export const SUFFIXES = {
   [MODULES.AUDIO]: {
     primary: 'cover',
     secondary: 'audio',

@@ -9,11 +9,11 @@ import {
   COMMANDS,
   SocialAccount,
   Profile,
+  SUFFIXES,
 } from '~/configs';
 import { useBroadcast } from '../useBroadcast/useBroadcast';
 import { getFileSignatures } from '../useBroadcast/utils';
 import { Params } from './types';
-import { getEntityIDFromEvents } from '~/helpers/transaction';
 import { bufferize } from '~/helpers/convertors';
 
 export const useCreateProfile = () => {
@@ -37,11 +37,11 @@ export const useCreateProfile = () => {
       : {};
 
     const avatarSignatureAndHash = (formValues.avatar as File[])[0]
-      ? await getFileSignatures([{ key: 'avatar', value: (formValues.avatar as File[])[0] }], account)
+      ? await getFileSignatures([{ key: SUFFIXES.profile.primary, value: (formValues.avatar as File[])[0] }], account)
       : { avatarHash: bufferize(profile.avatarHash), avatarSignature: bufferize(profile.avatarSignature) };
 
     const bannerSignatureAndHash = (formValues.banner as File[])[0]
-      ? await getFileSignatures([{ key: 'banner', value: (formValues.banner as File[])[0] }], account)
+      ? await getFileSignatures([{ key: SUFFIXES.profile.secondary, value: (formValues.banner as File[])[0] }], account)
       : { bannerHash: bufferize(profile.bannerHash), bannerSignature: bufferize(profile.bannerSignature) };
 
     const result = await broadcast({
@@ -60,12 +60,11 @@ export const useCreateProfile = () => {
     });
  
     // upload files
-    const entityID = profile.profileID ?? getEntityIDFromEvents(MODULES.PROFILE, result.events || []);
     const files = [
-      { key: 'avatar', value: (formValues.avatar as File[])[0] },
-      { key: 'banner', value: (formValues.banner as File[])[0] },
+      { key: SUFFIXES.profile.primary, value: (formValues.avatar as File[])[0] },
+      { key: SUFFIXES.profile.secondary, value: (formValues.banner as File[])[0] },
     ];
-    const uploadResponse = await uploadFiles(entityID, files);
+    const uploadResponse = await uploadFiles(result.entityID as string, files);
     const uploadSuccess = uploadResponse.reduce((acc, curr) => {
       if (curr.error === true || !acc) {
         acc = false;

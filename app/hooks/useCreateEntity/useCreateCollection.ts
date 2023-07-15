@@ -4,8 +4,7 @@ import { useState } from 'react';
 /* Internal dependencies */
 import { uploadFiles } from '~/models/entity.client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { getEntityIDFromEvents } from '~/helpers/transaction';
-import { MODULES, COMMANDS, FILES } from '~/configs';
+import { MODULES, COMMANDS, SUFFIXES } from '~/configs';
 import { useBroadcast } from '../useBroadcast/useBroadcast';
 import { getFileSignatures } from '../useBroadcast/utils';
 import { Params } from './types';
@@ -24,7 +23,7 @@ export const useCreateCollection = () => {
     const account = await updateAccount();
     setBroadcastStatus({ error: false, message: '', loading: true });
 
-    const files = [{ key: FILES.collection.primary, value: (formValues.files as File[])[0] }];
+    const files = [{ key: SUFFIXES.collection.primary, value: (formValues.files as File[])[0] }];
     const coverSignatureAndHash = await getFileSignatures(files, account);
 
     const result = await broadcast({
@@ -38,9 +37,8 @@ export const useCreateCollection = () => {
       },
       account,
     });
-    const entityID = getEntityIDFromEvents(MODULES.COLLECTION, result.events || []);
 
-    const uploadResponse = await uploadFiles(entityID, files);
+    const uploadResponse = await uploadFiles(result.entityID as string, files);
     const uploadSuccess = uploadResponse.reduce((acc, curr) => {
       if (curr.error === true || !acc) {
         acc = false;
