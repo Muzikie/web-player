@@ -5,7 +5,6 @@ import { cryptography } from '@liskhq/lisk-client';
 /* Internal dependencies */
 import { uploadFiles } from '~/models/entity.client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { getEntityIDFromEvents } from '~/helpers/transaction';
 import { MODULES, COMMANDS, FILES, LoyaltyOwner } from '~/configs';
 import { useBroadcast } from '../useBroadcast/useBroadcast';
 import { getFileSignatures } from '../useBroadcast/utils';
@@ -46,9 +45,8 @@ export const useCreateAudio = () => {
       },
       account,
     });
-    const entityID = getEntityIDFromEvents(MODULES.AUDIO, result.events || []);
 
-    const uploadResponse = await uploadFiles(entityID, files);
+    const uploadResponse = await uploadFiles(result.entityID as string, files);
     const uploadSuccess = uploadResponse.reduce((acc, curr) => {
       if (curr.error === true || !acc) {
         acc = false;
