@@ -5,7 +5,7 @@ import Image from '~/components/common/Image';
 import Icon from '~/components/common/Icon';
 import { PrimaryButton } from '~/components/common/Button';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { API_URLS, FILES, socialPlatformNames } from '~/configs';
+import { API_URLS, SUFFIXES, socialPlatformNames } from '~/configs';
 import { truncateAddress } from '~/helpers/formatters';
 import { ProfileEditProps } from './types';
 import './profileDetails.css';
@@ -16,7 +16,7 @@ const ViewProfile = ({ profile, setShowForm }: ProfileEditProps) => {
     <section className="component viewProfile ">
       <figure className="profileAvatar">
         <Image
-          src={`${API_URLS.STORAGE}/${profile.profileID}${FILES.profile.primary}.jpg`}
+          src={`${API_URLS.STORAGE}/${profile.profileID}${SUFFIXES.profile.primary}.jpg`}
           alt={profile.name || profile.creatorAddress}
           placeHolder="/images/artist.jpg"
         />

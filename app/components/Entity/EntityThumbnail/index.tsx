@@ -2,7 +2,7 @@ import React from 'react';
 
 import Image from '~/components/common/Image';
 import { EntityRowProps, Entity } from '../types';
-import { API_URLS, FILES } from '~/configs';
+import { API_URLS, SUFFIXES } from '~/configs';
 import { getEntity, getID } from '../utils';
 
 const EntityThumbnail = ({
@@ -17,7 +17,7 @@ const EntityThumbnail = ({
     <section className={wrapper}>
       <figure>
         <Image
-          src={`${API_URLS.STORAGE}/${id}${FILES[entity].primary}.jpg`}
+          src={`${API_URLS.STORAGE}/${id}${SUFFIXES[entity].primary}.jpg`}
           placeHolder="/images/artist.jpg"
           alt={data.name} 
         />

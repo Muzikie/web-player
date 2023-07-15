@@ -5,7 +5,7 @@ import { cryptography } from '@liskhq/lisk-client';
 /* Internal dependencies */
 import { uploadFiles } from '~/models/entity.client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { MODULES, COMMANDS, FILES, LoyaltyOwner } from '~/configs';
+import { MODULES, COMMANDS, SUFFIXES, LoyaltyOwner } from '~/configs';
 import { useBroadcast } from '../useBroadcast/useBroadcast';
 import { getFileSignatures } from '../useBroadcast/utils';
 import { bufferize } from '~/helpers/convertors';
@@ -25,7 +25,7 @@ export const useCreateAudio = () => {
     const account = await updateAccount();
     setBroadcastStatus({ error: false, message: '', loading: true });
 
-    const files = [{ key: FILES.audio.secondary, value: (formValues.files as File[])[0] }];
+    const files = [{ key: SUFFIXES.audio.secondary, value: (formValues.files as File[])[0] }];
     const audioSignatureAndHash = await getFileSignatures(files, account);
 
     const result = await broadcast({
