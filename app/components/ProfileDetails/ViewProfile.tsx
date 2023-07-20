@@ -11,7 +11,7 @@ import { ProfileEditProps } from './types';
 import './profileDetails.css';
 
 const ViewProfile = ({ profile, setShowForm }: ProfileEditProps) => {
-  const { info } = useAccount();
+  const { account } = useAccount();
   return (
     <section className="component viewProfile ">
       <figure className="profileAvatar">
@@ -53,7 +53,7 @@ const ViewProfile = ({ profile, setShowForm }: ProfileEditProps) => {
           }
         </ul>
         {
-          profile.creatorAddress === info.address
+          profile.creatorAddress === account.address
             ? (
               <PrimaryButton
                 onClick={() => setShowForm(true)}

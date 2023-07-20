@@ -54,17 +54,10 @@ const MainMenu = () => {
               <>
                 <Link
                   icon="user"
-                  to={ROUTES.MY_PROFILE}
+                  to={ROUTES.DASHBOARD}
                   className="menuItem"
                 >
-                  Profile
-                </Link>
-                <Link
-                  icon="user"
-                  to={ROUTES.UPLOAD_COLLECTION}
-                  className="menuItem"
-                >
-                  Upload
+                  Dashboard
                 </Link>
                 <Link
                   icon="file"

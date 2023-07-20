@@ -5,11 +5,11 @@ import { bufferize } from '~/helpers/convertors';
 import {
   SCHEMAS,
   CHAIN_ID,
+  Account,
 } from '~/configs';
-import { ProfileInfoType } from '~/context/profileContext/types';
 import { SignTransactionProps, SignTransactionResult } from '../useCreateEntity/types';
 
-export const getFileSignatures = async (files: { value: File, key: string }[], account: ProfileInfoType): Promise<{ [key: string]: Buffer }> => {
+export const getFileSignatures = async (files: { value: File, key: string }[], account: Account): Promise<{ [key: string]: Buffer }> => {
   const fileSignatures: { [key: string]: Buffer } = {};
   for await (const file of files) {
     const fileContent = await file.value.arrayBuffer();

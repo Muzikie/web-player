@@ -10,7 +10,7 @@ import { ROUTES } from '~/routes/routes';
 import { UserDiscographyProps } from './types';
 
 const UserDiscography = ({ collections, profile }: UserDiscographyProps) => {
-  const { info } = useAccount();
+  const { account } = useAccount();
   return (
     <section className='component userDiscography tabContainer'>
       <header>
@@ -21,7 +21,7 @@ const UserDiscography = ({ collections, profile }: UserDiscographyProps) => {
         emptyState={{
           title: 'No audios or collection to display.',
           subtitle: 'Start by creating your first collection, then add audios to it.',
-          content: info.address === profile.creatorAddress ? (
+          content: account.address === profile.creatorAddress ? (
             <Link to={ROUTES.UPLOAD_COLLECTION}>
               <PrimaryButton className='newCollectionButton'>New collection</PrimaryButton>
             </Link>

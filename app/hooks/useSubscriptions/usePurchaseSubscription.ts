@@ -13,7 +13,7 @@ import { useBroadcast } from '../useBroadcast/useBroadcast';
 import { PurchaseErrors } from './types';
 
 export const usePurchaseSubscription = () => {
-  const { updateAccount } = useAccount();
+  const { account } = useAccount();
   const { request } = useWS();
   const { broadcast } = useBroadcast();
 
@@ -37,8 +37,7 @@ export const usePurchaseSubscription = () => {
       };
     }
 
-    const account = await updateAccount();
-    if (account.token.length === 0) {
+    if (account.balances.length === 0) {
       return {
         error: true,
         message: PurchaseErrors.InsufficientBalance,

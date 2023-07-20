@@ -8,7 +8,7 @@ export const ROUTES = {
   SETTINGS: '/settings',
   COLLECTION: '/collection:/id',
   PLAYLIST: '/playlist/:id',
-  MY_PROFILE: '/profile/me',
+  DASHBOARD: '/dashboard',
   PROFILE: '/profile/:id',
   SUBSCRIPTION_ACTIVE: '/subscription/active',
   SUBSCRIPTION_PURCHASE: '/subscription/purchase',

@@ -16,18 +16,24 @@ import ProfileDetails from '~/components/ProfileDetails';
 import WalletDetails from '~/components/WalletDetails';
 import styles from '~/css/routes/__main/profile.css';
 import UserDiscography from '~/components/UserDiscography';
-import { profileLoaderProps, ProfileLoaderData } from '../../types';
+import { LoaderBaseProps, ProfileLoaderData } from '../../types';
+import { extractCredentials } from '~/helpers/cryptography';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ params }: profileLoaderProps) => {
-  invariant(params.id, 'Expected params.id');
+export const loader = async ({ request }: LoaderBaseProps) => {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
 
-  const { data: profiles } = await getProfiles({ params: { creatorAddress: params.id } });
-  const { data: collections } = await getCollections({ params: { creatorAddress: params.id } });
-  const { data: audios } = await getAudios({ params: { ownerAddress: params.id, limit: '5' } });
+  const passphrase = session.get('passphrase');
+  const { address } = await extractCredentials(passphrase);
+
+  const { data: profiles } = await getProfiles({ params: { creatorAddress: address } });
+  const { data: collections } = await getCollections({ params: { creatorAddress: address } });
+  const { data: audios } = await getAudios({ params: { ownerAddress: address, limit: '5' } });
 
   const defaultProfile = {
     name: '',
@@ -39,7 +45,7 @@ export const loader = async ({ params }: profileLoaderProps) => {
     bannerSignature: '',
     socialAccounts: [],
     profileID: '',
-    creatorAddress: params.id,
+    creatorAddress: address,
   };
 
   const profile = profiles?.length > 0 ? profiles[0] : defaultProfile;
@@ -48,7 +54,7 @@ export const loader = async ({ params }: profileLoaderProps) => {
     profile,
     collections,
     audios,
-    id: params.id,
+    id: address,
   });
 };
 

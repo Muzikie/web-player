@@ -17,7 +17,7 @@ import { Params } from './types';
 import { bufferize } from '~/helpers/convertors';
 
 export const useCreateProfile = () => {
-  const { updateAccount } = useAccount();
+  const { account } = useAccount();
   const { broadcast } = useBroadcast();
 
   const [broadcastStatus, setBroadcastStatus] = useState({
@@ -27,7 +27,6 @@ export const useCreateProfile = () => {
   });
 
   const signAndBroadcast = async (formValues : Params, profile: Profile) => {
-    const account = await updateAccount();
     setBroadcastStatus({ error: false, message: '', loading: true });
 
     // Create if doesn't exist, update if it does

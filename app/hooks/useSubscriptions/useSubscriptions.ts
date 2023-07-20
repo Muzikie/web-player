@@ -6,7 +6,7 @@ import { useWS } from '../useWS/useWS';
 import { useAccount } from '../useAccount/useAccount';
 
 export const useSubscriptions = () => {
-  const { info } = useAccount();
+  const { account } = useAccount();
   const [subIDs, setSubIDs] = useState<string[]>([]);
   const { request } = useWS();
 
@@ -22,10 +22,10 @@ export const useSubscriptions = () => {
   };
 
   useEffect(() => {
-    if (!subIDs.length && info.address) {
+    if (!subIDs.length && account.address) {
       getSubscriptions();
     }
-  }, [info]);
+  }, [account]);
 
   return {
     subscriptions: subIDs,

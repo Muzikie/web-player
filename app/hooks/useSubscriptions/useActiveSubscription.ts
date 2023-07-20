@@ -15,19 +15,19 @@ import { SubscriptionStatus } from './types';
  * of the logged in (active) account
  */
 export const useActiveSubscription = () => {
-  const { info } = useAccount();
+  const { account } = useAccount();
   const [subscription, setSubscription] = useState<SubscriptionData|null>();
   const [subscriptionStatus, setStatus] = useState<SubscriptionStatus>(SubscriptionStatus.Loading);
   const { request, isConnected } = useWS();
 
   const updateSubscription = async () => {
-    if (!info.address) {
+    if (!account.address) {
       // set empty data
       setStatus(SubscriptionStatus.NotLoggedIn);
     } else {
       const accountInfo = <SubsAccountResponse> await request(
         Method.subscription_getAccount,
-        { address: info.address },
+        { address: account.address },
       );
       if (!accountInfo.error && accountInfo.data.subscription?.shared.length > 0) {
         const response = <SubscriptionResponse> await request(
@@ -50,7 +50,7 @@ export const useActiveSubscription = () => {
   };
 
   useEffect(() => {
-    if (isConnected && info.address) {
+    if (isConnected && account.address) {
       updateSubscription();
     }
   }, [isConnected]);

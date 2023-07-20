@@ -71,7 +71,6 @@ export interface profileLoaderProps {
   params: {
     id: string;
   };
-  request: Request;
 }
 
 export interface UploadLoaderProps {

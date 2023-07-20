@@ -4,6 +4,7 @@ import {
   CreateCommandParams,
   MODULES,
   COMMANDS,
+  Account,
 } from '~/configs';
 import { ProfileInfoType } from '~/context/profileContext/types';
 
@@ -39,14 +40,14 @@ export interface SignTransactionProps {
   command: COMMANDS,
   module: MODULES,
   params: Params,
-  account: ProfileInfoType,
+  account: Account,
 }
 
 export interface BroadcastProps {
   command: COMMANDS,
   module: MODULES,
   params: Params,
-  account: ProfileInfoType,
+  account: Account,
 }
 
 export interface SignTransactionResult {

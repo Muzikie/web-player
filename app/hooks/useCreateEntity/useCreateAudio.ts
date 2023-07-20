@@ -12,7 +12,7 @@ import { bufferize } from '~/helpers/convertors';
 import { Params } from './types';
 
 export const useCreateAudio = () => {
-  const { updateAccount } = useAccount();
+  const { account } = useAccount();
   const { broadcast } = useBroadcast();
 
   const [broadcastStatus, setBroadcastStatus] = useState({
@@ -22,7 +22,6 @@ export const useCreateAudio = () => {
   });
 
   const signAndBroadcast = async (formValues: Params) => {
-    const account = await updateAccount();
     setBroadcastStatus({ error: false, message: '', loading: true });
 
     const files = [{ key: SUFFIXES.audio.secondary, value: (formValues.files as File[])[0] }];

@@ -15,24 +15,23 @@ import { PlayerState } from './types';
 const Player = () => {
   const { current } = useContext(PlayerContext);
   const location = useLocation();
-  const { info } = useAccount();
+  const { isLoggedIn } = useAccount();
   const { subscriptionStatus } = useActiveSubscription();
 
   const isSubscribe = subscriptionStatus === SubscriptionStatus.Subscribed;
-  const isLogin = !!info.address;
 
   const isAuthPath = ['/registered', '/login'].includes(location.pathname);
 
   return (
     <Modal className={`component player ${current && !isAuthPath ? 'visible' : ''}`}>
       {
-        isLogin && isSubscribe
+        isLoggedIn && isSubscribe
           ? (
             <PlayerContent />
           )
           : (
             <Feedback
-              type={ !isLogin ? PlayerState.loginError : PlayerState.subscriptionError }
+              type={ !isLoggedIn ? PlayerState.loginError : PlayerState.subscriptionError }
             />
           )
       }
