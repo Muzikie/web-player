@@ -35,8 +35,8 @@ const UploadScreen = () => {
         <header className='tabsHeader'>
           <Tabs
             items={[
-              { title: 'Add an audio', to: ROUTES.UPLOAD_AUDIO },
-              { title: 'Add a collection', to: ROUTES.UPLOAD_COLLECTION },
+              { title: 'Add an audio', to: ROUTES.UPLOAD_AUDIO.location },
+              { title: 'Add a collection', to: ROUTES.UPLOAD_COLLECTION.location },
             ]}
           />
         </header>

@@ -27,8 +27,8 @@ const SubscriptionScreen = () => {
       <header className="tabsHeader">
         <Tabs
           items={[
-            { title: 'Active Subscription', to: ROUTES.SUBSCRIPTION_ACTIVE },
-            { title: 'Purchase', to: ROUTES.SUBSCRIPTION_PURCHASE }
+            { title: 'Active Subscription', to: ROUTES.SUBSCRIPTION_ACTIVE.location },
+            { title: 'Purchase', to: ROUTES.SUBSCRIPTION_PURCHASE.location }
           ]}
         />
       </header>

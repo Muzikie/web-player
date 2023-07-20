@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import BigNumber from 'bignumber.js';
 
 import { MODULES, COMMANDS } from '~/configs';
-import { ProfileInfoType } from '~/context/profileContext/types';
 import { useBroadcast } from '~/hooks/useBroadcast/useBroadcast';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { fromBaseToken } from '~/helpers/formatters';

@@ -24,7 +24,7 @@ export async function loader({ request }: LoaderBaseProps) {
 
   // Handle logout and login
   if (agreement) {
-    return redirect(ROUTES.HOME);
+    return redirect(ROUTES.HOME.location);
   }
 
   return json({});
@@ -35,7 +35,7 @@ export async function action({ request }: any) {
 
   session.set('agreement', true);
 
-  return redirect(ROUTES.HOME, {
+  return redirect(ROUTES.HOME.location, {
     headers: {
       'Set-Cookie': await commitSession(session),
     },

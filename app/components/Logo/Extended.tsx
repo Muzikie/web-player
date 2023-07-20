@@ -11,7 +11,7 @@ const ExtendedLogo = () => {
     <div className="component logo extended">
       <Link
         disabled={pathname === '/agreement'}
-        to={ROUTES.HOME}
+        to={ROUTES.HOME.location}
       >
         <figure>
           <img src="/images/logo.svg" alt="Muzikie" />

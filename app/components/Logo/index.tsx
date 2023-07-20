@@ -11,7 +11,7 @@ const Logo = ({ size = 'medium' }: LogoProps) => {
     <div className={`component logo ${size}`}>
       <figure>
         <Link
-          to={ROUTES.HOME}
+          to={ROUTES.HOME.location}
           disabled={pathname === '/agreement'}
         >
           <img src="./images/logo.svg" alt="Muzikie" />

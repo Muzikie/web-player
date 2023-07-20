@@ -22,7 +22,7 @@ export async function loader({ request }: LoaderBaseProps) {
 
   const passphrase = session.get('passphrase');
   if (passphrase?.length > 0) {
-    return redirect(ROUTES.HOME);
+    return redirect(ROUTES.HOME.location);
   }
 
   return json({});
@@ -38,7 +38,7 @@ export async function action({ request }: LoaderBaseProps) {
   session.set('passphrase', passphrase);
 
   // Redirect back to the agreement page.
-  return redirect(ROUTES.AGREEMENT, {
+  return redirect(ROUTES.AGREEMENT.location, {
     headers: {
       'Set-Cookie': await commitSession(session),
     },

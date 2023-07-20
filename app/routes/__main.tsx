@@ -12,7 +12,7 @@ import MainHeader from '~/components/MainHeader';
 import { getSession, commitSession } from '~/hooks/useSession';
 import Player from '~/components/Player';
 import styles from '~/css/routes/__main.css';
-import { PUBLIC_ROUTES, ROUTES } from './routes';
+import { getRouteByPath, ROUTES, ROUTE_TYPES } from './routes';
 import { LoaderBaseProps, MainLoaderData } from './types';
 
 export function links() {
@@ -28,8 +28,8 @@ export async function loader({ request }: LoaderBaseProps) {
 
   const passphrase = session.get('passphrase');
 
-  if (!passphrase && !PUBLIC_ROUTES.includes(pathname)) {
-    return redirect(ROUTES.LOGIN);
+  if (!passphrase && getRouteByPath(pathname).type === ROUTE_TYPES.PRIVATE) {
+    return redirect(ROUTES.LOGIN.location);
   }
 
   const data: MainLoaderData = {

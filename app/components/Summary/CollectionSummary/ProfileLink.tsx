@@ -9,7 +9,7 @@ import { ROUTES } from '~/routes/routes';
 import { ProfileLinkProps } from './types';
 
 const ProfileLink = ({ profile }: ProfileLinkProps) => (
-  <Link to={ROUTES.PROFILE.replace(':id', profile.creatorAddress)} className="profile">
+  <Link to={ROUTES.PROFILE.location.replace(':id', profile.creatorAddress)} className="profile">
     <figure>
       <Image
         src={`${API_URLS.STORAGE}/${profile.profileID}${SUFFIXES.profile.primary}.jpg`}

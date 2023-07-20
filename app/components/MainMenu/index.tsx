@@ -34,14 +34,14 @@ const MainMenu = () => {
               <>
                 <Link
                   icon="home"
-                  to={ROUTES.HOME}
+                  to={ROUTES.HOME.location}
                   className="menuItem"
                 >
                   Home
                 </Link>
                 <Link
                   icon="search"
-                  to={ROUTES.SEARCH}
+                  to={ROUTES.SEARCH.location}
                   className="menuItem"
                 >
                   Search
@@ -54,14 +54,14 @@ const MainMenu = () => {
               <>
                 <Link
                   icon="user"
-                  to={ROUTES.DASHBOARD}
+                  to={ROUTES.DASHBOARD.location}
                   className="menuItem"
                 >
                   Dashboard
                 </Link>
                 <Link
                   icon="file"
-                  to={ROUTES.SUBSCRIPTION_ACTIVE}
+                  to={ROUTES.SUBSCRIPTION_ACTIVE.location}
                   className="menuItem"
                 >
                   Subscription
@@ -74,7 +74,7 @@ const MainMenu = () => {
               ? (
                 <Link
                   icon="key"
-                  to={ROUTES.LOGOUT}
+                  to={ROUTES.LOGOUT.location}
                   className="menuItem"
                 >
                   Logout
@@ -83,7 +83,7 @@ const MainMenu = () => {
               : (
                 <Link
                   icon="key"
-                  to={ROUTES.LOGIN}
+                  to={ROUTES.LOGIN.location}
                   className="menuItem"
                 >
                   Login

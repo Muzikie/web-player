@@ -22,7 +22,7 @@ const UserDiscography = ({ collections, profile }: UserDiscographyProps) => {
           title: 'No audios or collection to display.',
           subtitle: 'Start by creating your first collection, then add audios to it.',
           content: account.address === profile.creatorAddress ? (
-            <Link to={ROUTES.UPLOAD_COLLECTION}>
+            <Link to={ROUTES.UPLOAD_COLLECTION.location}>
               <PrimaryButton className='newCollectionButton'>New collection</PrimaryButton>
             </Link>
           ) : null,

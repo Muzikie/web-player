@@ -76,7 +76,7 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
             options={CollectionsInfo}
           />
           <Link
-            to={ROUTES.UPLOAD_COLLECTION}
+            to={ROUTES.UPLOAD_COLLECTION.location}
             icon="cross"
             className='addCollection'
           />
