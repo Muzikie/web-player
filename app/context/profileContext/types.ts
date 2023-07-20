@@ -7,6 +7,7 @@ export interface TokenBalance {
   lockedBalances: string[];
 }
 
+// @todo to be removed
 export interface ProfileInfoType {
   address: string;
   publicKey: string;

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import io from 'socket.io-client';
 
 import AccountContext from './accountContext';
-import { AccountProviderProps } from './types';
+import { AccountProviderProps, NewTransactionEvent } from './types';
 import { API_URLS, Account } from '~/configs';
 import { extractCredentials } from '~/helpers/cryptography';
 import { getAuth, getTokenBalances } from '~/models/entity.client';
@@ -25,7 +25,7 @@ const AccountProvider = ({ passphrase, children }: AccountProviderProps) => {
 
     // Update the value
     setAccount(newValue);
-  }, []);
+  }, [account.address]);
 
   const signIn = useCallback(async (passphrase: string) => {
     setIsLoggedIn(passphrase.length > 0);
@@ -46,20 +46,24 @@ const AccountProvider = ({ passphrase, children }: AccountProviderProps) => {
 
   // Connect to WebSocket
   useEffect(() => {
-    const connection = io(`${API_URLS.STREAMER}/blockchain`, {
-      transports: ['websocket'],
-    });
-
-    connection.on('new.transaction', (transaction) => {
-      if (transaction.senderPublicKey === account ||
-        transaction.params.recipientAddress === account.address) {
-        update();
-      }
-    });
-  }, []);
+    if (account.address) {
+      const connection = io(`${API_URLS.STREAMER}/blockchain`, {
+        transports: ['websocket'],
+      });
+  
+      connection.on('new.transactions', (transactions: NewTransactionEvent) => {
+        const relevantTxs = transactions.data.filter((tx) => {
+          return tx.sender.address === account.address ||
+            tx.params.recipientAddress === account.address;
+        });
+        if (relevantTxs.length) {
+          update();
+        }
+      });
+    }
+  }, [account.address]);
 
   useEffect(() => {
-    console.log('AccountProvider passphrase', passphrase);
     if (passphrase) signIn(passphrase);
   }, [passphrase]);
 
