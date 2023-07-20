@@ -99,3 +99,7 @@ export interface PurchaseSubscriptionData {
 export interface ActiveSubscriptionData {
   activeSubscription: Awaited<Subscription|null>;
 }
+
+export interface MainLoaderData {
+  passphrase: string;
+}

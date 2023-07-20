@@ -1,16 +1,33 @@
 /* External dependencies */
 import React, { useState, ChangeEvent } from 'react';
+import { json, redirect } from '@remix-run/node';
 
 /* Internal dependencies */
 import { PartialView } from '~/components/PartialView';
 import styles from '~/css/routes/__main/agreements.css';
 import { commitSession, getSession } from '~/hooks/useSession';
-import { redirect } from '@remix-run/node';
+import { LoaderBaseProps } from '../../types';
 import AgreementForm from '~/components/Agreement/AgreementFrom';
 import ActionAndInfo from '~/components/Agreement/ActionAndInfo';
+import { ROUTES } from '~/routes/routes';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
+}
+
+export async function loader({ request }: LoaderBaseProps) {
+  const session = await getSession(
+    request.headers.get('Cookie')
+  );
+
+  const agreement = session.get('agreement');
+
+  // Handle logout and login
+  if (agreement) {
+    return redirect(ROUTES.HOME);
+  }
+
+  return json({});
 }
 
 export async function action({ request }: any) {
@@ -18,7 +35,7 @@ export async function action({ request }: any) {
 
   session.set('agreement', true);
 
-  return redirect('/', {
+  return redirect(ROUTES.HOME, {
     headers: {
       'Set-Cookie': await commitSession(session),
     },

@@ -119,6 +119,9 @@ export interface Auth {
 
 export interface Account {
   address: string;
+  passphrase: string;
+  publicKey: Buffer;
+  privateKey: Buffer;
   auth: Auth;
   balances: Balance[];
 }

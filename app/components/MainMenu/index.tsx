@@ -1,15 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { ROUTES } from '~/routes/routes';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
-  const { info } = useContext(ProfileContext);
+  const { isLoggedIn } = useAccount();
   const location = useLocation();
 
   const onClick = () => {
@@ -50,7 +50,7 @@ const MainMenu = () => {
             )
           }
           {
-            location.pathname !== '/agreement' && !!info.address && (
+            location.pathname !== '/agreement' && !!isLoggedIn && (
               <>
                 <Link
                   icon="user"
@@ -76,13 +76,27 @@ const MainMenu = () => {
               </>
             )
           }
-          <Link
-            icon="key"
-            to={`${ROUTES.LOGIN}?action=${info.address ? 'logout' : 'login'}`}
-            className="menuItem"
-          >
-            {info.address ? 'Logout' : 'Login'}
-          </Link>
+          {
+            isLoggedIn
+              ? (
+                <Link
+                  icon="key"
+                  to={ROUTES.LOGOUT}
+                  className="menuItem"
+                >
+                  Logout
+                </Link>
+              )
+              : (
+                <Link
+                  icon="key"
+                  to={ROUTES.LOGIN}
+                  className="menuItem"
+                >
+                  Login
+                </Link>
+              )
+          }
         </div>
       </section>
     </aside>
