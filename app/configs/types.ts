@@ -124,6 +124,7 @@ export interface Account {
   privateKey: Buffer;
   auth: Auth;
   balances: Balance[];
+  subscription: Subscription|undefined;
 }
 
 export type EndpointParams = Partial<Record<

@@ -1,16 +1,17 @@
 import { cryptography } from '@liskhq/lisk-client';
 import { accountMock } from '../../../test/mocks/account';
-import { COMMANDS, MODULES, VALID_GENRES } from '~/configs';
+import { Account, COMMANDS, MODULES, VALID_GENRES } from '~/configs';
 import { bufferize } from '~/helpers/convertors';
 import { signTransaction } from './utils';
 
 describe('useBroadcast', () => {
-  const account = {
+  const account: Account = {
     ...accountMock,
-    token: [],
+    balances: [],
     auth: {
       nonce: '1',
-    }
+    },
+    subscription: undefined,
   };
 
   it.skip('should sign audio/create transaction given valid props', async () => {

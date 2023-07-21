@@ -6,7 +6,6 @@ import {
   COMMANDS,
   Account,
 } from '~/configs';
-import { ProfileInfoType } from '~/context/profileContext/types';
 
 export enum ValidationStatus {
   pending = 'PENDING',

@@ -8,17 +8,14 @@ import Modal from '~/components/Modal';
 import PlayerContent from './PlayerContent';
 import Feedback from './Feedback';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { useActiveSubscription } from '~/hooks/useSubscriptions';
-import { SubscriptionStatus } from '~/hooks/useSubscriptions/types';
 import { PlayerState } from './types';
 
 const Player = () => {
   const { current } = useContext(PlayerContext);
   const location = useLocation();
-  const { isLoggedIn } = useAccount();
-  const { subscriptionStatus } = useActiveSubscription();
+  const { isLoggedIn, account } = useAccount();
 
-  const isSubscribe = subscriptionStatus === SubscriptionStatus.Subscribed;
+  const isSubscribe = !!account.subscription;
 
   const isAuthPath = ['/registered', '/login'].includes(location.pathname);
 

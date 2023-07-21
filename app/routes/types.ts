@@ -6,6 +6,7 @@ import {
   Profile,
   Playlist,
   Subscription,
+  Balance,
 } from '~/configs';
 
 export interface SearchLoaderData {
@@ -64,6 +65,7 @@ export interface ProfileLoaderData {
   profile: Awaited<Profile>;
   collections?: Awaited<Collection[]>;
   audios?: Awaited<Audio[]>;
+  balances: Awaited<Balance[]>;
   id: string;
 }
 

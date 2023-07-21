@@ -2,10 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import io from 'socket.io-client';
 
 import AccountContext from './accountContext';
-import { AccountProviderProps, NewTransactionEvent } from './types';
+import {
+  AccountProviderProps,
+  NewTransactionEvent,
+  AccountContextType
+} from './types';
 import { API_URLS, Account } from '~/configs';
 import { extractCredentials } from '~/helpers/cryptography';
-import { getAuth, getTokenBalances } from '~/models/entity.client';
+import { getAuth, getTokenBalances, getSubscriptions } from '~/models/entity.client';
 
 const AccountProvider = ({ passphrase, children }: AccountProviderProps) => {
   const [account, setAccount] = useState<Account>({} as Account);
@@ -32,6 +36,7 @@ const AccountProvider = ({ passphrase, children }: AccountProviderProps) => {
     const { address, publicKey, privateKey } = await extractCredentials(passphrase);
     const auth = await getAuth({ params: { address } });
     const { data: balances } = await getTokenBalances({ params: { address } });
+    const { data: subscriptions } = await getSubscriptions({ params: { memberAddress: address } });
 
     setAccount({
       passphrase,
@@ -40,8 +45,8 @@ const AccountProvider = ({ passphrase, children }: AccountProviderProps) => {
       publicKey,
       auth,
       balances,
+      subscription: subscriptions?.[0],
     });
-
   }, []);
 
   // Connect to WebSocket
@@ -67,7 +72,7 @@ const AccountProvider = ({ passphrase, children }: AccountProviderProps) => {
     if (passphrase) signIn(passphrase);
   }, [passphrase]);
 
-  const value = { account, isLoggedIn };
+  const value: AccountContextType = { account, isLoggedIn };
 
   return (
     <AccountContext.Provider value={value}>

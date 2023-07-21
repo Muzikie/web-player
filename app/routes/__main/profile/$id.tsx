@@ -16,6 +16,7 @@ import ViewWallet from '~/components/ViewWallet';
 import styles from '~/css/routes/__main/profile.css';
 import UserDiscography from '~/components/UserDiscography';
 import { profileLoaderProps, ProfileLoaderData } from '../../types';
+import { getTokenBalances } from '~/models/entity.client';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -27,6 +28,7 @@ export const loader = async ({ params }: profileLoaderProps) => {
   const { data: profiles } = await getProfiles({ params: { creatorAddress: params.id } });
   const { data: collections } = await getCollections({ params: { creatorAddress: params.id } });
   const { data: audios } = await getAudios({ params: { ownerAddress: params.id, limit: '5' } });
+  const { data: balances } = await getTokenBalances({ params: { address: params.id } });
 
   const defaultProfile = {
     name: '',
@@ -47,6 +49,7 @@ export const loader = async ({ params }: profileLoaderProps) => {
     profile,
     collections,
     audios,
+    balances,
     id: params.id,
   });
 };
@@ -56,6 +59,7 @@ const ProfileScreen = () => {
     profile,
     collections,
     audios,
+    balances,
     id,
   } = useLoaderData() as ProfileLoaderData;
 
@@ -69,7 +73,7 @@ const ProfileScreen = () => {
         collections={collections?.length ? collections : []}
       />
       <ViewProfile data={profile} />
-      <ViewWallet address={id} />
+      <ViewWallet address={id} balances={balances} />
     </section>
   );
 };

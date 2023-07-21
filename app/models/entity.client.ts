@@ -8,14 +8,17 @@ import {
   API_VERSION,
   EndpointParams,
   AwaitedEndpointResult,
+  DEV_ACCOUNT,
+  Subscription,
 } from '~/configs';
 import { removeNullValues } from '~/helpers/helpers';
-import { DryRunTxResponse, PostTxResponse } from '~/context/socketContext/types';
 import type {
   Asset,
   PostOptions,
   SearchResultType,
   transactionCreationProps,
+  DryRunTxResponse,
+  PostTxResponse,
 } from './types';
 
 const getList = (entity: string, params: EndpointParams) => {
@@ -61,6 +64,15 @@ export async function search(query: string): Promise<SearchResultType> {
     audio,
     collection,
   };
+}
+
+export async function getSubscriptionIDs(): Promise<string[]> {
+  const results = await getList('subscriptions', { creatorAddress: DEV_ACCOUNT.ADDRESS });
+  return results.data.map((item: Subscription) => item.subscriptionID);
+}
+
+export async function getSubscriptions({ params }: { params: EndpointParams }): AwaitedEndpointResult<Array<Subscription>> {
+  return getList('subscriptions', params);
 }
 
 export async function getAuth({ params }: { params: EndpointParams }): Promise<Auth> {

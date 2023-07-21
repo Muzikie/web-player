@@ -1,4 +1,4 @@
-import { DryRunTxResponse, BlockEvent } from '~/context/socketContext/types';
+import { DryRunTxResponse, BlockEvent } from '~/models/types';
 import { HTTP_STATUS } from '~/configs';
 
 export const getTransactionExecutionStatus = (module: string, id: string, response: DryRunTxResponse) => {
