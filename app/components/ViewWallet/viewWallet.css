@@ -1,4 +1,4 @@
-.component.walletDetails {
+.component.viewWallet {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -36,8 +36,7 @@
 }
 
 @media (min-width: 1280px) {
-
-  .component.walletDetails {
+  .component.viewWallet {
     justify-content: center;
 
     & .balance {

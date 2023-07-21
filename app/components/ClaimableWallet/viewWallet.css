@@ -1,0 +1,46 @@
+.component.claimableWallet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: linear-gradient(269.4deg, #B8ABDB 0.66%, #A79BCF 12.86%, #8F85C1 34.09%, #8A80BF 99.63%);
+  border-radius: var(--border-radius-l);
+  padding: var(--padding-m);
+  box-shadow: var(--primary-shadow);
+  box-sizing: border-box;
+
+  & .walletHeader {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: var(--padding-m);
+    justify-content: space-between;
+    align-items: flex-start;
+
+    & .walletAddress {
+      font-weight: var(--font-weight-bold);
+      width: 70%;
+      line-break: anywhere;
+    }
+  }
+
+  & .balance {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--padding-m);
+
+    & .balanceValue {
+      font-weight: var(--font-weight-black);
+    }
+  }
+
+}
+
+@media (min-width: 1280px) {
+  .component.claimableWallet {
+    justify-content: center;
+
+    & .balance {
+      padding-bottom: 0;
+    }
+  }
+}

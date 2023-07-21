@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import BigNumber from 'bignumber.js';
 
+/* Internal dependencies */
 import { MODULES, COMMANDS } from '~/configs';
 import { useBroadcast } from '~/hooks/useBroadcast/useBroadcast';
 import { useAccount } from '~/hooks/useAccount/useAccount';
@@ -10,7 +11,7 @@ import { PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
 import { WalletAddressProps } from './types';
 
-const WalletDetails = ({ address, audios }: WalletAddressProps) => {
+const ViewWallet = ({ address, audios }: WalletAddressProps) => {
   const { account } = useAccount();
   const { broadcast } = useBroadcast();
   const [status, setStatus] = useState({ error: false, message: '' });
@@ -46,7 +47,7 @@ const WalletDetails = ({ address, audios }: WalletAddressProps) => {
   };
 
   return (
-    <section className="component walletDetails">
+    <section className="component claimableWallet">
       <header className="walletHeader">
         <h3 className="walletAddress">{address}</h3>
         <CopyButton text={address} />
@@ -73,4 +74,4 @@ const WalletDetails = ({ address, audios }: WalletAddressProps) => {
   );
 };
 
-export default WalletDetails;
+export default ViewWallet;
