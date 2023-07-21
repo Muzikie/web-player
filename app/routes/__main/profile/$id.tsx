@@ -9,6 +9,7 @@ import {
   getProfiles,
   getCollections,
   getAudios,
+  getTokenBalances,
 } from '~/models/entity.server';
 import ProfileBanner from '~/components/ProfileBanner';
 import ViewProfile from '~/components/ViewProfile';
@@ -16,7 +17,6 @@ import ViewWallet from '~/components/ViewWallet';
 import styles from '~/css/routes/__main/profile.css';
 import UserDiscography from '~/components/UserDiscography';
 import { profileLoaderProps, ProfileLoaderData } from '../../types';
-import { getTokenBalances } from '~/models/entity.client';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];

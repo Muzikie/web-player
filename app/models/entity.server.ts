@@ -40,3 +40,7 @@ export async function getGenerators({ params }: { params: EndpointParams }): Awa
 export async function getNetworkStatus(): Promise<NetworkStatus> {
   return getList('network/status', {});
 }
+
+export async function getTokenBalances({ params }: { params: EndpointParams }): AwaitedEndpointResult<Array<Balance>> {
+  return getList('token/balances', params);
+}
