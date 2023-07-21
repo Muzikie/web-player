@@ -9,7 +9,7 @@ import { bufferize } from '~/helpers/convertors';
 import { useBroadcast } from '../useBroadcast/useBroadcast';
 
 export const useStream = () => {
-  const { updateAccount } = useAccount();
+  const { account } = useAccount();
   const [queue, setQueue] = useState<string[]>([]);
   const [broadcastStatus, setBroadcastStatus] = useState({ error: false, message: '' });
   const { broadcast } = useBroadcast();
@@ -19,7 +19,6 @@ export const useStream = () => {
   };
 
   const registerOne = async (audioID: string) => {
-    const account = await updateAccount();
     const result = await broadcast({
       module: MODULES.AUDIO,
       command: COMMANDS.STREAM,

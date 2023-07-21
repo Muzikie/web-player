@@ -9,11 +9,11 @@ import {
   getProfiles,
   getCollections,
   getAudios,
+  getTokenBalances,
 } from '~/models/entity.server';
-import { getSession } from '~/hooks/useSession';
 import ProfileBanner from '~/components/ProfileBanner';
-import ProfileDetails from '~/components/ProfileDetails';
-import WalletDetails from '~/components/WalletDetails';
+import ViewProfile from '~/components/ViewProfile';
+import ViewWallet from '~/components/ViewWallet';
 import styles from '~/css/routes/__main/profile.css';
 import UserDiscography from '~/components/UserDiscography';
 import { profileLoaderProps, ProfileLoaderData } from '../../types';
@@ -22,16 +22,13 @@ export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
-export const loader = async ({ params, request }: profileLoaderProps) => {
+export const loader = async ({ params }: profileLoaderProps) => {
   invariant(params.id, 'Expected params.id');
-  const session = await getSession(
-    request.headers.get('Cookie')
-  );
 
-  const address = params.id === 'me' ? session.get('address') : params.id;
-  const { data: profiles } = await getProfiles({ params: { creatorAddress: address } });
-  const { data: collections } = await getCollections({ params: { creatorAddress: address } });
-  const { data: audios } = await getAudios({ params: { ownerAddress: address, limit: '5' } });
+  const { data: profiles } = await getProfiles({ params: { creatorAddress: params.id } });
+  const { data: collections } = await getCollections({ params: { creatorAddress: params.id } });
+  const { data: audios } = await getAudios({ params: { ownerAddress: params.id, limit: '5' } });
+  const { data: balances } = await getTokenBalances({ params: { address: params.id } });
 
   const defaultProfile = {
     name: '',
@@ -43,7 +40,7 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
     bannerSignature: '',
     socialAccounts: [],
     profileID: '',
-    creatorAddress: address,
+    creatorAddress: params.id,
   };
 
   const profile = profiles?.length > 0 ? profiles[0] : defaultProfile;
@@ -52,7 +49,8 @@ export const loader = async ({ params, request }: profileLoaderProps) => {
     profile,
     collections,
     audios,
-    id: address,
+    balances,
+    id: params.id,
   });
 };
 
@@ -61,6 +59,7 @@ const ProfileScreen = () => {
     profile,
     collections,
     audios,
+    balances,
     id,
   } = useLoaderData() as ProfileLoaderData;
 
@@ -72,10 +71,9 @@ const ProfileScreen = () => {
       />
       <UserDiscography
         collections={collections?.length ? collections : []}
-        profile={profile}
       />
-      <ProfileDetails data={profile} />
-      <WalletDetails address={id} audios={audios?.length ? audios : []} />
+      <ViewProfile data={profile} />
+      <ViewWallet address={id} balances={balances} />
     </section>
   );
 };

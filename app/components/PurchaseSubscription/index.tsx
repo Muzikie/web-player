@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 /* Internal dependencies */
-import { usePurchaseSubscription } from '~/hooks/useSubscriptions';
+import { usePurchaseSubscription } from '~/hooks/usePurchaseSubscription';
 import SubscriptionPlans from './SubscriptionPlans';
 import WhyMuzikie from './WhyMuzikie';
 import Intro from './Intro';

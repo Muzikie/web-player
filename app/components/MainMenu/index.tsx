@@ -1,15 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
 import { ROUTES } from '~/routes/routes';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 
 const MainMenu = () => {
   const [isActive, setIsActive] = useState(false);
-  const { info } = useContext(ProfileContext);
+  const { isLoggedIn } = useAccount();
   const location = useLocation();
 
   const onClick = () => {
@@ -34,14 +34,14 @@ const MainMenu = () => {
               <>
                 <Link
                   icon="home"
-                  to={ROUTES.HOME}
+                  to={ROUTES.HOME.location}
                   className="menuItem"
                 >
                   Home
                 </Link>
                 <Link
                   icon="search"
-                  to={ROUTES.SEARCH}
+                  to={ROUTES.SEARCH.location}
                   className="menuItem"
                 >
                   Search
@@ -50,25 +50,18 @@ const MainMenu = () => {
             )
           }
           {
-            location.pathname !== '/agreement' && !!info.address && (
+            location.pathname !== '/agreement' && !!isLoggedIn && (
               <>
                 <Link
                   icon="user"
-                  to={ROUTES.MY_PROFILE}
+                  to={ROUTES.DASHBOARD.location}
                   className="menuItem"
                 >
-                  Profile
-                </Link>
-                <Link
-                  icon="user"
-                  to={ROUTES.UPLOAD_COLLECTION}
-                  className="menuItem"
-                >
-                  Upload
+                  Dashboard
                 </Link>
                 <Link
                   icon="file"
-                  to={ROUTES.SUBSCRIPTION_ACTIVE}
+                  to={ROUTES.SUBSCRIPTION_ACTIVE.location}
                   className="menuItem"
                 >
                   Subscription
@@ -76,13 +69,27 @@ const MainMenu = () => {
               </>
             )
           }
-          <Link
-            icon="key"
-            to={`${ROUTES.LOGIN}?action=${info.address ? 'logout' : 'login'}`}
-            className="menuItem"
-          >
-            {info.address ? 'Logout' : 'Login'}
-          </Link>
+          {
+            isLoggedIn
+              ? (
+                <Link
+                  icon="key"
+                  to={ROUTES.LOGOUT.location}
+                  className="menuItem"
+                >
+                  Logout
+                </Link>
+              )
+              : (
+                <Link
+                  icon="key"
+                  to={ROUTES.LOGIN.location}
+                  className="menuItem"
+                >
+                  Login
+                </Link>
+              )
+          }
         </div>
       </section>
     </aside>

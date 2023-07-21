@@ -1,5 +1,5 @@
 import { HTTP_STATUS } from '~/configs';
-import { DryRunTxResponse, ErrorResponse } from '~/context/socketContext/types';
+import { DryRunTxResponse, ErrorResponse } from '~/models/types';
 import {
   getTransactionExecutionStatus,
 } from './transaction';

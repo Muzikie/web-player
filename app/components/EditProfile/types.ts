@@ -7,6 +7,5 @@ export interface ProfileDetailsProps {
 export type ProfileState = boolean;
 
 export interface ProfileEditProps {
-  profile: Profile
-  setShowForm: (value: boolean) => void;
+  data: Profile
 }

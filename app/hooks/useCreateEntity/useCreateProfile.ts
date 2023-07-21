@@ -17,7 +17,7 @@ import { Params } from './types';
 import { bufferize } from '~/helpers/convertors';
 
 export const useCreateProfile = () => {
-  const { updateAccount } = useAccount();
+  const { account } = useAccount();
   const { broadcast } = useBroadcast();
 
   const [broadcastStatus, setBroadcastStatus] = useState({
@@ -27,7 +27,6 @@ export const useCreateProfile = () => {
   });
 
   const signAndBroadcast = async (formValues : Params, profile: Profile) => {
-    const account = await updateAccount();
     setBroadcastStatus({ error: false, message: '', loading: true });
 
     // Create if doesn't exist, update if it does
@@ -64,7 +63,7 @@ export const useCreateProfile = () => {
       { key: SUFFIXES.profile.primary, value: (formValues.avatar as File[])[0] },
       { key: SUFFIXES.profile.secondary, value: (formValues.banner as File[])[0] },
     ];
-    const uploadResponse = await uploadFiles(result.entityID as string, files);
+    const uploadResponse = await uploadFiles(profile.profileID ?? result.entityID as string, files);
     const uploadSuccess = uploadResponse.reduce((acc, curr) => {
       if (curr.error === true || !acc) {
         acc = false;

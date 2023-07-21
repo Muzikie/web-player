@@ -6,53 +6,34 @@ import { useLoaderData } from '@remix-run/react';
 
 /* Internal dependencies */
 import PlayerProvider from '~/context/playerContext/playerContextProvider';
-import ProfileProvider from '~/context/profileContext/profileContextProvider';
+import AccountProvider from '~/context/accountContext/AccountContextProvider';
 import SettingsProvider from '~/context/settingsContext/settingsContextProvider';
-import SocketContext from '~/context/socketContext/socketContextProvider';
 import MainHeader from '~/components/MainHeader';
 import { getSession, commitSession } from '~/hooks/useSession';
 import Player from '~/components/Player';
 import styles from '~/css/routes/__main.css';
-import { bufferize } from '~/helpers/convertors';
-import { LoaderBaseProps } from './types';
+import { getRouteByPath, ROUTES, ROUTE_TYPES } from './routes';
+import { LoaderBaseProps, MainLoaderData } from './types';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
 }
 
 export async function loader({ request }: LoaderBaseProps) {
-  const privatePath: string[] = [
-    '/profile/me',
-    '/upload/audio',
-    '/upload/collection',
-    '/subscription/active',
-    '/subscription/purchase',
-  ];
   const url = new URL(request.url);
   const { pathname } = url;
   const session = await getSession(
     request.headers.get('Cookie')
   );
-  const address = session.get('address');
-  const publicKey = session.get('publicKey');
-  const privateKey = session.get('privateKey');
-  const agreement = session.get('agreement');
 
-  if (!address) {
-    if (privatePath.includes(pathname)) {
-      return redirect('/login');
-    }
-  }
-  if (address && pathname !== '/agreement') {
-    if (!agreement) {
-      return redirect('/agreement');
-    }
+  const passphrase = session.get('passphrase');
+
+  if (!passphrase && getRouteByPath(pathname).type === ROUTE_TYPES.PRIVATE) {
+    return redirect(ROUTES.LOGIN.location);
   }
 
-  const data = {
-    address: address ?? '',
-    publicKey: publicKey ? bufferize(publicKey).toString('hex') : '',
-    privateKey: privateKey ? bufferize(privateKey).toString('hex') : '',
+  const data: MainLoaderData = {
+    passphrase,
   };
 
   return json(data, {
@@ -62,10 +43,11 @@ export async function loader({ request }: LoaderBaseProps) {
   });
 }
 
-const Main = () => (
-  <SocketContext>
-    <SettingsProvider>
-      <ProfileProvider sessionData={useLoaderData()}>
+const Main = () => {
+  const { passphrase } = useLoaderData() as MainLoaderData;
+  return (
+    <AccountProvider passphrase={passphrase}>
+      <SettingsProvider>
         <PlayerProvider>
           <div id="layout" className="component layout">
             <MainHeader />
@@ -75,9 +57,9 @@ const Main = () => (
             <Player />
           </div>
         </PlayerProvider>
-      </ProfileProvider>
-    </SettingsProvider>
-  </SocketContext>
-);
+      </SettingsProvider>
+    </AccountProvider>
+  );
+};
 
 export default Main;

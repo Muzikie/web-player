@@ -5,7 +5,7 @@ import { Outlet } from '@remix-run/react';
 import { PlayerContext } from '~/context/playerContext/playerContextProvider';
 import styles from '~/css/routes/__main/subscription.css';
 import { Tabs } from '~/components/common/Tabs';
-import { useActiveSubscription } from '~/hooks/useSubscriptions';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 import { ROUTES } from '~/routes/routes';
 
 export function links() {
@@ -13,22 +13,22 @@ export function links() {
 }
 
 const SubscriptionScreen = () => {
-  const { subscription } = useActiveSubscription();
+  const { account } = useAccount();
   const { setCurrent } = useContext(PlayerContext);
 
   useEffect(() => {
-    if (!subscription) {
+    if (!account.subscription) {
       setCurrent(null);
     }
-  }, [subscription]);
+  }, [account.subscription]);
 
   return (
     <section className="screen subscription">
       <header className="tabsHeader">
         <Tabs
           items={[
-            { title: 'Active Subscription', to: ROUTES.SUBSCRIPTION_ACTIVE },
-            { title: 'Purchase', to: ROUTES.SUBSCRIPTION_PURCHASE }
+            { title: 'Active Subscription', to: ROUTES.SUBSCRIPTION_ACTIVE.location },
+            { title: 'Purchase', to: ROUTES.SUBSCRIPTION_PURCHASE.location }
           ]}
         />
       </header>

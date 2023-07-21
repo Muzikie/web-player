@@ -2,7 +2,7 @@ import { cryptography } from '@liskhq/lisk-client';
 
 export const ABORT_DELAY = 5000;
 export const DERIVATION_PATH = "m/44'/134'/0'";
-export const CHAIN_ID = '04000000';
+export const CHAIN_ID = '01000003';
 export const DEV_SHARE = '0.8';
 export const TOKEN = 'MZK';
 export const VALID_GENRES = [

@@ -11,7 +11,7 @@
     align-items: center;
   }
 
-  &.public {
+  &.pullUp {
     margin-bottom: -70px;
   }
 

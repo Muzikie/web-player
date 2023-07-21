@@ -12,7 +12,7 @@ const ActionAndInfo = ({ disabled }: AgreementInfoProps) => {
     <footer>
       <h4>
         <span>By using Muzikie you declare that you have read and agreed to our </span>
-        <Link to={ROUTES.AGREEMENT}>
+        <Link to={ROUTES.AGREEMENT.location}>
           full user agreement
         </Link>
         <span>.</span>

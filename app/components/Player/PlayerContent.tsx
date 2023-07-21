@@ -28,7 +28,7 @@ const PlayerContent = () => {
   return (
     <>
       <section className="primaryInfo">
-        <Link to={ROUTES.COLLECTION.replace(':id', current?.audioID ?? '')}>
+        <Link to={ROUTES.COLLECTION.location.replace(':id', current?.audioID ?? '')}>
           <EntityThumbnail data={current || {} as Audio} />
         </Link>
         <header>
