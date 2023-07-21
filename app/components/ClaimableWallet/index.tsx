@@ -11,7 +11,10 @@ import { PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
 import { WalletAddressProps } from './types';
 
-const ViewWallet = ({ address, audios }: WalletAddressProps) => {
+/**
+ * This component should be only used for the signed in user's wallet.
+ */
+const ClaimableWallet = ({ address, audios }: WalletAddressProps) => {
   const { account } = useAccount();
   const { broadcast } = useBroadcast();
   const [status, setStatus] = useState({ error: false, message: '' });
@@ -56,22 +59,16 @@ const ViewWallet = ({ address, audios }: WalletAddressProps) => {
         <span className="balanceTitle">Balance:</span>
         <h2 className="balanceValue">{`${fromBaseToken(availableBalance)} MZK`}</h2>
       </div>
-      {
-        audios && account.address === address && (
-          <>
-            <div className="balance claim">
-              <span className="balanceTitle">Unclaimed income:</span>
-              <h2 className="balanceValue">{`${fromBaseToken(unclaimed.toString())} MZK`}</h2>
-            </div>
-            <PrimaryButton disabled={unclaimed.isEqualTo(BigNumber(0))} onClick={claim}>
-              Claim
-            </PrimaryButton>
-            <Feedback data={status} /> 
-          </>
-        )
-      }
+      <div className="balance claim">
+        <span className="balanceTitle">Unclaimed income:</span>
+        <h2 className="balanceValue">{`${fromBaseToken(unclaimed.toString())} MZK`}</h2>
+      </div>
+      <PrimaryButton disabled={unclaimed.isEqualTo(BigNumber(0))} onClick={claim}>
+        Claim
+      </PrimaryButton>
+      <Feedback data={status} /> 
     </section>
   );
 };
 
-export default ViewWallet;
+export default ClaimableWallet;
