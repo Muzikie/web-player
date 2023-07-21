@@ -2,7 +2,7 @@ import React from 'react';
 
 /* Internal dependencies */
 //import { IconButton } from '~/components/common/Button';
-import { API_URLS, FILES } from '~/configs';
+import { API_URLS, SUFFIXES } from '~/configs';
 import Image from '~/components/common/Image';
 import ProfileLink from './ProfileLink';
 import { CollectionSummaryProps } from './types';
@@ -30,7 +30,7 @@ const CollectionSummary = ({ collection, profile }: CollectionSummaryProps) => (
     </header>
     <figure className="photo">
       <Image
-        src={`${API_URLS.STORAGE}/${collection.collectionID}${FILES.collection.primary}.jpg`}
+        src={`${API_URLS.STORAGE}/${collection.collectionID}${SUFFIXES.collection.primary}.jpg`}
         placeHolder="/images/collection.jpg"
         alt={collection.name}
       />

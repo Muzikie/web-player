@@ -1,4 +1,4 @@
-import { DryRunTxResponse, BlockEvent } from '~/context/socketContext/types';
+import { DryRunTxResponse, BlockEvent } from '~/models/types';
 import { HTTP_STATUS } from '~/configs';
 
 export const getTransactionExecutionStatus = (module: string, id: string, response: DryRunTxResponse) => {
@@ -23,13 +23,6 @@ export const getEntityEvent = (module: string, response: DryRunTxResponse): Bloc
   }
   return response.data.events.filter((e) =>
     e.module === module && e.name !== 'commandExecutionResult');
-};
-
-export const getEntityIDFromEvents = (module: string, events: BlockEvent[]): string => {
-  if (!events.length) {
-    return '';
-  }
-  return events[0].data[`${module}ID`] as string;
 };
 
 export const getEntityIDFromDryRunRespose = (module: string, response: DryRunTxResponse): string => {

@@ -1,3 +1,5 @@
+import md5 from 'md5';
+
 /* Internal dependencies */
 import { HTTP_STATUS } from '~/configs';
 import { BroadcastProps } from '../useCreateEntity/types';
@@ -31,6 +33,7 @@ export const useBroadcast = () => {
           message: HTTP_STATUS.OK.MESSAGE,
           error: false,
           events: getEntityEvent(module, dryRunResponse),
+          entityID: md5(txBytes),
         };
       }
       return {

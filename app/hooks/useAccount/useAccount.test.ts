@@ -7,9 +7,8 @@ describe('useAccount', () => {
     const { result } = renderHook(() => useAccount());
 
     act(() => {
-      expect(result.current.info).toBeDefined();
-      expect(typeof result.current.setProfileInfo).toBe('function');
-      expect(typeof result.current.updateAccount).toBe('function');
+      expect(result.current.account).toBeDefined();
+      expect(result.current.isLoggedIn).toBeDefined();
     });
   });
 });

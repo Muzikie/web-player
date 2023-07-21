@@ -11,12 +11,14 @@ import {
   ListScreenProps,
   ActiveSubscriptionData,
 } from '~/routes/types';
+import { extractCredentials } from '~/helpers/cryptography';
 
 export const loader = async ({ request }: ListScreenProps) => {
   const session = await getSession(
     request.headers.get('Cookie')
   );
-  const address = session.get('address');
+  const passphrase = session.get('passphrase');
+  const { address } = await extractCredentials(passphrase);
 
   const { data: subscriptions } = await getSubscriptions({ params: {
     memberAddress: address,

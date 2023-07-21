@@ -1,35 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 /* Internal dependencies */
-import { ProfileContext } from '~/context/profileContext/profileContextProvider';
-import { getAuth, getTokenBalances } from '~/models/entity.client';
+import AccountContext from '~/context/accountContext/accountContext';
+import { AccountContextType } from '~/context/accountContext/types';
 
-export const useAccount = () => {
-  const { info, setProfileInfo } = useContext(ProfileContext);
-  const [isAccountLoaded, setISAccountLoaded] = useState(false);
-
-  const updateAccount = async () => {
-    setISAccountLoaded(true);
-    const auth = await getAuth({ params: { address: info.address } });
-    const { data: token } = await getTokenBalances({ params: { address: info.address } });
-    const data = {
-      ...info,
-      token,
-      auth,
-    };
-    setProfileInfo(data);
-    return data;
-  };
-
-  useEffect(() => {
-    if(info.address !== '' && !isAccountLoaded) {
-      updateAccount();
-    }
-  }, [info]);
+export const useAccount = (): AccountContextType => {
+  const { account, isLoggedIn } = useContext(AccountContext);
 
   return {
-    info,
-    setProfileInfo,
-    updateAccount,
+    account, isLoggedIn,
   };
 };

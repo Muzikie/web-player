@@ -5,15 +5,14 @@ import { cryptography } from '@liskhq/lisk-client';
 /* Internal dependencies */
 import { uploadFiles } from '~/models/entity.client';
 import { useAccount } from '~/hooks/useAccount/useAccount';
-import { getEntityIDFromEvents } from '~/helpers/transaction';
-import { MODULES, COMMANDS, FILES } from '~/configs';
+import { MODULES, COMMANDS, SUFFIXES, LoyaltyOwner } from '~/configs';
 import { useBroadcast } from '../useBroadcast/useBroadcast';
 import { getFileSignatures } from '../useBroadcast/utils';
 import { bufferize } from '~/helpers/convertors';
 import { Params } from './types';
 
 export const useCreateAudio = () => {
-  const { updateAccount } = useAccount();
+  const { account } = useAccount();
   const { broadcast } = useBroadcast();
 
   const [broadcastStatus, setBroadcastStatus] = useState({
@@ -23,10 +22,9 @@ export const useCreateAudio = () => {
   });
 
   const signAndBroadcast = async (formValues: Params) => {
-    const account = await updateAccount();
     setBroadcastStatus({ error: false, message: '', loading: true });
 
-    const files = [{ key: FILES.audio.secondary, value: (formValues.files as File[])[0] }];
+    const files = [{ key: SUFFIXES.audio.secondary, value: (formValues.files as File[])[0] }];
     const audioSignatureAndHash = await getFileSignatures(files, account);
 
     const result = await broadcast({
@@ -38,17 +36,16 @@ export const useCreateAudio = () => {
         fit: [],
         genre: [formValues.genre],
         collectionID: bufferize(formValues.collectionID),
-        owners: [{
-          address: cryptography.address.getAddressFromLisk32Address(account.address),
-          shares: 100
-        }],
+        owners: (formValues.owners as LoyaltyOwner[]).map((owner) => ({
+          address: cryptography.address.getAddressFromLisk32Address(owner.address),
+          shares: owner.shares,
+        })),
         ...audioSignatureAndHash,
       },
       account,
     });
-    const entityID = getEntityIDFromEvents(MODULES.AUDIO, result.events || []);
 
-    const uploadResponse = await uploadFiles(entityID, files);
+    const uploadResponse = await uploadFiles(result.entityID as string, files);
     const uploadSuccess = uploadResponse.reduce((acc, curr) => {
       if (curr.error === true || !acc) {
         acc = false;

@@ -1,0 +1,29 @@
+.component.uploadDirector {
+  display: flex;
+  flex-flow: column nowrap;
+
+  & .title {
+    color: var(--gray);
+    font-weight: var(--font-weight-bold);
+  }
+
+  & .main {
+    padding: var(--padding-l);
+    box-sizing: border-box;
+  }
+
+  & .wrapper {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-s);
+
+    & .button {
+      padding: var(--padding-s) var(--padding-m);
+      box-sizing: border-box;
+      height: var(--box-size-m);
+    }
+  }
+}

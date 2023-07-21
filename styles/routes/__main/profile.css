@@ -14,18 +14,17 @@
 }
 
 @media (min-width: 800px) {
-
   .screen.profile {
     flex-flow: row wrap; 
     align-items: stretch;
     justify-content: space-between;
 
-    & .component.profileDetails {
+    & .component.viewProfile {
       flex-basis: 58%;
       margin-bottom: 0;
     }
 
-    & .component.walletDetails {
+    & .component.viewWallet {
       flex-basis: 40%;
     }
   }

@@ -33,6 +33,18 @@ export const isEmpty = (value: any) => {
   return false;
 };
 
+/*
+* @param {any} value
+* @returns {boolean}
+*/
+export const  isNonEmptyBuffer = (value: any): boolean => {
+  if (Buffer.isBuffer(value)) {
+    console.log('In here', value);
+    return value.length > 0;
+  }
+  return false;
+};
+
 /**
  * Checks if a value is an object or array
  *

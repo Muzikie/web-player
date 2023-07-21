@@ -1,0 +1,36 @@
+.screen.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: var(--padding-m);
+
+  & .uploadDirector,
+  & .popularTracks,
+  & .discography {
+    margin-bottom: var(--padding-m);
+  }
+}
+
+@media (min-width: 800px) {
+  .screen.dashboard {
+    flex-flow: row wrap; 
+    align-items: stretch;
+    justify-content: space-between;
+
+    & .component.uploadDirector {
+      flex-basis: 100%;
+    }
+
+    & .component.editProfile {
+      flex-basis: 58%;
+      margin-bottom: 0;
+    }
+
+    & .component.claimableWallet {
+      flex-basis: 40%;
+    }
+  }
+}

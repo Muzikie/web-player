@@ -19,14 +19,15 @@ export const loader = async ({ request }: collectionLoaderProps) => {
 
   return json<CollectionInfoLoaderData>({
     CollectionInfo,
+    address,
   });
 };
 
 const UploadAudioScreen = () => {
-  const { CollectionInfo } = useLoaderData() as CollectionInfoLoaderData;
+  const { CollectionInfo, address } = useLoaderData() as CollectionInfoLoaderData;
   return (
     <section className="screen create tabContainer">
-      <CreateAudio CollectionInfo={CollectionInfo} />
+      <CreateAudio CollectionInfo={CollectionInfo} creatorAddress={address} />
     </section>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import BigNumber from 'bignumber.js';
 
+/* Internal dependencies */
 import { MODULES, COMMANDS } from '~/configs';
-import { ProfileInfoType } from '~/context/profileContext/types';
 import { useBroadcast } from '~/hooks/useBroadcast/useBroadcast';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 import { fromBaseToken } from '~/helpers/formatters';
@@ -11,12 +11,14 @@ import { PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
 import { WalletAddressProps } from './types';
 
-const WalletDetails = ({ address, audios }: WalletAddressProps) => {
-  const { info, updateAccount } = useAccount();
+/**
+ * This component should be only used for the signed in user's wallet.
+ */
+const ClaimableWallet = ({ address, audios }: WalletAddressProps) => {
+  const { account } = useAccount();
   const { broadcast } = useBroadcast();
   const [status, setStatus] = useState({ error: false, message: '' });
-  const [account, setAccount] = useState<ProfileInfoType>(info);
-  const availableBalance = account.token?.length > 0 ? account.token[0].availableBalance : '0';
+  const availableBalance = account.balances?.length > 0 ? account.balances[0].availableBalance : '0';
 
   const unclaimed = audios.reduce((total, item) => {
     const me = item.owners.find(owner => owner.address === address);
@@ -25,20 +27,16 @@ const WalletDetails = ({ address, audios }: WalletAddressProps) => {
   }, BigNumber(0));
 
   const claim = async () => {
-    let updatedAccount = await updateAccount();
-    setAccount(updatedAccount);
     const result = await broadcast({
       module: MODULES.AUDIO,
       command: COMMANDS.RECLAIM,
       params: {
         id: Buffer.alloc(0),
       },
-      account: updatedAccount,
+      account,
     });
 
     if (!result.error) {
-      updatedAccount = await updateAccount();
-      setAccount(updatedAccount);
       setStatus({
         error: false,
         message: 'Successfully reclaimed your income. It takes a few seconds to reflect on your account.',
@@ -52,7 +50,7 @@ const WalletDetails = ({ address, audios }: WalletAddressProps) => {
   };
 
   return (
-    <section className="component walletDetails">
+    <section className="component claimableWallet">
       <header className="walletHeader">
         <h3 className="walletAddress">{address}</h3>
         <CopyButton text={address} />
@@ -61,22 +59,16 @@ const WalletDetails = ({ address, audios }: WalletAddressProps) => {
         <span className="balanceTitle">Balance:</span>
         <h2 className="balanceValue">{`${fromBaseToken(availableBalance)} MZK`}</h2>
       </div>
-      {
-        account.address === address && (
-          <>
-            <div className="balance claim">
-              <span className="balanceTitle">Unclaimed income:</span>
-              <h2 className="balanceValue">{`${fromBaseToken(unclaimed.toString())} MZK`}</h2>
-            </div>
-            <PrimaryButton disabled={unclaimed.isEqualTo(BigNumber(0))} onClick={claim}>
-              Claim
-            </PrimaryButton>
-            <Feedback data={status} /> 
-          </>
-        )
-      }
+      <div className="balance claim">
+        <span className="balanceTitle">Unclaimed income:</span>
+        <h2 className="balanceValue">{`${fromBaseToken(unclaimed.toString())} MZK`}</h2>
+      </div>
+      <PrimaryButton disabled={unclaimed.isEqualTo(BigNumber(0))} onClick={claim}>
+        Claim
+      </PrimaryButton>
+      <Feedback data={status} /> 
     </section>
   );
 };
 
-export default WalletDetails;
+export default ClaimableWallet;

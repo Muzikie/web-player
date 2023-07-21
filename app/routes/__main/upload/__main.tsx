@@ -7,9 +7,10 @@ import { useLoaderData } from '@remix-run/react';
 import styles from '~/css/routes/__main/upload.css';
 import { ROUTES } from '~/routes/routes';
 import { Tabs } from '~/components/common/Tabs';
-import WalletDetails from '~/components/WalletDetails';
+import ViewWallet from '~/components/ViewWallet';
 import { UploadLoaderProps, UploadLoaderData } from '../../types';
 import { getSession } from '~/hooks/useSession';
+import { useAccount } from '~/hooks/useAccount/useAccount';
 
 export function links() {
   return [{ rel: 'stylesheet', href: styles }];
@@ -27,16 +28,17 @@ export const loader = async ({ request }: UploadLoaderProps) => {
 
 const UploadScreen = () => {
   const { id } = useLoaderData() as UploadLoaderData;
+  const { account } = useAccount();
 
   return (
     <section className="screen upload">
-      <WalletDetails address={id} />
+      <ViewWallet address={id} balances={account.balances} />
       <div className='tab'>
         <header className='tabsHeader'>
           <Tabs
             items={[
-              { title: 'Add an audio', to: ROUTES.UPLOAD_AUDIO },
-              { title: 'Add a collection', to: ROUTES.UPLOAD_COLLECTION },
+              { title: 'Add an audio', to: ROUTES.UPLOAD_AUDIO.location },
+              { title: 'Add a collection', to: ROUTES.UPLOAD_COLLECTION.location },
             ]}
           />
         </header>
