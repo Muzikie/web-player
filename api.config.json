@@ -1,5 +1,4 @@
 {
   "STREAMER": "http://localhost:9901",
-  "STORAGE": "http://localhost:4009",
-  "WS": "ws://localhost:7887"
+  "STORAGE": "http://localhost:4009"
 }
