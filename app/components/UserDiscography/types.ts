@@ -1,6 +1,5 @@
-import { Collection, Profile } from '~/configs';
+import { Collection } from '~/configs';
 
 export interface UserDiscographyProps {
-  profile: Profile;
   collections: Collection[];
 }

@@ -10,10 +10,9 @@ import {
   getCollections,
   getAudios,
 } from '~/models/entity.server';
-import { getSession } from '~/hooks/useSession';
 import ProfileBanner from '~/components/ProfileBanner';
-import ProfileDetails from '~/components/ProfileDetails';
-import WalletDetails from '~/components/WalletDetails';
+import ViewProfile from '~/components/ViewProfile';
+import ViewWallet from '~/components/ViewWallet';
 import styles from '~/css/routes/__main/profile.css';
 import UserDiscography from '~/components/UserDiscography';
 import { profileLoaderProps, ProfileLoaderData } from '../../types';
@@ -68,10 +67,9 @@ const ProfileScreen = () => {
       />
       <UserDiscography
         collections={collections?.length ? collections : []}
-        profile={profile}
       />
-      <ProfileDetails data={profile} />
-      <WalletDetails address={id} audios={audios?.length ? audios : []} />
+      <ViewProfile data={profile} />
+      <ViewWallet address={id} />
     </section>
   );
 };

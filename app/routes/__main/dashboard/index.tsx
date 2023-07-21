@@ -2,7 +2,6 @@
 import React from 'react';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import invariant from 'tiny-invariant';
 
 /* Internal dependencies */
 import {
@@ -12,9 +11,10 @@ import {
 } from '~/models/entity.server';
 import { getSession } from '~/hooks/useSession';
 import ProfileBanner from '~/components/ProfileBanner';
-import ProfileDetails from '~/components/ProfileDetails';
-import WalletDetails from '~/components/WalletDetails';
-import styles from '~/css/routes/__main/profile.css';
+import EditProfile from '~/components/EditProfile';
+import ClaimableWallet from '~/components/ClaimableWallet';
+import UploadDirector from '~/components/UploadDirector';
+import styles from '~/css/routes/__main/dashboard.css';
 import UserDiscography from '~/components/UserDiscography';
 import { LoaderBaseProps, ProfileLoaderData } from '../../types';
 import { extractCredentials } from '~/helpers/cryptography';
@@ -67,17 +67,17 @@ const ProfileScreen = () => {
   } = useLoaderData() as ProfileLoaderData;
 
   return (
-    <section className="screen profile">
+    <section className="screen dashboard">
       <ProfileBanner
         data={profile}
         audios={audios?.length ? audios : []}
       />
       <UserDiscography
         collections={collections?.length ? collections : []}
-        profile={profile}
       />
-      <ProfileDetails data={profile} />
-      <WalletDetails address={id} audios={audios?.length ? audios : []} />
+      <UploadDirector />
+      <EditProfile data={profile} />
+      <ClaimableWallet address={id} audios={audios?.length ? audios : []} />
     </section>
   );
 };

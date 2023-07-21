@@ -1,9 +1,14 @@
+export interface Route {
+  location: string;
+  type: string;
+}
+
 export const ROUTE_TYPES = {
   PRIVATE: 'private',
   PUBLIC: 'public',
 };
 
-export const ROUTES = {
+export const ROUTES: Record<string, Route> = {
   HOME: {
     location: '/',
     type: ROUTE_TYPES.PRIVATE,
@@ -70,14 +75,32 @@ export const ROUTES = {
   },
 };
 
-export const getRouteByPath = (path: string) => {
-  const route = Object.values(ROUTES).find((route) => route.location === path);
+export const getRouteByPath = (pathname: string): Route => {
+  const matchingRoute = Object.values(ROUTES).find(route => {
+    const routeParts = route.location.split('/');
+    const pathParts = pathname.split('/');
 
-  if (!route) {
-    return ROUTES.NOT_FOUND;
-  }
+    if (routeParts.length !== pathParts.length) {
+      return false;
+    }
 
-  return route;
+    for (let i = 0; i < routeParts.length; i++) {
+      const routePart = routeParts[i];
+      const pathPart = pathParts[i];
+
+      if (routePart.startsWith(':')) {
+        continue;
+      }
+
+      if (routePart !== pathPart) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  return matchingRoute || ROUTES.NOT_FOUND;
 };
 
 export const PUBLIC_ROUTES = [

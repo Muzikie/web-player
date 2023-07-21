@@ -7,7 +7,7 @@ import { useLoaderData } from '@remix-run/react';
 import styles from '~/css/routes/__main/upload.css';
 import { ROUTES } from '~/routes/routes';
 import { Tabs } from '~/components/common/Tabs';
-import WalletDetails from '~/components/WalletDetails';
+import ViewWallet from '~/components/ViewWallet';
 import { UploadLoaderProps, UploadLoaderData } from '../../types';
 import { getSession } from '~/hooks/useSession';
 
@@ -30,7 +30,7 @@ const UploadScreen = () => {
 
   return (
     <section className="screen upload">
-      <WalletDetails address={id} />
+      <ViewWallet address={id} />
       <div className='tab'>
         <header className='tabsHeader'>
           <Tabs
