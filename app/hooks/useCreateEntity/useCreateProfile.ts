@@ -63,7 +63,7 @@ export const useCreateProfile = () => {
       { key: SUFFIXES.profile.primary, value: (formValues.avatar as File[])[0] },
       { key: SUFFIXES.profile.secondary, value: (formValues.banner as File[])[0] },
     ];
-    const uploadResponse = await uploadFiles(profile.profileID ?? result.entityID as string, files);
+    const uploadResponse = await uploadFiles(profile?.profileID ?? result.entityID as string, files);
     const uploadSuccess = uploadResponse.reduce((acc, curr) => {
       if (curr.error === true || !acc) {
         acc = false;

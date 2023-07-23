@@ -45,16 +45,20 @@ export const useCreateAudio = () => {
       account,
     });
 
-    const uploadResponse = await uploadFiles(result.entityID as string, files);
-    const uploadSuccess = uploadResponse.reduce((acc, curr) => {
-      if (curr.error === true || !acc) {
-        acc = false;
-      }
-      return acc;
-    }, true);
-    // @todo React upon upload failure
-    console.log('uploadSuccess', uploadSuccess);
-    setBroadcastStatus({ ...result, loading: false });
+    if (result.error) {
+      return setBroadcastStatus({ ...result, loading: false });
+    } else {
+      const uploadResponse = await uploadFiles(result.entityID as string, files);
+      const uploadSuccess = uploadResponse.reduce((acc, curr) => {
+        if (curr.error === true || !acc) {
+          acc = false;
+        }
+        return acc;
+      }, true);
+      // @todo React upon upload failure
+      console.log('uploadSuccess', uploadSuccess);
+      setBroadcastStatus({ ...result, loading: false });
+    }
   };
 
   return {
