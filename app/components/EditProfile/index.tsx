@@ -78,8 +78,9 @@ const ProfileEdit = ({ data }: ProfileEditProps) => {
           <Textarea
             {...register('description', { required: false })}
             name="description"
-            placeholder="Describe yourself"
+            placeholder="Describe yourself (255 characters max, make it short and sweet)"
             className="descriptionInput"
+            maxLength={255}
           />
           {
             fields.map(({ platform }) => (
