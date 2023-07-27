@@ -55,13 +55,13 @@ export async function search(query: string): Promise<SearchResultType> {
   const promise1 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/profiles?search=${query}`);
   const promise3 = <Promise<Audio[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/audios?search=${query}`);
   const promise4 = <Promise<Collection[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/collections?search=${query}`);
-
+  
   const [profile, audio, collection] = await Promise.all([promise1, promise3, promise4]);
 
   return {
-    profile,
-    audio,
-    collection,
+    profile: profile || [],
+    audio: audio || [],
+    collection: collection || [],
   };
 }
 
