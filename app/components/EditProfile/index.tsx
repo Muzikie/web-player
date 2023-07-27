@@ -7,10 +7,24 @@ import { Input, FileInput, Textarea } from '~/components/common/Input';
 import { IconButton, PrimaryButton } from '~/components/common/Button';
 import Feedback from '~/components/Feedback';
 import { useCreateProfile } from '~/hooks/useCreateEntity';
-import { socialPlatformNames } from '~/configs';
+import {
+  socialPlatformNames,
+  SocialAccountPlatform,
+  SocialAccount,
+} from '~/configs';
 import { profileSchema } from '~/hooks/useCreateEntity/schemas';
 import { ProfileEditProps } from './types';
 import './profileDetails.css';
+
+const fillSocialMediaInputs = (values: SocialAccount[]) =>
+  [
+    SocialAccountPlatform.Instagram,
+    SocialAccountPlatform.Twitter,
+    SocialAccountPlatform.Youtube,
+  ].map((platform) => ({
+    platform,
+    username: values.find((value) => value.platform === platform)?.username ?? '',
+  }));
 
 const ProfileEdit = ({ data }: ProfileEditProps) => {
   const { signAndBroadcast, broadcastStatus } = useCreateProfile();
@@ -27,11 +41,13 @@ const ProfileEdit = ({ data }: ProfileEditProps) => {
     resolver: yupResolver(profileSchema),
     mode: 'onBlur', // validate on blur
     shouldFocusError: true, // focus on input with an error after submission
-    defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      socialAccounts: fillSocialMediaInputs(defaultValues.socialAccounts),
+    },
   });
   const { fields, remove } = useFieldArray({
     control,
-    rules: { minLength: 3 },
     name: 'socialAccounts',
   });
 
@@ -53,7 +69,7 @@ const ProfileEdit = ({ data }: ProfileEditProps) => {
             accept=".png,.jpg,.jpeg"
             multiple={false}
             placeholder="Click to update banner"
-            className="fileInput"
+            className={`fileInput ${formState.errors.banner ? 'error' : ''}`}
             {...register('banner', { required: false })}
           />
           <FileInput
@@ -61,25 +77,27 @@ const ProfileEdit = ({ data }: ProfileEditProps) => {
             accept=".png,.jpg,.jpeg"
             multiple={false}
             placeholder="Click to update Avatar"
-            className="fileInput"
+            className={`fileInput ${formState.errors.avatar ? 'error' : ''}`}
           />
           <Input
             {...register('name', { required: false })}
             name="name"
             placeholder="Enter name"
             type="text"
+            className={formState.errors.name ? 'error' : ''}
           />
           <Input
             {...register('nickName', { required: false })}
             name="nickName"
             placeholder="Enter nickname"
             type="text"
+            className={formState.errors.nickName ? 'error' : ''}
           />
           <Textarea
             {...register('description', { required: false })}
             name="description"
             placeholder="Describe yourself (255 characters max, make it short and sweet)"
-            className="descriptionInput"
+            className={`descriptionInput ${formState.errors.banner ? 'error' : ''}`}
             maxLength={255}
           />
           {
@@ -103,7 +121,7 @@ const ProfileEdit = ({ data }: ProfileEditProps) => {
         <PrimaryButton
           type="submit"
           className="button"
-          disabled={formError.error}
+          disabled={formError.loading || formError.error}
         >
           {broadcastStatus.loading ? 'loading...' : 'Save'}
         </PrimaryButton>

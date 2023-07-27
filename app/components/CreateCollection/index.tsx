@@ -44,16 +44,19 @@ const CreateCollection = () => {
           {...register('name', { required: true })}
           placeholder="Enter name"
           type="text"
+          className={formState.errors.name ? 'error' : ''}
         />
         <Input
           {...register('releaseYear', { required: true })}
           placeholder="Release year"
           type="text"
+          className={formState.errors.releaseYear ? 'error' : ''}
         />
         <Select
           {...register('collectionType', { required: true })}
           placeholder="Select a collection type"
           options={VALID_COLLECTION_TYPES}
+          className={formState.errors.collectionType ? 'error' : ''}
         />
         <FileInput
           {...register('files', { required: true })}
@@ -61,10 +64,11 @@ const CreateCollection = () => {
           accept=".png,.jpg,.jpeg"
           multiple={false}
           placeholder="Upload cover image"
+          className={formState.errors.files ? 'error' : ''}
         />
       </fieldset>
-      <PrimaryButton type="submit">
-        <>{broadcastStatus.loading ? <span>loading...</span> : <span>Create</span>}</>
+      <PrimaryButton type="submit" disabled={formError.loading || formError.error}>
+        <span>{broadcastStatus.loading ? 'loading...' : 'Create'}</span>
       </PrimaryButton>
       <Feedback data={formError} />
     </form>
