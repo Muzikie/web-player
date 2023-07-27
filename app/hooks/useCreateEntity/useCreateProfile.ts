@@ -67,7 +67,7 @@ export const useCreateProfile = () => {
       { key: SUFFIXES.profile.secondary, value: (formValues.banner as File[])[0] },
     ];
     // @todo React upon upload failure
-    await uploadFiles(profile?.profileID ?? result.entityID as string, files);
+    await uploadFiles(profile.profileID ?? result.entityID as string, files);
     return setBroadcastStatus({ ...result, loading: false });
   };
 

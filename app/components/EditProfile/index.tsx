@@ -54,7 +54,7 @@ const ProfileEdit = ({ data }: ProfileEditProps) => {
   const onSubmit = async (formValues: Record<string, unknown>) => {
     await signAndBroadcast(formValues, data);
   };
-  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const errorMessage = (Object.values(formState.errors)[0]?.message as string);
   const formError = errorMessage
     ? {
       message: errorMessage,

@@ -29,7 +29,7 @@ const CreateCollection = () => {
   const onSubmit = async (data: Record<string, any>) => {
     await signAndBroadcast(data);
   };
-  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const errorMessage = (Object.values(formState.errors)[0]?.message as string);
   const formError = errorMessage
     ? {
       message: errorMessage,
