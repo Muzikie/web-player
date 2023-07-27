@@ -1,3 +1,4 @@
+import type { FormState } from 'react-hook-form';
 import type { KeyValue } from '~/configs/types';
 
 export const greet = (timestamp = 0) => {
@@ -77,7 +78,7 @@ export const removeNullValues = (obj: KeyValue): KeyValue => {
   return newObj;
 };
 
-export const getFormErrorMessage = (formState): string => {
+export const getFormErrorMessage = (formState: FormState<Record<string, unknown>>): string => {
   const firstErrorKey = Object.keys(formState.errors)[0];
 
   // Check if there are any errors
@@ -87,19 +88,20 @@ export const getFormErrorMessage = (formState): string => {
 
   const firstError = formState.errors[firstErrorKey];
 
+  if (!firstError) {
+    return '';
+  }
+
   // Check if the error is for a normal input (non-array input)
   if (Array.isArray(firstError)) {
     // If it's an array, it contains errors for array inputs
     for (const item of firstError) {
-      const errorMessage = item && Object.values(item).length ? Object.values(item)[0].message : '';
+      const errorMessage = item && Object.values(item).length ? (Object.values(item)[0] as any).message : '';
       if (errorMessage) {
         return errorMessage;
       }
     }
-  } else {
-    // If it's not an array, it contains the error message for a normal input
-    return firstError?.message;
   }
-
-  return ''; // Return null if no error message is found
+  // If it's not an array, it contains the error message for a normal input
+  return firstError.message as string;
 };
