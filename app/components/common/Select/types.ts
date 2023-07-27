@@ -5,6 +5,7 @@ export interface SelectProps<T> {
   placeholder?: string;
   name: string;
   value?: T;
+  className?: string;
   onChange?: (value: ChangeEvent<HTMLSelectElement>) => void;
 }
 

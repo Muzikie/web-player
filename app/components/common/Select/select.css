@@ -24,9 +24,8 @@
   }
 
   &.notSelected {
-
     & select {
-      color: #a499a2;
+      color: var(--gray);
     }
   }
 }
