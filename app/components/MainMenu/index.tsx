@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
-import { ROUTES } from '~/routes/routes';
+import { ROUTES, ROUTE_TYPES } from '~/routes/routes';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 
 const MainMenu = () => {
+  const menuRef = useRef<HTMLElement>(null);
   const [isActive, setIsActive] = useState(false);
   const { isLoggedIn } = useAccount();
   const location = useLocation();
@@ -20,8 +21,22 @@ const MainMenu = () => {
     setIsActive(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsActive(false);
+      }
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <aside className="component mainMenu">
+    <aside className="component mainMenu" ref={menuRef}>
       <IconButton
         className="menuButton"
         icon={isActive ? 'cross' : 'menuCut'}
@@ -30,7 +45,7 @@ const MainMenu = () => {
       <section className={`menuContainer ${isActive ? 'active' : ''}`}>
         <div className="list">
           {
-            location.pathname !== '/agreement' && (
+            location.pathname !== ROUTES.AGREEMENT.location && (
               <>
                 <Link
                   icon="home"
@@ -50,7 +65,7 @@ const MainMenu = () => {
             )
           }
           {
-            location.pathname !== '/agreement' && !!isLoggedIn && (
+            location.pathname !== ROUTES.AGREEMENT.location && !!isLoggedIn && (
               <>
                 <Link
                   icon="user"
