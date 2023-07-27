@@ -14,7 +14,6 @@ const FileInput = ({
   onChange,
   ...restProps
 }: FileInputProps, ref) => {
-  console.log(restProps);
   const [fileName, setFileName] = useState('');
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,5 +41,6 @@ const FileInput = ({
       <span>{fileName || `${placeholder} (${accept})`}</span>
     </label>
   );
-}
+};
+
 export default forwardRef(FileInput);

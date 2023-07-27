@@ -1,5 +1,4 @@
 import * as yup from 'yup';
-import { VALID_GENRES } from '~/configs';
 
 export const audioSchema = yup
   .object()
@@ -11,19 +10,39 @@ export const audioSchema = yup
       name: 'files',
       test: item => !!item?.[0]?.name,
     }),
-    genre: yup.number().min(0).max(VALID_GENRES.length - 1).required('Please select a genre'),
-    collectionID: yup.string().trim().matches(/([\w\d]+){10,}/, 'Please select a collection type'),
+    genre: yup.string().matches(/[\d]{1}/, 'Please select a genre'),
+    collectionID: yup.string().trim().matches(/([\w\d]+){10,}/, 'Please select a collection'),
     owners: yup.array().of(yup.object().shape({
       address: yup.string().matches(/lsk[\w\d]{38}/, 'Address must be a valid Lisk wallet address'),
       shares: yup.number().min(1).max(100),
     })).test(
       'sum-of-percentage',
       'The sum of the shares must be 100',
-      (owners) => {
-        const sum = owners?.reduce((acc, owner) => {
-          return acc + (owner?.shares ?? 0);
+      (items) => {
+        const sum = items?.reduce((acc, item) => {
+          return acc + (item?.shares ?? 0);
         }, 0) || 0;
-        return sum === 100;
+    
+        // Check if the sum of shares is 100
+        if (sum !== 100) {
+          return false;
+        }
+        return true;
+      }
+    ).test(
+      'unique-addresses',
+      'Owner addresses must be unique',
+      (items) => {
+        // Check if owner addresses are unique
+        const addressSet = new Set();
+        for (const item of items) {
+          if (addressSet.has(item.address)) {
+            return false;
+          }
+          addressSet.add(item.address);
+        }
+    
+        return true;
       }
     ),
   });
@@ -34,7 +53,7 @@ export const collectionSchema = yup
     name: yup.string().trim().min(3, 'Name is too short').max(20, 'Name is too long'),
     releaseYear: yup.string().trim().matches(/(\d+){4}/, 'Please enter the release year in YYYY format'),
     profileName: yup.string().trim().matches(/([\w.\-\s]+){3,20}/, 'Please enter your profileName and it should be more than 3 characters'),
-    collectionType: yup.number().min(1, 'Please select a collection type').max(2),
+    collectionType: yup.string().matches(/[\d]{1}/, 'Please select a collection type'),
     files: yup.mixed().test({
       message: 'Please enter an image',
       name: 'files',

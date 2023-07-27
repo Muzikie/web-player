@@ -34,7 +34,7 @@ export const useCreateAudio = () => {
         name: formValues.name,
         releaseYear: formValues.releaseYear,
         fit: [],
-        genre: [formValues.genre],
+        genre: [Number(formValues.genre)],
         collectionID: bufferize(formValues.collectionID),
         owners: (formValues.owners as LoyaltyOwner[]).map((owner) => ({
           address: cryptography.address.getAddressFromLisk32Address(owner.address),

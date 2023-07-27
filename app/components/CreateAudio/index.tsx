@@ -12,6 +12,7 @@ import { Link } from '~/components/common/Link';
 import Feedback from '~/components/Feedback';
 import { ROUTES } from '~/routes/routes';
 import { VALID_GENRES } from '~/configs';
+import { getFormErrorMessage } from '~/helpers/helpers';
 import { CollectionInfo } from './types';
 
 const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
@@ -24,7 +25,7 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
       name: '',
       releaseYear: '',
       collectionID: '',
-      genre: 0,
+      genre: '',
       files: null,
       owners: [{
         address: creatorAddress,
@@ -48,14 +49,14 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
     await signAndBroadcast(data);
   };
 
-  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const errorMessage = getFormErrorMessage(formState);
   const formError = errorMessage
     ? {
       message: errorMessage,
       error: true,
     }
     : broadcastStatus;
-
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="component createAudio">
       <fieldset>

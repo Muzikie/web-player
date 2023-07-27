@@ -31,7 +31,7 @@ export const useCreateCollection = () => {
       params: {
         name: formValues.name,
         releaseYear: formValues.releaseYear,
-        collectionType: formValues.collectionType,
+        collectionType: Number(formValues.collectionType),
         ...coverSignatureAndHash,
       },
       account,
