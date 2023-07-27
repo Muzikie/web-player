@@ -11,6 +11,7 @@ const Textarea = ({
   icon = '',
   message = '',
   name = '',
+  maxLength,
 }: TextareaProps, ref) => (
   <div className="component textarea">
     {
@@ -26,6 +27,7 @@ const Textarea = ({
       placeholder={placeholder}
       className={`component input ${className}`}
       ref={ref}
+      maxLength={maxLength}
     />
     <span className="message">{message}</span>
   </div>

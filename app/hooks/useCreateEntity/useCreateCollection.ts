@@ -31,22 +31,18 @@ export const useCreateCollection = () => {
       params: {
         name: formValues.name,
         releaseYear: formValues.releaseYear,
-        collectionType: formValues.collectionType,
+        collectionType: Number(formValues.collectionType),
         ...coverSignatureAndHash,
       },
       account,
     });
 
-    const uploadResponse = await uploadFiles(result.entityID as string, files);
-    const uploadSuccess = uploadResponse.reduce((acc, curr) => {
-      if (curr.error === true || !acc) {
-        acc = false;
-      }
-      return acc;
-    }, true);
+    if (result.error) {
+      return setBroadcastStatus({ ...result, loading: false });
+    }
     // @todo React upon upload failure
-    console.log('uploadSuccess', uploadSuccess);
-    setBroadcastStatus({ ...result, loading: false });
+    await uploadFiles(result.entityID as string, files);
+    return setBroadcastStatus({ ...result, loading: false });
   };
 
   return {

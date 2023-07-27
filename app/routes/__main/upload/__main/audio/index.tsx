@@ -7,15 +7,16 @@ import { useLoaderData } from '@remix-run/react';
 import CreateAudio from '~/components/CreateAudio';
 import { getCollections } from '~/models/entity.server';
 import { getSession } from '~/hooks/useSession';
+import { extractCredentials } from '~/helpers/cryptography';
 import { CollectionInfoLoaderData, collectionLoaderProps } from '~/routes/types';
 
 export const loader = async ({ request }: collectionLoaderProps) => {
   const session = await getSession(
     request.headers.get('Cookie')
   );
-  const address = session.get('address');
-  const { data:  collections } = await getCollections({ params: {} });
-  const CollectionInfo = collections.filter((items) => items.creatorAddress === address);
+  const passphrase = session.get('passphrase');
+  const { address } = await extractCredentials(passphrase);
+  const { data:  CollectionInfo } = await getCollections({ params: { creatorAddress: address } });
 
   return json<CollectionInfoLoaderData>({
     CollectionInfo,

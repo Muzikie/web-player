@@ -10,6 +10,7 @@ interface BaseInput {
   register?: UseFormRegister<any>;
   registerConfig?: Record<string, unknown>;
   placeholder?: string;
+  maxLength? : number;
 }
 
 export interface InputProps extends BaseInput {
