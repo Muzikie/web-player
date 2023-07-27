@@ -57,22 +57,18 @@ export const useCreateProfile = () => {
       },
       account,
     });
- 
+
+    if (result.error) {
+      return setBroadcastStatus({ ...result, loading: false });
+    }
     // upload files
     const files = [
       { key: SUFFIXES.profile.primary, value: (formValues.avatar as File[])[0] },
       { key: SUFFIXES.profile.secondary, value: (formValues.banner as File[])[0] },
     ];
-    const uploadResponse = await uploadFiles(profile?.profileID ?? result.entityID as string, files);
-    const uploadSuccess = uploadResponse.reduce((acc, curr) => {
-      if (curr.error === true || !acc) {
-        acc = false;
-      }
-      return acc;
-    }, true);
     // @todo React upon upload failure
-    console.log('uploadSuccess', uploadSuccess);
-    setBroadcastStatus({ ...result, loading: false });
+    await uploadFiles(profile?.profileID ?? result.entityID as string, files);
+    return setBroadcastStatus({ ...result, loading: false });
   };
 
   return {
