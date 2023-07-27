@@ -1,8 +1,8 @@
 .component.mainMenu {
   --menu-width: 200px;
   --menu-button: var(--box-size-xs);
-  position: relative;
 
+  position: relative;
   height: var(--menu-button);
   box-sizing: border-box;
   z-index: 5;

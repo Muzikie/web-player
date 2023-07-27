@@ -109,6 +109,7 @@
     & ~ .iconCheck {
       display: none;
     }
+
     & ~ .iconFile {
       display: block;
     }
@@ -117,6 +118,7 @@
       & ~ .iconCheck {
         display: block;
       }
+
       & ~ .iconFile {
         display: none;
       }

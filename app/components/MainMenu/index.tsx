@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 /* Internal dependencies */
 import { Link } from '~/components/common/Link';
 import { IconButton } from '~/components/common/Button';
-import { ROUTES, ROUTE_TYPES } from '~/routes/routes';
+import { ROUTES } from '~/routes/routes';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 
 const MainMenu = () => {
