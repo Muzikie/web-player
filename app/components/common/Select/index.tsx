@@ -5,9 +5,10 @@ import { SelectProps } from './types';
 const Select = <T extends string | number,>({
   options,
   placeholder,
+  className,
   ...restProps
 }: SelectProps<T>, ref) => (
-    <section className={`component select ${restProps.name  ? '' : 'notSelected'}`}>
+    <section className={`component select ${className} ${restProps.name  ? '' : 'notSelected'}`}>
       <select {...restProps} ref={ref}>
         {
           placeholder && <option value="">{placeholder}</option>

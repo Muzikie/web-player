@@ -8,8 +8,9 @@ import styles from '~/css/routes/__main/upload.css';
 import { ROUTES } from '~/routes/routes';
 import { Tabs } from '~/components/common/Tabs';
 import ViewWallet from '~/components/ViewWallet';
-import { UploadLoaderProps, UploadLoaderData } from '../../types';
+import { UploadLoaderProps, UploadLoaderData } from '~/routes/types';
 import { getSession } from '~/hooks/useSession';
+import { extractCredentials } from '~/helpers/cryptography';
 import { useAccount } from '~/hooks/useAccount/useAccount';
 
 export function links() {
@@ -21,8 +22,11 @@ export const loader = async ({ request }: UploadLoaderProps) => {
     request.headers.get('Cookie')
   );
 
+  const passphrase = session.get('passphrase');
+  const { address } = await extractCredentials(passphrase);
+
   return json<UploadLoaderData>({
-    id: session.get('address')
+    id: address
   });
 };
 

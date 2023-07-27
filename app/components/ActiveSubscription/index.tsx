@@ -2,8 +2,6 @@ import React from 'react';
 import BigNumber from 'bignumber.js';
 
 import { fromBaseToken } from '~/helpers/formatters';
-import Modal from '../Modal';
-import { PrimaryButton } from '~/components/common/Button';
 import EmptyState from '~/components/common/EmptyState';
 import { SubscriptionInfoProps } from './types';
 import { TOKEN, DEV_SHARE, Subscription } from '~/configs';
@@ -52,25 +50,6 @@ const ActiveSubscription = ({ data }: { data: Subscription | null }) => {
   return (
     <section className="component activeSubscription">
       <SubscriptionInfo data={data} />
-      <Modal className="subscriptionFooter">
-        <div className="wrapper">
-          <figure>
-            <img
-              className="svg"
-              src="/images/letter.svg"
-              alt="Letter icon"
-            />
-          </figure>
-          <header>
-            <h4>
-              Spread the word of Muzikie
-              <br />
-              let others enjoy free music too
-            </h4>
-          </header>
-          <PrimaryButton theme="white">Share link</PrimaryButton>
-        </div>
-      </Modal>
     </section>
   );
 };

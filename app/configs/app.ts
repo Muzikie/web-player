@@ -31,6 +31,7 @@ export const VALID_GENRES = [
   { value: 22, label: 'Latin Music' },
   { value: 23, label: 'Grime' },
   { value: 24, label: 'Trap' },
+  { value: 25, label: 'Other' },
 ];
 
 export const VALID_COLLECTION_TYPES = [

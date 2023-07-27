@@ -1,5 +1,7 @@
 .component.layout {
   width: 100%;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
 
   & .main {
     width: 100%;

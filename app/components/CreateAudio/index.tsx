@@ -12,6 +12,7 @@ import { Link } from '~/components/common/Link';
 import Feedback from '~/components/Feedback';
 import { ROUTES } from '~/routes/routes';
 import { VALID_GENRES } from '~/configs';
+import { getFormErrorMessage } from '~/helpers/helpers';
 import { CollectionInfo } from './types';
 
 const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
@@ -24,7 +25,7 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
       name: '',
       releaseYear: '',
       collectionID: '',
-      genre: 0,
+      genre: '',
       files: null,
       owners: [{
         address: creatorAddress,
@@ -48,14 +49,14 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
     await signAndBroadcast(data);
   };
 
-  const errorMessage = formState.errors && (Object.values(formState.errors)[0]?.message as string);
+  const errorMessage = getFormErrorMessage(formState);
   const formError = errorMessage
     ? {
       message: errorMessage,
       error: true,
     }
     : broadcastStatus;
-
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="component createAudio">
       <fieldset>
@@ -63,13 +64,15 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
           {...register('name', { required: true })}
           placeholder="Enter name"
           type="text"
+          className={formState.errors.name ? 'error' : ''}
         />
         <Input
           {...register('releaseYear', { required: true })}
           placeholder="Release year"
           type="text"
+          className={formState.errors.releaseYear ? 'error' : ''}
         />
-        <div className="collectionRow">
+        <div className={`collectionRow ${formState.errors.collectionID ? 'error' : ''}`}>
           <Select
             {...register('collectionID', { required: true })}
             placeholder="Select a collection (Collection)"
@@ -84,7 +87,8 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
         <Select
           {...register('genre', { required: true })}
           placeholder="Select a genre"
-          options={VALID_GENRES}
+          options={VALID_GENRES.sort((a, b) => a.label.localeCompare(b.label))}
+          className={formState.errors.releaseYear ? 'error' : ''}
         />
         <fieldset className="royaltyOwners">
           <legend>
@@ -99,13 +103,13 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
             fields.map(({ address }, index: number) => (
               <fieldset key={address + index} className="ownerItem">
                 <Input
-                  className="input"
+                  className={`input ${formState.errors.owners && formState.errors.owners[index] ? 'error' : ''}`}
                   placeholder="Owner's wallet address"
                   type="text"
                   {...register(`owners.${index}.address`, { required: false })} 
                 />
                 <Input
-                  className="input"
+                  className={`input ${formState.errors.owners && formState.errors.owners[index] ? 'error' : ''}`}
                   placeholder="Owner's royalty shares (%)"
                   type="text"
                   {...register(`owners.${index}.shares`, { required: false })} 
@@ -125,9 +129,13 @@ const CreateAudio = ({ CollectionInfo, creatorAddress }: CollectionInfo) => {
           accept=".mp3,.wav"
           multiple={false}
           placeholder="Upload MP3"
+          className={formState.errors.files ? 'error' : ''}
         />
       </fieldset>
-      <PrimaryButton type="submit" disabled={formError.loading || formError.error}>
+      <PrimaryButton
+        type="submit"
+        disabled={formError.loading || formError.error}
+      >
         <span>{broadcastStatus.loading ? 'loading...' : 'Create'}</span>
       </PrimaryButton>
       <Feedback data={formError} />

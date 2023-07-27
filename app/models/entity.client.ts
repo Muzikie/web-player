@@ -52,15 +52,14 @@ export async function uploadFiles(id: string, files: Asset[]): Promise<string[]>
 }
 
 export async function search(query: string): Promise<SearchResultType> {
-  const promise1 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/profiles?name=${query}`);
-  const promise2 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/profiles?nickName=${query}`);
-  const promise3 = <Promise<Audio[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/audios?name=${query}`);
-  const promise4 = <Promise<Collection[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/collections?name=${query}`);
+  const promise1 = <Promise<Profile[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/profiles?search=${query}`);
+  const promise3 = <Promise<Audio[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/audios?search=${query}`);
+  const promise4 = <Promise<Collection[]>> get(`${API_URLS.STREAMER}/api/${API_VERSION}/collections?search=${query}`);
 
-  const [names, nickNames, audio, collection] = await Promise.all([promise1, promise2, promise3, promise4]);
+  const [profile, audio, collection] = await Promise.all([promise1, promise3, promise4]);
 
   return {
-    profile: [...names, ...nickNames],
+    profile,
     audio,
     collection,
   };

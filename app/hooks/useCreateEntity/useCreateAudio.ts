@@ -34,7 +34,7 @@ export const useCreateAudio = () => {
         name: formValues.name,
         releaseYear: formValues.releaseYear,
         fit: [],
-        genre: [formValues.genre],
+        genre: [Number(formValues.genre)],
         collectionID: bufferize(formValues.collectionID),
         owners: (formValues.owners as LoyaltyOwner[]).map((owner) => ({
           address: cryptography.address.getAddressFromLisk32Address(owner.address),
@@ -47,18 +47,10 @@ export const useCreateAudio = () => {
 
     if (result.error) {
       return setBroadcastStatus({ ...result, loading: false });
-    } else {
-      const uploadResponse = await uploadFiles(result.entityID as string, files);
-      const uploadSuccess = uploadResponse.reduce((acc, curr) => {
-        if (curr.error === true || !acc) {
-          acc = false;
-        }
-        return acc;
-      }, true);
-      // @todo React upon upload failure
-      console.log('uploadSuccess', uploadSuccess);
-      setBroadcastStatus({ ...result, loading: false });
     }
+    // @todo React upon upload failure
+    await uploadFiles(result.entityID as string, files);
+    return setBroadcastStatus({ ...result, loading: false });
   };
 
   return {

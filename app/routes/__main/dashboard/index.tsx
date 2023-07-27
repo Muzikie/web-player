@@ -51,6 +51,7 @@ export const loader = async ({ request }: LoaderBaseProps) => {
   const profile = profiles?.length > 0 ? profiles[0] : defaultProfile;
 
   return json<ProfileLoaderData>({
+    balances: [],
     profile,
     collections,
     audios,
