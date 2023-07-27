@@ -26,6 +26,10 @@
     border-radius: var(--border-radius-s);
     border: solid 1px var(--brightOutline);
 
+    &.error {
+      border-color: var(--color-error);
+    }
+
     &:focus {
       border-color: var(--color-primary);
       box-shadow: 0 0 0 1px var(--color-primary);
@@ -101,6 +105,22 @@
     opacity: 0;
     cursor: pointer;
     z-index: 1;
+
+    & ~ .iconCheck {
+      display: none;
+    }
+    & ~ .iconFile {
+      display: block;
+    }
+
+    &:valid {
+      & ~ .iconCheck {
+        display: block;
+      }
+      & ~ .iconFile {
+        display: none;
+      }
+    }
   }
 }
 
